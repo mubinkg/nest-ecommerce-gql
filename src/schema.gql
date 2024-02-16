@@ -117,8 +117,10 @@ type Address {
 }
 
 type Slider {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  _id: String!
+  slider_type: String!
+  image: String
+  link: String
 }
 
 type Query {
