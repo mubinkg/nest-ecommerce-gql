@@ -10,6 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ProductsModule } from './products/products.module';
 import { AreasModule } from './areas/areas.module';
 import { ConfigModule } from '@nestjs/config';
+import { CitiesModule } from './cities/cities.module';
 
 
 @Module({
@@ -25,6 +26,7 @@ import { ConfigModule } from '@nestjs/config';
     TicketsModule,
     ProductsModule,
     AreasModule,
+    CitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

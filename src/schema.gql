@@ -56,6 +56,11 @@ type Area {
   delivery_charges: Float
 }
 
+type City {
+  _id: String!
+  city_name: String
+}
+
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -63,6 +68,8 @@ type Query {
   product(id: Int!): Product!
   areas: [Area!]!
   areaByCityId(city_id: String!): [Area!]!
+  cities(limit: Float!, offset: Float!): [City!]!
+  city(id: Int!): City!
 }
 
 type Mutation {
@@ -75,6 +82,9 @@ type Mutation {
   createArea(createAreaInput: CreateAreaInput!): Area!
   updateArea(updateAreaInput: UpdateAreaInput!): Area!
   removeArea(id: Int!): Area!
+  createCity(createCityInput: CreateCityInput!): City!
+  updateCity(updateCityInput: UpdateCityInput!): City!
+  removeCity(id: Int!): City!
 }
 
 input CreateTicketInput {
@@ -171,5 +181,14 @@ input UpdateAreaInput {
   zipcode_id: String
   minimum_free_delivery_order_amount: Float
   delivery_charges: Float
+  id: Int!
+}
+
+input CreateCityInput {
+  city_name: String
+}
+
+input UpdateCityInput {
+  city_name: String
   id: Int!
 }
