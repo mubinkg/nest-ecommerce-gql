@@ -12,6 +12,7 @@ import { CitiesModule } from './cities/cities.module';
 import { CustomersModule } from './customers/customers.module';
 import { CategoriesModule } from './categories/categories.module';
 import { AddressesModule } from './addresses/addresses.module';
+import { SlidersModule } from './sliders/sliders.module';
 
 
 @Module({
@@ -30,7 +31,8 @@ import { AddressesModule } from './addresses/addresses.module';
     CitiesModule,
     CustomersModule,
     CategoriesModule,
-    AddressesModule
+    AddressesModule,
+    SlidersModule
   ],
 })
 export class AppModule {}
