@@ -131,7 +131,6 @@ type Query {
   categories: [Category!]!
   category(id: Int!): Category!
   addresses: [Address!]!
-  address(id: Int!): Address!
 }
 
 type Mutation {
@@ -337,5 +336,5 @@ input UpdateAddressInput {
   state: String
   country: String
   is_default: Int
-  id: Int!
+  id: String!
 }

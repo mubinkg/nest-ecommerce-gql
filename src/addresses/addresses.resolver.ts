@@ -18,10 +18,10 @@ export class AddressesResolver {
     return this.addressesService.findAll();
   }
 
-  @Query(() => Address, { name: 'address' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.addressesService.findOne(id);
-  }
+  // @Query(() => Address, { name: 'address' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.addressesService.findOne(id);
+  // }
 
   @Mutation(() => Address)
   updateAddress(@Args('updateAddressInput') updateAddressInput: UpdateAddressInput) {

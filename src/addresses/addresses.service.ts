@@ -35,8 +35,14 @@ export class AddressesService {
     return `This action returns a #${id} address`;
   }
 
-  update(id: number, updateAddressInput: UpdateAddressInput) {
-    return `This action updates a #${id} address`;
+  async update(id: string, updateAddressInput: UpdateAddressInput) {
+    try{
+      await this.addressModel.findByIdAndUpdate(id, updateAddressInput)
+      return await this.addressModel.findById(id)
+    }
+    catch(err){
+      throw new NotImplementedException('Can not update address')
+    }
   }
 
   remove(id: number) {
