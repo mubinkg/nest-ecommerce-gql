@@ -37,7 +37,20 @@ export class AddressesService {
 
   async update(id: string, updateAddressInput: UpdateAddressInput) {
     try{
-      await this.addressModel.findByIdAndUpdate(id, updateAddressInput)
+      const udpatedData = {...updateAddressInput}
+      if(updateAddressInput.user_id){
+        udpatedData['user'] = updateAddressInput.user_id
+        delete udpatedData['user_id']
+      }
+      if(updateAddressInput.city_id){
+        udpatedData['city'] = updateAddressInput.city_id
+        delete udpatedData['city_id']
+      }
+      if(updateAddressInput.area_id){
+        udpatedData['area'] = updateAddressInput.area_id
+        delete udpatedData['area_id']
+      }
+      await this.addressModel.findByIdAndUpdate(id,udpatedData)
       return await this.addressModel.findById(id)
     }
     catch(err){
