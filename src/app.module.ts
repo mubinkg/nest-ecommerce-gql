@@ -8,6 +8,7 @@ import { TicketsModule } from './tickets/tickets.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ProductsModule } from './products/products.module';
+import { AreasModule } from './areas/areas.module';
 
 
 @Module({
@@ -21,6 +22,7 @@ import { ProductsModule } from './products/products.module';
     MongooseModule.forRoot('mongodb://mubin:mubin@localhost:27017'),
     TicketsModule,
     ProductsModule,
+    AreasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
