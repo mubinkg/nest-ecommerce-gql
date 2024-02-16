@@ -1,16 +1,25 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { AddressType } from '../enum/address.enum';
+import mongoose, { HydratedDocument, mongo } from 'mongoose';
+import { Customer } from 'src/customers/entities/customer.entity';
+import { Area } from 'src/areas/entities/area.entity';
+import { City } from 'src/cities/entities/city.entity';
+
+export type AddressDocument = HydratedDocument<Address>
 
 @ObjectType()
 @Schema()
 export class Address {
+  
+  @Field(()=> String)
+  _id: string
 
-  @Field(()=>String)
-  @Prop({type: String})
-  user_id?:string
+  @Field(()=>Customer, {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref:Customer})
+  user?:Customer
 
-  @Field(()=>String)
+  @Field(()=>String, {nullable:true})
   @Prop({type:String})
   type?:AddressType
 
@@ -34,13 +43,13 @@ export class Address {
   @Prop(()=>String)
   landmark?: string
 
-  @Field(()=>String, {nullable:true})
-  @Prop(()=>String)
-  area_id?:string
+  @Field(()=>Area, {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: Area})
+  area?:Area
 
-  @Field(()=>String, {nullable:true})
-  @Prop(()=>String)
-  city_id:string
+  @Field(()=>City, {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId,ref: City})
+  city_id:City
 
   @Field(()=>String, {nullable:true})
   @Prop(()=>String)
@@ -70,3 +79,6 @@ export class Address {
   @Prop(()=>Int)
   is_default?:number
 }
+
+
+export const AddressSchema = SchemaFactory.createForClass(Address)

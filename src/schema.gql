@@ -97,6 +97,7 @@ type Category {
 }
 
 type Address {
+  _id: String!
   user_id: String!
   type: String!
   name: String
@@ -301,12 +302,40 @@ input UpdateCategoryInput {
 }
 
 input CreateAddressInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  user_id: String!
+  type: String!
+  name: String
+  country_code: String
+  alternate_mobile: String
+  address: String
+  landmark: String
+  area_id: String
+  city_id: String
+  city_name: String
+  area_name: String
+  pincode_name: String
+  pincode: String
+  state: String
+  country: String
+  is_default: Int
 }
 
 input UpdateAddressInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  user_id: String
+  type: String
+  name: String
+  country_code: String
+  alternate_mobile: String
+  address: String
+  landmark: String
+  area_id: String
+  city_id: String
+  city_name: String
+  area_name: String
+  pincode_name: String
+  pincode: String
+  state: String
+  country: String
+  is_default: Int
   id: Int!
 }

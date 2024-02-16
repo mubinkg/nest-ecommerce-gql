@@ -1,11 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotImplementedException } from '@nestjs/common';
 import { CreateAddressInput } from './dto/create-address.input';
 import { UpdateAddressInput } from './dto/update-address.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { Address, AddressDocument } from './entities/address.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AddressesService {
-  create(createAddressInput: CreateAddressInput) {
-    return 'This action adds a new address';
+
+  constructor(
+    @InjectModel(Address.name) private readonly addressModel:Model<AddressDocument>
+  ){}
+
+  async create(createAddressInput: CreateAddressInput):Promise<Address> {
+    try{
+      const address = await this.addressModel.create(createAddressInput)
+      return address
+    }
+    catch(err){
+      throw new NotImplementedException('Can not create address.')
+    }
   }
 
   findAll() {
