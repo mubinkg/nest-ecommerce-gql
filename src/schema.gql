@@ -96,6 +96,11 @@ type Category {
   status: String
 }
 
+type Address {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -110,6 +115,8 @@ type Query {
   customer(id: Int!): Customer!
   categories: [Category!]!
   category(id: Int!): Category!
+  addresses: [Address!]!
+  address(id: Int!): Address!
 }
 
 type Mutation {
@@ -132,6 +139,9 @@ type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   removeCategory(id: Int!): Category!
+  createAddress(createAddressInput: CreateAddressInput!): Address!
+  updateAddress(updateAddressInput: UpdateAddressInput!): Address!
+  removeAddress(id: Int!): Address!
 }
 
 input CreateTicketInput {
@@ -271,6 +281,17 @@ input CreateCategoryInput {
 }
 
 input UpdateCategoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateAddressInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAddressInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!
