@@ -2,7 +2,7 @@ import { Field, ObjectType } from "@nestjs/graphql";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
 
-export type TicketDocument = HydratedDocument<TicketType>
+export type TicketTypeDocument = HydratedDocument<TicketType>
 
 @ObjectType()
 @Schema()
