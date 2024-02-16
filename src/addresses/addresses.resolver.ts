@@ -29,7 +29,7 @@ export class AddressesResolver {
   }
 
   @Mutation(() => Address)
-  removeAddress(@Args('id', { type: () => Int }) id: number) {
+  removeAddress(@Args('id', { type: () => String }) id: string) {
     return this.addressesService.remove(id);
   }
 }

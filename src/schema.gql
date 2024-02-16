@@ -155,7 +155,7 @@ type Mutation {
   removeCategory(id: Int!): Category!
   createAddress(createAddressInput: CreateAddressInput!): Address!
   updateAddress(updateAddressInput: UpdateAddressInput!): Address!
-  removeAddress(id: Int!): Address!
+  removeAddress(id: String!): Address!
 }
 
 input CreateTicketInput {
