@@ -58,7 +58,12 @@ export class AddressesService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} address`;
+  async remove(id: string) {
+    try{
+      return await this.addressModel.findByIdAndDelete(id)
+    }
+    catch(err){
+      throw new NotImplementedException('Can not delte address.')
+    }
   }
 }
