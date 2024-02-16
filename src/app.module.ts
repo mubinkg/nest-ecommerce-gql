@@ -11,7 +11,7 @@ import { ProductsModule } from './products/products.module';
 import { AreasModule } from './areas/areas.module';
 import { ConfigModule } from '@nestjs/config';
 import { CitiesModule } from './cities/cities.module';
-import { CoustomersModule } from './coustomers/coustomers.module';
+import { CustomersModule } from './customers/customers.module';
 
 
 @Module({
@@ -28,7 +28,7 @@ import { CoustomersModule } from './coustomers/coustomers.module';
     ProductsModule,
     AreasModule,
     CitiesModule,
-    CoustomersModule,
+    CustomersModule
   ],
   controllers: [AppController],
   providers: [AppService],

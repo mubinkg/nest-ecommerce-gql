@@ -1,11 +1,10 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema } from '@nestjs/mongoose';
-import { status } from '../enum/status.enum';
+import { Status } from '../enum/status.enum';
 
 @ObjectType()
 @Schema()
-export class Coustomer {
-  
+export class Customer {
   @Field(() => String)
   _id: string;
 
@@ -42,6 +41,6 @@ export class Coustomer {
   city: string
 
   @Field(()=>String)
-  @Prop({type: String, default: status.ACTIVE})
-  status: status
+  @Prop({type: String, default: Status.ACTIVE})
+  status: Status
 }
