@@ -3,8 +3,7 @@
 # ------------------------------------------------------
 
 type Ticket {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  ticket_type: String
 }
 
 type Product {
@@ -75,8 +74,10 @@ type Customer {
 }
 
 type Category {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String
+  image: String
+  banner: String
+  status: String
 }
 
 type Query {

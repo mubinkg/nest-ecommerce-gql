@@ -1,14 +1,28 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { CategoryStatus } from '../enum/category-status.enum';
 
 export type CategoryDocuemnt = HydratedDocument<Category>
 
 @ObjectType()
 @Schema()
 export class Category {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => String, { nullable: true})
+  @Prop({type: String})
+  name?: string;
+
+  @Field(() => String, { nullable: true})
+  @Prop({type: String})
+  image?: string;
+
+  @Field(() => String, { nullable: true})
+  @Prop({type: String})
+  banner?: string;
+
+  @Field(() => String, { nullable: true})
+  @Prop({type: String, default: CategoryStatus.ACTIVE})
+  status?: CategoryStatus;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category)
