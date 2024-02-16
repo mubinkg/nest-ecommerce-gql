@@ -16,7 +16,7 @@ export class Address {
   _id: string
 
   @Field(()=>Customer, {nullable:true})
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref:Customer})
+  @Prop({type: String})
   user?:Customer
 
   @Field(()=>String, {nullable:true})
@@ -44,12 +44,12 @@ export class Address {
   landmark?: string
 
   @Field(()=>Area, {nullable:true})
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref: Area})
+  @Prop({type: String})
   area?:Area
 
   @Field(()=>City, {nullable:true})
-  @Prop({type: mongoose.Schema.Types.ObjectId,ref: City})
-  city_id:City
+  @Prop({type: String})
+  city:City
 
   @Field(()=>String, {nullable:true})
   @Prop(()=>String)

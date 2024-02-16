@@ -10,7 +10,7 @@ export class CreateAddressInput {
   @IsString()
   user_id?:string
 
-  @Field(()=>String)
+  @Field(()=>String, {nullable: true})
   @IsOptional()
   @IsEnum(AddressType)
   type?:AddressType

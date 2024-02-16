@@ -98,15 +98,15 @@ type Category {
 
 type Address {
   _id: String!
-  user_id: String!
-  type: String!
+  user: Customer
+  type: String
   name: String
   country_code: String
   alternate_mobile: String
   address: String
   landmark: String
-  area_id: String
-  city_id: String
+  area: Area
+  city: City
   city_name: String
   area_name: String
   pincode_name: String
@@ -303,7 +303,7 @@ input UpdateCategoryInput {
 
 input CreateAddressInput {
   user_id: String!
-  type: String!
+  type: String
   name: String
   country_code: String
   alternate_mobile: String

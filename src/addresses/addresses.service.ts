@@ -14,7 +14,12 @@ export class AddressesService {
 
   async create(createAddressInput: CreateAddressInput):Promise<Address> {
     try{
-      const address = await this.addressModel.create(createAddressInput)
+      const address = await this.addressModel.create({
+        ...createAddressInput,
+        user: createAddressInput.user_id,
+        area: createAddressInput.area_id,
+        city: createAddressInput.city_id
+      })
       return address
     }
     catch(err){
