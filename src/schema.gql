@@ -63,15 +63,15 @@ type City {
 
 type Customer {
   _id: String!
-  name: String!
-  email: String!
-  mobile_no: String!
-  password: String!
-  balance: Float!
-  street: String!
-  area: String!
-  city: String!
-  status: String!
+  name: String
+  email: String
+  mobile_no: String
+  password: String
+  balance: Float
+  street: String
+  area: String
+  city: String
+  status: String
 }
 
 type Query {
@@ -212,12 +212,22 @@ input UpdateCityInput {
 }
 
 input CreateCustomerInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  email: String
+  mobile_no: String
+  password: String!
+  street: String
+  area: String
+  city: String
 }
 
 input UpdateCustomerInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
+  email: String
+  mobile_no: String
+  password: String
+  street: String
+  area: String
+  city: String
   id: Int!
 }

@@ -1,6 +1,9 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Status } from '../enum/status.enum';
+import { HydratedDocument } from 'mongoose';
+
+export type CustomerDocument = HydratedDocument<Customer>
 
 @ObjectType()
 @Schema()
@@ -8,39 +11,42 @@ export class Customer {
   @Field(() => String)
   _id: string;
 
-  @Field(()=>String)
+  @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  name: string
+  name?: string
 
-  @Field(()=>String)
+  @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  email: string
+  email?: string
   
-  @Field(()=>String)
+  @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  mobile_no: string
+  mobile_no?: string
 
-  @Field(()=>String)
+  @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  password: string
+  password?: string
 
-  @Field(()=>Number)
+  @Field(()=>Number, {nullable:true})
   @Prop({type: Number, default: 0})
-  balance: number
+  balance?: number
 
-  @Field(()=>String)
+  @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  street: string
+  street?: string
 
-  @Field(()=>String)
+  @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  area: string
+  area?: string
 
-  @Field(()=>String)
+  @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  city: string
+  city?: string
 
-  @Field(()=>String)
+  @Field(()=>String, {nullable:true})
   @Prop({type: String, default: Status.ACTIVE})
-  status: Status
+  status?: Status
 }
+
+
+export const CustomerSchema = SchemaFactory.createForClass(Customer)
