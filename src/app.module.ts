@@ -10,6 +10,7 @@ import { AreasModule } from './areas/areas.module';
 import { ConfigModule } from '@nestjs/config';
 import { CitiesModule } from './cities/cities.module';
 import { CustomersModule } from './customers/customers.module';
+import { CategoriesModule } from './categories/categories.module';
 
 
 @Module({
@@ -26,7 +27,8 @@ import { CustomersModule } from './customers/customers.module';
     ProductsModule,
     AreasModule,
     CitiesModule,
-    CustomersModule
+    CustomersModule,
+    CategoriesModule
   ],
 })
 export class AppModule {}
