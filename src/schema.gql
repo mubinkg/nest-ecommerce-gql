@@ -124,7 +124,7 @@ type Query {
   product(id: Int!): Product!
   areas: [Area!]!
   areaByCityId(city_id: String!): [Area!]!
-  cities(limit: Float!, offset: Float!): [City!]!
+  getCities(limit: Float!, offset: Float!, query: String!): [City!]!
   city(id: Int!): City!
   customers: [Customer!]!
   customer(id: Int!): Customer!

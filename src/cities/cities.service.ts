@@ -22,9 +22,14 @@ export class CitiesService {
     } 
   }
 
-  async findAll(limit:number, offset:number) {
+  async findAll(limit:number, offset:number, query:string) {
     try{
-      const cities = await this.cityModel.find({}).limit(limit).skip(offset)
+      const cities = await this.cityModel.find({
+        city_name: {
+          $regex: query,
+          $options: 'i'
+        }
+      }).limit(limit).skip(offset)
       return cities
     }
     catch(err){

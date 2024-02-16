@@ -13,12 +13,13 @@ export class CitiesResolver {
     return this.citiesService.create(createCityInput);
   }
 
-  @Query(() => [City], { name: 'cities' })
+  @Query(() => [City], { name: 'getCities' })
   findAll(
-    @Args('limit', {type:()=>Number}) limit,
-    @Args('offset', {type:()=>Number}) offset,
+    @Args('limit', {type:()=>Number}) limit:number,
+    @Args('offset', {type:()=>Number}) offset:number,
+    @Args('query', {type:()=>String}) query:string
   ) {
-    return this.citiesService.findAll(limit, offset);
+    return this.citiesService.findAll(limit, offset, query);
   }
 
   @Query(() => City, { name: 'city' })
