@@ -130,7 +130,7 @@ type Query {
   customer(id: Int!): Customer!
   categories: [Category!]!
   category(id: Int!): Category!
-  addresses: [Address!]!
+  getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
 }
 
 type Mutation {

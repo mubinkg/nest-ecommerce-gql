@@ -1,4 +1,4 @@
-import { Injectable, NotImplementedException } from '@nestjs/common';
+import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { CreateAddressInput } from './dto/create-address.input';
 import { UpdateAddressInput } from './dto/update-address.input';
 import { InjectModel } from '@nestjs/mongoose';
@@ -27,8 +27,13 @@ export class AddressesService {
     }
   }
 
-  findAll() {
-    return `This action returns all addresses`;
+  async findAll(user_id: string, limit: number, offset:number) {
+    try{
+      return await this.addressModel.find({user: user_id}).limit(limit).skip(offset)
+    }
+    catch(err){
+      throw new NotFoundException('Address list not found')
+    }
   }
 
   findOne(id: number) {

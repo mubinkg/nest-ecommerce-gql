@@ -13,9 +13,13 @@ export class AddressesResolver {
     return this.addressesService.create(createAddressInput);
   }
 
-  @Query(() => [Address], { name: 'addresses' })
-  findAll() {
-    return this.addressesService.findAll();
+  @Query(() => [Address], { name: 'getAddresses' })
+  findAll(
+    @Args('user_id', {type:()=>String}) user_id: string,
+    @Args('limit', {type:()=> Number}) limit:number,
+    @Args('offset', {type:()=> Number}) offset:number
+  ) {
+    return this.addressesService.findAll(user_id, limit, offset);
   }
 
   // @Query(() => Address, { name: 'address' })
