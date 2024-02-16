@@ -18,9 +18,9 @@ export class AreasResolver {
     return this.areasService.findAll();
   }
 
-  @Query(() => Area, { name: 'area' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.areasService.findOne(id);
+  @Query(() => [Area], { name: 'areaByCityId' })
+  findOne(@Args('city_id', { type: () => String }) city_id: String) {
+    return this.areasService.findOne(city_id);
   }
 
   @Mutation(() => Area)

@@ -47,11 +47,22 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Area {
+  _id: String!
+  area_name: String
+  city_id: String
+  zipcode_id: String
+  minimum_free_delivery_order_amount: Float
+  delivery_charges: Float
+}
+
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
   products: [Product!]!
   product(id: Int!): Product!
+  areas: [Area!]!
+  areaByCityId(city_id: String!): [Area!]!
 }
 
 type Mutation {
@@ -61,6 +72,9 @@ type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   removeProduct(id: Int!): Product!
+  createArea(createAreaInput: CreateAreaInput!): Area!
+  updateArea(updateAreaInput: UpdateAreaInput!): Area!
+  removeArea(id: Int!): Area!
 }
 
 input CreateTicketInput {
@@ -140,5 +154,22 @@ input UpdateProductInput {
   variant_id: String
   price: Float
   special_price: Float
+  id: Int!
+}
+
+input CreateAreaInput {
+  area_name: String
+  city_id: String
+  zipcode_id: String
+  minimum_free_delivery_order_amount: Float
+  delivery_charges: Float
+}
+
+input UpdateAreaInput {
+  area_name: String
+  city_id: String
+  zipcode_id: String
+  minimum_free_delivery_order_amount: Float
+  delivery_charges: Float
   id: Int!
 }

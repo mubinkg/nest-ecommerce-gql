@@ -9,17 +9,19 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { MongooseModule } from '@nestjs/mongoose';
 import { ProductsModule } from './products/products.module';
 import { AreasModule } from './areas/areas.module';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()]
     }),
-    MongooseModule.forRoot('mongodb://mubin:mubin@localhost:27017'),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     TicketsModule,
     ProductsModule,
     AreasModule,
