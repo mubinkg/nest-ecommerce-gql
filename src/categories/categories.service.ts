@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { Category, CategoryDocuemnt } from './entities/category.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class CategoriesService {
+
+  constructor(
+    @InjectModel(Category.name) private readonly categoryModel:Model<CategoryDocuemnt>
+  ){}
+
   create(createCategoryInput: CreateCategoryInput) {
     return 'This action adds a new category';
   }
