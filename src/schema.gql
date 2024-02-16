@@ -1,0 +1,144 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Ticket {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Product {
+  _id: String
+  category_id: String
+  tax: Float
+  type: String
+  stock_type: Float
+  name: String
+  short_description: String
+  indicator: String
+  cod_allowed: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  total_allowed_quantity: Float
+  is_prices_inclusive_tax: Boolean
+  is_returnable: Boolean
+  is_cancelable: Boolean
+  cancelable_till: DateTime
+  image: String
+  video_type: String
+  video: String
+  tags: String
+  warranty_period: String
+  made_in: String
+  sku: String
+  stock: Float
+  availability: Float
+  description: String
+  deliverable_type: String
+  deliverable_zipcodes: String
+  seller_id: String
+  variant_id: String
+  price: Float
+  special_price: Float
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  tickets: [Ticket!]!
+  ticket(id: Int!): Ticket!
+  products: [Product!]!
+  product(id: Int!): Product!
+}
+
+type Mutation {
+  createTicket(createTicketInput: CreateTicketInput!): Ticket!
+  updateTicket(updateTicketInput: UpdateTicketInput!): Ticket!
+  removeTicket(id: Int!): Ticket!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  removeProduct(id: Int!): Product!
+}
+
+input CreateTicketInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateTicketInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateProductInput {
+  category_id: String
+  tax: Float
+  type: String
+  stock_type: Float
+  name: String
+  short_description: String
+  indicator: String
+  cod_allowed: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  total_allowed_quantity: Float
+  is_prices_inclusive_tax: Boolean
+  is_returnable: Boolean
+  is_cancelable: Boolean
+  cancelable_till: DateTime
+  image: String
+  video_type: String
+  video: String
+  tags: String
+  warranty_period: String
+  made_in: String
+  sku: String
+  stock: Float
+  availability: Float
+  description: String
+  deliverable_type: String
+  deliverable_zipcodes: String
+  seller_id: String
+  variant_id: String
+  price: Float
+  special_price: Float
+}
+
+input UpdateProductInput {
+  category_id: String
+  tax: Float
+  type: String
+  stock_type: Float
+  name: String
+  short_description: String
+  indicator: String
+  cod_allowed: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  total_allowed_quantity: Float
+  is_prices_inclusive_tax: Boolean
+  is_returnable: Boolean
+  is_cancelable: Boolean
+  cancelable_till: DateTime
+  image: String
+  video_type: String
+  video: String
+  tags: String
+  warranty_period: String
+  made_in: String
+  sku: String
+  stock: Float
+  availability: Float
+  description: String
+  deliverable_type: String
+  deliverable_zipcodes: String
+  seller_id: String
+  variant_id: String
+  price: Float
+  special_price: Float
+  id: Int!
+}
