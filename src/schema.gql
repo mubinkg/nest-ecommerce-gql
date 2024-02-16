@@ -61,6 +61,19 @@ type City {
   city_name: String
 }
 
+type Coustomer {
+  _id: String!
+  name: String!
+  email: String!
+  mobile_no: String!
+  password: String!
+  balance: Float!
+  street: String!
+  area: String!
+  city: String!
+  status: String!
+}
+
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -70,6 +83,8 @@ type Query {
   areaByCityId(city_id: String!): [Area!]!
   cities(limit: Float!, offset: Float!): [City!]!
   city(id: Int!): City!
+  coustomers: [Coustomer!]!
+  coustomer(id: Int!): Coustomer!
 }
 
 type Mutation {
@@ -85,6 +100,9 @@ type Mutation {
   createCity(createCityInput: CreateCityInput!): City!
   updateCity(updateCityInput: UpdateCityInput!): City!
   removeCity(id: Int!): City!
+  registerUser(createCoustomerInput: CreateCoustomerInput!): Coustomer!
+  updateCoustomer(updateCoustomerInput: UpdateCoustomerInput!): Coustomer!
+  removeCoustomer(id: Int!): Coustomer!
 }
 
 input CreateTicketInput {
@@ -190,5 +208,16 @@ input CreateCityInput {
 
 input UpdateCityInput {
   city_name: String
+  id: Int!
+}
+
+input CreateCoustomerInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateCoustomerInput {
+  """Example field (placeholder)"""
+  exampleField: Int
   id: Int!
 }
