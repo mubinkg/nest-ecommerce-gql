@@ -116,9 +116,15 @@ type Address {
   is_default: Int
 }
 
+type SliderType {
+  _id: String!
+  type: String
+  type_id: String
+}
+
 type Slider {
   _id: String!
-  slider_type: String!
+  slider_type: SliderType
   image: String
   link: String
 }
@@ -138,7 +144,7 @@ type Query {
   categories: [Category!]!
   category(id: Int!): Category!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
-  sliders: [Slider!]!
+  sliders(limit: Float!, offset: Float!): [Slider!]!
   slider(id: Int!): Slider!
 }
 
@@ -166,6 +172,7 @@ type Mutation {
   updateAddress(updateAddressInput: UpdateAddressInput!): Address!
   removeAddress(id: String!): Address!
   createSlider(createSliderInput: CreateSliderInput!): Slider!
+  createSliderType(createSliderType: CreateSliderTypeInput!): SliderType!
   updateSlider(updateSliderInput: UpdateSliderInput!): Slider!
   removeSlider(id: Int!): Slider!
 }
@@ -352,12 +359,19 @@ input UpdateAddressInput {
 }
 
 input CreateSliderInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  slider_type: String
+  image: String
+  link: String
+}
+
+input CreateSliderTypeInput {
+  type: String!
+  type_id: String!
 }
 
 input UpdateSliderInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  slider_type: String
+  image: String
+  link: String
   id: Int!
 }

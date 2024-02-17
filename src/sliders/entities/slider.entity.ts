@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
+import { SliderType } from './slider-type.entity';
 
 export type SliderDocument = HydratedDocument<Slider>
 
@@ -11,9 +12,9 @@ export class Slider {
   @Field(() => String)
   _id: string;
 
-  @Field(() => String)
-  @Prop({type: String})
-  slider_type: string;
+  @Field(() => SliderType, {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'SliderType'})
+  slider_type: SliderType;
 
   @Field(() => String, {nullable:true})
   @Prop({type: String})

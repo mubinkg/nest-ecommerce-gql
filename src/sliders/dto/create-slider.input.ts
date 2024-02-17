@@ -2,6 +2,12 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateSliderInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => String, {nullable:true})
+  slider_type: string;
+
+  @Field(() => String, {nullable:true})
+  image?: string;
+
+  @Field(() => String , {nullable:true})
+  link?: string;
 }

@@ -3,6 +3,8 @@ import { SlidersService } from './sliders.service';
 import { Slider } from './entities/slider.entity';
 import { CreateSliderInput } from './dto/create-slider.input';
 import { UpdateSliderInput } from './dto/update-slider.input';
+import { SliderType } from './entities/slider-type.entity';
+import { CreateSliderTypeInput } from './dto/create-slider-type.input';
 
 @Resolver(() => Slider)
 export class SlidersResolver {
@@ -13,9 +15,19 @@ export class SlidersResolver {
     return this.slidersService.create(createSliderInput);
   }
 
+  @Mutation(()=>SliderType)
+  createSliderType(
+    @Args('createSliderType') createSliderType: CreateSliderTypeInput
+  ){
+    return this.slidersService.createSliderType(createSliderType)
+  }
+
   @Query(() => [Slider], { name: 'sliders' })
-  findAll() {
-    return this.slidersService.findAll();
+  findAll(
+    @Args('limit', {type: ()=> Number}) limit: number,
+    @Args('offset', {type: ()=> Number}) offset: number
+  ) {
+    return this.slidersService.findAll(limit, offset);
   }
 
   @Query(() => Slider, { name: 'slider' })
