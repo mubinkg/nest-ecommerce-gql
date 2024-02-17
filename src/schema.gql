@@ -305,7 +305,7 @@ input UpdateCustomerInput {
   street: String
   area: String
   city: String
-  id: Int!
+  id: String!
 }
 
 input CreateCategoryInput {

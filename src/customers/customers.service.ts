@@ -47,8 +47,19 @@ export class CustomersService {
     return `This action returns a #${id} customer`;
   }
 
-  update(id: number, updateCustomerInput: UpdateCustomerInput) {
-    return `This action updates a #${id} customer`;
+  async update(id: string, updateCustomerInput: UpdateCustomerInput) {
+    try{
+      if(updateCustomerInput.password){
+        const hash = await bcrypt.hash(updateCustomerInput.password, 10);
+        updateCustomerInput.password = await bcrypt.hash(updateCustomerInput.password, hash)
+      }
+      const customer = await this.customerModel.findById(id)
+      customer.password = ''
+      return customer
+    }
+    catch(err){
+      throw new NotImplementedException('Can not udpate customer.')
+    } 
   }
 
   remove(id: number) {
