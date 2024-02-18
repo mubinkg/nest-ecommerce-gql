@@ -11,7 +11,7 @@ export class Category {
 
   @Field(()=>String)
   _id: string
-  
+
   @Field(() => String, { nullable: true})
   @Prop({type: String})
   name?: string;
@@ -27,6 +27,10 @@ export class Category {
   @Field(() => String, { nullable: true})
   @Prop({type: String})
   banner?: string;
+
+  @Field(()=>String)
+  @Prop({type: String})
+  parent?: string
 
   @Field(() => String, { nullable: true})
   @Prop({type: String, default: CategoryStatus.ACTIVE})

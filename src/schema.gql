@@ -90,9 +90,12 @@ type City {
 }
 
 type Category {
+  _id: String!
   name: String
+  order: Float
   image: String
   banner: String
+  parent: String!
   status: String
 }
 
@@ -309,13 +312,17 @@ input UpdateCustomerInput {
 }
 
 input CreateCategoryInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  image: String!
+  banner: String
+  parent: String
 }
 
 input UpdateCategoryInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
+  image: String
+  banner: String
+  parent: String
   id: Int!
 }
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotImplementedException } from '@nestjs/common';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
 import { InjectModel } from '@nestjs/mongoose';
@@ -12,8 +12,13 @@ export class CategoriesService {
     @InjectModel(Category.name) private readonly categoryModel:Model<CategoryDocuemnt>
   ){}
 
-  create(createCategoryInput: CreateCategoryInput) {
-    return 'This action adds a new category';
+  async create(createCategoryInput: CreateCategoryInput) {
+    try{
+      return await this.categoryModel.create(createCategoryInput)
+    }
+    catch(err){
+      throw new NotImplementedException('Can not create category.')
+    }
   }
 
   findAll() {
