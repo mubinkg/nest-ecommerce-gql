@@ -6,6 +6,8 @@ import { Model } from 'mongoose';
 import { SliderType, SliderTypeDocument } from './entities/slider-type.entity';
 import { Slider, SliderDocument } from './entities/slider.entity';
 import { CreateSliderTypeInput } from './dto/create-slider-type.input';
+import { uplodFile } from 'src/util/upload';
+import { FileUpload } from 'graphql-upload';
 
 @Injectable()
 export class SlidersService {
@@ -17,9 +19,12 @@ export class SlidersService {
 
   async create(createSliderInput: CreateSliderInput) {
     try{
+      const data = await uplodFile(createSliderInput.image as FileUpload)
+      createSliderInput.image = data as string
       return await this.sliderModel.create(createSliderInput)
     }
     catch(err){
+      console.log(err)
       throw new NotImplementedException('Can not create slidder')
     }
   }

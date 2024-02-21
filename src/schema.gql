@@ -159,7 +159,6 @@ type Query {
   category(id: Int!): Category!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
-  slider(id: Int!): Slider!
 }
 
 input SignInDto {
@@ -190,8 +189,6 @@ type Mutation {
   removeAddress(id: String!): Address!
   createSlider(createSliderInput: CreateSliderInput!): Slider!
   createSliderType(createSliderType: CreateSliderTypeInput!): SliderType!
-  updateSlider(updateSliderInput: UpdateSliderInput!): Slider!
-  removeSlider(id: Int!): Slider!
 }
 
 input CreateTicketInput {
@@ -378,18 +375,14 @@ input UpdateAddressInput {
 
 input CreateSliderInput {
   slider_type: String
-  image: String
+  image: Upload
   link: String
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 input CreateSliderTypeInput {
   type: String!
   type_id: String!
-}
-
-input UpdateSliderInput {
-  slider_type: String
-  image: String
-  link: String
-  id: Int!
 }

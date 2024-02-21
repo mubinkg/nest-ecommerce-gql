@@ -30,18 +30,18 @@ export class SlidersResolver {
     return this.slidersService.findAll(limit, offset);
   }
 
-  @Query(() => Slider, { name: 'slider' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.slidersService.findOne(id);
-  }
+  // @Query(() => Slider, { name: 'slider' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.slidersService.findOne(id);
+  // }
 
-  @Mutation(() => Slider)
-  updateSlider(@Args('updateSliderInput') updateSliderInput: UpdateSliderInput) {
-    return this.slidersService.update(updateSliderInput.id, updateSliderInput);
-  }
+  // @Mutation(() => Slider)
+  // updateSlider(@Args('updateSliderInput') updateSliderInput: UpdateSliderInput) {
+  //   return this.slidersService.update(updateSliderInput.id, updateSliderInput);
+  // }
 
-  @Mutation(() => Slider)
-  removeSlider(@Args('id', { type: () => Int }) id: number) {
-    return this.slidersService.remove(id);
-  }
+  // @Mutation(() => Slider)
+  // removeSlider(@Args('id', { type: () => Int }) id: number) {
+  //   return this.slidersService.remove(id);
+  // }
 }
