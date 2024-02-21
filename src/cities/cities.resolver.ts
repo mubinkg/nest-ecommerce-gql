@@ -3,6 +3,8 @@ import { CitiesService } from './cities.service';
 import { City } from './entities/city.entity';
 import { CreateCityInput } from './dto/create-city.input';
 import { UpdateCityInput } from './dto/update-city.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
 
 @Resolver(() => City)
 export class CitiesResolver {
@@ -13,6 +15,7 @@ export class CitiesResolver {
     return this.citiesService.create(createCityInput);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => [City], { name: 'getCities' })
   findAll(
     @Args('limit', {type:()=>Number}) limit:number,

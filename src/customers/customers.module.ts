@@ -4,6 +4,9 @@ import { CustomersResolver } from './customers.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Customer, CustomerSchema } from './entities/customer.entity';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './passport.strategy';
+import { GqlAuthGuard } from './jwt-guards';
 
 @Module({
   imports: [
@@ -19,8 +22,9 @@ import { JwtModule } from '@nestjs/jwt';
       signOptions: {
         expiresIn: '1d'
       }
-    })
+    }),
+    PassportModule
   ],
-  providers: [CustomersResolver, CustomersService],
+  providers: [CustomersResolver, CustomersService,JwtStrategy, GqlAuthGuard],
 })
 export class CustomersModule {}
