@@ -1,4 +1,4 @@
-import { Injectable, NotAcceptableException, NotImplementedException } from '@nestjs/common';
+import { Injectable, NotAcceptableException, NotImplementedException, UnauthorizedException } from '@nestjs/common';
 import { CreateCustomerInput } from './dto/create-customer.input';
 import { UpdateCustomerInput } from './dto/update-customer.input';
 import { InjectModel } from '@nestjs/mongoose';
@@ -7,6 +7,7 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { AuthResponseDto } from './dto/auth-response.dto';
 import { JwtService } from '@nestjs/jwt';
+import { SignInDto } from './dto/signin.dto';
 
 
 @Injectable()
@@ -55,8 +56,33 @@ export class CustomersService {
     return `This action returns all customers`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} customer`;
+  async signIn(signinInput: SignInDto):Promise<AuthResponseDto> {
+    try{
+      const customer = await this.customerModel.findOne({mobile_no: signinInput.mobile_no})
+      if(!customer){
+        throw new UnauthorizedException('User not found.')
+      }
+      const checkPassword = await bcrypt.compare(signinInput.password, customer.password)
+      if(!checkPassword){
+        throw new UnauthorizedException('Email or password not matched')
+      }
+
+      const payload = {
+        id:customer._id.toString(),
+        mobile_no: customer.mobile_no,
+        name: customer.name
+      }
+
+      const access_token = await this.jwtService.signAsync(payload)
+
+      return {
+        access_token,
+        customer
+      }
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   async update(id: string, updateCustomerInput: UpdateCustomerInput) {

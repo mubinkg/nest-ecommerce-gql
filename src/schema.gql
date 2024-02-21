@@ -154,11 +154,17 @@ type Query {
   areaByCityId(city_id: String!): [Area!]!
   getCities(limit: Float!, offset: Float!, query: String!): [City!]!
   city(id: Int!): City!
+  signIn(signinInput: SignInDto!): AuthResponseDto!
   categories: [Category!]!
   category(id: Int!): Category!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
   slider(id: Int!): Slider!
+}
+
+input SignInDto {
+  mobile_no: String!
+  password: String!
 }
 
 type Mutation {
