@@ -96,6 +96,11 @@ type City {
   city_name: String
 }
 
+type AuthResponseDto {
+  access_token: String!
+  customer: Customer
+}
+
 type Category {
   _id: String!
   name: String
@@ -170,7 +175,7 @@ type Mutation {
   createCity(createCityInput: CreateCityInput!): City!
   updateCity(updateCityInput: UpdateCityInput!): City!
   removeCity(id: Int!): City!
-  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+  registerUser(createCustomerInput: CreateCustomerInput!): AuthResponseDto!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   removeCategory(id: Int!): Category!

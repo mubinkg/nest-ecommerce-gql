@@ -3,13 +3,14 @@ import { CustomersService } from './customers.service';
 import { Customer } from './entities/customer.entity';
 import { CreateCustomerInput } from './dto/create-customer.input';
 import { UpdateCustomerInput } from './dto/update-customer.input';
+import { AuthResponseDto } from './dto/auth-response.dto';
 
 @Resolver(() => Customer)
 export class CustomersResolver {
   constructor(private readonly customersService: CustomersService) {}
 
-  @Mutation(() => Customer)
-  createCustomer(@Args('createCustomerInput') createCustomerInput: CreateCustomerInput) {
+  @Mutation(() => AuthResponseDto, {name: 'registerUser'})
+  createCustomer(@Args('createCustomerInput') createCustomerInput: CreateCustomerInput):Promise<AuthResponseDto> {
     return this.customersService.create(createCustomerInput);
   }
 

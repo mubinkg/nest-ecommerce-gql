@@ -5,16 +5,19 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Customer, CustomerDocument } from './entities/customer.entity';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
+import { AuthResponseDto } from './dto/auth-response.dto';
+import { JwtService } from '@nestjs/jwt';
 
 
 @Injectable()
 export class CustomersService {
 
   constructor(
-    @InjectModel(Customer.name) private readonly customerModel:Model<CustomerDocument>
+    @InjectModel(Customer.name) private readonly customerModel:Model<CustomerDocument>,
+    private readonly jwtService:JwtService
   ){}
 
-  async create(createCustomerInput: CreateCustomerInput) {
+  async create(createCustomerInput: CreateCustomerInput):Promise<AuthResponseDto> {
     try{
       if(createCustomerInput.email){
         const user = await this.customerModel.findOne({email: createCustomerInput.email})
@@ -23,7 +26,7 @@ export class CustomersService {
         }
       }
       if(createCustomerInput.mobile_no){
-        const user = this.customerModel.findOne({mobile_no: createCustomerInput.mobile_no})
+        const user = await this.customerModel.findOne({mobile_no: createCustomerInput.mobile_no})
         if(user){
           throw new NotAcceptableException('Phone number already exist.')
         }
@@ -31,8 +34,17 @@ export class CustomersService {
       const hash = await bcrypt.hash(createCustomerInput.password, 10);
       createCustomerInput.password = await bcrypt.hash(createCustomerInput.password, hash)
       const customer = await this.customerModel.create(createCustomerInput)
+      const payload = {
+        id:customer._id.toString(),
+        mobile_no: customer.mobile_no,
+        name: customer.name
+      }
+      const access_token = await this.jwtService.signAsync(payload)
       customer.password = ''
-      return customer
+      return {
+        access_token: access_token,
+        customer: customer
+      }
     }
     catch(err){
       throw err;
