@@ -27,21 +27,49 @@ export class Customer {
   @Prop({type: String})
   password?: string
 
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  country_code?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  currency?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  language?: string
+
+  @Field(()=>Date, {nullable:true})
+  @Prop({type: Date})
+  dob?: Date
+
   @Field(()=>Number, {nullable:true})
-  @Prop({type: Number, default: 0})
-  balance?: number
+  @Prop({type: Number})
+  height?: number
+
+  @Field(()=>Number, {nullable:true})
+  @Prop({type: Number})
+  weight?: number
+
+  @Field(()=>Number, {nullable:true})
+  @Prop({type: Number})
+  shoe_size?: number
 
   @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  street?: string
+  favourite_k_pop_group?: string
 
   @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  area?: string
+  flavor?: string
 
   @Field(()=>String, {nullable:true})
   @Prop({type: String})
-  city?: string
+  referral_code?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  friends_code?: string
 
   @Field(()=>String, {nullable:true})
   @Prop({type: String, default: Status.ACTIVE})

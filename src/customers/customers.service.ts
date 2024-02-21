@@ -19,13 +19,13 @@ export class CustomersService {
       if(createCustomerInput.email){
         const user = await this.customerModel.findOne({email: createCustomerInput.email})
         if(user){
-          throw new NotAcceptableException('User Exist')
+          throw new NotAcceptableException('Email alredy exist.')
         }
       }
       if(createCustomerInput.mobile_no){
         const user = this.customerModel.findOne({mobile_no: createCustomerInput.mobile_no})
         if(user){
-          throw new NotAcceptableException('User Exist')
+          throw new NotAcceptableException('Phone number already exist.')
         }
       }
       const hash = await bcrypt.hash(createCustomerInput.password, 10);

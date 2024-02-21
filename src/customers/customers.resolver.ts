@@ -13,23 +13,23 @@ export class CustomersResolver {
     return this.customersService.create(createCustomerInput);
   }
 
-  @Query(() => [Customer], { name: 'customers' })
-  findAll() {
-    return this.customersService.findAll();
-  }
+  // @Query(() => [Customer], { name: 'customers' })
+  // findAll() {
+  //   return this.customersService.findAll();
+  // }
 
-  @Query(() => Customer, { name: 'customer' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.customersService.findOne(id);
-  }
+  // @Query(() => Customer, { name: 'customer' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.customersService.findOne(id);
+  // }
 
-  @Mutation(() => Customer)
-  updateCustomer(@Args('updateCustomerInput') updateCustomerInput: UpdateCustomerInput) {
-    return this.customersService.update(updateCustomerInput.id, updateCustomerInput);
-  }
+  // @Mutation(() => Customer)
+  // updateCustomer(@Args('updateCustomerInput') updateCustomerInput: UpdateCustomerInput) {
+  //   return this.customersService.update(updateCustomerInput.id, updateCustomerInput);
+  // }
 
-  @Mutation(() => Customer)
-  removeCustomer(@Args('id', { type: () => Int }) id: number) {
-    return this.customersService.remove(id);
-  }
+  // @Mutation(() => Customer)
+  // removeCustomer(@Args('id', { type: () => Int }) id: number) {
+  //   return this.customersService.remove(id);
+  // }
 }

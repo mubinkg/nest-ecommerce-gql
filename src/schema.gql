@@ -13,12 +13,24 @@ type Customer {
   email: String
   mobile_no: String
   password: String
-  balance: Float
-  street: String
-  area: String
-  city: String
+  country_code: String
+  currency: String
+  language: String
+  dob: DateTime
+  height: Float
+  weight: Float
+  shoe_size: Float
+  favourite_k_pop_group: String
+  flavor: String
+  referral_code: String
+  friends_code: String
   status: String
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type TicketCustomer {
   user_name: String
@@ -34,11 +46,6 @@ type Ticket {
   status: String
   created_at: DateTime
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Product {
   _id: String
@@ -142,8 +149,6 @@ type Query {
   areaByCityId(city_id: String!): [Area!]!
   getCities(limit: Float!, offset: Float!, query: String!): [City!]!
   city(id: Int!): City!
-  customers: [Customer!]!
-  customer(id: Int!): Customer!
   categories: [Category!]!
   category(id: Int!): Category!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
@@ -166,8 +171,6 @@ type Mutation {
   updateCity(updateCityInput: UpdateCityInput!): City!
   removeCity(id: Int!): City!
   createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
-  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
-  removeCustomer(id: Int!): Customer!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   removeCategory(id: Int!): Category!
@@ -293,22 +296,19 @@ input UpdateCityInput {
 input CreateCustomerInput {
   name: String!
   email: String
-  mobile_no: String
+  mobile_no: String!
   password: String!
-  street: String
-  area: String
-  city: String
-}
-
-input UpdateCustomerInput {
-  name: String
-  email: String
-  mobile_no: String
-  password: String
-  street: String
-  area: String
-  city: String
-  id: String!
+  country_code: String!
+  currency: String!
+  language: String!
+  dob: DateTime
+  height: Float
+  weight: Float
+  shoe_size: Float
+  favourite_k_pop_group: String
+  flavor: String
+  referral_code: String
+  friends_code: String
 }
 
 input CreateCategoryInput {

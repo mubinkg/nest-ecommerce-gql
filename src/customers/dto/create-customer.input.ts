@@ -1,5 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsEmail, IsMobilePhone, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsEmail, IsMobilePhone, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class CreateCustomerInput {
@@ -12,11 +12,11 @@ export class CreateCustomerInput {
   @Field(()=>String, {nullable:true})
   @IsEmail()
   @IsOptional()
-  email: string
+  email?: string
   
-  @Field(()=>String, {nullable:true})
+  @Field(()=>String)
   @IsMobilePhone()
-  @IsOptional()
+  @IsNotEmpty()
   mobile_no: string
 
   @Field(()=>String)
@@ -24,18 +24,58 @@ export class CreateCustomerInput {
   @IsNotEmpty()
   password: string
 
+  @Field(()=>String)
+  @IsString()
+  @IsNotEmpty()
+  country_code: string
+
+  @Field(()=>String)
+  @IsString()
+  @IsNotEmpty()
+  currency: string
+
+  @Field(()=>String)
+  @IsString()
+  @IsNotEmpty()
+  language: string
+
+  @Field(()=>Date, {nullable:true})
+  @IsDate()
+  @IsOptional()
+  dob?: Date
+
+  @Field(()=>Number, {nullable:true})
+  @IsNumber()
+  @IsOptional()
+  height?: number
+
+  @Field(()=>Number, {nullable:true})
+  @IsNumber()
+  @IsOptional()
+  weight?: number
+
+  @Field(()=>Number, {nullable:true})
+  @IsNumber()
+  @IsOptional()
+  shoe_size?: number
+
   @Field(()=>String, {nullable:true})
   @IsOptional()
   @IsString()
-  street: string
+  favourite_k_pop_group?: string
 
   @Field(()=>String, {nullable: true})
   @IsOptional()
   @IsString()
-  area: string
+  flavor?: string
 
   @Field(()=>String, {nullable:true})
   @IsOptional()
   @IsString()
-  city: string
+  referral_code?: string
+
+  @Field(()=>String, {nullable:true})
+  @IsOptional()
+  @IsString()
+  friends_code?: string
 }
