@@ -13,6 +13,7 @@ import { CustomersModule } from './customers/customers.module';
 import { CategoriesModule } from './categories/categories.module';
 import { AddressesModule } from './addresses/addresses.module';
 import { SlidersModule } from './sliders/sliders.module';
+import { BrandsModule } from './brands/brands.module';
 
 
 @Module({
@@ -22,7 +23,8 @@ import { SlidersModule } from './sliders/sliders.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: false,
-      plugins: [ApolloServerPluginLandingPageLocalDefault()]
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
+      csrfPrevention: false
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
     TicketsModule,
@@ -32,7 +34,8 @@ import { SlidersModule } from './sliders/sliders.module';
     CustomersModule,
     CategoriesModule,
     AddressesModule,
-    SlidersModule
+    SlidersModule,
+    BrandsModule
   ],
 })
 export class AppModule {}

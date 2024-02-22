@@ -144,6 +144,12 @@ type Slider {
   link: String
 }
 
+type Brand {
+  _id: String!
+  name: String
+  image: String
+}
+
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -160,6 +166,7 @@ type Query {
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
+  brands(limit: Float!, offset: Float!): [Brand!]!
 }
 
 input SignInDto {
@@ -190,6 +197,7 @@ type Mutation {
   removeAddress(id: String!): Address!
   createSlider(createSliderInput: CreateSliderInput!): Slider!
   createSliderType(createSliderType: CreateSliderTypeInput!): SliderType!
+  createBrand(createBrandInput: CreateBrandInput!): Brand!
 }
 
 input CreateTicketInput {
@@ -386,4 +394,9 @@ scalar Upload
 input CreateSliderTypeInput {
   type: String!
   type_id: Float!
+}
+
+input CreateBrandInput {
+  name: String!
+  image: Upload
 }
