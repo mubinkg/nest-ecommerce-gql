@@ -4,6 +4,8 @@ import { UpdateCategoryInput } from './dto/update-category.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Category, CategoryDocuemnt } from './entities/category.entity';
 import { Model } from 'mongoose';
+import { uploadFile } from 'src/util/upload';
+import { FileUpload } from 'graphql-upload';
 
 @Injectable()
 export class CategoriesService {
@@ -14,14 +16,22 @@ export class CategoriesService {
 
   async create(createCategoryInput: CreateCategoryInput) {
     try{
-      return await this.categoryModel.create(createCategoryInput)
+      if(createCategoryInput.image){
+        createCategoryInput.image = await uploadFile(createCategoryInput.image as FileUpload) as string
+      }
+      if(createCategoryInput.banner){
+        createCategoryInput.banner = await uploadFile(createCategoryInput.banner as FileUpload) as string
+      }
+      const totalCategory = await this.categoryModel.countDocuments()
+      return await this.categoryModel.create({...createCategoryInput, order: totalCategory+1})
     }
     catch(err){
+      console.log(err)
       throw new NotImplementedException('Can not create category.')
     }
   }
 
-  findAll() {
+  async findAll(limit:number, offset:number) {
     return `This action returns all categories`;
   }
 

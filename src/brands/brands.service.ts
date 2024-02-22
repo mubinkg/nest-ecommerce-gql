@@ -4,7 +4,7 @@ import { UpdateBrandInput } from './dto/update-brand.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Brand, BrandDocument } from './entities/brand.entity';
 import { Model } from 'mongoose';
-import { uplodFile } from 'src/util/upload';
+import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class BrandsService {
 
   async create(createBrandInput: CreateBrandInput) {
     try{
-      createBrandInput.image = await uplodFile(createBrandInput.image as FileUpload) as string
+      createBrandInput.image = await uploadFile(createBrandInput.image as FileUpload) as string
       return await this.brandModel.create(createBrandInput)
     }
     catch(err){

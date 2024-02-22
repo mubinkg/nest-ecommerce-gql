@@ -14,22 +14,25 @@ export class CategoriesResolver {
   }
 
   @Query(() => [Category], { name: 'categories' })
-  findAll() {
-    return this.categoriesService.findAll();
+  findAll(
+    @Args('limit', {type: ()=>Number}) limit:number,
+    @Args('offset', {type: ()=>Number}) offset:number
+  ) {
+    return this.categoriesService.findAll(limit, offset);
   }
 
-  @Query(() => Category, { name: 'category' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.categoriesService.findOne(id);
-  }
+  // @Query(() => Category, { name: 'category' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.categoriesService.findOne(id);
+  // }
 
-  @Mutation(() => Category)
-  updateCategory(@Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput) {
-    return this.categoriesService.update(updateCategoryInput.id, updateCategoryInput);
-  }
+  // @Mutation(() => Category)
+  // updateCategory(@Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput) {
+  //   return this.categoriesService.update(updateCategoryInput.id, updateCategoryInput);
+  // }
 
-  @Mutation(() => Category)
-  removeCategory(@Args('id', { type: () => Int }) id: number) {
-    return this.categoriesService.remove(id);
-  }
+  // @Mutation(() => Category)
+  // removeCategory(@Args('id', { type: () => Int }) id: number) {
+  //   return this.categoriesService.remove(id);
+  // }
 }

@@ -1,5 +1,6 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
+import { FileUpload, GraphQLUpload } from 'graphql-upload';
 
 @InputType()
 export class CreateCategoryInput {
@@ -9,13 +10,11 @@ export class CreateCategoryInput {
   @IsString()
   name: string;
 
-  @Field(() => String)
-  @IsString()
-  @IsNotEmpty()
-  image: string;
+  @Field(() => GraphQLUpload, {nullable:true})
+  image?: FileUpload | string;
 
-  @Field(() => String, { nullable: true})
-  banner?: string;
+  @Field(() => GraphQLUpload, {nullable:true})
+  banner?: FileUpload | string;
 
   @Field(()=>String, {nullable:true})
   @IsOptional()

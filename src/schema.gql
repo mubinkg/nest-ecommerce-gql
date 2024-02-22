@@ -107,7 +107,7 @@ type Category {
   order: Float
   image: String
   banner: String
-  parent: String!
+  parent: String
   status: String
 }
 
@@ -161,8 +161,7 @@ type Query {
   getCities(limit: Float!, offset: Float!, query: String!): [City!]!
   city(id: Int!): City!
   signIn(signinInput: SignInDto!): AuthResponseDto!
-  categories: [Category!]!
-  category(id: Int!): Category!
+  categories(limit: Float!, offset: Float!): [Category!]!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
@@ -190,8 +189,6 @@ type Mutation {
   removeCity(id: Int!): City!
   registerUser(createCustomerInput: CreateCustomerInput!): AuthResponseDto!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
-  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
-  removeCategory(id: Int!): Category!
   createAddress(createAddressInput: CreateAddressInput!): Address!
   updateAddress(updateAddressInput: UpdateAddressInput!): Address!
   removeAddress(id: String!): Address!
@@ -330,18 +327,13 @@ input CreateCustomerInput {
 
 input CreateCategoryInput {
   name: String!
-  image: String!
-  banner: String
+  image: Upload
+  banner: Upload
   parent: String
 }
 
-input UpdateCategoryInput {
-  name: String
-  image: String
-  banner: String
-  parent: String
-  id: Int!
-}
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 input CreateAddressInput {
   user_id: String!
@@ -387,9 +379,6 @@ input CreateSliderInput {
   image: Upload
   link: String
 }
-
-"""The `Upload` scalar type represents a file upload."""
-scalar Upload
 
 input CreateSliderTypeInput {
   type: String!

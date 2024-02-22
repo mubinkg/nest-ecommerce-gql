@@ -10,7 +10,7 @@ const storage = new Storage({
 
 export const kocartBucket = storage.bucket('kocart')
 
-export async function uplodFile(file:FileUpload){
+export async function uploadFile(file:FileUpload){
     try{
         const {createReadStream, filename} = await file
         const modifiedFilename = uuidV4() + filename
