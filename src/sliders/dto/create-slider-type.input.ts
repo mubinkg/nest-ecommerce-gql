@@ -1,5 +1,5 @@
 import { Field, InputType } from "@nestjs/graphql";
-import { IsNotEmpty, IsString, } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, } from "class-validator";
 
 @InputType()
 export class CreateSliderTypeInput{
@@ -8,8 +8,8 @@ export class CreateSliderTypeInput{
     @IsString()
     type: string
 
-    @Field(()=>String)
+    @Field(()=>Number)
     @IsNotEmpty()
-    @IsString()
-    type_id: string
+    @IsNumber()
+    type_id: number
 }

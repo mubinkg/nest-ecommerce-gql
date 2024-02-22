@@ -15,9 +15,9 @@ export class SliderType{
     @Prop({type: String})
     type?: string
 
-    @Field(()=>String,{nullable:true})
-    @Prop({type: String})
-    type_id?: string
+    @Field(()=>Number,{nullable:true})
+    @Prop({type: Number})
+    type_id?: number
 }
 
 export const SliderTypeSchema = SchemaFactory.createForClass(SliderType)

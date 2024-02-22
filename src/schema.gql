@@ -134,7 +134,7 @@ type Address {
 type SliderType {
   _id: String!
   type: String
-  type_id: String
+  type_id: Float
 }
 
 type Slider {
@@ -159,6 +159,7 @@ type Query {
   category(id: Int!): Category!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
+  sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
 }
 
 input SignInDto {
@@ -384,5 +385,5 @@ scalar Upload
 
 input CreateSliderTypeInput {
   type: String!
-  type_id: String!
+  type_id: Float!
 }
