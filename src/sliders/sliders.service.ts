@@ -47,6 +47,15 @@ export class SlidersService {
     }
   }
 
+  async getSliderTypeList(limit:number, offset:number):Promise<SliderType[]>{
+    try{
+      return await this.sliderTypeModel.find({}).limit(limit).skip(offset)
+    }
+    catch(err){
+      throw err
+    }
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} slider`;
   }

@@ -30,6 +30,14 @@ export class SlidersResolver {
     return this.slidersService.findAll(limit, offset);
   }
 
+  @Query(()=>[SliderType], {name: 'sliderTypeList'})
+  getSliderTypeList(
+    @Args('limit', {type: ()=> Number}) limit: number,
+    @Args('offset', {type: ()=> Number}) offset: number
+  ){
+    return this.slidersService.getSliderTypeList(limit, offset)
+  }
+
   // @Query(() => Slider, { name: 'slider' })
   // findOne(@Args('id', { type: () => Int }) id: number) {
   //   return this.slidersService.findOne(id);
