@@ -150,6 +150,14 @@ type Brand {
   image: String
 }
 
+type Rating {
+  _id: String!
+  product_id: String
+  rating: Float
+  comment: String
+  images: [String!]
+}
+
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -166,6 +174,8 @@ type Query {
   sliders(limit: Float!, offset: Float!): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
   brands(limit: Float!, offset: Float!): [Brand!]!
+  ratings: [Rating!]!
+  rating(id: Int!): Rating!
 }
 
 input SignInDto {
@@ -195,6 +205,9 @@ type Mutation {
   createSlider(createSliderInput: CreateSliderInput!): Slider!
   createSliderType(createSliderType: CreateSliderTypeInput!): SliderType!
   createBrand(createBrandInput: CreateBrandInput!): Brand!
+  createRating(createRatingInput: CreateRatingInput!): Rating!
+  updateRating(updateRatingInput: UpdateRatingInput!): Rating!
+  removeRating(id: Int!): Rating!
 }
 
 input CreateTicketInput {
@@ -388,4 +401,15 @@ input CreateSliderTypeInput {
 input CreateBrandInput {
   name: String!
   image: Upload
+}
+
+input CreateRatingInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateRatingInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
