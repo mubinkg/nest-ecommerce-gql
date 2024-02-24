@@ -166,6 +166,7 @@ type Brand {
 type Rating {
   _id: String!
   product_id: String
+  user_id: String
   rating: Float
   comment: String
   images: [String!]
@@ -195,7 +196,7 @@ type Query {
   sliders(limit: Float!, offset: Float!): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
   brands(limit: Float!, offset: Float!): [Brand!]!
-  ratings: [Rating!]!
+  ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
   rating(id: Int!): Rating!
   favourites: [Favourite!]!
   favourite(id: Int!): Favourite!
@@ -204,6 +205,20 @@ type Query {
 input SignInDto {
   mobile_no: String!
   password: String!
+}
+
+input RatingFilterDto {
+  product_id: String
+  user_id: String
+  limit: Float = 25
+  offset: Float = 0
+  sort: String
+  order: SortingOrder! = DESC
+}
+
+enum SortingOrder {
+  DESC
+  ASC
 }
 
 type Mutation {
@@ -229,7 +244,7 @@ type Mutation {
   createSliderType(createSliderType: CreateSliderTypeInput!): SliderType!
   createBrand(createBrandInput: CreateBrandInput!): Brand!
   createRating(createRatingInput: CreateRatingInput!): Rating!
-  deleteRating(deleteRatingInput: DeleteRatingInput!): String!
+  deleteRating(id: String!): String!
   updateRating(updateRatingInput: UpdateRatingInput!): Rating!
   removeRating(id: Int!): Rating!
   createFavourite(createFavouriteInput: CreateFavouriteInput!): Favourite!
@@ -432,6 +447,7 @@ input CreateBrandInput {
 
 input CreateRatingInput {
   product_id: String
+  user_id: String
   rating: Float
   comment: String
   images: [ImageInput!]
@@ -442,18 +458,9 @@ input ImageInput {
   image: Upload
 }
 
-input DeleteRatingInput {
-  id: String!
-  status: Status
-}
-
-enum Status {
-  ACTIVE
-  INACTIVE
-}
-
 input UpdateRatingInput {
   product_id: String
+  user_id: String
   rating: Float
   comment: String
   images: [ImageInput!]

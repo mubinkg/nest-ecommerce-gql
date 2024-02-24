@@ -1,5 +1,5 @@
 import { InputType,  Field, registerEnumType } from '@nestjs/graphql';
-import { Status } from '../data/status.enum';
+import { Status } from '../data/enum';
 registerEnumType(Status,{
   name:"Status"
 })

@@ -3,10 +3,11 @@ import { CreateRatingInput } from './dto/create-rating.input';
 import { UpdateRatingInput } from './dto/update-rating.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Rating, RatingDocument } from './entities/rating.entity';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
 import { DeleteRatingInput } from './dto/delete-rating.dto';
+import { RatingFilterDto } from './dto/ratings.filter.dto';
 
 @Injectable()
 export class RatingsService {
@@ -30,23 +31,43 @@ export class RatingsService {
   }
 
 
-  async delete(deleteRatingInput:DeleteRatingInput){
-    const {id,status} = deleteRatingInput
+  async delete(id: string) {
+    
     try {
-      await this.ratingModel.findByIdAndUpdate(id,{$set: {status}}, { new: true });
+      await this.ratingModel.findByIdAndUpdate(id, { $set: { status:"inactive" } }, { new: true });
       return "Successfully deleted  review"
     } catch (error) {
       throw new NotFoundException("Your data not found")
-      
+
     }
 
   }
-  async getRatings() {
-   try {
-    return await this.ratingModel.find()
-   } catch (error) {
+  async getRatings(ratingFilterDto: RatingFilterDto) {
+    const { product_id, user_id, offset, limit, order,sort } = ratingFilterDto
+
+    let query = {}
+    if (product_id) {
+      query["product_id"] = new mongoose.Types.ObjectId(product_id as string);
+    }
     
-   }
+
+    if (user_id) {
+      query["user_id"] =new mongoose.Types.ObjectId(user_id as string);
+    }
+
+   
+      query["status"] ="active";
+    
+    try {
+      return await this.ratingModel.aggregate([{
+        $match: query
+      },
+      { $sort: { createdAt: order } },
+      { $skip: offset },
+      { $limit: limit }])
+    } catch (error) {
+     throw new InternalServerErrorException("Error on finding list",error.message)
+    }
   }
 
   findOne(id: number) {
