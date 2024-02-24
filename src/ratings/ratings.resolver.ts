@@ -3,6 +3,7 @@ import { RatingsService } from './ratings.service';
 import { Rating } from './entities/rating.entity';
 import { CreateRatingInput } from './dto/create-rating.input';
 import { UpdateRatingInput } from './dto/update-rating.input';
+import { DeleteRatingInput } from './dto/delete-rating.dto';
 
 @Resolver(() => Rating)
 export class RatingsResolver {
@@ -13,9 +14,17 @@ export class RatingsResolver {
     return this.ratingsService.create(createRatingInput);
   }
 
+  @Mutation(() => String)
+  deleteRating(@Args('deleteRatingInput') deleteRatingInput: DeleteRatingInput) {
+    return this.ratingsService.delete(deleteRatingInput);
+  }
+
+
+  
+  
   @Query(() => [Rating], { name: 'ratings' })
-  findAll() {
-    return this.ratingsService.findAll();
+  getRatings() {
+    return this.ratingsService.getRatings();
   }
 
   @Query(() => Rating, { name: 'rating' })

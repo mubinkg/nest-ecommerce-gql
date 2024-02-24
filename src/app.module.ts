@@ -15,6 +15,7 @@ import { AddressesModule } from './addresses/addresses.module';
 import { SlidersModule } from './sliders/sliders.module';
 import { BrandsModule } from './brands/brands.module';
 import { RatingsModule } from './ratings/ratings.module';
+import { FavouritesModule } from './favourites/favourites.module';
 
 
 @Module({
@@ -25,7 +26,8 @@ import { RatingsModule } from './ratings/ratings.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      csrfPrevention: false
+      csrfPrevention: false,
+      context: ({ req, res }) => ({ req, res }),
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
     TicketsModule,
@@ -37,7 +39,8 @@ import { RatingsModule } from './ratings/ratings.module';
     AddressesModule,
     SlidersModule,
     BrandsModule,
-    RatingsModule
+    RatingsModule,
+    FavouritesModule
   ],
 })
 export class AppModule {}

@@ -29,7 +29,7 @@ export class Category {
   banner?: string;
 
   @Field(()=>String, {nullable:true})
-  @Prop({type: String})
+  @Prop({ type: 'ObjectId' }) 
   parent?: string
 
   @Field(() => String, { nullable: true})

@@ -1,15 +1,52 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateRatingInput } from './dto/create-rating.input';
 import { UpdateRatingInput } from './dto/update-rating.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { Rating, RatingDocument } from './entities/rating.entity';
+import { Model } from 'mongoose';
+import { uploadFile } from 'src/util/upload';
+import { FileUpload } from 'graphql-upload';
+import { DeleteRatingInput } from './dto/delete-rating.dto';
 
 @Injectable()
 export class RatingsService {
-  create(createRatingInput: CreateRatingInput) {
-    return 'This action adds a new rating';
+  constructor(
+    @InjectModel(Rating.name) private readonly ratingModel: Model<RatingDocument>
+  ) { }
+  async create(createRatingInput: CreateRatingInput) {
+    try {
+      if (createRatingInput.images.length > 0) {
+        let images: string[] = []
+        for (let index = 0; index < createRatingInput.images.length; index++) {
+          const temp = await uploadFile(createRatingInput.images[index].image as FileUpload) as string;
+          images.push(temp)
+        }
+        createRatingInput.imageUrl = images
+      }
+      return await this.ratingModel.create(createRatingInput)
+    } catch (error) {
+      throw new InternalServerErrorException("Error on creating rating", error.message)
+    }
   }
 
-  findAll() {
-    return `This action returns all ratings`;
+
+  async delete(deleteRatingInput:DeleteRatingInput){
+    const {id,status} = deleteRatingInput
+    try {
+      await this.ratingModel.findByIdAndUpdate(id,{$set: {status}}, { new: true });
+      return "Successfully deleted  review"
+    } catch (error) {
+      throw new NotFoundException("Your data not found")
+      
+    }
+
+  }
+  async getRatings() {
+   try {
+    return await this.ratingModel.find()
+   } catch (error) {
+    
+   }
   }
 
   findOne(id: number) {
