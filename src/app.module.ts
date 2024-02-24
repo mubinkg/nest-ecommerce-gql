@@ -15,6 +15,7 @@ import { AddressesModule } from './addresses/addresses.module';
 import { SlidersModule } from './sliders/sliders.module';
 import { BrandsModule } from './brands/brands.module';
 import { RatingsModule } from './ratings/ratings.module';
+import { PromoCodeModule } from './promo-code/promo-code.module';
 
 
 @Module({
@@ -37,7 +38,8 @@ import { RatingsModule } from './ratings/ratings.module';
     AddressesModule,
     SlidersModule,
     BrandsModule,
-    RatingsModule
+    RatingsModule,
+    PromoCodeModule
   ],
 })
 export class AppModule {}
