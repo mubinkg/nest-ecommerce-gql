@@ -111,6 +111,19 @@ type Category {
   status: String
 }
 
+type CategoriesResponse {
+  _id: String!
+  name: String
+  order: Float
+  image: String
+  banner: String
+  parent: String
+  status: String
+
+  """Children Array are same as category"""
+  children: [Category!]!
+}
+
 type Address {
   _id: String!
   user: Customer
@@ -156,6 +169,14 @@ type Rating {
   rating: Float
   comment: String
   images: [String!]
+  imageUrl: [String!]
+  status: String
+}
+
+type Favourite {
+  _id: String
+  product_id: String
+  user_Id: String
 }
 
 type Query {
@@ -169,13 +190,15 @@ type Query {
   getCities(limit: Float!, offset: Float!, query: String!): [City!]!
   city(id: Int!): City!
   signIn(signinInput: SignInDto!): AuthResponseDto!
-  categories(limit: Float!, offset: Float!): [Category!]!
+  categories: [CategoriesResponse!]!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
   brands(limit: Float!, offset: Float!): [Brand!]!
   ratings: [Rating!]!
   rating(id: Int!): Rating!
+  favourites: [Favourite!]!
+  favourite(id: Int!): Favourite!
 }
 
 input SignInDto {
@@ -206,8 +229,12 @@ type Mutation {
   createSliderType(createSliderType: CreateSliderTypeInput!): SliderType!
   createBrand(createBrandInput: CreateBrandInput!): Brand!
   createRating(createRatingInput: CreateRatingInput!): Rating!
+  deleteRating(deleteRatingInput: DeleteRatingInput!): String!
   updateRating(updateRatingInput: UpdateRatingInput!): Rating!
   removeRating(id: Int!): Rating!
+  createFavourite(createFavouriteInput: CreateFavouriteInput!): Favourite!
+  updateFavourite(updateFavouriteInput: UpdateFavouriteInput!): Favourite!
+  removeFavourite(id: String!): String!
 }
 
 input CreateTicketInput {
@@ -404,12 +431,43 @@ input CreateBrandInput {
 }
 
 input CreateRatingInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  product_id: String
+  rating: Float
+  comment: String
+  images: [ImageInput!]
+  imageUrl: [String!]
+}
+
+input ImageInput {
+  image: Upload
+}
+
+input DeleteRatingInput {
+  id: String!
+  status: Status
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
 }
 
 input UpdateRatingInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  product_id: String
+  rating: Float
+  comment: String
+  images: [ImageInput!]
+  imageUrl: [String!]
   id: Int!
+}
+
+input CreateFavouriteInput {
+  product_id: String
+  user_Id: String
+}
+
+input UpdateFavouriteInput {
+  product_id: String
+  user_Id: String
+  id: String!
 }

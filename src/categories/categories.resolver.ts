@@ -3,6 +3,7 @@ import { CategoriesService } from './categories.service';
 import { Category } from './entities/category.entity';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
+import { CategoriesResponse } from './dto/categories.response.dto';
 
 @Resolver(() => Category)
 export class CategoriesResolver {
@@ -13,13 +14,13 @@ export class CategoriesResolver {
     return this.categoriesService.create(createCategoryInput);
   }
 
-  @Query(() => [Category], { name: 'categories' })
-  findAll(
-    @Args('limit', {type: ()=>Number}) limit:number,
-    @Args('offset', {type: ()=>Number}) offset:number
-  ) {
-    return this.categoriesService.findAll(limit, offset);
+  @Query(() => [CategoriesResponse], { name: 'categories' })
+  getCategories() {
+    return this.categoriesService.getCategories();
   }
+
+
+
 
   // @Query(() => Category, { name: 'category' })
   // findOne(@Args('id', { type: () => Int }) id: number) {
