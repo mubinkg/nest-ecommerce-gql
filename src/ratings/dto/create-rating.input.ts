@@ -1,7 +1,7 @@
 import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { ImageInput } from './rating-images';
-import { Status } from '../data/status.enum';
+import { Status } from '../data/enum';
 registerEnumType(Status,{
   name:"Status"
 })
@@ -9,6 +9,9 @@ registerEnumType(Status,{
 export class CreateRatingInput {
   @Field(()=>String, {nullable:true})
   product_id: string
+
+  @Field(()=>String, {nullable:true})
+  user_id?: string
 
   @Field(()=>Number, {nullable:true})
   rating?: number

@@ -1,10 +1,10 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose'
-import { Status } from '../data/status.enum';
+import { Status } from '../data/enum';
 
 @ObjectType()
-@Schema()
+@Schema({timestamps:true})
 export class Rating {
     @Field(()=>String)
     _id: string
@@ -12,6 +12,10 @@ export class Rating {
     @Field(()=>String, {nullable:true})
     @Prop({type: mongoose.Schema.Types.ObjectId})
     product_id: string
+
+    @Field(()=>String, {nullable:true})
+    @Prop({type: mongoose.Schema.Types.ObjectId})
+    user_id: string
 
     @Field(()=>Number, {nullable:true})
     @Prop({type: Number})
