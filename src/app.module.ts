@@ -16,6 +16,7 @@ import { SlidersModule } from './sliders/sliders.module';
 import { BrandsModule } from './brands/brands.module';
 import { RatingsModule } from './ratings/ratings.module';
 import { PromoCodeModule } from './promo-code/promo-code.module';
+import { FavouritesModule } from './favourites/favourites.module';
 
 
 @Module({
@@ -26,7 +27,8 @@ import { PromoCodeModule } from './promo-code/promo-code.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      csrfPrevention: false
+      csrfPrevention: false,
+      context: ({ req, res }) => ({ req, res }),
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
     TicketsModule,
@@ -39,7 +41,8 @@ import { PromoCodeModule } from './promo-code/promo-code.module';
     SlidersModule,
     BrandsModule,
     RatingsModule,
-    PromoCodeModule
+    PromoCodeModule,
+    FavouritesModule
   ],
 })
 export class AppModule {}

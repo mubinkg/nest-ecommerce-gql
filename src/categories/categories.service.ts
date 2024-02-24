@@ -1,4 +1,4 @@
-import { Injectable, NotImplementedException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotImplementedException } from '@nestjs/common';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
 import { InjectModel } from '@nestjs/mongoose';
@@ -15,6 +15,7 @@ export class CategoriesService {
   ){}
 
   async create(createCategoryInput: CreateCategoryInput) {
+
     try{
       if(createCategoryInput.image){
         createCategoryInput.image = await uploadFile(createCategoryInput.image as FileUpload) as string
@@ -31,8 +32,33 @@ export class CategoriesService {
     }
   }
 
-  async findAll(limit:number, offset:number) {
-    return `This action returns all categories`;
+  async getCategories() {
+    try {
+      return await this.categoryModel.aggregate([
+        {
+          $match: {
+            status: "active",
+            parent: {
+              $eq: null,
+            },
+          },
+        },
+        {
+          $lookup:
+            {
+              from: "categories",
+              localField: "_id",
+              foreignField: "parent",
+              as: "children",
+            },
+        },
+      ]);
+      
+    } catch (error) {
+      throw new InternalServerErrorException("Error On finding categories ",error.message)
+      
+    }
+   
   }
 
   findOne(id: number) {
