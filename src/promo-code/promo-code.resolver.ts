@@ -3,6 +3,10 @@ import { PromoCodeService } from './promo-code.service';
 import { PromoCode } from './entities/promo-code.entity';
 import { CreatePromoCodeInput } from './dto/create-promo-code.input';
 import { UpdatePromoCodeInput } from './dto/update-promo-code.input';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
+import { GetPromoCodesInput } from './dto/get-promo-code.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
 
 @Resolver(() => PromoCode)
 export class PromoCodeResolver {
@@ -14,30 +18,21 @@ export class PromoCodeResolver {
   }
 
   @Mutation(() => PromoCode)
+  @UseGuards(GqlAuthGuard)
   async validatePromoCode(
     @Args('code') code: string,
     @Args('orderFinalAmount') orderFinalAmount: number,
+    @CurrentUser('user') user :any
     ) {
-    return await this.promoCodeService.validatePromoCode(code,orderFinalAmount)
+    return await this.promoCodeService.validatePromoCode(code,orderFinalAmount,user?.id)
   }
 
   @Query(() => [PromoCode], { name: 'promoCode' })
-  findAll() {
-    return this.promoCodeService.findAll();
+  @UseGuards(GqlAuthGuard)
+  async getPromoCodes(
+    @Args('getPromocodesInput') getPromocodesInput: GetPromoCodesInput,
+  ) {
+    return this.promoCodeService.getPromoCodes();
   }
 
-  @Query(() => PromoCode, { name: 'promoCode' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.promoCodeService.findOne(id);
-  }
-
-  @Mutation(() => PromoCode)
-  updatePromoCode(@Args('updatePromoCodeInput') updatePromoCodeInput: UpdatePromoCodeInput) {
-    return this.promoCodeService.update(updatePromoCodeInput.id, updatePromoCodeInput);
-  }
-
-  @Mutation(() => PromoCode)
-  removePromoCode(@Args('id', { type: () => Int }) id: number) {
-    return this.promoCodeService.remove(id);
-  }
 }

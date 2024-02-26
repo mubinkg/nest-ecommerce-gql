@@ -54,7 +54,7 @@ export class PromoCode {
   numberOfUsers?:number
 
   @Field(()=>Number,{nullable:true})
-  @Prop({type:Number})
+  @Prop({type:Number,default:0})
   numberOfUsedUser?:number
 
   @Field(()=>[String],{nullable:true})
