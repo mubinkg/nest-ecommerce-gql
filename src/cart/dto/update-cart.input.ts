@@ -1,6 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { CreateCartInput } from './create-cart.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateCartInput{

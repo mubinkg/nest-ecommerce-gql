@@ -18,6 +18,7 @@ import { RatingsModule } from './ratings/ratings.module';
 import { PromoCodeModule } from './promo-code/promo-code.module';
 import { FavouritesModule } from './favourites/favourites.module';
 import { CartModule } from './cart/cart.module';
+import { OrdersModule } from './orders/orders.module';
 
 
 @Module({
@@ -44,7 +45,8 @@ import { CartModule } from './cart/cart.module';
     RatingsModule,
     PromoCodeModule,
     FavouritesModule,
-    CartModule
+    CartModule,
+    OrdersModule
   ],
 })
 export class AppModule {}

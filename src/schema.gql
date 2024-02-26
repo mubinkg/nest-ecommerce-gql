@@ -223,6 +223,11 @@ type Cart {
   qty: Float!
 }
 
+type Order {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -246,6 +251,8 @@ type Query {
   favourite(id: Int!): Favourite!
   getUserCart: [Cart!]!
   cart(id: Int!): Cart!
+  orders: [Order!]!
+  order(id: Int!): Order!
 }
 
 input SignInDto {
@@ -289,6 +296,9 @@ type Mutation {
   createCart(createCartInput: CreateCartInput!): Cart!
   updateCart(updateCartInput: UpdateCartInput!): Cart!
   removeCart(id: String!): Cart!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  removeOrder(id: Int!): Order!
 }
 
 input CreateTicketInput {
@@ -570,4 +580,15 @@ input CreateCartInput {
 input UpdateCartInput {
   cartId: String!
   qty: Float!
+}
+
+input CreateOrderInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateOrderInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
