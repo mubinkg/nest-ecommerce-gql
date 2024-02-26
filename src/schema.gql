@@ -288,7 +288,7 @@ type Mutation {
   removeFavourite(id: String!): String!
   createCart(createCartInput: CreateCartInput!): Cart!
   updateCart(updateCartInput: UpdateCartInput!): Cart!
-  removeCart(id: Int!): Cart!
+  removeCart(id: String!): Cart!
 }
 
 input CreateTicketInput {

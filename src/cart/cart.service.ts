@@ -38,7 +38,12 @@ export class CartService {
     return `This action updates a #${id} cart`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cart`;
+  async remove(id: string) {
+    try{
+      return await this.cartModel.findByIdAndDelete(id)
+    }
+    catch(err){
+      throw new NotImplementedException('Can not remove cart')
+    }
   }
 }

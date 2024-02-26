@@ -39,7 +39,7 @@ export class CartResolver {
   }
 
   @Mutation(() => Cart)
-  removeCart(@Args('id', { type: () => Int }) id: number) {
+  removeCart(@Args('id', { type: () => String }) id: string) {
     return this.cartService.remove(id);
   }
 }
