@@ -244,6 +244,7 @@ type Query {
   promoCode(id: Int!): PromoCode!
   favourites: [Favourite!]!
   favourite(id: Int!): Favourite!
+  getUserCart: [Cart!]!
   cart(id: Int!): Cart!
 }
 

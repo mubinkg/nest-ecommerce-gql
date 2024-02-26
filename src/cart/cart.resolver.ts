@@ -20,9 +20,12 @@ export class CartResolver {
     return this.cartService.create(createCartInput, user);
   }
 
-  @Query(() => [Cart], { name: 'cart' })
-  findAll() {
-    return this.cartService.findAll();
+  @Query(() => [Cart], { name: 'getUserCart' })
+  @UseGuards(GqlAuthGuard)
+  findAll(
+    @CurrentUser() user:any
+  ) {
+    return this.cartService.findAll(user);
   }
 
   @Query(() => Cart, { name: 'cart' })

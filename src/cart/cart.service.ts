@@ -20,8 +20,14 @@ export class CartService {
     }
   }
 
-  findAll() {
-    return `This action returns all cart`;
+  async findAll(user:any) {
+    try{
+      const userId = user.userId
+      return await this.cartModel.find({user_id: userId})
+    }
+    catch(err){
+      throw new NotImplementedException('Can not get user card details.')
+    }
   }
 
   findOne(id: number) {
