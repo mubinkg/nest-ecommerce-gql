@@ -17,6 +17,7 @@ import { BrandsModule } from './brands/brands.module';
 import { RatingsModule } from './ratings/ratings.module';
 import { PromoCodeModule } from './promo-code/promo-code.module';
 import { FavouritesModule } from './favourites/favourites.module';
+import { ProductAttributesModule } from './product-attributes/product-attributes.module';
 
 
 @Module({
@@ -42,7 +43,8 @@ import { FavouritesModule } from './favourites/favourites.module';
     BrandsModule,
     RatingsModule,
     PromoCodeModule,
-    FavouritesModule
+    FavouritesModule,
+    ProductAttributesModule
   ],
 })
 export class AppModule {}

@@ -33,7 +33,7 @@ export class PromoCodeService {
     return promoCode;
   }
 
-  async validatePromoCode(promoCode:string,orderFinalAmount:number){
+  async validatePromoCode(promoCode:string,orderFinalAmount:number,userId:string){
 
     const currentDate= new Date()
 
@@ -41,6 +41,10 @@ export class PromoCodeService {
 
     if(!promoCodeDetails){
       throw new NotFoundException('Promo Code is Invalid')
+    }
+
+    if(promoCodeDetails?.numberOfUsers<=promoCodeDetails?.numberOfUsedUser){
+      throw new NotAcceptableException('Invalid promocode')
     }
 
     const minOrderAmount=Number(promoCodeDetails?.minOrderAmount)
@@ -56,35 +60,24 @@ export class PromoCodeService {
     throw new NotAcceptableException(`Order amount should be less than ${maxOrderAmount}`)
    }
 
-   const usedUsers=promoCodeDetails.usedUsers
+   const usedUsers=promoCodeDetails?.usedUsers
 
-  //  if(promoCodeDetails?.repeatUsage!==RepeatUsage.ALLOWED){
+   if(promoCodeDetails?.repeatUsage!==RepeatUsage.ALLOWED && promoCodeDetails.numberOfUsedUser>0){
+    const isUsed= usedUsers.includes(userId)
 
+    if(isUsed){
+      throw new NotAcceptableException('Already used this promocode')
+    }
     
-
-  //  }
-
-
-  //   console.log(promoCodeDetails)
-
+   }
 
     return promoCodeDetails
 
   }
 
-  findAll() {
-    return `This action returns all promoCode`;
+  async getPromoCodes(){
+    
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} promoCode`;
-  }
-
-  update(id: number, updatePromoCodeInput: UpdatePromoCodeInput) {
-    return `This action updates a #${id} promoCode`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} promoCode`;
-  }
+ 
 }
