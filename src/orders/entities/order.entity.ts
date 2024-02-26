@@ -5,7 +5,9 @@ import { HydratedDocument } from 'mongoose';
 export type OrderDocument = HydratedDocument<Order>
 
 @ObjectType()
-@Schema()
+@Schema({
+  timestamps: true
+})
 export class Order {
 
   @Field(()=>String)
@@ -74,6 +76,10 @@ export class Order {
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
   email?:string // only enter when ordered product is digital product and one of them is not downloadable(download_allowed = 0)
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  created_at?:string
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order)

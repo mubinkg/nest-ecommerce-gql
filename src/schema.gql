@@ -241,6 +241,7 @@ type Order {
   order_note: String
   documents: [String!]
   email: String
+  created_at: String
 }
 
 type Query {
@@ -598,12 +599,38 @@ input UpdateCartInput {
 }
 
 input CreateOrderInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  mobile: String!
+  product_variant_id: [String!]!
+  quantity: [Float!]!
+  total: Float!
+  delivery_charge: Float!
+  final_total: Float!
+  promo_code: String
+  promo_discount: Float
+  payment_method: String!
+  address_id: String!
+  is_wallet_used: Float! = 0
+  wallet_balance_used: Float! = 0
+  order_note: String
+  documents: [String!]
+  email: String
 }
 
 input UpdateOrderInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  mobile: String
+  product_variant_id: [String!]
+  quantity: [Float!]
+  total: Float
+  delivery_charge: Float
+  final_total: Float
+  promo_code: String
+  promo_discount: Float
+  payment_method: String
+  address_id: String
+  is_wallet_used: Float = 0
+  wallet_balance_used: Float = 0
+  order_note: String
+  documents: [String!]
+  email: String
   id: Int!
 }

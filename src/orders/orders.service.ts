@@ -12,8 +12,10 @@ export class OrdersService {
     @InjectModel(Order.name) private readonly orderModel:Model<OrderDocument>
   ){}
 
-  async create(createOrderInput: CreateOrderInput) {
-    try{}
+  async create(createOrderInput: CreateOrderInput, user:any) {
+    try{
+      return await this.orderModel.create({...createOrderInput, user_id: user.userId})
+    }
     catch(err){
       throw new NotImplementedException('Can not create order.')
     }

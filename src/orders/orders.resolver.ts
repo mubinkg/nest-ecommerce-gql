@@ -3,14 +3,21 @@ import { OrdersService } from './orders.service';
 import { Order } from './entities/order.entity';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
 
 @Resolver(() => Order)
 export class OrdersResolver {
   constructor(private readonly ordersService: OrdersService) {}
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Order)
-  createOrder(@Args('createOrderInput') createOrderInput: CreateOrderInput) {
-    return this.ordersService.create(createOrderInput);
+  createOrder(
+    @Args('createOrderInput') createOrderInput: CreateOrderInput,
+    @CurrentUser() user:any
+  ) {
+    return this.ordersService.create(createOrderInput, user);
   }
 
   @Query(() => [Order], { name: 'orders' })
