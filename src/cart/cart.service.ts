@@ -1,11 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotImplementedException } from '@nestjs/common';
 import { CreateCartInput } from './dto/create-cart.input';
 import { UpdateCartInput } from './dto/update-cart.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { Cart, CartDocument } from './entities/cart.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class CartService {
-  create(createCartInput: CreateCartInput) {
-    return 'This action adds a new cart';
+
+  @InjectModel(Cart.name) private readonly cartModel:Model<CartDocument>
+
+  async create(createCartInput: CreateCartInput, user:any) {
+    try{
+      const cartInput = {...createCartInput, user_id: user.userId}
+      return await this.cartModel.create(cartInput)
+    }
+    catch(err){
+      throw new NotImplementedException('Error on creating cart')
+    }
   }
 
   findAll() {

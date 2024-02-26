@@ -3,14 +3,21 @@ import { CartService } from './cart.service';
 import { Cart } from './entities/cart.entity';
 import { CreateCartInput } from './dto/create-cart.input';
 import { UpdateCartInput } from './dto/update-cart.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
 
 @Resolver(() => Cart)
 export class CartResolver {
   constructor(private readonly cartService: CartService) {}
 
   @Mutation(() => Cart)
-  createCart(@Args('createCartInput') createCartInput: CreateCartInput) {
-    return this.cartService.create(createCartInput);
+  @UseGuards(GqlAuthGuard)
+  createCart(
+    @Args('createCartInput') createCartInput: CreateCartInput,
+    @CurrentUser() user:any
+  ) {
+    return this.cartService.create(createCartInput, user);
   }
 
   @Query(() => [Cart], { name: 'cart' })

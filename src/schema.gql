@@ -216,8 +216,11 @@ type Favourite {
 }
 
 type Cart {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  _id: String!
+  user_id: String
+  product_variant_id: String
+  is_saved_for_later: Float!
+  qty: Float!
 }
 
 type Query {
@@ -558,12 +561,14 @@ input UpdateFavouriteInput {
 }
 
 input CreateCartInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  product_variant_id: String!
+  is_saved_for_later: Float! = 0
+  qty: Float! = 1
 }
 
 input UpdateCartInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  product_variant_id: String
+  is_saved_for_later: Float = 0
+  qty: Float = 1
   id: Int!
 }
