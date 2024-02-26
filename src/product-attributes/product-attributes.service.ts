@@ -1,11 +1,43 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateProductAttributeInput } from './dto/create-product-attribute.input';
 import { UpdateProductAttributeInput } from './dto/update-product-attribute.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { ProductAttribute, ProductAttributeDocument } from './entities/product-attribute.entity';
+import { Model } from 'mongoose';
+import ShortUniqueId from 'short-unique-id';
+import { uploadFile } from 'src/util/upload';
+import { FileUpload } from 'graphql-upload';
 
 @Injectable()
 export class ProductAttributesService {
-  create(createProductAttributeInput: CreateProductAttributeInput) {
-    return 'This action adds a new productAttribute';
+
+  constructor(
+    @InjectModel(ProductAttribute.name) private productAttributeModel: Model<ProductAttributeDocument>
+  ){}
+
+ async createProductAttribute(createProductAttributeInput: CreateProductAttributeInput) {
+
+     let attribute
+
+     for (let index = 0; index <  createProductAttributeInput.values.length; index++) {
+              const shortId=new ShortUniqueId({ length: 8 ,dictionary:"alphanum_upper"})()
+              createProductAttributeInput.values[index].id="AV"+shortId
+
+              if(createProductAttributeInput.values[index].image){
+
+                const imageUrl = await uploadFile(createProductAttributeInput.values[index].image as FileUpload) as string;
+                
+                createProductAttributeInput.values[index].image=imageUrl
+              }
+     }
+
+      try {
+        attribute= await this.productAttributeModel.create(createProductAttributeInput)
+      } catch (error) {
+        throw new InternalServerErrorException('Failed to create attribute'+error.message)
+      }
+
+    return attribute;
   }
 
   findAll() {

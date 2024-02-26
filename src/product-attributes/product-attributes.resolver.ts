@@ -3,14 +3,25 @@ import { ProductAttributesService } from './product-attributes.service';
 import { ProductAttribute } from './entities/product-attribute.entity';
 import { CreateProductAttributeInput } from './dto/create-product-attribute.input';
 import { UpdateProductAttributeInput } from './dto/update-product-attribute.input';
+import { ProductAttributeSetService } from './product-attribute-set.service';
+import { ProductAttributeSet } from './entities/product-attribute-set.entity';
+import { CreateProductAttributeSetInput } from './dto/create-product-attribute-set.input';
 
 @Resolver(() => ProductAttribute)
 export class ProductAttributesResolver {
-  constructor(private readonly productAttributesService: ProductAttributesService) {}
+  constructor(
+              private readonly productAttributesService: ProductAttributesService,
+              private readonly productAttributeSetService:ProductAttributeSetService
+    ) {}
 
   @Mutation(() => ProductAttribute)
-  createProductAttribute(@Args('createProductAttributeInput') createProductAttributeInput: CreateProductAttributeInput) {
-    return this.productAttributesService.create(createProductAttributeInput);
+  async createProductAttribute(@Args('createProductAttributeInput') createProductAttributeInput: CreateProductAttributeInput) {
+    return await this.productAttributesService.createProductAttribute(createProductAttributeInput);
+  }
+
+  @Mutation(() => ProductAttributeSet)
+  async createProductAttributeSet(@Args('createProductAttributeInput') createProductAttributeSetInput: CreateProductAttributeSetInput) {
+    return await this.productAttributeSetService.createProductAttributeSet(createProductAttributeSetInput);
   }
 
   @Query(() => [ProductAttribute], { name: 'productAttributes' })
