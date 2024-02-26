@@ -568,8 +568,6 @@ input CreateCartInput {
 }
 
 input UpdateCartInput {
-  product_variant_id: String
-  is_saved_for_later: Float = 0
-  qty: Float = 1
-  id: Int!
+  cartId: String!
+  qty: Float!
 }

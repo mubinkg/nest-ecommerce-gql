@@ -34,8 +34,14 @@ export class CartService {
     return `This action returns a #${id} cart`;
   }
 
-  update(id: number, updateCartInput: UpdateCartInput) {
-    return `This action updates a #${id} cart`;
+  async update(updateCartInput: UpdateCartInput) {
+    try{
+      await this.cartModel.findByIdAndUpdate(updateCartInput.cartId, {qty:updateCartInput.qty})
+      return await this.cartModel.findById(updateCartInput.cartId)
+    }
+    catch(err){
+      throw new NotImplementedException('Can not udpate cart')
+    }
   }
 
   async remove(id: string) {

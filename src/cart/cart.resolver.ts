@@ -29,15 +29,18 @@ export class CartResolver {
   }
 
   @Query(() => Cart, { name: 'cart' })
+  @UseGuards(GqlAuthGuard)
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.cartService.findOne(id);
   }
 
   @Mutation(() => Cart)
+  @UseGuards(GqlAuthGuard)
   updateCart(@Args('updateCartInput') updateCartInput: UpdateCartInput) {
-    return this.cartService.update(updateCartInput.id, updateCartInput);
+    return this.cartService.update(updateCartInput);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Cart)
   removeCart(@Args('id', { type: () => String }) id: string) {
     return this.cartService.remove(id);
