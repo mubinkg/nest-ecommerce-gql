@@ -224,8 +224,22 @@ type Cart {
 }
 
 type Order {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  user_id: String
+  mobile: String
+  product_variant_id: [String!]
+  quantity: [Float!]
+  total: Float
+  delivery_charge: Float
+  final_total: Float
+  promo_code: String
+  promo_discount: Float
+  payment_method: String
+  address_id: String
+  is_wallet_used: Float
+  wallet_balance_used: Float
+  order_note: String
+  documents: [String!]
+  email: String
 }
 
 type Query {
