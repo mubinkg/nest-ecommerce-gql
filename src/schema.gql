@@ -224,6 +224,7 @@ type Cart {
 }
 
 type Order {
+  _id: String!
   user_id: String
   mobile: String
   product_variant_id: [String!]

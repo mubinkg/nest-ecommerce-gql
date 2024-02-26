@@ -1,11 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotImplementedException } from '@nestjs/common';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { Order, OrderDocument } from './entities/order.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class OrdersService {
-  create(createOrderInput: CreateOrderInput) {
-    return 'This action adds a new order';
+
+  constructor(
+    @InjectModel(Order.name) private readonly orderModel:Model<OrderDocument>
+  ){}
+
+  async create(createOrderInput: CreateOrderInput) {
+    try{}
+    catch(err){
+      throw new NotImplementedException('Can not create order.')
+    }
   }
 
   findAll() {

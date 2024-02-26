@@ -7,6 +7,9 @@ export type OrderDocument = HydratedDocument<Order>
 @ObjectType()
 @Schema()
 export class Order {
+
+  @Field(()=>String)
+  _id:string
   
   @Field(()=>String, {nullable:true})
   @Prop({type: String})
