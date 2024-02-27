@@ -252,6 +252,63 @@ type Favourite {
   user_Id: String
 }
 
+type Cart {
+  _id: String!
+  user_id: String
+  product_variant_id: String
+  is_saved_for_later: Float!
+  qty: Float!
+}
+
+type Order {
+  _id: String!
+  user_id: String
+  mobile: String
+  product_variant_id: [String!]
+  quantity: [Float!]
+  total: Float
+  delivery_charge: Float
+  final_total: Float
+  promo_code: String
+  promo_discount: Float
+  payment_method: String
+  address_id: String
+  is_wallet_used: Float
+  wallet_balance_used: Float
+  order_note: String
+  documents: [String!]
+  email: String
+  created_at: String
+}
+
+type ProductAttributeValue {
+  id: String
+  type: ProductAttributeValueType
+  valueName: String
+  image: String
+  color: String
+}
+
+enum ProductAttributeValueType {
+  DEFAULT
+  COLOR
+  IMAGE
+}
+
+type ProductAttributeSet {
+  _id: String
+  attributeSetName: String
+  status: ActiveStatus
+}
+
+type ProductAttribute {
+  _id: String
+  name: String
+  attributeSet: ProductAttributeSet
+  values: [ProductAttributeValue!]
+  status: ActiveStatus
+}
+
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -272,9 +329,15 @@ type Query {
   brands(limit: Float!, offset: Float!): [Brand!]!
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
   rating(id: Int!): Rating!
-  promoCode(id: Int!): PromoCode!
+  promoCode(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!
   favourites: [Favourite!]!
   favourite(id: Int!): Favourite!
+  getUserCart: [Cart!]!
+  cart(id: Int!): Cart!
+  orders: [Order!]!
+  order(id: Int!): Order!
+  productAttributes: [ProductAttribute!]!
+  productAttribute(id: Int!): ProductAttribute!
 }
 
 input SignInDto {
@@ -298,6 +361,11 @@ enum SortingType {
 enum SortingOrder {
   DESC
   ASC
+}
+
+input GetPromoCodesInput {
+  limit: Float!
+  offset: Float!
 }
 
 type Mutation {
@@ -330,11 +398,19 @@ type Mutation {
   removeRating(id: Int!): Rating!
   createPromoCode(createPromoCodeInput: CreatePromoCodeInput!): PromoCode!
   validatePromoCode(code: String!, orderFinalAmount: Float!): PromoCode!
-  updatePromoCode(updatePromoCodeInput: UpdatePromoCodeInput!): PromoCode!
-  removePromoCode(id: Int!): PromoCode!
   createFavourite(createFavouriteInput: CreateFavouriteInput!): Favourite!
   updateFavourite(updateFavouriteInput: UpdateFavouriteInput!): Favourite!
   removeFavourite(id: String!): String!
+  createCart(createCartInput: CreateCartInput!): Cart!
+  updateCart(updateCartInput: UpdateCartInput!): Cart!
+  removeCart(id: String!): Cart!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  removeOrder(id: Int!): Order!
+  createProductAttribute(createProductAttributeInput: CreateProductAttributeInput!): ProductAttribute!
+  createProductAttributeSet(createProductAttributeInput: CreateProductAttributeSetInput!): ProductAttributeSet!
+  updateProductAttribute(updateProductAttributeInput: UpdateProductAttributeInput!): ProductAttribute!
+  removeProductAttribute(id: Int!): ProductAttribute!
 }
 
 input CreateTicketInput {
@@ -612,24 +688,6 @@ input CreatePromoCodeInput {
   status: ActiveStatus!
 }
 
-input UpdatePromoCodeInput {
-  promoCode: String
-  message: String
-  image: Upload
-  discountType: DiscountType
-  discountAmount: Float
-  startDate: DateTime
-  endDate: DateTime
-  minOrderAmount: Float
-  maxOrderAmount: Float
-  numberOfUsers: Float
-  repeatUsage: RepeatUsage
-  numberOfRepeatUsage: Float = 0
-  isCashBack: Boolean = false
-  status: ActiveStatus
-  id: Int!
-}
-
 input CreateFavouriteInput {
   product_id: String
   user_Id: String
@@ -639,4 +697,76 @@ input UpdateFavouriteInput {
   product_id: String
   user_Id: String
   id: String!
+}
+
+input CreateCartInput {
+  product_variant_id: String!
+  is_saved_for_later: Float! = 0
+  qty: Float! = 1
+}
+
+input UpdateCartInput {
+  cartId: String!
+  qty: Float!
+}
+
+input CreateOrderInput {
+  mobile: String!
+  product_variant_id: [String!]!
+  quantity: [Float!]!
+  total: Float!
+  delivery_charge: Float!
+  final_total: Float!
+  promo_code: String
+  promo_discount: Float
+  payment_method: String!
+  address_id: String!
+  is_wallet_used: Float! = 0
+  wallet_balance_used: Float! = 0
+  order_note: String
+  documents: [String!]
+  email: String
+}
+
+input UpdateOrderInput {
+  mobile: String
+  product_variant_id: [String!]
+  quantity: [Float!]
+  total: Float
+  delivery_charge: Float
+  final_total: Float
+  promo_code: String
+  promo_discount: Float
+  payment_method: String
+  address_id: String
+  is_wallet_used: Float = 0
+  wallet_balance_used: Float = 0
+  order_note: String
+  documents: [String!]
+  email: String
+  id: Int!
+}
+
+input CreateProductAttributeInput {
+  name: String
+  attributeSet: String!
+  values: [ProductAttributeValueInput!]
+}
+
+input ProductAttributeValueInput {
+  type: ProductAttributeValueType!
+  valueName: String!
+  image: Upload
+  color: String
+}
+
+input CreateProductAttributeSetInput {
+  attributeSetName: String!
+}
+
+input UpdateProductAttributeInput {
+  name: String
+  attributeSet: String
+  values: [ProductAttributeValueInput!]
+  id: Int!
 }
