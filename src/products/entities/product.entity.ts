@@ -124,15 +124,8 @@ export class Product {
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
-  variant_id: string
+   variant_id: string
 
-  @Field(()=>Number, {nullable:true})
-  @Prop({type:Number})
-  price: number
-
-  @Field(()=>Number, {nullable:true})
-  @Prop({type:Number})
-  special_price: number
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product)
