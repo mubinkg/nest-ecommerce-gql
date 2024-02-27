@@ -1,4 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
+import { CreateProductVariantInput } from 'src/product-variants/dto/create-product-variant.input';
 
 @InputType()
 export class CreateProductInput {
@@ -89,9 +90,8 @@ export class CreateProductInput {
   @Field(()=>String, {nullable:true})
   variant_id: string
 
-  @Field(()=>Number, {nullable:true})
-  price: number
+  @Field(()=>CreateProductVariantInput,{description:"Product Variants Details"})
+  createProductVariantInput?:CreateProductVariantInput
 
-  @Field(()=>Number, {nullable:true})
-  special_price: number
+ 
 }

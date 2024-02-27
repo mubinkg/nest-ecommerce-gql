@@ -5,17 +5,28 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductDocument } from './entities/product.entity';
 import { Model } from 'mongoose';
 import { Logger } from '@nestjs/common';
+import { ProductVariantsService } from './../product-variants/product-variants.service';
+import { CreateProductVariantInput } from './../product-variants/dto/create-product-variant.input';
 
 @Injectable()
 export class ProductsService {
 
   constructor(
+    private productVariantsService : ProductVariantsService,
     @InjectModel(Product.name) private readonly productModel: Model<ProductDocument>
   ){}
 
   async create(createProductInput: CreateProductInput) {
+    const {createProductVariantInput} = createProductInput
     try{
+      const productVariant = await this.productVariantsService.create(createProductVariantInput)
+
+ 
+     // delete createProductInput.createProductVariantInput;
+      createProductInput.variant_id = productVariant._id;
       const product = await this.productModel.create(createProductInput)
+
+      await this.productVariantsService.update(productVariant._id,product._id)
       return product
     }catch(err){
       Logger.log(err)

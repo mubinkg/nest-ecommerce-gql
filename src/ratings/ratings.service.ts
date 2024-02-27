@@ -54,15 +54,17 @@ export class RatingsService {
     if (user_id) {
       query["user_id"] =new mongoose.Types.ObjectId(user_id as string);
     }
-
+    const sortObj = {};
+    if(sort)
+    sortObj[sort] = order; 
    
-      query["status"] ="active";
+      query["status"] = "active";
     
     try {
       return await this.ratingModel.aggregate([{
         $match: query
       },
-      { $sort: { createdAt: order } },
+      { $sort: sortObj },
       { $skip: offset },
       { $limit: limit }])
     } catch (error) {

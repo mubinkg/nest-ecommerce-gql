@@ -78,8 +78,44 @@ type Product {
   deliverable_zipcodes: String
   seller_id: String
   variant_id: String
-  price: Float
-  special_price: Float
+}
+
+type ProductVariant {
+  """Regular Price"""
+  _id: String!
+
+  """Regular Price"""
+  price: Float!
+
+  """Price after discount"""
+  specialPrice: Float
+
+  """Unit (kg)"""
+  weight: Float
+
+  """"""
+  height: Float
+
+  """"""
+  breadth: Float
+
+  """"""
+  length: Float
+
+  """Stock Keeping Unit"""
+  sku: String
+
+  """"""
+  totalStock: Float
+
+  """"""
+  stockStatus: String
+
+  """If variants is missing it will be general variant"""
+  attributeReference: String
+
+  """Product Reference Id"""
+  productId: String
 }
 
 type Area {
@@ -174,6 +210,42 @@ type Rating {
   status: String
 }
 
+type PromoCode {
+  _id: String
+  promoCode: String
+  message: String
+  image: String
+  discountType: DiscountType
+  discountAmount: Float
+  startDate: DateTime
+  endDate: DateTime
+  minOrderAmount: Float
+  maxOrderAmount: Float
+  numberOfUsers: Float
+  numberOfUsedUser: Float
+  usedUsers: [String!]
+  repeatUsage: RepeatUsage
+  numberOfRepeatUsage: Float
+  isCashBack: Boolean
+  status: ActiveStatus
+  createdAt: DateTime
+}
+
+enum DiscountType {
+  PERCENTAGE
+  AMOUNT
+}
+
+enum RepeatUsage {
+  ALLOWED
+  NOT_ALLOWED
+}
+
+enum ActiveStatus {
+  ACTIVE
+  INACTIVE
+}
+
 type Favourite {
   _id: String
   product_id: String
@@ -186,6 +258,8 @@ type Query {
   getTicketTypes(limit: Float!, offset: Float!): [TicketType!]!
   products: [Product!]!
   product(id: Int!): Product!
+  productVariants: [ProductVariant!]!
+  productVariant(id: Int!): ProductVariant!
   areas: [Area!]!
   areaByCityId(city_id: String!): [Area!]!
   getCities(limit: Float!, offset: Float!, query: String!): [City!]!
@@ -198,6 +272,7 @@ type Query {
   brands(limit: Float!, offset: Float!): [Brand!]!
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
   rating(id: Int!): Rating!
+  promoCode(id: Int!): PromoCode!
   favourites: [Favourite!]!
   favourite(id: Int!): Favourite!
 }
@@ -212,8 +287,12 @@ input RatingFilterDto {
   user_id: String
   limit: Float = 25
   offset: Float = 0
-  sort: String
+  sort: SortingType! = CreateAt
   order: SortingOrder! = DESC
+}
+
+enum SortingType {
+  CreateAt
 }
 
 enum SortingOrder {
@@ -229,6 +308,8 @@ type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   removeProduct(id: Int!): Product!
+  createProductVariant(createProductVariantInput: CreateProductVariantInput!): ProductVariant!
+  removeProductVariant(id: Int!): ProductVariant!
   createArea(createAreaInput: CreateAreaInput!): Area!
   updateArea(updateAreaInput: UpdateAreaInput!): Area!
   removeArea(id: Int!): Area!
@@ -247,6 +328,10 @@ type Mutation {
   deleteRating(id: String!): String!
   updateRating(updateRatingInput: UpdateRatingInput!): Rating!
   removeRating(id: Int!): Rating!
+  createPromoCode(createPromoCodeInput: CreatePromoCodeInput!): PromoCode!
+  validatePromoCode(code: String!, orderFinalAmount: Float!): PromoCode!
+  updatePromoCode(updatePromoCodeInput: UpdatePromoCodeInput!): PromoCode!
+  removePromoCode(id: Int!): PromoCode!
   createFavourite(createFavouriteInput: CreateFavouriteInput!): Favourite!
   updateFavourite(updateFavouriteInput: UpdateFavouriteInput!): Favourite!
   removeFavourite(id: String!): String!
@@ -297,8 +382,49 @@ input CreateProductInput {
   deliverable_zipcodes: String
   seller_id: String
   variant_id: String
-  price: Float
-  special_price: Float
+
+  """Product Variants Details"""
+  createProductVariantInput: CreateProductVariantInput!
+}
+
+input CreateProductVariantInput {
+  """Regular Price"""
+  price: Float!
+
+  """Price after discount"""
+  specialPrice: Float
+
+  """Unit (kg)"""
+  weight: Float
+
+  """"""
+  height: Float
+
+  """"""
+  breadth: Float
+
+  """"""
+  length: Float
+
+  """Stock Keeping Unit"""
+  sku: String
+
+  """"""
+  totalStock: Float
+
+  """"""
+  stockStatus: StockStatus
+
+  """If variants is missing it will be general variant"""
+  attributeReference: String
+
+  """Product Reference Id"""
+  productId: String
+}
+
+enum StockStatus {
+  IN_STOCK
+  OUT_OF_STOCK
 }
 
 input UpdateProductInput {
@@ -331,8 +457,9 @@ input UpdateProductInput {
   deliverable_zipcodes: String
   seller_id: String
   variant_id: String
-  price: Float
-  special_price: Float
+
+  """Product Variants Details"""
+  createProductVariantInput: CreateProductVariantInput
   id: Int!
 }
 
@@ -465,6 +592,41 @@ input UpdateRatingInput {
   comment: String
   images: [ImageInput!]
   imageUrl: [String!]
+  id: Int!
+}
+
+input CreatePromoCodeInput {
+  promoCode: String!
+  message: String!
+  image: Upload!
+  discountType: DiscountType!
+  discountAmount: Float!
+  startDate: DateTime!
+  endDate: DateTime!
+  minOrderAmount: Float!
+  maxOrderAmount: Float!
+  numberOfUsers: Float!
+  repeatUsage: RepeatUsage!
+  numberOfRepeatUsage: Float! = 0
+  isCashBack: Boolean! = false
+  status: ActiveStatus!
+}
+
+input UpdatePromoCodeInput {
+  promoCode: String
+  message: String
+  image: Upload
+  discountType: DiscountType
+  discountAmount: Float
+  startDate: DateTime
+  endDate: DateTime
+  minOrderAmount: Float
+  maxOrderAmount: Float
+  numberOfUsers: Float
+  repeatUsage: RepeatUsage
+  numberOfRepeatUsage: Float = 0
+  isCashBack: Boolean = false
+  status: ActiveStatus
   id: Int!
 }
 
