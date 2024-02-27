@@ -18,6 +18,7 @@ import { RatingsModule } from './ratings/ratings.module';
 import { PromoCodeModule } from './promo-code/promo-code.module';
 import { FavouritesModule } from './favourites/favourites.module';
 import { ProductVariantsModule } from './product-variants/product-variants.module';
+import { ProductAttributesModule } from './product-attributes/product-attributes.module';
 
 
 @Module({
@@ -44,7 +45,8 @@ import { ProductVariantsModule } from './product-variants/product-variants.modul
     RatingsModule,
     PromoCodeModule,
     FavouritesModule,
-    ProductVariantsModule
+    ProductVariantsModule,
+    ProductAttributesModule
   ],
 })
 export class AppModule {}
