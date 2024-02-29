@@ -49,17 +49,27 @@ type Ticket {
 
 type Product {
   _id: String
+  seller_id: String
+  pro_input_name: String
+  short_description: String
+  tags: String
+  indicator: String
+  made_in: String
+  brand: String
+  total_allowed_quantity: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  warranty_period: String
+  guarantee_period: String
+  download_allowed: Float
+  download_link_type: DownloadLinkType
+  pro_input_zip: String
+  download_link: String
   category_id: String
   tax: Float
   type: String
   stock_type: Float
-  name: String
-  short_description: String
-  indicator: String
   cod_allowed: Float
-  minimum_order_quantity: Float
-  quantity_step_size: Float
-  total_allowed_quantity: Float
   is_prices_inclusive_tax: Boolean
   is_returnable: Boolean
   is_cancelable: Boolean
@@ -67,17 +77,19 @@ type Product {
   image: String
   video_type: String
   video: String
-  tags: String
-  warranty_period: String
-  made_in: String
   sku: String
   stock: Float
   availability: Float
   description: String
   deliverable_type: String
   deliverable_zipcodes: String
-  seller_id: String
   variant_id: String
+}
+
+enum DownloadLinkType {
+  NONE
+  SELF_HOSTED
+  ADD_LINK
 }
 
 type ProductVariant {
@@ -429,17 +441,27 @@ input CereateTicketTypeInput {
 }
 
 input CreateProductInput {
-  category_id: String
+  seller_id: String!
+  pro_input_name: String!
+  short_description: String!
+  tags: String
+  indicator: HalalIndicator = NONE
+  made_in: String
+  brand: String
+  total_allowed_quantity: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  warranty_period: String
+  guarantee_period: String
+  download_allowed: Float
+  download_link_type: DownloadLinkType
+  pro_input_zip: Upload
+  download_link: String
+  category_id: String!
   tax: Float
   type: String
   stock_type: Float
-  name: String
-  short_description: String
-  indicator: String
   cod_allowed: Float
-  minimum_order_quantity: Float
-  quantity_step_size: Float
-  total_allowed_quantity: Float
   is_prices_inclusive_tax: Boolean
   is_returnable: Boolean
   is_cancelable: Boolean
@@ -447,21 +469,26 @@ input CreateProductInput {
   image: String
   video_type: String
   video: String
-  tags: String
-  warranty_period: String
-  made_in: String
   sku: String
   stock: Float
   availability: Float
   description: String
   deliverable_type: String
   deliverable_zipcodes: String
-  seller_id: String
   variant_id: String
 
   """Product Variants Details"""
   createProductVariantInput: CreateProductVariantInput!
 }
+
+enum HalalIndicator {
+  NONE
+  HALAL
+  NON_HALAL
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 input CreateProductVariantInput {
   """Regular Price"""
@@ -504,17 +531,27 @@ enum StockStatus {
 }
 
 input UpdateProductInput {
+  seller_id: String
+  pro_input_name: String
+  short_description: String
+  tags: String
+  indicator: HalalIndicator = NONE
+  made_in: String
+  brand: String
+  total_allowed_quantity: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  warranty_period: String
+  guarantee_period: String
+  download_allowed: Float
+  download_link_type: DownloadLinkType
+  pro_input_zip: Upload
+  download_link: String
   category_id: String
   tax: Float
   type: String
   stock_type: Float
-  name: String
-  short_description: String
-  indicator: String
   cod_allowed: Float
-  minimum_order_quantity: Float
-  quantity_step_size: Float
-  total_allowed_quantity: Float
   is_prices_inclusive_tax: Boolean
   is_returnable: Boolean
   is_cancelable: Boolean
@@ -522,16 +559,12 @@ input UpdateProductInput {
   image: String
   video_type: String
   video: String
-  tags: String
-  warranty_period: String
-  made_in: String
   sku: String
   stock: Float
   availability: Float
   description: String
   deliverable_type: String
   deliverable_zipcodes: String
-  seller_id: String
   variant_id: String
 
   """Product Variants Details"""
@@ -589,9 +622,6 @@ input CreateCategoryInput {
   banner: Upload
   parent: String
 }
-
-"""The `Upload` scalar type represents a file upload."""
-scalar Upload
 
 input CreateAddressInput {
   user_id: String!
