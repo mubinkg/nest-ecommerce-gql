@@ -4,6 +4,9 @@ import { CreateProductVariantInput } from 'src/product-variants/dto/create-produ
 import { HalalIndicator } from '../enum/halal-indicator.enum';
 import { DownloadLinkType } from '../enum/download-link-type.enum';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
+import { CancelableTill } from '../enum/cancelable-till.enum';
+import { VideoType } from '../enum/video-type.enum';
+import { ProductType } from '../enum/product.type.enum';
 
 
 registerEnumType(HalalIndicator,{
@@ -12,6 +15,18 @@ registerEnumType(HalalIndicator,{
 
 registerEnumType(DownloadLinkType, {
   name:'DownloadLinkType'
+})
+
+registerEnumType(CancelableTill, {
+  name: 'CancelableTill'
+})
+
+registerEnumType(VideoType, {
+  name: 'VideoType'
+})
+
+registerEnumType(ProductType, {
+  name: 'ProductType'
 })
 
 @InputType()
@@ -95,10 +110,67 @@ export class CreateProductInput {
   @IsString()
   download_link?: string
 
+  @Field(()=>Number, {nullable:true})
+  @IsOptional()
+  @IsNumber()
+  is_returnable?: number
+
+  @Field(()=>Number, {nullable:true})
+  @IsOptional()
+  @IsNumber()
+  is_cancelable?: number
+
+  @Field(()=>CancelableTill, {nullable:true})
+  @IsOptional()
+  @IsEnum(CancelableTill)
+  cancelable_till?: CancelableTill
+
+  @Field(()=>GraphQLUpload,{nullable:true})
+  pro_input_image?: FileUpload
+
+  @Field(()=>[GraphQLUpload], {nullable:true})
+  other_images?: FileUpload[]
+
+  @Field(()=>VideoType, {nullable:true})
+  @IsOptional()
+  @IsEnum(VideoType)
+  video_type?: VideoType
+
+  @Field(()=>String, {nullable:true})
+  @IsString()
+  @IsOptional()
+  video?: string
+
+  @Field(()=>GraphQLUpload, {nullable:true})
+  pro_input_video?:FileUpload
+
+  @Field(()=>String, {nullable:true})
+  @IsString()
+  @IsOptional()
+  pro_input_description?: string
+
+  @Field(()=>String, {nullable:true})
+  @IsString()
+  @IsOptional()
+  extra_input_description?: string
+
+  @Field(()=>String, {nullable:true})
+  @IsString()
+  @IsOptional()
+  attribute_values?: string
+
   @Field(()=>String)
   @IsString()
   @IsNotEmpty()
   category_id: string
+
+  @Field(()=>Number, {nullable:true})
+  status: number
+
+  @Field(()=>ProductType, {nullable:true})
+  @IsOptional()
+  @IsEnum(ProductType)
+  product_type?: ProductType
 
   @Field(()=>Number, {nullable:true})
   tax: number
@@ -115,23 +187,8 @@ export class CreateProductInput {
   @Field(()=>Boolean, {nullable:true})
   is_prices_inclusive_tax: boolean
 
-  @Field(()=>Boolean, {nullable:true})
-  is_returnable: boolean
-
-  @Field(()=>Boolean, {nullable:true})
-  is_cancelable: boolean
-
-  @Field(()=>Date, {nullable:true})
-  cancelable_till: Date
-
   @Field(()=>String, {nullable:true})
   image: string
-
-  @Field(()=>String, {nullable:true})
-  video_type: string
-
-  @Field(()=>String, {nullable:true})
-  video: string
 
   @Field(()=>String, {nullable:true})
   sku: string

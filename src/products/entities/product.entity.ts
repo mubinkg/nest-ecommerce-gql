@@ -76,6 +76,54 @@ export class Product {
   @Prop({type:String})
   download_link?: string
 
+  @Field(()=>Number, {nullable:true})
+  @Prop({type:Number})
+  is_returnable?: number
+
+  @Field(()=>Number, {nullable:true})
+  @Prop({type:Number})
+  is_cancelable: number
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  cancelable_till?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  pro_input_image?: string
+
+  @Field(()=>[String], {nullable:true})
+  @Prop([{type:String}])
+  other_images?: string[]
+
+  @Field(()=>String, {nullable: true})
+  @Prop({type:String})
+  video_type?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  video?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  pro_input_video?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  pro_input_description?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  extra_input_description?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  attribute_values?: string
+
+  @Field(()=>Number, {nullable:true})
+  @Prop({type:Number})
+  status?: number
+
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
   category_id: string
@@ -100,29 +148,10 @@ export class Product {
   @Prop({type:Boolean})
   is_prices_inclusive_tax: boolean
 
-  @Field(()=>Boolean, {nullable:true})
-  @Prop({type:Boolean})
-  is_returnable: boolean
-
-  @Field(()=>Boolean, {nullable:true})
-  @Prop({type:Boolean})
-  is_cancelable: boolean
-
-  @Field(()=>Date, {nullable:true})
-  @Prop({type:Date})
-  cancelable_till: Date
-
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
   image: string
 
-  @Field(()=>String, {nullable:true})
-  @Prop({type:String})
-  video_type: string
-
-  @Field(()=>String, {nullable:true})
-  @Prop({type:String})
-  video: string
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
