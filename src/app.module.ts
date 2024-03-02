@@ -17,6 +17,8 @@ import { BrandsModule } from './brands/brands.module';
 import { RatingsModule } from './ratings/ratings.module';
 import { PromoCodeModule } from './promo-code/promo-code.module';
 import { FavouritesModule } from './favourites/favourites.module';
+import { CartModule } from './cart/cart.module';
+import { OrdersModule } from './orders/orders.module';
 import { ProductVariantsModule } from './product-variants/product-variants.module';
 import { ProductAttributesModule } from './product-attributes/product-attributes.module';
 
@@ -45,6 +47,8 @@ import { ProductAttributesModule } from './product-attributes/product-attributes
     RatingsModule,
     PromoCodeModule,
     FavouritesModule,
+    CartModule,
+    OrdersModule,
     ProductVariantsModule,
     ProductAttributesModule
   ],

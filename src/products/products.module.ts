@@ -3,6 +3,8 @@ import { ProductsService } from './products.service';
 import { ProductsResolver } from './products.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Product, ProductSchema } from './entities/product.entity';
+import { ProductTax, ProductTaxSchema } from './entities/product-tax.entity';
+import { ProductTaxService } from './services/product-tax.service';
 import { ProductVariantsModule } from 'src/product-variants/product-variants.module';
 
 @Module({
@@ -10,7 +12,10 @@ import { ProductVariantsModule } from 'src/product-variants/product-variants.mod
     {
       name: Product.name, schema: ProductSchema
     },
+    {
+      name: ProductTax.name, schema: ProductTaxSchema
+    },
   ]),ProductVariantsModule],
-  providers: [ProductsResolver, ProductsService],
+  providers: [ProductsResolver, ProductsService, ProductTaxService],
 })
 export class ProductsModule {}

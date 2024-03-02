@@ -252,6 +252,63 @@ type Favourite {
   user_Id: String
 }
 
+type Cart {
+  _id: String!
+  user_id: String
+  product_variant_id: String
+  is_saved_for_later: Float!
+  qty: Float!
+}
+
+type Order {
+  _id: String!
+  user_id: String
+  mobile: String
+  product_variant_id: [String!]
+  quantity: [Float!]
+  total: Float
+  delivery_charge: Float
+  final_total: Float
+  promo_code: String
+  promo_discount: Float
+  payment_method: String
+  address_id: String
+  is_wallet_used: Float
+  wallet_balance_used: Float
+  order_note: String
+  documents: [String!]
+  email: String
+  created_at: String
+}
+
+type ProductAttributeValue {
+  id: String
+  type: ProductAttributeValueType
+  valueName: String
+  image: String
+  color: String
+}
+
+enum ProductAttributeValueType {
+  DEFAULT
+  COLOR
+  IMAGE
+}
+
+type ProductAttributeSet {
+  _id: String
+  attributeSetName: String
+  status: ActiveStatus
+}
+
+type ProductAttribute {
+  _id: String
+  name: String
+  attributeSet: ProductAttributeSet
+  values: [ProductAttributeValue!]
+  status: ActiveStatus
+}
+
 type ProductAttributeValue {
   id: String
   type: ProductAttributeValueType
@@ -303,6 +360,10 @@ type Query {
   promoCode(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!
   favourites: [Favourite!]!
   favourite(id: Int!): Favourite!
+  getUserCart: [Cart!]!
+  cart(id: Int!): Cart!
+  orders: [Order!]!
+  order(id: Int!): Order!
   productAttributes: [ProductAttribute!]!
   productAttribute(id: Int!): ProductAttribute!
 }
@@ -368,6 +429,12 @@ type Mutation {
   createFavourite(createFavouriteInput: CreateFavouriteInput!): Favourite!
   updateFavourite(updateFavouriteInput: UpdateFavouriteInput!): Favourite!
   removeFavourite(id: String!): String!
+  createCart(createCartInput: CreateCartInput!): Cart!
+  updateCart(updateCartInput: UpdateCartInput!): Cart!
+  removeCart(id: String!): Cart!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  removeOrder(id: Int!): Order!
   createProductAttribute(createProductAttributeInput: CreateProductAttributeInput!): ProductAttribute!
   createProductAttributeSet(createProductAttributeInput: CreateProductAttributeSetInput!): ProductAttributeSet!
   updateProductAttribute(updateProductAttributeInput: UpdateProductAttributeInput!): ProductAttribute!
@@ -664,6 +731,54 @@ input UpdateFavouriteInput {
   product_id: String
   user_Id: String
   id: String!
+}
+
+input CreateCartInput {
+  product_variant_id: String!
+  is_saved_for_later: Float! = 0
+  qty: Float! = 1
+}
+
+input UpdateCartInput {
+  cartId: String!
+  qty: Float!
+}
+
+input CreateOrderInput {
+  mobile: String!
+  product_variant_id: [String!]!
+  quantity: [Float!]!
+  total: Float!
+  delivery_charge: Float!
+  final_total: Float!
+  promo_code: String
+  promo_discount: Float
+  payment_method: String!
+  address_id: String!
+  is_wallet_used: Float! = 0
+  wallet_balance_used: Float! = 0
+  order_note: String
+  documents: [String!]
+  email: String
+}
+
+input UpdateOrderInput {
+  mobile: String
+  product_variant_id: [String!]
+  quantity: [Float!]
+  total: Float
+  delivery_charge: Float
+  final_total: Float
+  promo_code: String
+  promo_discount: Float
+  payment_method: String
+  address_id: String
+  is_wallet_used: Float = 0
+  wallet_balance_used: Float = 0
+  order_note: String
+  documents: [String!]
+  email: String
+  id: Int!
 }
 
 input CreateProductAttributeInput {
