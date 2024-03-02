@@ -180,27 +180,6 @@ export class CreateProductInput {
   @IsEnum(VariantStockLavelEnum)
   variant_stock_level_type?: VariantStockLavelEnum
 
-  // @Field(()=>String, {nullable:true})
-  // sku: string
-
-  // @Field(()=>Number, {nullable:true})
-  // stock: number
-
-  // @Field(()=>Number, {nullable:true})
-  // availability: number
-
-  // @Field(()=>String, {nullable:true})
-  // description: string
-
-  // @Field(()=>String, {nullable:true})
-  // deliverable_type: string
-
-  // @Field(()=>String, {nullable:true})
-  // deliverable_zipcodes: string
-
-  // @Field(()=>String, {nullable:true})
-  // variant_id: string
-
-  // @Field(()=>CreateProductVariantInput,{description:"Product Variants Details"})
-  // createProductVariantInput?:CreateProductVariantInput
+  @Field(()=>[CreateProductVariantInput],{description:"Product Variants Details"})
+  createProductVariantInput?:CreateProductVariantInput[]
 }
