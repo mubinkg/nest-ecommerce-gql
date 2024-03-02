@@ -79,18 +79,7 @@ type Product {
   status: Float
   category_id: String
   tax: Float
-  type: String
-  stock_type: Float
-  cod_allowed: Float
-  is_prices_inclusive_tax: Boolean
-  image: String
-  sku: String
-  stock: Float
-  availability: Float
-  description: String
-  deliverable_type: String
-  deliverable_zipcodes: String
-  variant_id: String
+  product_type: String
 }
 
 enum DownloadLinkType {
@@ -451,6 +440,8 @@ input CreateProductInput {
   seller_id: String!
   pro_input_name: String!
   short_description: String!
+
+  """Comma seperated string"""
   tags: String
   indicator: HalalIndicator = NONE
   made_in: String
@@ -474,26 +465,13 @@ input CreateProductInput {
   pro_input_video: Upload
   pro_input_description: String
   extra_input_description: String
+
+  """comma separated string"""
   attribute_values: String
   category_id: String!
   status: Float
   product_type: ProductType
-  tax: Float
-  type: String
-  stock_type: Float
-  cod_allowed: Float
-  is_prices_inclusive_tax: Boolean
-  image: String
-  sku: String
-  stock: Float
-  availability: Float
-  description: String
-  deliverable_type: String
-  deliverable_zipcodes: String
-  variant_id: String
-
-  """Product Variants Details"""
-  createProductVariantInput: CreateProductVariantInput!
+  variant_stock_level_type: VariantStockLavelEnum
 }
 
 enum HalalIndicator {
@@ -522,6 +500,50 @@ enum ProductType {
   SIMPLE_PRODUCT
   VARIABLE_PRODUCT
   DIGITAL_PRODUCT
+}
+
+enum VariantStockLavelEnum {
+  PRODUCT_LEVEL
+  VARIABLE_LEVEL
+}
+
+input UpdateProductInput {
+  seller_id: String
+  pro_input_name: String
+  short_description: String
+
+  """Comma seperated string"""
+  tags: String
+  indicator: HalalIndicator = NONE
+  made_in: String
+  brand: String
+  total_allowed_quantity: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  warranty_period: String
+  guarantee_period: String
+  download_allowed: Float
+  download_link_type: DownloadLinkType
+  pro_input_zip: Upload
+  download_link: String
+  is_returnable: Float
+  is_cancelable: Float
+  cancelable_till: CancelableTill
+  pro_input_image: Upload
+  other_images: [Upload!]
+  video_type: VideoType
+  video: String
+  pro_input_video: Upload
+  pro_input_description: String
+  extra_input_description: String
+
+  """comma separated string"""
+  attribute_values: String
+  category_id: String
+  status: Float
+  product_type: ProductType
+  variant_stock_level_type: VariantStockLavelEnum
+  id: Int!
 }
 
 input CreateProductVariantInput {
@@ -562,56 +584,6 @@ input CreateProductVariantInput {
 enum StockStatus {
   IN_STOCK
   OUT_OF_STOCK
-}
-
-input UpdateProductInput {
-  seller_id: String
-  pro_input_name: String
-  short_description: String
-  tags: String
-  indicator: HalalIndicator = NONE
-  made_in: String
-  brand: String
-  total_allowed_quantity: Float
-  minimum_order_quantity: Float
-  quantity_step_size: Float
-  warranty_period: String
-  guarantee_period: String
-  download_allowed: Float
-  download_link_type: DownloadLinkType
-  pro_input_zip: Upload
-  download_link: String
-  is_returnable: Float
-  is_cancelable: Float
-  cancelable_till: CancelableTill
-  pro_input_image: Upload
-  other_images: [Upload!]
-  video_type: VideoType
-  video: String
-  pro_input_video: Upload
-  pro_input_description: String
-  extra_input_description: String
-  attribute_values: String
-  category_id: String
-  status: Float
-  product_type: ProductType
-  tax: Float
-  type: String
-  stock_type: Float
-  cod_allowed: Float
-  is_prices_inclusive_tax: Boolean
-  image: String
-  sku: String
-  stock: Float
-  availability: Float
-  description: String
-  deliverable_type: String
-  deliverable_zipcodes: String
-  variant_id: String
-
-  """Product Variants Details"""
-  createProductVariantInput: CreateProductVariantInput
-  id: Int!
 }
 
 input CreateAreaInput {

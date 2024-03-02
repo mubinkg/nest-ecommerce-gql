@@ -47,7 +47,7 @@ export class CreateProductInput {
   @IsNotEmpty()
   short_description: string
 
-  @Field(()=>String, {nullable:true})
+  @Field(()=>String, {nullable:true, description: 'Comma seperated string'})
   @IsString()
   @IsOptional()
   tags?: string
@@ -154,7 +154,7 @@ export class CreateProductInput {
   @IsOptional()
   extra_input_description?: string
 
-  @Field(()=>String, {nullable:true})
+  @Field(()=>String, {nullable:true, description: 'comma separated string'})
   @IsString()
   @IsOptional()
   attribute_values?: string
@@ -177,27 +177,27 @@ export class CreateProductInput {
   @IsEnum(VariantStockLavelEnum)
   variant_stock_level_type?: VariantStockLavelEnum
 
-  @Field(()=>String, {nullable:true})
-  sku: string
+  // @Field(()=>String, {nullable:true})
+  // sku: string
 
-  @Field(()=>Number, {nullable:true})
-  stock: number
+  // @Field(()=>Number, {nullable:true})
+  // stock: number
 
-  @Field(()=>Number, {nullable:true})
-  availability: number
+  // @Field(()=>Number, {nullable:true})
+  // availability: number
 
-  @Field(()=>String, {nullable:true})
-  description: string
+  // @Field(()=>String, {nullable:true})
+  // description: string
 
-  @Field(()=>String, {nullable:true})
-  deliverable_type: string
+  // @Field(()=>String, {nullable:true})
+  // deliverable_type: string
 
-  @Field(()=>String, {nullable:true})
-  deliverable_zipcodes: string
+  // @Field(()=>String, {nullable:true})
+  // deliverable_zipcodes: string
 
-  @Field(()=>String, {nullable:true})
-  variant_id: string
+  // @Field(()=>String, {nullable:true})
+  // variant_id: string
 
-  @Field(()=>CreateProductVariantInput,{description:"Product Variants Details"})
-  createProductVariantInput?:CreateProductVariantInput
+  // @Field(()=>CreateProductVariantInput,{description:"Product Variants Details"})
+  // createProductVariantInput?:CreateProductVariantInput
 }

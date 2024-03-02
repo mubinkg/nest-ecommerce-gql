@@ -17,16 +17,17 @@ export class ProductsService {
   ){}
 
   async create(createProductInput: CreateProductInput) {
-    const {createProductVariantInput} = createProductInput
+    // const {createProductVariantInput} = createProductInput
     try{
-      const productVariant = await this.productVariantsService.create(createProductVariantInput)
+      console.log(createProductInput)
+    //   const productVariant = await this.productVariantsService.create(createProductVariantInput)
 
  
-     // delete createProductInput.createProductVariantInput;
-      createProductInput.variant_id = productVariant._id;
+    //  // delete createProductInput.createProductVariantInput;
+    //   createProductInput.variant_id = productVariant._id;
       const product = await this.productModel.create(createProductInput)
 
-      await this.productVariantsService.update(productVariant._id,product._id)
+      // await this.productVariantsService.update(productVariant._id,product._id)
       return product
     }catch(err){
       Logger.log(err)
