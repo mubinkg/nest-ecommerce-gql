@@ -201,6 +201,6 @@ export class CreateProductInput {
   // @Field(()=>String, {nullable:true})
   // variant_id: string
 
-  // @Field(()=>CreateProductVariantInput,{description:"Product Variants Details"})
-  // createProductVariantInput?:CreateProductVariantInput
+  @Field(()=>[CreateProductVariantInput],{description:"Product Variants Details"})
+  createProductVariantInput?:CreateProductVariantInput[]
 }
