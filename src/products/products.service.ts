@@ -20,23 +20,13 @@ export class ProductsService {
   ){}
 
   async create(createProductInput: CreateProductInput) {
-    // const {createProductVariantInput} = createProductInput
+    const {createProductVariantInput} = createProductInput
+    
     try{
-      console.log(createProductInput)
-    //   const productVariant = await this.productVariantsService.create(createProductVariantInput)
 
- 
-    //  // delete createProductInput.createProductVariantInput;
-    //   createProductInput.variant_id = productVariant._id;
-
-    if(createProductInput.pro_input_image){
-     
-      createProductInput.pro_input_image= await uploadFile(createProductInput.pro_input_image as FileUpload) as string
-
-     
-    }
-
-
+      if(createProductInput.pro_input_image){
+        createProductInput.pro_input_image= await uploadFile(createProductInput.pro_input_image as FileUpload) as string
+      }
 
     if(createProductInput.other_imagesInput && createProductInput.other_imagesInput.length>0){
 
@@ -64,8 +54,9 @@ export class ProductsService {
 
   
       const product = await this.productModel.create(createProductInput)
+      
+      const productVariant = await this.productVariantsService.create(createProductVariantInput.map((d)=>({...d, productId: product._id})))
 
-      // await this.productVariantsService.update(productVariant._id,product._id)
       return product
     }catch(err){
       Logger.log(err)

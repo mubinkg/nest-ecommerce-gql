@@ -8,10 +8,10 @@ import { UpdateProductVariantInput } from './dto/update-product-variant.input';
 export class ProductVariantsResolver {
   constructor(private readonly productVariantsService: ProductVariantsService) {}
 
-  @Mutation(() => ProductVariant)
-  createProductVariant(@Args('createProductVariantInput') createProductVariantInput: CreateProductVariantInput) {
-    return this.productVariantsService.create(createProductVariantInput);
-  }
+  // @Mutation(() => ProductVariant)
+  // createProductVariant(@Args('createProductVariantInput') createProductVariantInput: CreateProductVariantInput) {
+  //   return this.productVariantsService.create(createProductVariantInput);
+  // }
 
   @Query(() => [ProductVariant], { name: 'productVariants' })
   findAll() {

@@ -384,7 +384,6 @@ type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   removeProduct(id: Int!): Product!
-  createProductVariant(createProductVariantInput: CreateProductVariantInput!): ProductVariant!
   removeProductVariant(id: Int!): ProductVariant!
   createArea(createAreaInput: CreateAreaInput!): Area!
   updateArea(updateAreaInput: UpdateAreaInput!): Area!
@@ -472,6 +471,9 @@ input CreateProductInput {
   status: Float
   product_type: ProductType
   variant_stock_level_type: VariantStockLavelEnum
+
+  """Product Variants Details"""
+  createProductVariantInput: [CreateProductVariantInput!]!
 }
 
 enum HalalIndicator {
@@ -509,45 +511,6 @@ enum ProductType {
 enum VariantStockLavelEnum {
   PRODUCT_LEVEL
   VARIABLE_LEVEL
-}
-
-input UpdateProductInput {
-  seller_id: String
-  pro_input_name: String
-  short_description: String
-
-  """Comma seperated string"""
-  tags: String
-  indicator: HalalIndicator = NONE
-  made_in: String
-  brand: String
-  total_allowed_quantity: Float
-  minimum_order_quantity: Float
-  quantity_step_size: Float
-  warranty_period: String
-  guarantee_period: String
-  download_allowed: Float
-  download_link_type: DownloadLinkType
-  pro_input_zip: Upload
-  download_link: String
-  is_returnable: Float
-  is_cancelable: Float
-  cancelable_till: CancelableTill
-  pro_input_image: Upload
-  other_imagesInput: [ImageInput!]
-  video_type: VideoType
-  video: String
-  pro_input_video: Upload
-  pro_input_description: String
-  extra_input_description: String
-
-  """comma separated string"""
-  attribute_values: String
-  category_id: String
-  status: Float
-  product_type: ProductType
-  variant_stock_level_type: VariantStockLavelEnum
-  id: Int!
 }
 
 input CreateProductVariantInput {
@@ -588,6 +551,48 @@ input CreateProductVariantInput {
 enum StockStatus {
   IN_STOCK
   OUT_OF_STOCK
+}
+
+input UpdateProductInput {
+  seller_id: String
+  pro_input_name: String
+  short_description: String
+
+  """Comma seperated string"""
+  tags: String
+  indicator: HalalIndicator = NONE
+  made_in: String
+  brand: String
+  total_allowed_quantity: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  warranty_period: String
+  guarantee_period: String
+  download_allowed: Float
+  download_link_type: DownloadLinkType
+  pro_input_zip: Upload
+  download_link: String
+  is_returnable: Float
+  is_cancelable: Float
+  cancelable_till: CancelableTill
+  pro_input_image: Upload
+  other_imagesInput: [ImageInput!]
+  video_type: VideoType
+  video: String
+  pro_input_video: Upload
+  pro_input_description: String
+  extra_input_description: String
+
+  """comma separated string"""
+  attribute_values: String
+  category_id: String
+  status: Float
+  product_type: ProductType
+  variant_stock_level_type: VariantStockLavelEnum
+
+  """Product Variants Details"""
+  createProductVariantInput: [CreateProductVariantInput!]
+  id: Int!
 }
 
 input CreateAreaInput {

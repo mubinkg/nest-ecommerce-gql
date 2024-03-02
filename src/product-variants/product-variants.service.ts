@@ -8,14 +8,11 @@ import { Model } from 'mongoose';
 @Injectable()
 export class ProductVariantsService {
   constructor(@InjectModel(ProductVariant.name) private readonly productVariantModel:Model<ProductVariant>){}
-  async create(createProductVariantInput: CreateProductVariantInput) {
-    console.log(createProductVariantInput)
+  async create(createProductVariantInput: CreateProductVariantInput[]) {
     try {
-      return await this.productVariantModel.create(createProductVariantInput)
-      
+      return await this.productVariantModel.insertMany(createProductVariantInput)
     } catch (error) {
       throw new InternalServerErrorException("Error on creating Product Variant")
-      
     }
   }
 
