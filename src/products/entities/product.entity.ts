@@ -7,7 +7,7 @@ import { DownloadLinkType } from '../enum/download-link-type.enum';
 export type ProductDocument = HydratedDocument<Product>
 
 @ObjectType()
-@Schema()
+@Schema({timestamps:true})
 export class Product {
   @Field(() => String, {nullable:true})
   _id: string;
@@ -37,7 +37,7 @@ export class Product {
   made_in?: string
 
   @Field(()=>String, {nullable:true})
-  @Prop({type:String})
+  @Prop({type:String})    //brand id object id??
   brand?: string
 
   @Field(()=>Number, {nullable:true})

@@ -3,6 +3,7 @@ import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsTaxId } from 'cla
 import { CreateProductVariantInput } from 'src/product-variants/dto/create-product-variant.input';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { VariantStockLavelEnum ,ProductType, VideoType, CancelableTill, HalalIndicator, DownloadLinkType} from '../enum';
+import { ImageInput } from 'src/ratings/dto/rating-images';
 
 
 registerEnumType(HalalIndicator,{
@@ -126,10 +127,12 @@ export class CreateProductInput {
   cancelable_till?: CancelableTill
 
   @Field(()=>GraphQLUpload,{nullable:true})
-  pro_input_image?: FileUpload
+  pro_input_image?: FileUpload | string
 
-  @Field(()=>[GraphQLUpload], {nullable:true})
-  other_images?: FileUpload[]
+  other_images?: string[]
+
+  @Field(()=>[ImageInput], {nullable:true})
+  other_imagesInput?: ImageInput[] 
 
   @Field(()=>VideoType, {nullable:true})
   @IsOptional()
@@ -142,7 +145,7 @@ export class CreateProductInput {
   video?: string
 
   @Field(()=>GraphQLUpload, {nullable:true})
-  pro_input_video?:FileUpload
+  pro_input_video?:FileUpload | string
 
   @Field(()=>String, {nullable:true})
   @IsString()

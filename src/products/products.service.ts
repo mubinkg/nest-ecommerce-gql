@@ -7,6 +7,9 @@ import { Model } from 'mongoose';
 import { Logger } from '@nestjs/common';
 import { ProductVariantsService } from './../product-variants/product-variants.service';
 import { CreateProductVariantInput } from './../product-variants/dto/create-product-variant.input';
+import { uploadFile } from 'src/util/upload';
+import { FileUpload } from 'graphql-upload';
+import { VideoType } from './enum';
 
 @Injectable()
 export class ProductsService {
@@ -25,13 +28,48 @@ export class ProductsService {
  
     //  // delete createProductInput.createProductVariantInput;
     //   createProductInput.variant_id = productVariant._id;
+
+    if(createProductInput.pro_input_image){
+     
+      createProductInput.pro_input_image= await uploadFile(createProductInput.pro_input_image as FileUpload) as string
+
+     
+    }
+
+
+
+    if(createProductInput.other_imagesInput && createProductInput.other_imagesInput.length>0){
+
+      let imageArray=[]
+      
+        for (let index = 0; index <  createProductInput.other_imagesInput.length; index++) {
+          
+          if(createProductInput.other_imagesInput[index]){
+
+            const imageUrl = await uploadFile(createProductInput.other_imagesInput[index].image as FileUpload) as string;
+            
+            imageArray.push(imageUrl)
+          }
+        }
+
+        createProductInput.other_images=imageArray
+
+    }
+
+    if(createProductInput.video_type && createProductInput.video_type===VideoType.SELF_HOSTED && createProductInput.pro_input_video){
+      createProductInput.pro_input_video= await uploadFile(createProductInput.pro_input_video as FileUpload) as string
+    }
+
+
+
+  
       const product = await this.productModel.create(createProductInput)
 
       // await this.productVariantsService.update(productVariant._id,product._id)
       return product
     }catch(err){
       Logger.log(err)
-      return new NotImplementedException('Can not create product')
+      return new NotImplementedException('Can not create product'+err.message)
     }
   }
 
