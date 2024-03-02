@@ -328,34 +328,6 @@ type ProductAttribute {
   status: ActiveStatus
 }
 
-type ProductAttributeValue {
-  id: String
-  type: ProductAttributeValueType
-  valueName: String
-  image: String
-  color: String
-}
-
-enum ProductAttributeValueType {
-  DEFAULT
-  COLOR
-  IMAGE
-}
-
-type ProductAttributeSet {
-  _id: String
-  attributeSetName: String
-  status: ActiveStatus
-}
-
-type ProductAttribute {
-  _id: String
-  name: String
-  attributeSet: ProductAttributeSet
-  values: [ProductAttributeValue!]
-  status: ActiveStatus
-}
-
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -477,7 +449,8 @@ input CereateTicketTypeInput {
 
 input CreateProductInput {
   seller_id: String!
-  pro_input_name: String!
+  tax: Float
+  type: ProductType
   short_description: String!
   tags: String
   indicator: HalalIndicator = NONE
@@ -506,12 +479,7 @@ input CreateProductInput {
   category_id: String!
   status: Float
   product_type: ProductType
-  tax: Float
-  type: String
-  stock_type: Float
-  cod_allowed: Float
-  is_prices_inclusive_tax: Boolean
-  image: String
+  variant_stock_level_type: VariantStockLavelEnum
   sku: String
   stock: Float
   availability: Float
@@ -522,6 +490,12 @@ input CreateProductInput {
 
   """Product Variants Details"""
   createProductVariantInput: CreateProductVariantInput!
+}
+
+enum ProductType {
+  SIMPLE_PRODUCT
+  VARIABLE_PRODUCT
+  DIGITAL_PRODUCT
 }
 
 enum HalalIndicator {
@@ -546,10 +520,9 @@ enum VideoType {
   YOUTUBE
 }
 
-enum ProductType {
-  SIMPLE_PRODUCT
-  VARIABLE_PRODUCT
-  DIGITAL_PRODUCT
+enum VariantStockLavelEnum {
+  PRODUCT_LEVEL
+  VARIABLE_LEVEL
 }
 
 input CreateProductVariantInput {
@@ -594,7 +567,8 @@ enum StockStatus {
 
 input UpdateProductInput {
   seller_id: String
-  pro_input_name: String
+  tax: Float
+  type: ProductType
   short_description: String
   tags: String
   indicator: HalalIndicator = NONE
@@ -623,12 +597,7 @@ input UpdateProductInput {
   category_id: String
   status: Float
   product_type: ProductType
-  tax: Float
-  type: ProductType
-  stock_type: Float
-  cod_allowed: Float
-  is_prices_inclusive_tax: Boolean
-  image: String
+  variant_stock_level_type: VariantStockLavelEnum
   sku: String
   stock: Float
   availability: Float

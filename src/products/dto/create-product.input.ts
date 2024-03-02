@@ -1,6 +1,5 @@
 import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
 import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsTaxId } from 'class-validator';
-import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
 import { CreateProductVariantInput } from 'src/product-variants/dto/create-product-variant.input';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { VariantStockLavelEnum ,ProductType, VideoType, CancelableTill, HalalIndicator, DownloadLinkType} from '../enum';

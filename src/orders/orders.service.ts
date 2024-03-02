@@ -14,6 +14,7 @@ export class OrdersService {
 
   async create(createOrderInput: CreateOrderInput, user:any) {
     try{
+      
       return await this.orderModel.create({...createOrderInput, user_id: user.userId})
     }
     catch(err){
