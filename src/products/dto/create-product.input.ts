@@ -1,6 +1,9 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
 import { CreateProductVariantInput } from 'src/product-variants/dto/create-product-variant.input';
-
+import { ProductType } from '../data/enum';
+registerEnumType(ProductType, {
+  name: 'ProductType',
+})
 @InputType()
 export class CreateProductInput {
   @Field(()=>String, {nullable:true})
@@ -9,8 +12,8 @@ export class CreateProductInput {
   @Field(()=>Number, {nullable:true})
   tax: number
 
-  @Field(()=>String, {nullable:true})
-  type: string
+  @Field(()=>ProductType, {nullable:true})
+  type?: ProductType
 
   @Field(()=>Number, {nullable:true})
   stock_type: number

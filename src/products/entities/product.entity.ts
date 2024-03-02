@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
+import { ObjectType, Field,  } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {HydratedDocument} from 'mongoose'
 
@@ -124,7 +124,7 @@ export class Product {
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
-   variant_id: string
+  variant_id: string
 
 }
 

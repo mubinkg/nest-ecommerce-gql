@@ -252,6 +252,34 @@ type Favourite {
   user_Id: String
 }
 
+type ProductAttributeValue {
+  id: String
+  type: ProductAttributeValueType
+  valueName: String
+  image: String
+  color: String
+}
+
+enum ProductAttributeValueType {
+  DEFAULT
+  COLOR
+  IMAGE
+}
+
+type ProductAttributeSet {
+  _id: String
+  attributeSetName: String
+  status: ActiveStatus
+}
+
+type ProductAttribute {
+  _id: String
+  name: String
+  attributeSet: ProductAttributeSet
+  values: [ProductAttributeValue!]
+  status: ActiveStatus
+}
+
 type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -272,9 +300,11 @@ type Query {
   brands(limit: Float!, offset: Float!): [Brand!]!
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
   rating(id: Int!): Rating!
-  promoCode(id: Int!): PromoCode!
+  promoCode(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!
   favourites: [Favourite!]!
   favourite(id: Int!): Favourite!
+  productAttributes: [ProductAttribute!]!
+  productAttribute(id: Int!): ProductAttribute!
 }
 
 input SignInDto {
@@ -298,6 +328,11 @@ enum SortingType {
 enum SortingOrder {
   DESC
   ASC
+}
+
+input GetPromoCodesInput {
+  limit: Float!
+  offset: Float!
 }
 
 type Mutation {
@@ -330,11 +365,13 @@ type Mutation {
   removeRating(id: Int!): Rating!
   createPromoCode(createPromoCodeInput: CreatePromoCodeInput!): PromoCode!
   validatePromoCode(code: String!, orderFinalAmount: Float!): PromoCode!
-  updatePromoCode(updatePromoCodeInput: UpdatePromoCodeInput!): PromoCode!
-  removePromoCode(id: Int!): PromoCode!
   createFavourite(createFavouriteInput: CreateFavouriteInput!): Favourite!
   updateFavourite(updateFavouriteInput: UpdateFavouriteInput!): Favourite!
   removeFavourite(id: String!): String!
+  createProductAttribute(createProductAttributeInput: CreateProductAttributeInput!): ProductAttribute!
+  createProductAttributeSet(createProductAttributeInput: CreateProductAttributeSetInput!): ProductAttributeSet!
+  updateProductAttribute(updateProductAttributeInput: UpdateProductAttributeInput!): ProductAttribute!
+  removeProductAttribute(id: Int!): ProductAttribute!
 }
 
 input CreateTicketInput {
@@ -355,7 +392,7 @@ input CereateTicketTypeInput {
 input CreateProductInput {
   category_id: String
   tax: Float
-  type: String
+  type: ProductType
   stock_type: Float
   name: String
   short_description: String
@@ -385,6 +422,12 @@ input CreateProductInput {
 
   """Product Variants Details"""
   createProductVariantInput: CreateProductVariantInput!
+}
+
+enum ProductType {
+  SIMPLE_PRODUCT
+  VARIABLE_PRODUCT
+  DIGITAL_PRODUCT
 }
 
 input CreateProductVariantInput {
@@ -430,7 +473,7 @@ enum StockStatus {
 input UpdateProductInput {
   category_id: String
   tax: Float
-  type: String
+  type: ProductType
   stock_type: Float
   name: String
   short_description: String
@@ -612,24 +655,6 @@ input CreatePromoCodeInput {
   status: ActiveStatus!
 }
 
-input UpdatePromoCodeInput {
-  promoCode: String
-  message: String
-  image: Upload
-  discountType: DiscountType
-  discountAmount: Float
-  startDate: DateTime
-  endDate: DateTime
-  minOrderAmount: Float
-  maxOrderAmount: Float
-  numberOfUsers: Float
-  repeatUsage: RepeatUsage
-  numberOfRepeatUsage: Float = 0
-  isCashBack: Boolean = false
-  status: ActiveStatus
-  id: Int!
-}
-
 input CreateFavouriteInput {
   product_id: String
   user_Id: String
@@ -639,4 +664,28 @@ input UpdateFavouriteInput {
   product_id: String
   user_Id: String
   id: String!
+}
+
+input CreateProductAttributeInput {
+  name: String
+  attributeSet: String!
+  values: [ProductAttributeValueInput!]
+}
+
+input ProductAttributeValueInput {
+  type: ProductAttributeValueType!
+  valueName: String!
+  image: Upload
+  color: String
+}
+
+input CreateProductAttributeSetInput {
+  attributeSetName: String!
+}
+
+input UpdateProductAttributeInput {
+  name: String
+  attributeSet: String
+  values: [ProductAttributeValueInput!]
+  id: Int!
 }
