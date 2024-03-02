@@ -1,12 +1,8 @@
 import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
 import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsTaxId } from 'class-validator';
 import { CreateProductVariantInput } from 'src/product-variants/dto/create-product-variant.input';
-import { HalalIndicator } from '../enum/halal-indicator.enum';
-import { DownloadLinkType } from '../enum/download-link-type.enum';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
-import { CancelableTill } from '../enum/cancelable-till.enum';
-import { VideoType } from '../enum/video-type.enum';
-import { ProductType } from '../enum/product.type.enum';
+import { VariantStockLavelEnum ,ProductType, VideoType, CancelableTill, HalalIndicator, DownloadLinkType} from '../enum';
 
 
 registerEnumType(HalalIndicator,{
@@ -27,6 +23,10 @@ registerEnumType(VideoType, {
 
 registerEnumType(ProductType, {
   name: 'ProductType'
+})
+
+registerEnumType(VariantStockLavelEnum, {
+  name: 'VariantStockLavelEnum'
 })
 
 @InputType()
@@ -172,23 +172,10 @@ export class CreateProductInput {
   @IsEnum(ProductType)
   product_type?: ProductType
 
-  @Field(()=>Number, {nullable:true})
-  tax: number
-
-  @Field(()=>String, {nullable:true})
-  type: string
-
-  @Field(()=>Number, {nullable:true})
-  stock_type: number
-
-  @Field(()=>Number, {nullable:true})
-  cod_allowed: number
-
-  @Field(()=>Boolean, {nullable:true})
-  is_prices_inclusive_tax: boolean
-
-  @Field(()=>String, {nullable:true})
-  image: string
+  @Field(()=>VariantStockLavelEnum, {nullable:true})
+  @IsOptional()
+  @IsEnum(VariantStockLavelEnum)
+  variant_stock_level_type?: VariantStockLavelEnum
 
   @Field(()=>String, {nullable:true})
   sku: string
