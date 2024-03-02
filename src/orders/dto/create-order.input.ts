@@ -38,7 +38,7 @@ export class CreateOrderInput {
   promo_code?:string
 
   @Field(()=>Number,{nullable:true})
-  @IsString()
+  @IsNumber()
   @IsOptional()
   promo_discount?:number
 
