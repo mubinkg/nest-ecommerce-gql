@@ -80,6 +80,7 @@ type Product {
   category_id: String
   tax: Float
   product_type: String
+  globalOrderNo: Float
 }
 
 enum DownloadLinkType {
@@ -137,7 +138,7 @@ type ProductVariant {
   attributeReference: String
 
   """Attribute Values"""
-  attributes: [ProductAttributeValue!]
+  attributes: ProductAttributeValue
 
   """Product Reference Id"""
   productId: String
@@ -176,6 +177,7 @@ type ProductResponse {
   category_id: String
   tax: Float
   product_type: String
+  globalOrderNo: Float
 
   """Product Variants"""
   productvariants: [ProductVariant!]!
@@ -355,8 +357,16 @@ type ProductAttribute {
   _id: String
   name: String
   attributeSet: ProductAttributeSet
-  values: [ProductAttributeValue!]
+  values: ProductAttributeValue
   status: ActiveStatus
+}
+
+type ProductFaq {
+  _id: String
+  productId: String
+  question: String
+  ans: String
+  createdAt: DateTime
 }
 
 type Query {
@@ -388,6 +398,7 @@ type Query {
   order(id: Int!): Order!
   productAttributes: [ProductAttribute!]!
   productAttribute(id: Int!): ProductAttribute!
+  productFaq(id: Int!): ProductFaq!
 }
 
 input GetProductDto {
@@ -478,7 +489,7 @@ type Mutation {
   createTicketType(createTicketTypeInput: CereateTicketTypeInput!): TicketType!
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
-  removeProduct(id: Int!): Product!
+  updateProductOrderNo(updateProductOrderNoInput: UpdateProductGlobalOrderNoInput!): String!
   removeProductVariant(id: Int!): ProductVariant!
   createArea(createAreaInput: CreateAreaInput!): Area!
   updateArea(updateAreaInput: UpdateAreaInput!): Area!
@@ -509,10 +520,13 @@ type Mutation {
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrderStatus(updateOrderInput: UpdateOrderInput!): String!
   removeOrder(id: Int!): Order!
-  createProductAttribute(createProductAttributeInput: CreateProductAttributeInput!): ProductAttribute!
+  createProductAttribute(createProductAttributeInput: CreateProductAttributeInput!): [ProductAttribute!]!
   createProductAttributeSet(createProductAttributeInput: CreateProductAttributeSetInput!): ProductAttributeSet!
   updateProductAttribute(updateProductAttributeInput: UpdateProductAttributeInput!): ProductAttribute!
   removeProductAttribute(id: Int!): ProductAttribute!
+  createProductFaq(createProductFaqInput: CreateProductFaqInput!): ProductFaq!
+  updateProductFaq(updateProductFaqInput: UpdateProductFaqInput!): ProductFaq!
+  removeProductFaq(id: Int!): ProductFaq!
 }
 
 input CreateTicketInput {
@@ -688,6 +702,15 @@ input UpdateProductInput {
   """Product Variants Details"""
   createProductVariantInput: [CreateProductVariantInput!]
   id: Int!
+}
+
+input UpdateProductGlobalOrderNoInput {
+  productArray: [UpdateProductGlobalOrderNoInputObject!]!
+}
+
+input UpdateProductGlobalOrderNoInputObject {
+  _id: String!
+  globalOrderNo: Float!
 }
 
 input CreateAreaInput {
@@ -898,5 +921,18 @@ input UpdateProductAttributeInput {
   name: String
   attributeSet: String
   values: [ProductAttributeValueInput!]
+  id: Int!
+}
+
+input CreateProductFaqInput {
+  productId: String!
+  question: String!
+  ans: String!
+}
+
+input UpdateProductFaqInput {
+  productId: String
+  question: String
+  ans: String
   id: Int!
 }

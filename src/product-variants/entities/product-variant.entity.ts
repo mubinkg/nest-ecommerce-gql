@@ -52,8 +52,8 @@ export class ProductVariant {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ProductAttribute'})
   attributeReference?: string;
 
-  @Field(() => [ProductAttributeValue], { description: "Attribute Values", nullable: true })
-  attributes?:  [ProductAttributeValue];
+  @Field(() => ProductAttributeValue, { description: "Attribute Values", nullable: true })
+  attributes?:  ProductAttributeValue;
 
   @Field(() => String, { description: "Product Reference Id", nullable: true })
   @Prop({ type: mongoose.Schema.Types.ObjectId })
