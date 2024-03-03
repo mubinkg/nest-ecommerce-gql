@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotImplementedException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotAcceptableException, InternalServerErrorException, NotImplementedException } from '@nestjs/common';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { InjectModel } from '@nestjs/mongoose';
@@ -10,6 +10,7 @@ import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
 import { VideoType } from './enum';
 import { GetProductDto } from './dto/get-products.dto';
+import { UpdateProductGlobalOrderNoInput } from './dto/updateGlobalOrderNo.input';
 import internal from 'stream';
 
 @Injectable()
@@ -50,7 +51,13 @@ export class ProductsService {
       if (createProductInput.video_type && createProductInput.video_type === VideoType.SELF_HOSTED && createProductInput.pro_input_video) {
         createProductInput.pro_input_video = await uploadFile(createProductInput.pro_input_video as FileUpload) as string
       }
+
+      const productCount= await this.productModel.countDocuments()
+
+      createProductInput.globalOrderNo=productCount+1
+
       const product = await this.productModel.create(createProductInput)
+      
       const productVariant = await this.productVariantsService.create(createProductVariantInput.map((d) => ({ ...d, productId: product._id })))
       return product
     } catch (err) {
@@ -257,6 +264,39 @@ export class ProductsService {
     catch (err) {
       throw new InternalServerErrorException('Can not find products');
     }
+  }
+
+
+  async updateProductGlobalOrderNo(updateProductGlobalOrderNoInput:UpdateProductGlobalOrderNoInput){
+
+    const {productArray}=updateProductGlobalOrderNoInput
+
+    let updateArrayInput=[],updatedProducts
+
+    if(productArray.length===0){
+      throw new NotAcceptableException(`Product array length cannot be zero`)
+    }
+
+    try {
+
+      productArray.map((element)=>{
+          updateArrayInput.push({ updateOne :
+            {
+               "filter": {_id:element._id},
+               "update": {globalOrderNo:element.globalOrderNo},            // Changed in 4.2
+            }
+         })
+      })
+
+      updatedProducts= await this.productModel.bulkWrite(updateArrayInput)
+
+      
+    } catch (error) {
+        throw new InternalServerErrorException('Failed to update product order no')
+    }
+
+    return "Successfully updated"
+
   }
 
   findOne(id: number) {

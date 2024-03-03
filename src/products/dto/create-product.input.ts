@@ -182,4 +182,6 @@ export class CreateProductInput {
 
   @Field(()=>[CreateProductVariantInput],{description:"Product Variants Details"})
   createProductVariantInput?:CreateProductVariantInput[]
+
+  globalOrderNo?: number
 }

@@ -19,6 +19,8 @@ export class ProductAttributesService {
 
      let attribute
 
+     let createInputArray=[]
+
      for (let index = 0; index <  createProductAttributeInput.values.length; index++) {
               const shortId=new ShortUniqueId({ length: 8 ,dictionary:"alphanum_upper"})()
               createProductAttributeInput.values[index].id="AV"+shortId
@@ -31,8 +33,13 @@ export class ProductAttributesService {
               }
      }
 
+      createProductAttributeInput.values.map((element)=>{
+          createInputArray.push({name:createProductAttributeInput.name,attributeSet:createProductAttributeInput.attributeSet,values:element})
+      })
+
+
       try {
-        attribute= await this.productAttributeModel.create(createProductAttributeInput)
+        attribute= await this.productAttributeModel.insertMany(createInputArray)
       } catch (error) {
         throw new InternalServerErrorException('Failed to create attribute'+error.message)
       }

@@ -5,6 +5,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Order, OrderDocument } from './entities/order.entity';
 import { Model } from 'mongoose';
 import { ProductVariantsService } from 'src/product-variants/product-variants.service';
+import { GetOrderDto } from './dto/get-orders.dto';
+import { OrderSortOrder } from './enum';
 
 @Injectable()
 export class OrdersService {
@@ -24,16 +26,39 @@ export class OrdersService {
     }
   }
 
-  findAll() {
-    return `This action returns all orders`;
+  async findAll(getOrderDto:GetOrderDto) {
+    try{
+      const query = {}
+      const sort = {}
+      if(getOrderDto?.user_id){
+        query['user_id'] = getOrderDto.user_id
+      }
+      if(getOrderDto?.active_status){
+        query['status'] = getOrderDto.active_status
+      }
+      if(getOrderDto.sort){
+        sort[getOrderDto.sort] = getOrderDto.order === OrderSortOrder.DESC ? -1 : 1
+      }
+
+      return await this.orderModel.find(query).sort(sort).limit(getOrderDto.limit).skip(getOrderDto.offset)
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {
     return `This action returns a #${id} order`;
   }
 
-  update(id: number, updateOrderInput: UpdateOrderInput) {
-    return `This action updates a #${id} order`;
+  async update(updateOrderInput: UpdateOrderInput) {
+    try{
+      await this.orderModel.findByIdAndUpdate(updateOrderInput.order_id, {status:updateOrderInput.status})
+      return 'Order status updated'
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   remove(id: number) {
