@@ -126,15 +126,15 @@ export class Product {
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
-  category_id: string
+  category_id?: string
 
   @Field(()=>Number, {nullable:true})
   @Prop({type:Number})
-  tax: number
+  tax?: number
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
-  product_type: string
+  product_type?: string
 
   // @Field(()=>Number, {nullable:true})
   // @Prop({type:Number})
@@ -180,6 +180,10 @@ export class Product {
   // @Field(()=>String, {nullable:true})
   // @Prop({type:String})
   // variant_id: string
+
+  @Field(()=>Number, {nullable:true})
+  @Prop({type:Number})
+  globalOrderNo?: number
 
 }
 

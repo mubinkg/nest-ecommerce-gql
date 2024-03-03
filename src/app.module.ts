@@ -21,6 +21,7 @@ import { CartModule } from './cart/cart.module';
 import { OrdersModule } from './orders/orders.module';
 import { ProductVariantsModule } from './product-variants/product-variants.module';
 import { ProductAttributesModule } from './product-attributes/product-attributes.module';
+import { ProductFaqModule } from './product-faq/product-faq.module';
 
 
 @Module({
@@ -50,7 +51,8 @@ import { ProductAttributesModule } from './product-attributes/product-attributes
     CartModule,
     OrdersModule,
     ProductVariantsModule,
-    ProductAttributesModule
+    ProductAttributesModule,
+    ProductFaqModule
   ],
 })
 export class AppModule {}
