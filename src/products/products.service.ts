@@ -11,7 +11,6 @@ import { FileUpload } from 'graphql-upload';
 import { VideoType } from './enum';
 import { GetProductDto } from './dto/get-products.dto';
 import { UpdateProductGlobalOrderNoInput } from './dto/updateGlobalOrderNo.input';
-import internal from 'stream';
 
 @Injectable()
 export class ProductsService {
