@@ -343,7 +343,7 @@ type Query {
   favourite(id: Int!): Favourite!
   getUserCart: [Cart!]!
   cart(id: Int!): Cart!
-  orders: [Order!]!
+  get_orders(getOrderDto: GetOrderDto!): [Order!]!
   order(id: Int!): Order!
   productAttributes: [ProductAttribute!]!
   productAttribute(id: Int!): ProductAttribute!
@@ -401,6 +401,33 @@ enum SortingOrder {
 input GetPromoCodesInput {
   limit: Float!
   offset: Float!
+}
+
+input GetOrderDto {
+  user_id: String!
+  active_status: OrderStatus
+  limit: Float = 25
+  offset: Float = 0
+  sort: OrderSortBy = ID
+  order: OrderSortOrder = DESC
+  download_invoice: Float
+}
+
+enum OrderStatus {
+  RECEIVED
+  DELIVERED
+  CANCELLED
+  PROCESSED
+}
+
+enum OrderSortBy {
+  ID
+  DATE_ADDED
+}
+
+enum OrderSortOrder {
+  DESC
+  AESC
 }
 
 type Mutation {

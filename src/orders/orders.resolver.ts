@@ -6,6 +6,7 @@ import { UpdateOrderInput } from './dto/update-order.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
+import { GetOrderDto } from './dto/get-orders.dto';
 
 @Resolver(() => Order)
 export class OrdersResolver {
@@ -20,9 +21,11 @@ export class OrdersResolver {
     return this.ordersService.create(createOrderInput, user);
   }
 
-  @Query(() => [Order], { name: 'orders' })
-  findAll() {
-    return this.ordersService.findAll();
+  @Query(() => [Order], { name: 'get_orders' })
+  findAll(
+    @Args('getOrderDto') getOrderDto:GetOrderDto
+  ) {
+    return this.ordersService.findAll(getOrderDto);
   }
 
   @Query(() => Order, { name: 'order' })
