@@ -3,6 +3,7 @@ import { ProductsService } from './products.service';
 import { Product } from './entities/product.entity';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
+import { GetProductDto } from './dto/get-products.dto';
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -14,8 +15,10 @@ export class ProductsResolver {
   }
 
   @Query(() => [Product], { name: 'get_products' })
-  findAll() {
-    return this.productsService.findAll();
+  findAll(
+    @Args('getProductInput') getProductInputDto:GetProductDto
+  ) {
+    return this.productsService.findAll(getProductInputDto);
   }
 
   @Query(() => Product, { name: 'product' })

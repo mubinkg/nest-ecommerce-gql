@@ -3,12 +3,13 @@ import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductDocument } from './entities/product.entity';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { Logger } from '@nestjs/common';
 import { ProductVariantsService } from './../product-variants/product-variants.service';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
 import { VideoType } from './enum';
+import { GetProductDto } from './dto/get-products.dto';
 
 @Injectable()
 export class ProductsService {
@@ -57,8 +58,41 @@ export class ProductsService {
     }
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll(getProductInputDto:GetProductDto) {
+    try{
+      const query = []
+      const matchStage = {}
+
+      if(getProductInputDto.id){
+        matchStage['_id'] = new mongoose.Types.ObjectId(getProductInputDto.id)
+      }
+      if(getProductInputDto.category_id){
+        matchStage['category_id'] = getProductInputDto.category_id
+      }
+      if(getProductInputDto.seller_id){
+        matchStage['seller_id'] = new mongoose.Types.ObjectId(getProductInputDto.seller_id)
+      }
+      query.push({
+        $match:matchStage
+      })
+
+      // Add pagination.
+      if(getProductInputDto.limit){
+        query.push({
+          $limit: getProductInputDto.limit
+        })
+      }
+      if(getProductInputDto.offset){
+        query.push({
+          $skip:getProductInputDto.offset
+        })
+      }
+
+      return await this.productModel.aggregate(query)
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {
