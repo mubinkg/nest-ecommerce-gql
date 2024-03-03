@@ -321,7 +321,7 @@ type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
   getTicketTypes(limit: Float!, offset: Float!): [TicketType!]!
-  products: [Product!]!
+  get_products(getProductInput: GetProductDto!): [Product!]!
   product(id: Int!): Product!
   productVariants: [ProductVariant!]!
   productVariant(id: Int!): ProductVariant!
@@ -346,6 +346,32 @@ type Query {
   order(id: Int!): Order!
   productAttributes: [ProductAttribute!]!
   productAttribute(id: Int!): ProductAttribute!
+}
+
+input GetProductDto {
+  id: String
+  category_id: String
+  search: String
+  tags: String
+  attribute_value_ids: String
+  limit: Float
+  offset: Float
+  sort: ProductSort = ID
+  order: ProductOrder = DESC
+  min_price: Float
+  max_price: Float
+  seller_id: String
+}
+
+enum ProductSort {
+  ID
+  DATE_ADDED
+  PRICE
+}
+
+enum ProductOrder {
+  ASC
+  DESC
 }
 
 input SignInDto {
