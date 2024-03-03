@@ -4,6 +4,7 @@ import { Product } from './entities/product.entity';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { GetProductDto } from './dto/get-products.dto';
+import { ProductResponse } from './dto/product-responose.dto';
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -14,7 +15,7 @@ export class ProductsResolver {
     return await this.productsService.create(createProductInput);
   }
 
-  @Query(() => [Product], { name: 'get_products' })
+  @Query(() => [ProductResponse], { name: 'get_products' })
   findAll(
     @Args('getProductInput') getProductInputDto:GetProductDto
   ) {

@@ -126,6 +126,44 @@ type ProductVariant {
   productId: String
 }
 
+type ProductResponse {
+  _id: String
+  seller_id: String
+  pro_input_name: String
+  short_description: String
+  tags: String
+  indicator: String
+  made_in: String
+  brand: String
+  total_allowed_quantity: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  warranty_period: String
+  guarantee_period: String
+  download_allowed: Float
+  download_link_type: DownloadLinkType
+  pro_input_zip: String
+  download_link: String
+  is_returnable: Float
+  is_cancelable: Float
+  cancelable_till: String
+  pro_input_image: String
+  other_images: [String!]
+  video_type: String
+  video: String
+  pro_input_video: String
+  pro_input_description: String
+  extra_input_description: String
+  attribute_values: String
+  status: Float
+  category_id: String
+  tax: Float
+  product_type: String
+
+  """Product Variants"""
+  productvariants: [ProductVariant!]!
+}
+
 type Area {
   _id: String!
   area_name: String
@@ -321,7 +359,7 @@ type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
   getTicketTypes(limit: Float!, offset: Float!): [TicketType!]!
-  get_products(getProductInput: GetProductDto!): [Product!]!
+  get_products(getProductInput: GetProductDto!): [ProductResponse!]!
   product(id: Int!): Product!
   productVariants: [ProductVariant!]!
   productVariant(id: Int!): ProductVariant!

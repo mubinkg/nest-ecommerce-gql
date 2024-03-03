@@ -1,5 +1,5 @@
 export enum ProductSort{
     ID = 'id',
-    DATE_ADDED = 'date_added',
+    DATE_ADDED = 'createdAt',
     PRICE = 'price'
 }

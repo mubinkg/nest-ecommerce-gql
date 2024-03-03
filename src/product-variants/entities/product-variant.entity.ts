@@ -46,10 +46,11 @@ export class ProductVariant {
   @Prop({ type: String })
   stockStatus?: StockStatus;
 
+ //variant reference id 
   @Field(() => String, { description: "If variants is missing it will be general variant", nullable: true })
-  @Prop({ type: String })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ProductAttribute'})
   attributeReference?: string;
-
+//we can store variant or attribute value embedded object
 
   @Field(() => String, { description: "Product Reference Id", nullable: true })
   @Prop({ type: mongoose.Schema.Types.ObjectId })
