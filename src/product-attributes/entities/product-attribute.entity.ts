@@ -22,9 +22,9 @@ export class ProductAttribute{
         @Prop({type:mongoose.Schema.Types.ObjectId, ref:''})
         attributeSet?:ProductAttributeSet
 
-        @Field(()=>[ProductAttributeValue],{nullable:true})
-        @Prop([{type:raw({ ...ProductAttributeValue})}])
-        values?:ProductAttributeValue[]
+        @Field(()=>ProductAttributeValue,{nullable:true})
+        @Prop({type:raw({ ...ProductAttributeValue})})
+        values?:ProductAttributeValue
 
         @Field(()=>ActiveStatus,{nullable:true})
         @Prop({type:String,enum:ActiveStatus,default:ActiveStatus.ACTIVE})
