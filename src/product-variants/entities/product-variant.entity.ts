@@ -2,6 +2,7 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { StockStatus } from '../enum';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { ProductAttributeValue } from 'src/product-attributes/entities/product-attribute-value.entity';
 
 
 @ObjectType()
@@ -46,10 +47,13 @@ export class ProductVariant {
   @Prop({ type: String })
   stockStatus?: StockStatus;
 
+ //variant reference id 
   @Field(() => String, { description: "If variants is missing it will be general variant", nullable: true })
-  @Prop({ type: String })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ProductAttribute'})
   attributeReference?: string;
 
+  @Field(() => ProductAttributeValue, { description: "Attribute Values", nullable: true })
+  attributes?:  ProductAttributeValue;
 
   @Field(() => String, { description: "Product Reference Id", nullable: true })
   @Prop({ type: mongoose.Schema.Types.ObjectId })

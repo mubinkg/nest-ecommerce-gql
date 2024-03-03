@@ -125,8 +125,8 @@ export class Product {
   status?: number
 
   @Field(()=>String, {nullable:true})
-  @Prop({type:String})
-  category_id?: string
+  @Prop({type: mongoose.Schema.Types.ObjectId})
+  category_id: string
 
   @Field(()=>Number, {nullable:true})
   @Prop({type:Number})

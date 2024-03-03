@@ -34,7 +34,7 @@ export class CreateProductVariantInput {
 
   @Field(() => String, { description: "If variants is missing it will be general variant", nullable: true })
   attributeReference?: string;
-
+ 
 
   @Field(() => String, { description: "Product Reference Id", nullable: true })
   productId?: string
