@@ -75,6 +75,10 @@ export class Order {
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
+  status?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
   email?:string // only enter when ordered product is digital product and one of them is not downloadable(download_allowed = 0)
 
   @Field(()=>String, {nullable:true})

@@ -285,6 +285,7 @@ type Order {
   wallet_balance_used: Float
   order_note: String
   documents: [String!]
+  status: String
   email: String
   created_at: String
 }
@@ -438,7 +439,7 @@ type Mutation {
   updateCart(updateCartInput: UpdateCartInput!): Cart!
   removeCart(id: String!): Cart!
   createOrder(createOrderInput: CreateOrderInput!): Order!
-  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  updateOrderStatus(updateOrderInput: UpdateOrderInput!): String!
   removeOrder(id: Int!): Order!
   createProductAttribute(createProductAttributeInput: CreateProductAttributeInput!): ProductAttribute!
   createProductAttributeSet(createProductAttributeInput: CreateProductAttributeSetInput!): ProductAttributeSet!
@@ -804,22 +805,8 @@ input CreateOrderInput {
 }
 
 input UpdateOrderInput {
-  mobile: String
-  product_variant_id: [String!]
-  quantity: [Float!]
-  total: Float
-  delivery_charge: Float
-  final_total: Float
-  promo_code: String
-  promo_discount: Float
-  payment_method: String
-  address_id: String
-  is_wallet_used: Float = 0
-  wallet_balance_used: Float = 0
-  order_note: String
-  documents: [String!]
-  email: String
-  id: Int!
+  order_id: String!
+  status: String!
 }
 
 input CreateProductAttributeInput {

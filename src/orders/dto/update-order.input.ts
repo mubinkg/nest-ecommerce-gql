@@ -1,8 +1,15 @@
-import { CreateOrderInput } from './create-order.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
-export class UpdateOrderInput extends PartialType(CreateOrderInput) {
-  @Field(() => Int)
-  id: number;
+export class UpdateOrderInput {
+  @Field(() => String)
+  @IsString()
+  @IsNotEmpty()
+  order_id: string;
+
+  @Field(()=>String)
+  @IsString()
+  @IsNotEmpty()
+  status: string
 }

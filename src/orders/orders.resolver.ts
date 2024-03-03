@@ -30,9 +30,9 @@ export class OrdersResolver {
     return this.ordersService.findOne(id);
   }
 
-  @Mutation(() => Order)
-  updateOrder(@Args('updateOrderInput') updateOrderInput: UpdateOrderInput) {
-    return this.ordersService.update(updateOrderInput.id, updateOrderInput);
+  @Mutation(() => String)
+  updateOrderStatus(@Args('updateOrderInput') updateOrderInput: UpdateOrderInput) {
+    return this.ordersService.update(updateOrderInput);
   }
 
   @Mutation(() => Order)
