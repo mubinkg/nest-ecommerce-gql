@@ -88,6 +88,20 @@ enum DownloadLinkType {
   ADD_LINK
 }
 
+type ProductAttributeValue {
+  id: String
+  type: ProductAttributeValueType
+  valueName: String
+  image: String
+  color: String
+}
+
+enum ProductAttributeValueType {
+  DEFAULT
+  COLOR
+  IMAGE
+}
+
 type ProductVariant {
   """Regular Price"""
   _id: String!
@@ -121,6 +135,9 @@ type ProductVariant {
 
   """If variants is missing it will be general variant"""
   attributeReference: String
+
+  """Attribute Values"""
+  attributes: [ProductAttributeValue!]
 
   """Product Reference Id"""
   productId: String
@@ -325,20 +342,6 @@ type Order {
   documents: [String!]
   email: String
   created_at: String
-}
-
-type ProductAttributeValue {
-  id: String
-  type: ProductAttributeValueType
-  valueName: String
-  image: String
-  color: String
-}
-
-enum ProductAttributeValueType {
-  DEFAULT
-  COLOR
-  IMAGE
 }
 
 type ProductAttributeSet {

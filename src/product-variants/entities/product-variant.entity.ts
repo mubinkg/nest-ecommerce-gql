@@ -2,6 +2,7 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { StockStatus } from '../enum';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { ProductAttributeValue } from 'src/product-attributes/entities/product-attribute-value.entity';
 
 
 @ObjectType()
@@ -50,7 +51,9 @@ export class ProductVariant {
   @Field(() => String, { description: "If variants is missing it will be general variant", nullable: true })
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ProductAttribute'})
   attributeReference?: string;
-//we can store variant or attribute value embedded object
+
+  @Field(() => [ProductAttributeValue], { description: "Attribute Values", nullable: true })
+  attributes?:  [ProductAttributeValue];
 
   @Field(() => String, { description: "Product Reference Id", nullable: true })
   @Prop({ type: mongoose.Schema.Types.ObjectId })

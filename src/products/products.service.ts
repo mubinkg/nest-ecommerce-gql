@@ -102,7 +102,7 @@ export class ProductsService {
         sortObj[sort] = order;
 
 
-      return await this.productModel.aggregate([{
+      const res = await this.productModel.aggregate([{
         $match: matchFirstStage
       }, {
         $lookup: {
@@ -115,6 +115,133 @@ export class ProductsService {
         $match: matchSecondStage
       },
       {
+        $unwind: {
+          path: "$productvariants",
+          includeArrayIndex: "index",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
+          from: "productattributes",
+          localField:
+            "productvariants.attributeReference",
+          foreignField: "_id",
+          as: "productvariants.attributes",
+        },
+      },
+      {
+        $addFields: {
+          "productvariants.attributes": {
+            $arrayElemAt: [
+              "$productvariants.attributes.values",
+              0,
+            ],
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$_id",
+          pro_input_name: {
+            $first: "$pro_input_name",
+          },
+          seller_id: {
+            $first: "$seller_id",
+          },
+          short_description: {
+            $first: "$short_description",
+          },
+          tags: {
+            $first: "$tags",
+          },
+          indicator: {
+            $first: "$indicator",
+          },
+          made_in: {
+            $first: "$made_in",
+          },
+          brand: {
+            $first: "$brand",
+          },
+          total_allowed_quantity: {
+            $first: "$total_allowed_quantity",
+          },
+          minimum_order_quantity: {
+            $first: "$minimum_order_quantity",
+          },
+          quantity_step_size: {
+            $first: "$quantity_step_size",
+          },
+          warranty_period: {
+            $first: "$warranty_period",
+          },
+          guarantee_period: {
+            $first: "$guarantee_period",
+          },
+          download_allowed: {
+            $first: "$download_allowed",
+          },
+          download_link_type: {
+            $first: "$download_link_type",
+          },
+          pro_input_zip: {
+            $first: "$pro_input_zip",
+          },
+          download_link: {
+            $first: "$download_link",
+          },
+          is_returnable: {
+            $first: "$is_returnable",
+          },
+          is_cancelable: {
+            $first: "$is_cancelable",
+          },
+          cancelable_till: {
+            $first: "$cancelable_till",
+          },
+          pro_input_image: {
+            $first: "$pro_input_image",
+          },
+          other_images: {
+            $first: "$other_images",
+          },
+          video_type: {
+            $first: "$video_type",
+          },
+          video: {
+            $first: "$video",
+          },
+          pro_input_video: {
+            $first: "$pro_input_video",
+          },
+          pro_input_description: {
+            $first: "$pro_input_description",
+          },
+          extra_input_description: {
+            $first: "$extra_input_description",
+          },
+          attribute_values: {
+            $first: "$attribute_values",
+          },
+          status: {
+            $first: "$status",
+          },
+          category_id: {
+            $first: "$category_id",
+          },
+          tax: {
+            $first: "$tax",
+          },
+          product_type: {
+            $first: "$product_type",
+          },
+          productvariants: {
+            $push: "$productvariants",
+          },
+        },
+      },
+      {
         $sort: sortObj
       },
       {
@@ -124,6 +251,8 @@ export class ProductsService {
         $limit: limit
       },
       ])
+
+      return res;
     }
     catch (err) {
       throw new InternalServerErrorException('Can not find products');
