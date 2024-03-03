@@ -321,7 +321,7 @@ type Query {
   tickets: [Ticket!]!
   ticket(id: Int!): Ticket!
   getTicketTypes(limit: Float!, offset: Float!): [TicketType!]!
-  products: [Product!]!
+  get_products: [Product!]!
   product(id: Int!): Product!
   productVariants: [ProductVariant!]!
   productVariant(id: Int!): ProductVariant!

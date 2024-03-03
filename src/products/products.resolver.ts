@@ -13,7 +13,7 @@ export class ProductsResolver {
     return await this.productsService.create(createProductInput);
   }
 
-  @Query(() => [Product], { name: 'products' })
+  @Query(() => [Product], { name: 'get_products' })
   findAll() {
     return this.productsService.findAll();
   }

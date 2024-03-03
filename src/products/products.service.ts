@@ -6,7 +6,6 @@ import { Product, ProductDocument } from './entities/product.entity';
 import { Model } from 'mongoose';
 import { Logger } from '@nestjs/common';
 import { ProductVariantsService } from './../product-variants/product-variants.service';
-import { CreateProductVariantInput } from './../product-variants/dto/create-product-variant.input';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
 import { VideoType } from './enum';
@@ -49,14 +48,8 @@ export class ProductsService {
     if(createProductInput.video_type && createProductInput.video_type===VideoType.SELF_HOSTED && createProductInput.pro_input_video){
       createProductInput.pro_input_video= await uploadFile(createProductInput.pro_input_video as FileUpload) as string
     }
-
-
-
-  
       const product = await this.productModel.create(createProductInput)
-      
       const productVariant = await this.productVariantsService.create(createProductVariantInput.map((d)=>({...d, productId: product._id})))
-
       return product
     }catch(err){
       Logger.log(err)
