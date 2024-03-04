@@ -36,8 +36,12 @@ export class AddressesService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} address`;
+  async findOne(id: string) {
+    try{
+      return await this.addressModel.findById(id)
+    }catch(err){
+      throw err
+    }
   }
 
   async update(id: string, updateAddressInput: UpdateAddressInput) {

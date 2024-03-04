@@ -3,6 +3,8 @@ import { CartService } from './cart.service';
 import { CartResolver } from './cart.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Cart, CartSchema } from './entities/cart.entity';
+import { DeliveryCharge, DeliveryChargeSchema } from './entities/delvary-charge.entity';
+import { AddressesModule } from 'src/addresses/addresses.module';
 
 @Module({
   imports: [
@@ -10,8 +12,13 @@ import { Cart, CartSchema } from './entities/cart.entity';
       {
         name: Cart.name,
         schema: CartSchema
+      },
+      {
+        name: DeliveryCharge.name,
+        schema: DeliveryChargeSchema
       }
-    ])
+    ]),
+    AddressesModule
   ],
   providers: [CartResolver, CartService],
 })

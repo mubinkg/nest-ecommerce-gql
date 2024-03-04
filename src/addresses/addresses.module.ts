@@ -14,5 +14,6 @@ import { MongooseModule } from '@nestjs/mongoose';
     ])
   ],
   providers: [AddressesResolver, AddressesService],
+  exports: [AddressesService]
 })
 export class AddressesModule {}

@@ -325,6 +325,11 @@ type Cart {
   qty: Float!
 }
 
+type CartList {
+  delivery_charge: Float
+  carts: [Cart!]
+}
+
 type Order {
   _id: String!
   user_id: String
@@ -392,7 +397,7 @@ type Query {
   promoCode(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!
   favourites: [Favourite!]!
   favourite(id: Int!): Favourite!
-  getUserCart: [Cart!]!
+  getUserCart(getCartDto: GetCartDto!): [CartList!]!
   cart(id: Int!): Cart!
   get_orders(getOrderDto: GetOrderDto!): [Order!]!
   order(id: Int!): Order!
@@ -453,6 +458,12 @@ enum SortingOrder {
 input GetPromoCodesInput {
   limit: Float!
   offset: Float!
+}
+
+input GetCartDto {
+  only_delivery_charge: Float
+  address_id: String
+  is_saved_for_later: Float = 0
 }
 
 input GetOrderDto {
