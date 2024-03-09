@@ -10,9 +10,9 @@ export class TicketType{
     @Field(()=>String)
     _id: string
 
-    @Field(()=>String)
+    @Field(()=>String, {nullable:true})
     @Prop({type: String})
-    title: string
+    title?: string
 }
 
 export const TicketTypeSchema = SchemaFactory.createForClass(TicketType)

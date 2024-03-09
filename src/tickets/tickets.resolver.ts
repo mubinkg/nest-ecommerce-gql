@@ -3,14 +3,18 @@ import { TicketsService } from './tickets.service';
 import { Ticket } from './entities/ticket.entity';
 import { CreateTicketInput } from './dto/create-ticket.input';
 import { UpdateTicketInput } from './dto/update-ticket.input';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
 
 @Resolver(() => Ticket)
 export class TicketsResolver {
   constructor(private readonly ticketsService: TicketsService) {}
 
   @Mutation(() => Ticket)
-  createTicket(@Args('createTicketInput') createTicketInput: CreateTicketInput) {
-    return this.ticketsService.create(createTicketInput);
+  createTicket(
+      @Args('createTicketInput') createTicketInput: CreateTicketInput,
+      @CurrentUser('user') user:any
+    ) {
+    return this.ticketsService.create(createTicketInput, user);
   }
 
   @Query(() => [Ticket], { name: 'tickets' })

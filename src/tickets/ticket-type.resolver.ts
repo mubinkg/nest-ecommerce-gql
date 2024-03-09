@@ -17,9 +17,8 @@ export class TicketTypeResolver{
     @UseGuards(GqlAuthGuard)
     createTicketType(
         @Args('createTicketTypeInput') createTikcetTypeInput:CereateTicketTypeInput,
-        @CurrentUser('user') user:any
     ){
-        return this.ticketTypeService.createTicketType(createTikcetTypeInput, user)
+        return this.ticketTypeService.createTicketType(createTikcetTypeInput)
     }
 
     @Query(()=>[TicketType])
