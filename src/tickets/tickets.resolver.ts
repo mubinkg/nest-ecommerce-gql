@@ -5,12 +5,15 @@ import { CreateTicketInput } from './dto/create-ticket.input';
 import { UpdateTicketInput } from './dto/update-ticket.input';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
 import { GetTicketsDto } from './dto/get-ticket.dto';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
 
 @Resolver(() => Ticket)
 export class TicketsResolver {
   constructor(private readonly ticketsService: TicketsService) {}
 
   @Mutation(() => Ticket)
+  @UseGuards(GqlAuthGuard)
   createTicket(
       @Args('createTicketInput') createTicketInput: CreateTicketInput,
       @CurrentUser('user') user:any

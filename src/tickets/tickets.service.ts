@@ -47,7 +47,7 @@ export class TicketsService {
         }
       }
 
-      return await this.ticketModel.find(query).sort({_id: -1}).limit(getTicketDto.limit).skip(getTicketDto.offset)
+      return await this.ticketModel.find(query).populate('ticket_type').populate('user').sort({_id: -1}).limit(getTicketDto.limit).skip(getTicketDto.offset)
 
     }
     catch(err){
