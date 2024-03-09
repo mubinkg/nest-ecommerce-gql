@@ -1,4 +1,4 @@
-import { Injectable, NotAcceptableException, NotImplementedException, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotAcceptableException, NotFoundException, NotImplementedException, UnauthorizedException } from '@nestjs/common';
 import { CreateCustomerInput } from './dto/create-customer.input';
 import { UpdateCustomerInput } from './dto/update-customer.input';
 import { InjectModel } from '@nestjs/mongoose';
@@ -9,6 +9,7 @@ import { AuthResponseDto } from './dto/auth-response.dto';
 import { JwtService } from '@nestjs/jwt';
 import { SignInDto } from './dto/signin.dto';
 import { VerifyUser } from './entities/verify-user.dto';
+import { UpdateCustomerDto } from './dto/update-customer.dto';
 
 
 @Injectable()
@@ -102,15 +103,35 @@ export class CustomersService {
     }
   }
 
-  async update(id: string, updateCustomerInput: UpdateCustomerInput) {
+  async update(id: string, updateCustomerInput: UpdateCustomerDto) {
     try{
-      if(updateCustomerInput.password){
-        const hash = await bcrypt.hash(updateCustomerInput.password, 10);
-        updateCustomerInput.password = await bcrypt.hash(updateCustomerInput.password, hash)
-      }
+      const updateData = {}
       const customer = await this.customerModel.findById(id)
-      customer.password = ''
-      return customer
+      if(!customer){
+        throw new NotFoundException('Customer not found')
+      }
+      if(updateCustomerInput?.old){
+        const compare = bcrypt.compare(updateCustomerInput.old, customer.password)
+        if(!compare){
+          throw new NotImplementedException('Password not matched')
+        }
+        if(!updateCustomerInput?.new){
+          throw new NotImplementedException('Give new password')
+        }
+        const newPassword = await bcrypt.hash(updateCustomerInput.new, 10);
+        updateData['password'] = newPassword
+      }
+      if(updateCustomerInput?.username) updateData['username'] = updateCustomerInput.username
+      if(updateCustomerInput?.mobile_no) updateData['mobile_no'] = updateCustomerInput.mobile_no
+      if(updateCustomerInput?.email) updateData['email'] = updateCustomerInput.email
+      if(updateCustomerInput?.address) updateData['address'] = updateCustomerInput.address
+      if(updateCustomerInput?.area) updateData['area'] = updateCustomerInput.area
+      if(updateCustomerInput?.city) updateData['city'] = updateCustomerInput.city
+      if(updateCustomerInput?.referral_code) updateData['referral_code'] = updateCustomerInput.referral_code
+
+      await this.customerModel.findByIdAndUpdate(id, updateData)
+      return await this.customerModel.findById(id)
+      
     }
     catch(err){
       throw new NotImplementedException('Can not udpate customer.')

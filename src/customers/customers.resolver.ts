@@ -6,6 +6,9 @@ import { UpdateCustomerInput } from './dto/update-customer.input';
 import { AuthResponseDto } from './dto/auth-response.dto';
 import { SignInDto } from './dto/signin.dto';
 import { VerifyUser } from './entities/verify-user.dto';
+import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from './jwt-guards';
 
 @Resolver(() => Customer)
 export class CustomersResolver {
@@ -28,6 +31,14 @@ export class CustomersResolver {
     @Args('verifyUserInput') verifyUserInput:VerifyUser
   ){
     return this.customersService.verifyUser(verifyUserInput)
+  }
+
+  @Mutation(()=>Customer, {name: 'updateUser'})
+  @UseGuards(GqlAuthGuard)
+  updateUser(
+    @Args('updateCustomerInput') updateCustomerInput:UpdateCustomerDto
+  ){
+    return this.customersService.update(updateCustomerInput.user_id, updateCustomerInput)
   }
   
 }

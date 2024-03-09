@@ -10,6 +10,10 @@ type TicketType {
 type Customer {
   _id: String!
   name: String
+  username: String
+  address: String
+  area: String
+  city: String
   email: String
   mobile_no: String
   password: String
@@ -524,6 +528,7 @@ type Mutation {
   updateCity(updateCityInput: UpdateCityInput!): City!
   removeCity(id: Int!): City!
   registerUser(createCustomerInput: CreateCustomerInput!): AuthResponseDto!
+  updateUser(updateCustomerInput: UpdateCustomerDto!): Customer!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   createAddress(createAddressInput: CreateAddressInput!): Address!
   updateAddress(updateAddressInput: UpdateAddressInput!): Address!
@@ -781,6 +786,19 @@ input CreateCustomerInput {
   flavor: String
   referral_code: String
   friends_code: String
+}
+
+input UpdateCustomerDto {
+  user_id: String!
+  username: String
+  mobile_no: String
+  email: String
+  address: String
+  area: String
+  city: String
+  referral_code: String
+  old: String
+  new: String
 }
 
 input CreateCategoryInput {

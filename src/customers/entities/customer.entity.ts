@@ -17,6 +17,22 @@ export class Customer {
 
   @Field(()=>String, {nullable:true})
   @Prop({type: String})
+  username?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  address?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  area?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  city?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
   email?: string
   
   @Field(()=>String, {nullable:true})
