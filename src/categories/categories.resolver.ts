@@ -4,6 +4,7 @@ import { Category } from './entities/category.entity';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
 import { CategoriesResponse } from './dto/categories.response.dto';
+import { GetCategoryDto } from './entities/get-category.dto';
 
 @Resolver(() => Category)
 export class CategoriesResolver {
@@ -15,8 +16,10 @@ export class CategoriesResolver {
   }
 
   @Query(() => [CategoriesResponse], { name: 'categories' })
-  getCategories() {
-    return this.categoriesService.getCategories();
+  getCategories(
+    @Args('getCategoriesInput') getCategoriesInput:GetCategoryDto
+  ) {
+    return this.categoriesService.getCategories(getCategoriesInput);
   }
 
 

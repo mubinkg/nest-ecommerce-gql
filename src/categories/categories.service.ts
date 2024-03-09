@@ -3,9 +3,10 @@ import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Category, CategoryDocuemnt } from './entities/category.entity';
-import { Model } from 'mongoose';
+import mongoose, { Model, Mongoose } from 'mongoose';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
+import { GetCategoryDto } from './entities/get-category.dto';
 
 @Injectable()
 export class CategoriesService {
@@ -32,16 +33,20 @@ export class CategoriesService {
     }
   }
 
-  async getCategories() {
+  async getCategories(getCategoriesInput: GetCategoryDto) {
     try {
+      const match = {
+        status: "active",
+        parent: {
+          $eq: null,
+        },
+      }
+      if(getCategoriesInput?.id){
+        match['_id'] = new mongoose.Types.ObjectId(getCategoriesInput.id) 
+      }
       return await this.categoryModel.aggregate([
         {
-          $match: {
-            status: "active",
-            parent: {
-              $eq: null,
-            },
-          },
+          $match: match
         },
         {
           $lookup:
