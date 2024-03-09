@@ -9,9 +9,10 @@ export class TicketTypeService{
         @InjectModel(TicketType.name) private readonly ticketTypeModel:Model<TicketTypeDocument>
     ){}
 
-    async createTicketType(ticketTypeInput:CereateTicketTypeInput): Promise<TicketType>{
+    async createTicketType(ticketTypeInput:CereateTicketTypeInput, user:any): Promise<TicketType>{
         try{
-            const ticketType = this.ticketTypeModel.create(ticketTypeInput)
+            const userid = user?.id
+            const ticketType = this.ticketTypeModel.create({...ticketTypeInput, user:userid})
             return ticketType
         }
         catch(err){

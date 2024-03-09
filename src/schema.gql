@@ -561,13 +561,17 @@ type Mutation {
 }
 
 input CreateTicketInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  ticket_type: String!
+  subject: String!
+  email: String!
+  description: String!
 }
 
 input UpdateTicketInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  ticket_type: String
+  subject: String
+  email: String
+  description: String
   id: Int!
 }
 
