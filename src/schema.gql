@@ -379,7 +379,7 @@ type ProductFaq {
 }
 
 type Query {
-  tickets: [Ticket!]!
+  getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
   getTicketTypes(limit: Float!, offset: Float!): [TicketType!]!
   get_products(getProductInput: GetProductDto!): [ProductResponse!]!
@@ -409,6 +409,24 @@ type Query {
   productAttributes: [ProductAttribute!]!
   productAttribute(id: Int!): ProductAttribute!
   productFaq(id: Int!): ProductFaq!
+}
+
+input GetTicketsDto {
+  ticket_id: String
+  ticket_type_id: String
+  user_id: String
+  status: TicketTypeEnum
+  search: String
+  limit: Float!
+  offset: Float!
+  sort: String
+  order: String
+}
+
+enum TicketTypeEnum {
+  PENDING
+  RESOLVED
+  REOPENED
 }
 
 input GetProductDto {
@@ -574,12 +592,6 @@ input UpdateTicketInput {
   description: String
   id: String!
   status: TicketTypeEnum = PENDING
-}
-
-enum TicketTypeEnum {
-  PENDING
-  RESOLVED
-  REOPENED
 }
 
 input CereateTicketTypeInput {

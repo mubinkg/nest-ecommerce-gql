@@ -4,6 +4,8 @@ import { UpdateTicketInput } from './dto/update-ticket.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Ticket, TicketDocument } from './entities/ticket.entity';
 import { Model } from 'mongoose';
+import { GetTicketsDto } from './dto/get-ticket.dto';
+import { convertToObjectId } from 'src/utils/convert-to-objectid';
 
 @Injectable()
 export class TicketsService {
@@ -20,8 +22,36 @@ export class TicketsService {
     }
   }
 
-  findAll() {
-    return `This action returns all tickets`;
+  async findAll(getTicketDto:GetTicketsDto) {
+    try{
+      const query = {}
+      const sortOrder = {
+        _id: '-1'
+      }
+      if(getTicketDto?.ticket_id){
+        query['_id'] = convertToObjectId(getTicketDto.ticket_id)
+      }
+      if(getTicketDto?.ticket_type_id){
+        query['ticket_type'] = convertToObjectId(getTicketDto.ticket_type_id)
+      }
+      if(getTicketDto?.user_id){
+        query['user'] = convertToObjectId(getTicketDto.user_id)
+      }
+      if(getTicketDto?.status){
+        query['status'] = getTicketDto.status
+      }
+      if(getTicketDto?.search){
+        query['description'] = {
+          $regex: getTicketDto.search
+        }
+      }
+
+      return await this.ticketModel.find(query).sort({_id: -1}).limit(getTicketDto.limit).skip(getTicketDto.offset)
+
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {

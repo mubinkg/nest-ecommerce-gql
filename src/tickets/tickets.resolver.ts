@@ -4,6 +4,7 @@ import { Ticket } from './entities/ticket.entity';
 import { CreateTicketInput } from './dto/create-ticket.input';
 import { UpdateTicketInput } from './dto/update-ticket.input';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
+import { GetTicketsDto } from './dto/get-ticket.dto';
 
 @Resolver(() => Ticket)
 export class TicketsResolver {
@@ -17,9 +18,11 @@ export class TicketsResolver {
     return this.ticketsService.create(createTicketInput, user);
   }
 
-  @Query(() => [Ticket], { name: 'tickets' })
-  findAll() {
-    return this.ticketsService.findAll();
+  @Query(() => [Ticket], { name: 'getTickets' })
+  findAll(
+    @Args('getTicketDto') getTicketDto:GetTicketsDto
+  ) {
+    return this.ticketsService.findAll(getTicketDto);
   }
 
   @Query(() => Ticket, { name: 'ticket' })
