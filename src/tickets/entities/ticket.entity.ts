@@ -4,6 +4,7 @@ import { TicketType } from './ticker-type.entity';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { TicketCustomer } from '../dto/ticket-customer.dto';
+import { TicketTypeEnum } from '../enum/ticket-type.enum';
 
 @ObjectType()
 @Schema({
@@ -37,7 +38,7 @@ export class Ticket {
   description?:string
 
   @Field(()=>String, {nullable:true})
-  @Prop({type:String})
+  @Prop({type:String, default: TicketTypeEnum.PENDING})
   status?:string 
 
   @Field(()=>Date, {nullable:true})

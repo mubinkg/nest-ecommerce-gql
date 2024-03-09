@@ -572,7 +572,14 @@ input UpdateTicketInput {
   subject: String
   email: String
   description: String
-  id: Int!
+  id: String!
+  status: TicketTypeEnum = PENDING
+}
+
+enum TicketTypeEnum {
+  PENDING
+  RESOLVED
+  REOPENED
 }
 
 input CereateTicketTypeInput {

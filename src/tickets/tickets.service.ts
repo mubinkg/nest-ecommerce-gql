@@ -28,8 +28,16 @@ export class TicketsService {
     return `This action returns a #${id} ticket`;
   }
 
-  update(id: number, updateTicketInput: UpdateTicketInput) {
-    return `This action updates a #${id} ticket`;
+  async update(id: string, updateTicketInput: UpdateTicketInput) {
+    try{
+      delete updateTicketInput.id
+      await this.ticketModel.findByIdAndUpdate(id, updateTicketInput)
+      return await this.ticketModel.findById(id)
+    }
+    catch(err){
+      console.log(err)
+      throw err
+    }
   }
 
   remove(id: number) {
