@@ -8,6 +8,7 @@ import * as bcrypt from 'bcrypt';
 import { AuthResponseDto } from './dto/auth-response.dto';
 import { JwtService } from '@nestjs/jwt';
 import { SignInDto } from './dto/signin.dto';
+import { VerifyUser } from './entities/verify-user.dto';
 
 
 @Injectable()
@@ -54,6 +55,22 @@ export class CustomersService {
 
   findAll() {
     return `This action returns all customers`;
+  }
+
+  async verifyUser(verifyUserInput:VerifyUser){
+    try{
+      const query = {
+        mobile_no: verifyUserInput.mobile
+      }
+      if(verifyUserInput.email){
+        query['email'] = verifyUserInput.email
+      }
+      const user = await this.customerModel.exists(query)
+      return user?true:false
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   async signIn(signinInput: SignInDto):Promise<AuthResponseDto> {

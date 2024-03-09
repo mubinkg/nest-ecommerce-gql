@@ -387,6 +387,7 @@ type Query {
   getCities(limit: Float!, offset: Float!, query: String!): [City!]!
   city(id: Int!): City!
   signIn(signinInput: SignInDto!): AuthResponseDto!
+  verifyUser(verifyUserInput: VerifyUser!): Boolean!
   categories(getCategoriesInput: GetCategoryDto!): [CategoriesResponse!]!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
@@ -435,6 +436,11 @@ enum ProductOrder {
 input SignInDto {
   mobile_no: String!
   password: String!
+}
+
+input VerifyUser {
+  email: String
+  mobile: String!
 }
 
 input GetCategoryDto {
