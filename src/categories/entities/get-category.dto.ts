@@ -29,7 +29,7 @@ export class GetCategoryDto{
     order?:string
 
     @Field(()=>Boolean, {nullable:true})
-    @IsString()
+    @IsOptional()
     @IsBoolean()
     has_child_or_item?: boolean
 }
