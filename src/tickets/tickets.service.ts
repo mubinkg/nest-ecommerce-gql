@@ -42,7 +42,8 @@ export class TicketsService {
       }
       if(getTicketDto?.search){
         query['description'] = {
-          $regex: getTicketDto.search
+          $regex: getTicketDto.search,
+          $options: 'i'
         }
       }
 
