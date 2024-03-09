@@ -35,29 +35,53 @@ export class CategoriesService {
 
   async getCategories(getCategoriesInput: GetCategoryDto) {
     try {
-      const match = {
+      const query  =[]
+      const matchData = {
         status: "active",
         parent: {
           $eq: null,
         },
       }
+
+      const match = {
+        $match: matchData
+      }
+
+      const lookup = {
+        $lookup:
+          {
+            from: "categories",
+            localField: "_id",
+            foreignField: "parent",
+            as: "children",
+          },
+      }
+
+      const skip = {}
+
+      const limit = {}
+
+      query.push(match)
+      query.push(lookup)
+
       if(getCategoriesInput?.id){
         match['_id'] = new mongoose.Types.ObjectId(getCategoriesInput.id) 
       }
-      return await this.categoryModel.aggregate([
-        {
-          $match: match
-        },
-        {
-          $lookup:
-            {
-              from: "categories",
-              localField: "_id",
-              foreignField: "parent",
-              as: "children",
-            },
-        },
-      ]);
+      if(getCategoriesInput?.limit){
+        limit['$limit'] = getCategoriesInput.limit
+        query.push(limit)
+      }
+      if(getCategoriesInput.offset){
+        skip['$skip'] = getCategoriesInput.offset
+        query.push(skip)
+      }
+      const sort = {
+        $sort: {
+          _id: -1
+        }
+      }
+      query.push(sort)
+      return await this.categoryModel.aggregate(query)
       
     } catch (error) {
       throw new InternalServerErrorException("Error On finding categories ",error.message)
