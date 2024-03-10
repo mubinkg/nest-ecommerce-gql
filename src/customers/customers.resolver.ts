@@ -40,5 +40,11 @@ export class CustomersResolver {
   ){
     return this.customersService.update(updateCustomerInput.user_id, updateCustomerInput)
   }
+
+  @Mutation(()=>Customer, {name: 'deleteUser'})
+  @UseGuards(GqlAuthGuard)
+  deleteUser(){
+    
+  }
   
 }

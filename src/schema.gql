@@ -550,6 +550,7 @@ type Mutation {
   removeCity(id: Int!): City!
   registerUser(createCustomerInput: CreateCustomerInput!): AuthResponseDto!
   updateUser(updateCustomerInput: UpdateCustomerDto!): Customer!
+  deleteUser: Customer!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   createAddress(createAddressInput: CreateAddressInput!): Address!
   updateAddress(updateAddressInput: UpdateAddressInput!): Address!
