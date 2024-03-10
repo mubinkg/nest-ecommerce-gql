@@ -550,7 +550,7 @@ type Mutation {
   removeCity(id: Int!): City!
   registerUser(createCustomerInput: CreateCustomerInput!): AuthResponseDto!
   updateUser(updateCustomerInput: UpdateCustomerDto!): Customer!
-  deleteUser: Customer!
+  deleteUser(deleteCustomerInput: DeleteCustomerInput!): Customer!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   createAddress(createAddressInput: CreateAddressInput!): Address!
   updateAddress(updateAddressInput: UpdateAddressInput!): Address!
@@ -826,6 +826,11 @@ input UpdateCustomerDto {
   referral_code: String
   old: String
   new: String
+}
+
+input DeleteCustomerInput {
+  mobile: String!
+  password: String!
 }
 
 input CreateCategoryInput {

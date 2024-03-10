@@ -10,6 +10,8 @@ import { JwtService } from '@nestjs/jwt';
 import { SignInDto } from './dto/signin.dto';
 import { VerifyUser } from './entities/verify-user.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { DeleteCustomerInput } from './dto/delete-customer.input';
+import { Status } from './enum/status.enum';
 
 
 @Injectable()
@@ -76,7 +78,7 @@ export class CustomersService {
 
   async signIn(signinInput: SignInDto):Promise<AuthResponseDto> {
     try{
-      const customer = await this.customerModel.findOne({mobile_no: signinInput.mobile_no})
+      const customer = await this.customerModel.findOne({mobile_no: signinInput.mobile_no, status:Status.ACTIVE})
       if(!customer){
         throw new UnauthorizedException('User not found.')
       }
@@ -138,7 +140,26 @@ export class CustomersService {
     } 
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  async remove(deleteCustomerInput: DeleteCustomerInput, user:any) {
+      try{
+        const userid = user?.userId
+        const userData = await this.customerModel.findOne({mobile_no: deleteCustomerInput.mobile})
+        if(!userData){
+          throw new NotFoundException('User not found.')
+        }
+        const compPass = await bcrypt.compare(deleteCustomerInput.password, userData.password)
+        if(!compPass){
+          throw new NotImplementedException('Password not matched')
+        }
+        if(userid !== userData._id.toString()){
+          throw new NotImplementedException('Unrecognized user')
+        }
+
+        await this.customerModel.findByIdAndUpdate(userid, {status: Status.INACTIVE})
+        return await this.customerModel.findById(userid)
+      }
+      catch(err){
+        throw err;
+      }
   }
 }

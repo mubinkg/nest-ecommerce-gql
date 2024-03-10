@@ -2,13 +2,14 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { CustomersService } from './customers.service';
 import { Customer } from './entities/customer.entity';
 import { CreateCustomerInput } from './dto/create-customer.input';
-import { UpdateCustomerInput } from './dto/update-customer.input';
+import { DeleteCustomerInput } from './dto/delete-customer.input'
 import { AuthResponseDto } from './dto/auth-response.dto';
 import { SignInDto } from './dto/signin.dto';
 import { VerifyUser } from './entities/verify-user.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from './jwt-guards';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
 
 @Resolver(() => Customer)
 export class CustomersResolver {
@@ -43,8 +44,11 @@ export class CustomersResolver {
 
   @Mutation(()=>Customer, {name: 'deleteUser'})
   @UseGuards(GqlAuthGuard)
-  deleteUser(){
-    
+  deleteUser(
+    @Args('deleteCustomerInput') deleteCustomerInput:DeleteCustomerInput,
+    @CurrentUser('user') user:any
+  ){
+    return this.customersService.remove(deleteCustomerInput,user)
   }
   
 }
