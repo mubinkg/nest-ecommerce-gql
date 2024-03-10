@@ -8,6 +8,7 @@ import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
 import { ActiveStatus } from './types/activeStatus.enum';
 import { RepeatUsage } from './types/repeatUsage.enum';
+import { GetPromoCodesInput } from './dto/get-promo-code.input';
 
 @Injectable()
 export class PromoCodeService {
@@ -75,8 +76,40 @@ export class PromoCodeService {
 
   }
 
-  async getPromoCodes(){
-    
+  async getPromoCodes(getPromocodesInput:GetPromoCodesInput){
+    try{
+      const query = []
+      const match = {}
+      if(getPromocodesInput?.search){
+        match['promoCode'] = {
+          $regex: getPromocodesInput.search,
+          $options: 'i'
+        }
+      }
+      query.push({
+        $match: match
+      })
+      if(getPromocodesInput?.sort){
+        query.push({
+          $sort: {
+            [getPromocodesInput.sort]: getPromocodesInput.order === 'ASC' ? 1 : -1
+          }
+        })
+      }
+
+      query.push({
+        $limit: getPromocodesInput.limit
+      })
+
+      query.push({
+        $skip: getPromocodesInput.offset
+      })
+
+      return await this.promoCodeModel.aggregate(query)
+    }
+    catch(err){
+      throw err;
+    }
   }
 
  

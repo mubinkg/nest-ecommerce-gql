@@ -495,6 +495,9 @@ enum SortingOrder {
 input GetPromoCodesInput {
   limit: Float!
   offset: Float!
+  sort: String! = "id"
+  search: String! = "id"
+  order: String! = "DESC"
 }
 
 input GetCartDto {

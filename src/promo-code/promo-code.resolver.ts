@@ -32,7 +32,7 @@ export class PromoCodeResolver {
   async getPromoCodes(
     @Args('getPromocodesInput') getPromocodesInput: GetPromoCodesInput,
   ) {
-    return this.promoCodeService.getPromoCodes();
+    return this.promoCodeService.getPromoCodes(getPromocodesInput);
   }
 
 }
