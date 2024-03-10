@@ -27,7 +27,7 @@ export class PromoCodeResolver {
     return await this.promoCodeService.validatePromoCode(code,orderFinalAmount,user?.id)
   }
 
-  @Query(() => [PromoCode], { name: 'promoCode' })
+  @Query(() => [PromoCode], { name: 'getPromoCodes' })
   @UseGuards(GqlAuthGuard)
   async getPromoCodes(
     @Args('getPromocodesInput') getPromocodesInput: GetPromoCodesInput,

@@ -399,7 +399,7 @@ type Query {
   brands(limit: Float!, offset: Float!): [Brand!]!
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
   rating(id: Int!): Rating!
-  promoCode(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!
+  getPromoCodes(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!
   favourites: [Favourite!]!
   favourite(id: Int!): Favourite!
   getUserCart(getCartDto: GetCartDto!): [CartList!]!
