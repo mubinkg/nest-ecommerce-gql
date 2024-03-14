@@ -37,4 +37,11 @@ export class ProductsResolver {
   async updateProductOrderNo(@Args('updateProductOrderNoInput') updateProductOrderNoInput: UpdateProductGlobalOrderNoInput) {
     return this.productsService.updateProductGlobalOrderNo(updateProductOrderNoInput);
   }
+
+  @Mutation(()=>String, {name: 'deleteProduct'})
+  async deleteProduct(
+    @Args('productId') productId:string
+  ){
+    return await this.productsService.remove(productId)
+  }
 }
