@@ -384,8 +384,10 @@ type Aramic {
 }
 
 type Faq {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  product: Product
+  question: String
+  userId: String
+  ans: String
 }
 
 type Query {
