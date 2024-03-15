@@ -378,6 +378,11 @@ type ProductFaq {
   createdAt: DateTime
 }
 
+type Aramic {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -409,6 +414,8 @@ type Query {
   productAttributes: [ProductAttribute!]!
   productAttribute(id: Int!): ProductAttribute!
   productFaq(id: Int!): ProductFaq!
+  aramics: String!
+  aramic(id: Int!): Aramic!
 }
 
 input GetTicketsDto {
@@ -541,6 +548,7 @@ type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   updateProductOrderNo(updateProductOrderNoInput: UpdateProductGlobalOrderNoInput!): String!
+  deleteProduct(productId: String!): String!
   removeProductVariant(id: Int!): ProductVariant!
   createArea(createAreaInput: CreateAreaInput!): Area!
   updateArea(updateAreaInput: UpdateAreaInput!): Area!
@@ -580,6 +588,9 @@ type Mutation {
   createProductFaq(createProductFaqInput: CreateProductFaqInput!): ProductFaq!
   updateProductFaq(updateProductFaqInput: UpdateProductFaqInput!): ProductFaq!
   removeProductFaq(id: Int!): ProductFaq!
+  createAramic(createAramicInput: CreateAramicInput!): Aramic!
+  updateAramic(updateAramicInput: UpdateAramicInput!): Aramic!
+  removeAramic(id: Int!): Aramic!
 }
 
 input CreateTicketInput {
@@ -1010,5 +1021,16 @@ input UpdateProductFaqInput {
   productId: String
   question: String
   ans: String
+  id: Int!
+}
+
+input CreateAramicInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAramicInput {
+  """Example field (placeholder)"""
+  exampleField: Int
   id: Int!
 }
