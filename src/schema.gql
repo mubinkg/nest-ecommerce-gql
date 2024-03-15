@@ -383,6 +383,11 @@ type Aramic {
   exampleField: Int!
 }
 
+type Faq {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -416,6 +421,7 @@ type Query {
   productFaq(id: Int!): ProductFaq!
   aramics: String!
   aramic(id: Int!): Aramic!
+  faq(id: Int!): Faq!
 }
 
 input GetTicketsDto {
@@ -591,6 +597,9 @@ type Mutation {
   createAramic(createAramicInput: CreateAramicInput!): Aramic!
   updateAramic(updateAramicInput: UpdateAramicInput!): Aramic!
   removeAramic(id: Int!): Aramic!
+  createFaq(createFaqInput: CreateFaqInput!): Faq!
+  updateFaq(updateFaqInput: UpdateFaqInput!): Faq!
+  removeFaq(id: Int!): Faq!
 }
 
 input CreateTicketInput {
@@ -1030,6 +1039,17 @@ input CreateAramicInput {
 }
 
 input UpdateAramicInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateFaqInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateFaqInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!

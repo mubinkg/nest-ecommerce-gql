@@ -23,6 +23,7 @@ import { ProductVariantsModule } from './product-variants/product-variants.modul
 import { ProductAttributesModule } from './product-attributes/product-attributes.module';
 import { ProductFaqModule } from './product-faq/product-faq.module';
 import { AramicsModule } from './aramics/aramics.module';
+import { FaqModule } from './faq/faq.module';
 
 
 @Module({
@@ -54,7 +55,8 @@ import { AramicsModule } from './aramics/aramics.module';
     ProductVariantsModule,
     ProductAttributesModule,
     ProductFaqModule,
-    AramicsModule
+    AramicsModule,
+    FaqModule
   ],
 })
 export class AppModule {}
