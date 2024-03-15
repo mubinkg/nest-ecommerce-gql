@@ -3,14 +3,21 @@ import { FaqService } from './faq.service';
 import { Faq } from './entities/faq.entity';
 import { CreateFaqInput } from './dto/create-faq.input';
 import { UpdateFaqInput } from './dto/update-faq.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
 
 @Resolver(() => Faq)
 export class FaqResolver {
   constructor(private readonly faqService: FaqService) {}
 
   @Mutation(() => Faq)
-  createFaq(@Args('createFaqInput') createFaqInput: CreateFaqInput) {
-    return this.faqService.create(createFaqInput);
+  @UseGuards(GqlAuthGuard)
+  createFaq(
+    @Args('createFaqInput') createFaqInput: CreateFaqInput,
+    @CurrentUser('user') user:any
+  ) {
+    return this.faqService.create(createFaqInput, user);
   }
 
   @Query(() => [Faq], { name: 'faq' })

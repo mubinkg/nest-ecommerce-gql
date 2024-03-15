@@ -9,7 +9,7 @@ import { Product } from 'src/products/entities/product.entity';
 })
 export class Faq {
   @Field(()=>Product, {nullable:true})
-  @Prop({type:mongoose.Types.ObjectId, ref: 'Product'})
+  @Prop({type:mongoose.Schema.Types.ObjectId, ref: 'Product'})
   product?: Product
 
   @Field(()=>String, {nullable:true})
@@ -17,8 +17,8 @@ export class Faq {
   question?: string
 
   @Field(()=>String, {nullable:true})
-  @Prop({type: mongoose.Types.ObjectId})
-  userId?: string
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
+  user?: string
 
   @Field(()=>String, {nullable:true})
   @Prop({type: String})

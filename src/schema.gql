@@ -386,7 +386,7 @@ type Aramic {
 type Faq {
   product: Product
   question: String
-  userId: String
+  user: String
   ans: String
 }
 
@@ -1047,12 +1047,12 @@ input UpdateAramicInput {
 }
 
 input CreateFaqInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  product: String!
+  question: String!
 }
 
 input UpdateFaqInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  product: String
+  question: String
   id: Int!
 }
