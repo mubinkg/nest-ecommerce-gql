@@ -423,7 +423,7 @@ type Query {
   productFaq(id: Int!): ProductFaq!
   aramics: String!
   aramic(id: Int!): Aramic!
-  faq(id: Int!): Faq!
+  faq(getFaqInput: GetFaqInput!): [Faq!]!
 }
 
 input GetTicketsDto {
@@ -548,6 +548,13 @@ enum OrderSortOrder {
   AESC
 }
 
+input GetFaqInput {
+  limit: Int!
+  offset: Int!
+  sort: String = "id"
+  order: String = "DESC"
+}
+
 type Mutation {
   createTicket(createTicketInput: CreateTicketInput!): Ticket!
   updateTicket(updateTicketInput: UpdateTicketInput!): Ticket!
@@ -600,8 +607,6 @@ type Mutation {
   updateAramic(updateAramicInput: UpdateAramicInput!): Aramic!
   removeAramic(id: Int!): Aramic!
   createFaq(createFaqInput: CreateFaqInput!): Faq!
-  updateFaq(updateFaqInput: UpdateFaqInput!): Faq!
-  removeFaq(id: Int!): Faq!
 }
 
 input CreateTicketInput {
@@ -1049,10 +1054,4 @@ input UpdateAramicInput {
 input CreateFaqInput {
   product: String!
   question: String!
-}
-
-input UpdateFaqInput {
-  product: String
-  question: String
-  id: Int!
 }

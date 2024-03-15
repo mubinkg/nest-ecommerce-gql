@@ -4,6 +4,7 @@ import { UpdateFaqInput } from './dto/update-faq.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Faq } from './entities/faq.entity';
 import { Model } from 'mongoose';
+import { GetFaqInput } from './dto/get-faq-input';
 
 @Injectable()
 export class FaqService {
@@ -22,8 +23,14 @@ export class FaqService {
     }
   }
 
-  findAll() {
-    return `This action returns all faq`;
+  async findAll(getFaqInput:GetFaqInput) {
+    try{
+      const order = getFaqInput?.order === 'ASC'? 1 : -1
+      return await this.faqModel.find({}).sort({_di: order}).limit(getFaqInput.limit).skip(getFaqInput.offset)
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {
