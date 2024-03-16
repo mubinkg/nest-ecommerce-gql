@@ -48,14 +48,14 @@ export class SmsService {
     return `This action removes a #${id} sm`;
   }
 
-  async verifyOpt(phoneNumber:string, otp:string){
+  async verifyOtp(phoneNumber:string, otp:string){
     const verifyOtp = (phoneNumber:string, otp:string)=>new Promise((resolve, reject)=>{
       client.verify.v2
       .services(verifySid)
       .verificationChecks.create({ to: phoneNumber, code: otp })
       .then((verification_check) => resolve(true))
       .catch(err=>{
-        reject(false)
+        resolve(false)
       })
     })
 

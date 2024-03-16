@@ -18,26 +18,26 @@ export class SmsResolver {
     @Args('phoneNumber') phoneNumber:string,
     @Args('otp') otp:string
   ){
-    return this.verifyOtp(phoneNumber, otp)
+    return this.smsService.verifyOtp(phoneNumber, otp)
   }
 
-  @Query(() => [Sm], { name: 'sms' })
-  findAll() {
-    return this.smsService.findAll();
-  }
+  // @Query(() => [Sm], { name: 'sms' })
+  // findAll() {
+  //   return this.smsService.findAll();
+  // }
 
-  @Query(() => Sm, { name: 'sm' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.smsService.findOne(id);
-  }
+  // @Query(() => Sm, { name: 'sm' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.smsService.findOne(id);
+  // }
 
-  @Mutation(() => Sm)
-  updateSm(@Args('updateSmInput') updateSmInput: UpdateSmInput) {
-    return this.smsService.update(updateSmInput.id, updateSmInput);
-  }
+  // @Mutation(() => Sm)
+  // updateSm(@Args('updateSmInput') updateSmInput: UpdateSmInput) {
+  //   return this.smsService.update(updateSmInput.id, updateSmInput);
+  // }
 
-  @Mutation(() => Sm)
-  removeSm(@Args('id', { type: () => Int }) id: number) {
-    return this.smsService.remove(id);
-  }
+  // @Mutation(() => Sm)
+  // removeSm(@Args('id', { type: () => Int }) id: number) {
+  //   return this.smsService.remove(id);
+  // }
 }
