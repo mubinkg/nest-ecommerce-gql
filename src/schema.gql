@@ -390,6 +390,11 @@ type Faq {
   ans: String
 }
 
+type Sm {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -424,6 +429,9 @@ type Query {
   aramics: String!
   aramic(id: Int!): Aramic!
   faq(getFaqInput: GetFaqInput!): [Faq!]!
+  verifyOtp(phoneNumber: String!, otp: String!): Boolean
+  sms: [Sm!]!
+  sm(id: Int!): Sm!
 }
 
 input GetTicketsDto {
@@ -607,6 +615,9 @@ type Mutation {
   updateAramic(updateAramicInput: UpdateAramicInput!): Aramic!
   removeAramic(id: Int!): Aramic!
   createFaq(createFaqInput: CreateFaqInput!): Faq!
+  sendOtp(mobile: String!): String!
+  updateSm(updateSmInput: UpdateSmInput!): Sm!
+  removeSm(id: Int!): Sm!
 }
 
 input CreateTicketInput {
@@ -1054,4 +1065,10 @@ input UpdateAramicInput {
 input CreateFaqInput {
   product: String!
   question: String!
+}
+
+input UpdateSmInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

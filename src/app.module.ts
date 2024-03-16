@@ -24,6 +24,7 @@ import { ProductAttributesModule } from './product-attributes/product-attributes
 import { ProductFaqModule } from './product-faq/product-faq.module';
 import { AramicsModule } from './aramics/aramics.module';
 import { FaqModule } from './faq/faq.module';
+import { SmsModule } from './sms/sms.module';
 
 
 @Module({
@@ -56,7 +57,8 @@ import { FaqModule } from './faq/faq.module';
     ProductAttributesModule,
     ProductFaqModule,
     AramicsModule,
-    FaqModule
+    FaqModule,
+    SmsModule
   ],
 })
 export class AppModule {}
