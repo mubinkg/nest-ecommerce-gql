@@ -162,4 +162,19 @@ export class CustomersService {
         throw err;
       }
   }
+
+  async resetPass(phone:string, password:string){
+    try{
+      const user = await this.customerModel.findOne({mobile_no: phone})
+      if(!user){
+        throw new NotFoundException('User not found')
+      }
+      const hash = await bcrypt.hash(password, 10);
+      await this.customerModel.findByIdAndUpdate(user._id, {password: hash})
+      return 'Password update success'
+    }
+    catch(err){
+      throw err;
+    }
+  }
 }

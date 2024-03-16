@@ -575,6 +575,7 @@ type Mutation {
   registerUser(createCustomerInput: CreateCustomerInput!): AuthResponseDto!
   updateUser(updateCustomerInput: UpdateCustomerDto!): Customer!
   deleteUser(deleteCustomerInput: DeleteCustomerInput!): Customer!
+  resetPassword(phone: String!, password: String!): String!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   createAddress(createAddressInput: CreateAddressInput!): Address!
   updateAddress(updateAddressInput: UpdateAddressInput!): Address!

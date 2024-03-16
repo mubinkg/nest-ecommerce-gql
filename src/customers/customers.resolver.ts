@@ -50,5 +50,13 @@ export class CustomersResolver {
   ){
     return this.customersService.remove(deleteCustomerInput,user)
   }
+
+  @Mutation(()=>String, {name: 'resetPassword'})
+  resetPassword(
+    @Args('phone') phone:string,
+    @Args('password') password:string
+  ){
+    return this.customersService.resetPass(phone, password)
+  }
   
 }
