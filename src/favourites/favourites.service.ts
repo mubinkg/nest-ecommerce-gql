@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { CreateFavouriteInput } from './dto/create-favourite.input';
 import { UpdateFavouriteInput } from './dto/update-favourite.input';
 import { InjectModel } from '@nestjs/mongoose';
@@ -12,6 +12,11 @@ export class FavouritesService {
  
  async create(createFavouriteInput: CreateFavouriteInput) {
     try {
+      const {user_Id, product_id} = createFavouriteInput
+      const isadded = await this.favouriteModel.exists({user: convertToObjectId(user_Id), product: convertToObjectId(product_id)})
+      if(isadded){
+        throw new NotImplementedException('Already exist')
+      }
       return await this.favouriteModel.create({user: createFavouriteInput.user_Id, product: createFavouriteInput.product_id})
       
     } catch (error) {
