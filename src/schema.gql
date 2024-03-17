@@ -317,7 +317,7 @@ enum ActiveStatus {
 
 type Favourite {
   _id: String
-  product: Product
+  product: ProductResponse
   user: String
 }
 
