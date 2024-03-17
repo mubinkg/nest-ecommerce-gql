@@ -5,7 +5,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Favourite, FavouriteDocument } from './entities/favourite.entity';
 import { Model } from 'mongoose';
 import { convertToObjectId } from 'src/utils/convert-to-objectid';
-import { skip } from 'node:test';
 
 @Injectable()
 export class FavouritesService {
@@ -13,7 +12,7 @@ export class FavouritesService {
  
  async create(createFavouriteInput: CreateFavouriteInput) {
     try {
-      return await this.favouriteModel.create(createFavouriteInput)
+      return await this.favouriteModel.create({user: createFavouriteInput.user_Id, product: createFavouriteInput.product_id})
       
     } catch (error) {
       throw new InternalServerErrorException("Error on creating favourites ",error.message)
