@@ -317,8 +317,8 @@ enum ActiveStatus {
 
 type Favourite {
   _id: String
-  product_id: String
-  user_Id: String
+  product: Product
+  user: String
 }
 
 type Cart {
@@ -412,7 +412,7 @@ type Query {
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
   rating(id: Int!): Rating!
   getPromoCodes(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!
-  favourites: [Favourite!]!
+  favourites(limit: Float!, offset: Float!): [Favourite!]!
   favourite(id: Int!): Favourite!
   getUserCart(getCartDto: GetCartDto!): [CartList!]!
   cart(id: Int!): Cart!

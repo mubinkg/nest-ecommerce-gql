@@ -21,8 +21,14 @@ export class FavouritesResolver {
   }
 
   @Query(() => [Favourite], { name: 'favourites' })
-  findAll() {
-    return this.favouritesService.findAll();
+  @UseGuards(GqlAuthGuard)
+  findAll(
+    @Args('limit', {type:()=> Number}) limit: number,
+    @Args('offset', {type:()=> Number}) offset: number,
+    @CurrentUser('user') user:any
+  ) {
+    const userId = user.userId
+    return this.favouritesService.findAll(userId, limit, offset);
   }
 
   @Query(() => Favourite, { name: 'favourite' })

@@ -108,44 +108,47 @@ export class ProductsService {
         sortObj[sort] = order;
 
 
-      const res = await this.productModel.aggregate([{
-        $match: matchFirstStage
-      }, {
-        $lookup: {
-          from: 'productvariants',
-          localField: '_id',
-          foreignField: 'productId',
-          as: 'productvariants'
-        }
-      }, {
-        $match: matchSecondStage
-      },
-      {
-        $unwind: {
-          path: "$productvariants",
-          includeArrayIndex: "index",
-          preserveNullAndEmptyArrays: true,
+      const res = await this.productModel.aggregate([
+        {
+          $match: matchFirstStage
+        }, 
+        {
+          $lookup: {
+            from: 'productvariants',
+            localField: '_id',
+            foreignField: 'productId',
+            as: 'productvariants'
+          }
+        }, 
+        {
+          $match: matchSecondStage
         },
-      },
-      {
-        $lookup: {
-          from: "productattributes",
-          localField:
-            "productvariants.attributeReference",
-          foreignField: "_id",
-          as: "productvariants.attributes",
-        },
-      },
-      {
-        $addFields: {
-          "productvariants.attributes": {
-            $arrayElemAt: [
-              "$productvariants.attributes.values",
-              0,
-            ],
+        {
+          $unwind: {
+            path: "$productvariants",
+            includeArrayIndex: "index",
+            preserveNullAndEmptyArrays: true,
           },
         },
-      },
+        {
+          $lookup: {
+            from: "productattributes",
+            localField:
+              "productvariants.attributeReference",
+            foreignField: "_id",
+            as: "productvariants.attributes",
+          },
+        },
+        {
+          $addFields: {
+            "productvariants.attributes": {
+              $arrayElemAt: [
+                "$productvariants.attributes.values",
+                0,
+              ],
+            },
+          },
+        },
       {
         $group: {
           _id: "$_id",
