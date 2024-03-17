@@ -20,34 +20,14 @@ export class FavouritesService {
       return await this.favouriteModel.create({user: createFavouriteInput.user_Id, product: createFavouriteInput.product_id})
       
     } catch (error) {
-      throw new InternalServerErrorException("Error on creating favourites ",error.message)
-      
+      throw error
+
     }
   }
 
   async findAll(userId:string, limit:number, offset:number) {
     try {
-      return await this.favouriteModel.aggregate([
-        {
-          $match: {
-            user: convertToObjectId(userId)
-          }
-        },
-        {
-          $lookup: {
-            localField: 'product',
-            from: 'products',
-            foreignField: '_id',
-            as: 'product'
-          }
-        },
-        {
-          $limit: limit,
-        },
-        {
-          $skip: offset
-        }
-      ])
+      return await this.favouriteModel.find({user: convertToObjectId(userId)}).populate({path: 'product'}).limit(limit).skip(offset)
     } catch (error) {
       throw new InternalServerErrorException("Error on finding",error.message)
       
