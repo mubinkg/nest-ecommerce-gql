@@ -1,11 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSectionInput } from './dto/create-section.input';
 import { UpdateSectionInput } from './dto/update-section.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { Section, SectionDocuement } from './entities/section.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class SectionsService {
-  create(createSectionInput: CreateSectionInput) {
-    return 'This action adds a new section';
+
+  constructor(
+    @InjectModel(Section.name) private readonly sectionModel:Model<SectionDocuement>
+  ){}
+
+  async create(createSectionInput: CreateSectionInput) {
+    try{
+      return await this.sectionModel.create(createSectionInput)
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   findAll() {

@@ -14,6 +14,9 @@ registerEnumType(SectionStyle, {
 })
 export class Section {
   @Field(()=>String, {nullable:true})
+  _id: string
+
+  @Field(()=>String, {nullable:true})
   @Prop({type:String})
   title?:string
 

@@ -391,6 +391,7 @@ type Faq {
 }
 
 type Section {
+  _id: String
   title: String
   description: String
   categories: [String!]
@@ -440,8 +441,6 @@ type Query {
   aramic(id: Int!): Aramic!
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
-  sections: [Section!]!
-  section(id: Int!): Section!
 }
 
 input GetTicketsDto {
@@ -628,8 +627,6 @@ type Mutation {
   createFaq(createFaqInput: CreateFaqInput!): Faq!
   sendOtp(mobile: String!): String!
   createSection(createSectionInput: CreateSectionInput!): Section!
-  updateSection(updateSectionInput: UpdateSectionInput!): Section!
-  removeSection(id: Int!): Section!
 }
 
 input CreateTicketInput {
@@ -1080,12 +1077,10 @@ input CreateFaqInput {
 }
 
 input CreateSectionInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateSectionInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  title: String!
+  description: String!
+  categories: [String!]
+  style: SectionStyle! = DEFAULT
+  productType: String!
+  products: [String!]
 }
