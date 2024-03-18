@@ -5,12 +5,15 @@ import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
 import { CategoriesResponse } from './dto/categories.response.dto';
 import { GetCategoryDto } from './entities/get-category.dto';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
 
 @Resolver(() => Category)
 export class CategoriesResolver {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Mutation(() => Category)
+  @UseGuards(GqlAuthGuard)
   createCategory(@Args('createCategoryInput') createCategoryInput: CreateCategoryInput) {
     return this.categoriesService.create(createCategoryInput);
   }

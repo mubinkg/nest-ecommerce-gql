@@ -19,7 +19,11 @@ export async function uploadFile(file:FileUpload){
             .pipe(
                 kocartBucket.file(modifiedFilename).createWriteStream({
                     resumable: false,
-                    gzip: true
+                    gzip: true,
+                    metadata: {
+                        contentType: 'application/octet-stream', // Set the content type according to your file type
+                        predefinedAcl: 'publicRead', // Make the file public
+                    }
                 })
             ).on('finish', ()=>{
                 resolve(`https://storage.cloud.google.com/kocart/${modifiedFilename}`)
