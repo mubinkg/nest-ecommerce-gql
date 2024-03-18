@@ -391,8 +391,18 @@ type Faq {
 }
 
 type Section {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  title: String
+  description: String
+  categories: [String!]
+  style: SectionStyle!
+  productType: String
+}
+
+enum SectionStyle {
+  DEFAULT
+  STYLE_ONE
+  STYLE_TWO
+  STYLE_THREE
 }
 
 type Query {
