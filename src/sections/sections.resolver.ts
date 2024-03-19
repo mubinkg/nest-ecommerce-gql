@@ -3,6 +3,7 @@ import { SectionsService } from './sections.service';
 import { Section } from './entities/section.entity';
 import { CreateSectionInput } from './dto/create-section.input';
 import { UpdateSectionInput } from './dto/update-section.input';
+import { GetSectionsInput } from './dto/get-sections.input';
 
 @Resolver(() => Section)
 export class SectionsResolver {
@@ -13,10 +14,12 @@ export class SectionsResolver {
     return this.sectionsService.create(createSectionInput);
   }
 
-  // @Query(() => [Section], { name: 'sections' })
-  // findAll() {
-  //   return this.sectionsService.findAll();
-  // }
+  @Query(() => [Section], { name: 'getSections' })
+  findAll(
+    @Args('getSectionInput') getSectionInput:GetSectionsInput
+  ) {
+    return this.sectionsService.findAll(getSectionInput);
+  }
 
   // @Query(() => Section, { name: 'section' })
   // findOne(@Args('id', { type: () => Int }) id: number) {

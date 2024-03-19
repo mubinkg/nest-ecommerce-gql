@@ -441,6 +441,7 @@ type Query {
   aramic(id: Int!): Aramic!
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
+  getSections(getSectionInput: GetSectionsInput!): [Section!]!
 }
 
 input GetTicketsDto {
@@ -570,6 +571,22 @@ input GetFaqInput {
   offset: Int!
   sort: String = "id"
   order: String = "DESC"
+}
+
+input GetSectionsInput {
+  limit: Float! = 25
+  offset: Float! = 0
+  user_id: String
+  section_id: String
+  attribute_value_ids: [String!]
+  top_rated_product: Float
+  p_limit: Float! = 10
+  p_offset: Float! = 0
+  p_sort: String
+  p_order: String
+  discount: Float! = 0
+  min_price: Float! = 0
+  max_price: Float! = 0
 }
 
 type Mutation {

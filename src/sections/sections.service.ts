@@ -4,6 +4,7 @@ import { UpdateSectionInput } from './dto/update-section.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Section, SectionDocuement } from './entities/section.entity';
 import { Model } from 'mongoose';
+import { GetSectionsInput } from './dto/get-sections.input';
 
 @Injectable()
 export class SectionsService {
@@ -21,7 +22,7 @@ export class SectionsService {
     }
   }
 
-  findAll() {
+  findAll(getSectionInput:GetSectionsInput) {
     return `This action returns all sections`;
   }
 
