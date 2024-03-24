@@ -1,5 +1,6 @@
 server {
     listen 80;
+    server_name _; 
 
     location /api {
         proxy_pass http://localhost:3001; # Forward requests to your Nest.js application
@@ -13,6 +14,7 @@ server {
 
 server {
     listen 80;
+    server_name _; 
 
     location /admin {
         proxy_pass http://localhost:3000; # Forward requests to your Next.js application
