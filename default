@@ -10,6 +10,11 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
     }
+}
+
+server {
+    listen 80;
+    server_name "34.42.45.11"; # Set your domain or IP address
 
     location /admin {
         proxy_pass http://localhost:3000; # Forward requests to your Next.js application
