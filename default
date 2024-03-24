@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name 34.42.45.11; # Set your domain or IP address
+    server_name "34.42.45.11"; # Set your domain or IP address
 
     location /api/ {
         proxy_pass http://localhost:3001; # Forward requests to your Nest.js application
