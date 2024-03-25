@@ -26,6 +26,7 @@ import { AramicsModule } from './aramics/aramics.module';
 import { FaqModule } from './faq/faq.module';
 import { SmsModule } from './sms/sms.module';
 import { SectionsModule } from './sections/sections.module';
+import { SellersModule } from './sellers/sellers.module';
 
 
 @Module({
@@ -60,7 +61,8 @@ import { SectionsModule } from './sections/sections.module';
     AramicsModule,
     FaqModule,
     SmsModule,
-    SectionsModule
+    SectionsModule,
+    SellersModule
   ],
 })
 export class AppModule {}
