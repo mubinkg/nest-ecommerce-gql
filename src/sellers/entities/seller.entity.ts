@@ -2,9 +2,15 @@ import { ObjectType, Field } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
-@Schema()
+@Schema({
+  timestamps: true
+})
 @ObjectType()
 export class Seller {
+
+  @Field(()=>String)
+  _id: string
+
   @Field(() => String, {nullable:true})
   @Prop({type: String})
   name?: String;
