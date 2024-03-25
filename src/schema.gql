@@ -406,6 +406,21 @@ enum SectionStyle {
   STYLE_THREE
 }
 
+type Seller {
+  name: String
+  mobile: String
+  email: String
+  password: String
+  address: String
+  address_proof: String
+  national_identity_card: String
+  business_license: String
+  account_number: String
+  account_name: String
+  bank_code: String
+  bank_name: String
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -442,6 +457,8 @@ type Query {
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
+  sellers: [Seller!]!
+  seller(id: Int!): Seller!
 }
 
 input GetTicketsDto {
@@ -644,6 +661,9 @@ type Mutation {
   createFaq(createFaqInput: CreateFaqInput!): Faq!
   sendOtp(mobile: String!): String!
   createSection(createSectionInput: CreateSectionInput!): Section!
+  createSeller(createSellerInput: CreateSellerInput!): Seller!
+  updateSeller(updateSellerInput: UpdateSellerInput!): Seller!
+  removeSeller(id: Int!): Seller!
 }
 
 input CreateTicketInput {
@@ -1100,4 +1120,15 @@ input CreateSectionInput {
   style: SectionStyle! = DEFAULT
   productType: String!
   products: [String!]
+}
+
+input CreateSellerInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateSellerInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
