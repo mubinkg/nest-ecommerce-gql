@@ -17,11 +17,11 @@ export class Seller {
   name?: String;
 
   @Field(() => String, {nullable:true})
-  @Prop({type: String})
+  @Prop({type: String, unique:true})
   mobile?: String;
 
   @Field(() => String, {nullable:true})
-  @Prop({type: String})
+  @Prop({type: String, unique:true})
   email?: String;
 
   @Field(() => String, {nullable:true})

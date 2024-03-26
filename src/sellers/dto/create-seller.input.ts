@@ -37,13 +37,13 @@ export class CreateSellerInput {
   address: String;
 
   @Field(() => GraphQLUpload, {nullable:true})
-  address_proof?: FileUpload;
+  address_proof?: FileUpload | string;
 
   @Field(() => GraphQLUpload, {nullable:true})
-  national_identity_card?: FileUpload;
+  national_identity_card?: FileUpload | string;
 
   @Field(() => GraphQLUpload, {nullable:true})
-  business_license?: FileUpload;
+  business_license?: FileUpload | string;
 
   @Field(() => String)
   @IsString()
