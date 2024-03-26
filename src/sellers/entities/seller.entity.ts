@@ -1,6 +1,7 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { SellerStatusEnum } from '../enum/seller-status.enum';
 
 @Schema({
   timestamps: true
@@ -58,6 +59,10 @@ export class Seller {
   @Field(() => String, {nullable:true})
   @Prop({type: String})
   bank_name?: String;
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String, enum: SellerStatusEnum, default: SellerStatusEnum.INACTIVE})
+  status?: SellerStatusEnum
 }
 
 export type SellerDocument = HydratedDocument<Seller>

@@ -420,6 +420,7 @@ type Seller {
   account_name: String
   bank_code: String
   bank_name: String
+  status: String
 }
 
 type Query {

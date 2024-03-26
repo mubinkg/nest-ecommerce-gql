@@ -1,6 +1,12 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
+import { SellerStatusEnum } from '../enum/seller-status.enum';
+
+
+registerEnumType(SellerStatusEnum, {
+  name: "SellerStatusEnum"
+})
 
 @InputType()
 export class CreateSellerInput {
