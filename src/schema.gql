@@ -1124,12 +1124,32 @@ input CreateSectionInput {
 }
 
 input CreateSellerInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  mobile: String!
+  email: String!
+  password: String!
+  address: String!
+  address_proof: Upload
+  national_identity_card: Upload
+  business_license: Upload
+  account_number: String!
+  account_name: String!
+  bank_code: String!
+  bank_name: String!
 }
 
 input UpdateSellerInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
+  mobile: String
+  email: String
+  password: String
+  address: String
+  address_proof: Upload
+  national_identity_card: Upload
+  business_license: Upload
+  account_number: String
+  account_name: String
+  bank_code: String
+  bank_name: String
   id: Int!
 }
