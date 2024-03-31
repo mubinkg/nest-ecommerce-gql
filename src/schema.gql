@@ -665,7 +665,7 @@ type Mutation {
   createSection(createSectionInput: CreateSectionInput!): Section!
   createSeller(createSellerInput: CreateSellerInput!): Seller!
   updateSeller(updateSellerInput: UpdateSellerInput!): Seller!
-  removeSeller(id: Int!): Seller!
+  signinSeller(email: String!, phone: String!): Seller!
 }
 
 input CreateTicketInput {

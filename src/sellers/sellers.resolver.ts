@@ -28,8 +28,11 @@ export class SellersResolver {
     return this.sellersService.update(updateSellerInput.id, updateSellerInput);
   }
 
-  @Mutation(() => Seller)
-  removeSeller(@Args('id', { type: () => Int }) id: number) {
-    return this.sellersService.remove(id);
+  @Mutation(() => Seller, {name: 'signinSeller'})
+  removeSeller(
+    @Args('email', {type: ()=>String}) email: string,
+    @Args('phone', {type: ()=>String}) phone: string
+  ) {
+    return this.sellersService.signIn(email, phone);
   }
 }

@@ -6,6 +6,7 @@ import { FileUpload } from 'graphql-upload';
 import { InjectModel } from '@nestjs/mongoose';
 import { Seller, SellerDocument } from './entities/seller.entity';
 import { Model } from 'mongoose';
+import { SellerStatusEnum } from './enum/seller-status.enum';
 
 @Injectable()
 export class SellersService {
@@ -46,7 +47,13 @@ export class SellersService {
     return `This action updates a #${id} seller`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} seller`;
+  async signIn(email:string, phone:string) {
+    try{
+      const seller = await this.sellerModel.findOne({email:email, mobile:phone})
+      if(seller.status === SellerStatusEnum.INACTIVE) throw new NotAcceptableException('Seller not approved yet.')
+    }
+    catch(err){
+      throw err;
+    }
   }
 }
