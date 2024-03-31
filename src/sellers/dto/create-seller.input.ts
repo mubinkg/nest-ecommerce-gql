@@ -29,7 +29,7 @@ export class CreateSellerInput {
   @Field(() => String)
   @IsString()
   @IsNotEmpty()
-  password: String;
+  password: string;
 
   @Field(() => String)
   @IsString()

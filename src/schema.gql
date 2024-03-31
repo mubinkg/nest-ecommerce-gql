@@ -420,7 +420,13 @@ type Seller {
   account_name: String
   bank_code: String
   bank_name: String
+  isAdmin: Boolean
   status: String
+}
+
+type SellerAuthResponse {
+  seller: Seller
+  access_token: String
 }
 
 type Query {
@@ -665,7 +671,7 @@ type Mutation {
   createSection(createSectionInput: CreateSectionInput!): Section!
   createSeller(createSellerInput: CreateSellerInput!): Seller!
   updateSeller(updateSellerInput: UpdateSellerInput!): Seller!
-  signinSeller(email: String!, phone: String!): Seller!
+  signinSeller(password: String!, phone: String!): SellerAuthResponse!
 }
 
 input CreateTicketInput {

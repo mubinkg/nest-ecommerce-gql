@@ -3,6 +3,7 @@ import { SellersService } from './sellers.service';
 import { Seller } from './entities/seller.entity';
 import { CreateSellerInput } from './dto/create-seller.input';
 import { UpdateSellerInput } from './dto/update-seller.input';
+import { SellerAuthResponse } from './dto/seller-auth.dto';
 
 @Resolver(() => Seller)
 export class SellersResolver {
@@ -28,11 +29,11 @@ export class SellersResolver {
     return this.sellersService.update(updateSellerInput.id, updateSellerInput);
   }
 
-  @Mutation(() => Seller, {name: 'signinSeller'})
+  @Mutation(() => SellerAuthResponse, {name: 'signinSeller'})
   removeSeller(
-    @Args('email', {type: ()=>String}) email: string,
-    @Args('phone', {type: ()=>String}) phone: string
+    @Args('password', {type: ()=>String}) password: string,
+    @Args('phone', {type: ()=>String}) mobile: string
   ) {
-    return this.sellersService.signIn(email, phone);
+    return this.sellersService.signIn(password, mobile);
   }
 }

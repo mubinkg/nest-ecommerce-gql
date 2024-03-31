@@ -26,7 +26,7 @@ export class Seller {
 
   @Field(() => String, {nullable:true})
   @Prop({type: String})
-  password?: String;
+  password?: string;
 
   @Field(() => String, {nullable:true})
   @Prop({type: String})
@@ -59,6 +59,10 @@ export class Seller {
   @Field(() => String, {nullable:true})
   @Prop({type: String})
   bank_name?: String;
+
+  @Field(() => Boolean, {nullable:true})
+  @Prop({type: Boolean, default: false})
+  isAdmin?: boolean;
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String, enum: SellerStatusEnum, default: SellerStatusEnum.INACTIVE})
