@@ -40,7 +40,12 @@ export class SellersService {
 
   async findAll(limit:number, offset: number) {
     try{
-      return await this.sellerModel.find({}).limit(limit).skip(offset)
+      const total = await this.sellerModel.countDocuments({isAdmin:false})
+      const sellers = await this.sellerModel.find({isAdmin:false}).limit(limit).skip(offset)
+      return {
+        total,
+        sellers
+      }
     }catch(err){
       throw err;
     }
@@ -50,8 +55,14 @@ export class SellersService {
     return `This action returns a #${id} seller`;
   }
 
-  update(id: number, updateSellerInput: UpdateSellerInput) {
-    return `This action updates a #${id} seller`;
+  async update(id: string, updateSellerInput: UpdateSellerInput) {
+    try{
+      await this.sellerModel.findByIdAndUpdate(id, updateSellerInput)
+      return await this.sellerModel.findById(id)
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   async signIn(password:string, mobile:string) {

@@ -429,6 +429,11 @@ type SellerAuthResponse {
   access_token: String
 }
 
+type SellerList {
+  sellers: [Seller!]
+  total: Float
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -465,7 +470,7 @@ type Query {
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
-  sellers(limit: Float!, offset: Float!): [Seller!]!
+  sellers(limit: Float!, offset: Float!): SellerList!
   seller(id: Int!): Seller!
 }
 
@@ -1158,5 +1163,11 @@ input UpdateSellerInput {
   account_name: String
   bank_code: String
   bank_name: String
-  id: Int!
+  id: String!
+  status: SellerStatusEnum
+}
+
+enum SellerStatusEnum {
+  ACTIVE
+  INACTIVE
 }
