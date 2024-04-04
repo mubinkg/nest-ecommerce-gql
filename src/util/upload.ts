@@ -26,7 +26,7 @@ export async function uploadFile(file:FileUpload){
                     }
                 })
             ).on('finish', ()=>{
-                resolve(`https://storage.cloud.google.com/kocart/${modifiedFilename}`)
+                resolve(`https://storage.googleapis.com/kocart/${modifiedFilename}`)
             }).on('error', reject)
         })
     }
