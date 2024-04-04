@@ -38,8 +38,12 @@ export class SellersService {
     }
   }
 
-  findAll() {
-    return `This action returns all sellers`;
+  async findAll(limit:number, offset: number) {
+    try{
+      return await this.sellerModel.find({}).limit(limit).skip(offset)
+    }catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {

@@ -465,7 +465,7 @@ type Query {
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
-  sellers: [Seller!]!
+  sellers(limit: Float!, offset: Float!): [Seller!]!
   seller(id: Int!): Seller!
 }
 

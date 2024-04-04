@@ -4,6 +4,8 @@ import { Seller } from './entities/seller.entity';
 import { CreateSellerInput } from './dto/create-seller.input';
 import { UpdateSellerInput } from './dto/update-seller.input';
 import { SellerAuthResponse } from './dto/seller-auth.dto';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
 
 @Resolver(() => Seller)
 export class SellersResolver {
@@ -15,8 +17,12 @@ export class SellersResolver {
   }
 
   @Query(() => [Seller], { name: 'sellers' })
-  findAll() {
-    return this.sellersService.findAll();
+  @UseGuards(GqlAuthGuard)
+  findAll(
+    @Args('limit', {type: ()=>Number}) limit: number,
+    @Args('offset', {type: ()=>Number}) offset: number,
+  ) {
+    return this.sellersService.findAll(limit, offset);
   }
 
   @Query(() => Seller, { name: 'seller' })
