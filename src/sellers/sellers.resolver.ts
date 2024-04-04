@@ -36,7 +36,7 @@ export class SellersResolver {
   }
 
   @Mutation(() => SellerAuthResponse, {name: 'signinSeller'})
-  removeSeller(
+  signinSeller(
     @Args('password', {type: ()=>String}) password: string,
     @Args('phone', {type: ()=>String}) mobile: string
   ) {

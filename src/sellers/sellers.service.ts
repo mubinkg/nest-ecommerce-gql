@@ -91,6 +91,16 @@ export class SellersService {
         }
       }
       if(seller.status === SellerStatusEnum.INACTIVE) throw new NotAcceptableException('Seller not approved yet.')
+      const payload = {
+        id:seller._id.toString(),
+        mobile_no: seller.mobile,
+        name: seller.name
+      }
+      const access_token = await this.jwtService.sign(payload)
+      return {
+        access_token,
+        seller
+      }
     }
     catch(err){
       throw err;
