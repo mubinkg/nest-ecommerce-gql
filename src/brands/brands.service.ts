@@ -26,7 +26,11 @@ export class BrandsService {
 
   async findAll(limit:number, offset:number) {
     try{
-      return await this.brandModel.find({}).limit(limit).skip(offset)
+      const brands = await this.brandModel.find({}).limit(limit).skip(offset)
+      const total = await this.brandModel.countDocuments({})
+      return {
+        brands, total
+      }
     }
     catch(err){
       throw err;

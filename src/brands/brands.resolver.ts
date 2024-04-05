@@ -3,6 +3,7 @@ import { BrandsService } from './brands.service';
 import { Brand } from './entities/brand.entity';
 import { CreateBrandInput } from './dto/create-brand.input';
 import { UpdateBrandInput } from './dto/update-brand.input';
+import { BrandList } from './dto/brand-list.dto';
 
 @Resolver(() => Brand)
 export class BrandsResolver {
@@ -13,7 +14,7 @@ export class BrandsResolver {
     return this.brandsService.create(createBrandInput);
   }
 
-  @Query(() => [Brand], { name: 'brands' })
+  @Query(() => BrandList, { name: 'brands' })
   findAll(
     @Args('limit', {type: ()=>Number}) limit:number,
     @Args('offset', {type: ()=>Number}) offset:number
