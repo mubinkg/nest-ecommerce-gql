@@ -28,19 +28,50 @@ export class CategoriesService {
       return await this.categoryModel.create({...createCategoryInput, order: totalCategory+1})
     }
     catch(err){
-      console.log(err)
       throw new NotImplementedException('Can not create category.')
     }
   }
 
-  async getCategories(getCategoriesInput: GetCategoryDto) {
+  async getCategories(getCategoriesInput: GetCategoryDto, isAdmin=false) {
     try {
-      const query  =[]
+      const query = this.createCategoryListQuery(getCategoriesInput, isAdmin)
+      return await this.categoryModel.aggregate(query)
+      
+    } catch (error) {
+      throw new InternalServerErrorException("Error On finding categories ",error.message)
+      
+    }
+   
+  }
+
+  async getAdminCategories(getCategoriesInput: GetCategoryDto){
+    try{
+      const query = this.createCategoryListQuery(getCategoriesInput, true)
+      const count = await this.categoryModel.countDocuments(query)
+      const categories = await this.getCategories(getCategoriesInput, true)
+      
+      return {
+        count,
+        categories
+      }
+    }catch(err){
+      throw err;
+    }
+  }
+
+  createCategoryListQuery(getCategoriesInput: GetCategoryDto, isAdmin=false){
+    const query  =[]
       const matchData = {
-        status: "active",
-        parent: {
+      }
+
+      if(!isAdmin){
+        matchData['parent'] =  {
           $eq: null,
-        },
+        }
+      }
+
+      if(!isAdmin){
+        matchData['status'] = 'active'
       }
 
       const match = {
@@ -81,13 +112,7 @@ export class CategoriesService {
         }
       }
       query.push(sort)
-      return await this.categoryModel.aggregate(query)
-      
-    } catch (error) {
-      throw new InternalServerErrorException("Error On finding categories ",error.message)
-      
-    }
-   
+      return query;
   }
 
   findOne(id: number) {

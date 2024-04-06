@@ -7,6 +7,7 @@ import { CategoriesResponse } from './dto/categories.response.dto';
 import { GetCategoryDto } from './entities/get-category.dto';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
+import { AdminCategoryList } from './dto/admin-category-list.dto';
 
 @Resolver(() => Category)
 export class CategoriesResolver {
@@ -23,6 +24,13 @@ export class CategoriesResolver {
     @Args('getCategoriesInput') getCategoriesInput:GetCategoryDto
   ) {
     return this.categoriesService.getCategories(getCategoriesInput);
+  }
+
+  @Query(() => AdminCategoryList, { name: 'getAdminCategories' })
+  getAdminCategories(
+    @Args('getCategoriesInput') getCategoriesInput:GetCategoryDto
+  ) {
+    return this.categoriesService.getAdminCategories(getCategoriesInput);
   }
 
 

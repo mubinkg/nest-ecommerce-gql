@@ -229,6 +229,11 @@ type CategoriesResponse {
   children: [Category!]!
 }
 
+type AdminCategoryList {
+  categories: [CategoriesResponse!]!
+  count: Float!
+}
+
 type Address {
   _id: String!
   user: Customer
@@ -454,6 +459,7 @@ type Query {
   signIn(signinInput: SignInDto!): AuthResponseDto!
   verifyUser(verifyUserInput: VerifyUser!): Boolean!
   categories(getCategoriesInput: GetCategoryDto!): [CategoriesResponse!]!
+  getAdminCategories(getCategoriesInput: GetCategoryDto!): AdminCategoryList!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
