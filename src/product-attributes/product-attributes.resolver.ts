@@ -6,6 +6,7 @@ import { UpdateProductAttributeInput } from './dto/update-product-attribute.inpu
 import { ProductAttributeSetService } from './product-attribute-set.service';
 import { ProductAttributeSet } from './entities/product-attribute-set.entity';
 import { CreateProductAttributeSetInput } from './dto/create-product-attribute-set.input';
+import { GetProductAttributeSet } from './dto/get-attributeset.dto';
 
 @Resolver(() => ProductAttribute)
 export class ProductAttributesResolver {
@@ -22,6 +23,14 @@ export class ProductAttributesResolver {
   @Mutation(() => ProductAttributeSet)
   async createProductAttributeSet(@Args('createProductAttributeInput') createProductAttributeSetInput: CreateProductAttributeSetInput) {
     return await this.productAttributeSetService.createProductAttributeSet(createProductAttributeSetInput);
+  }
+
+  @Query(()=>GetProductAttributeSet, {nullable:true})
+  async getProductAttributeSetList(
+    @Args('limit', {type: ()=>Number}) limit: number,
+    @Args('offset', {type: ()=>Number}) offset: number
+  ){
+    return this.productAttributeSetService.getProductAttributeSetList(limit, offset)
   }
 
   @Query(() => [ProductAttribute], { name: 'productAttributes' })

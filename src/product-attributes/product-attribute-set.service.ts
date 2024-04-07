@@ -23,4 +23,18 @@ export class ProductAttributeSetService{
 
         return attributeSet
     }
+
+    async getProductAttributeSetList(limit:number, offset:number){
+        try{
+            const productAttributeSetList = await this.productAttributeSetModel.find({}).sort('-_id').limit(limit).skip(offset)
+            const count = await this.productAttributeSetModel.countDocuments({})
+            return {
+                productAttributeSetList,
+                count
+            }
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }
