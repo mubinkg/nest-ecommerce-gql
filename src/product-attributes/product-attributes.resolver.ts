@@ -7,6 +7,7 @@ import { ProductAttributeSetService } from './product-attribute-set.service';
 import { ProductAttributeSet } from './entities/product-attribute-set.entity';
 import { CreateProductAttributeSetInput } from './dto/create-product-attribute-set.input';
 import { GetProductAttributeSet } from './dto/get-attributeset.dto';
+import { ProductAttributeResponseDto } from './dto/product-attribute-response.dto';
 
 @Resolver(() => ProductAttribute)
 export class ProductAttributesResolver {
@@ -28,14 +29,19 @@ export class ProductAttributesResolver {
   @Query(()=>GetProductAttributeSet, {nullable:true})
   async getProductAttributeSetList(
     @Args('limit', {type: ()=>Number}) limit: number,
-    @Args('offset', {type: ()=>Number}) offset: number
+    @Args('offset', {type: ()=>Number}) offset: number,
+    @Args('query', {type: ()=>String,nullable:true}) query: string
   ){
-    return this.productAttributeSetService.getProductAttributeSetList(limit, offset)
+    return this.productAttributeSetService.getProductAttributeSetList(limit, offset, query)
   }
 
-  @Query(() => [ProductAttribute], { name: 'productAttributes' })
-  findAll() {
-    return this.productAttributesService.findAll();
+  @Query(() => ProductAttributeResponseDto, { name: 'productAttributes' })
+  findAll(
+    @Args('limit', {type: ()=>Number}) limit: number,
+    @Args('offset', {type: ()=>Number}) offset: number,
+    @Args('query', {type: ()=>String,nullable:true}) query: string
+  ) {
+    return this.productAttributesService.findAll(limit, offset, query);
   }
 
   @Query(() => ProductAttribute, { name: 'productAttribute' })

@@ -385,6 +385,11 @@ type GetProductAttributeSet {
   count: Float
 }
 
+type ProductAttributeResponseDto {
+  attributeList: [ProductAttribute!]
+  count: Float
+}
+
 type ProductFaq {
   _id: String
   productId: String
@@ -478,8 +483,8 @@ type Query {
   cart(id: Int!): Cart!
   get_orders(getOrderDto: GetOrderDto!): [Order!]!
   order(id: Int!): Order!
-  getProductAttributeSetList(limit: Float!, offset: Float!): GetProductAttributeSet
-  productAttributes: [ProductAttribute!]!
+  getProductAttributeSetList(limit: Float!, offset: Float!, query: String): GetProductAttributeSet
+  productAttributes(limit: Float!, offset: Float!, query: String): ProductAttributeResponseDto!
   productAttribute(id: Int!): ProductAttribute!
   productFaq(id: Int!): ProductFaq!
   aramics: String!

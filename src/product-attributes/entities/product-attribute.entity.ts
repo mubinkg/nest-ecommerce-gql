@@ -19,7 +19,7 @@ export class ProductAttribute{
         name?:string
 
         @Field(()=>ProductAttributeSet,{nullable:true})
-        @Prop({type:mongoose.Schema.Types.ObjectId, ref:''})
+        @Prop({type:mongoose.Schema.Types.ObjectId, ref:'ProductAttributeSet'})
         attributeSet?:ProductAttributeSet
 
         @Field(()=>ProductAttributeValue,{nullable:true})

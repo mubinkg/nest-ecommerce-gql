@@ -47,8 +47,19 @@ export class ProductAttributesService {
     return attribute;
   }
 
-  findAll() {
-    return `This action returns all productAttributes`;
+  async findAll(limit:number, offset:number, queryString:string) {
+    try{
+      const query = { "name": { "$regex": queryString, "$options": "i" }}
+      const attributeList = await this.productAttributeModel.find(query).populate({path:'attributeSet'}).sort('-_id').limit(limit).skip(offset)
+      const count = await this.productAttributeModel.countDocuments(query)
+      return {
+        attributeList,
+        count
+      }
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {

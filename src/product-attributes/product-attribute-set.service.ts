@@ -24,10 +24,11 @@ export class ProductAttributeSetService{
         return attributeSet
     }
 
-    async getProductAttributeSetList(limit:number, offset:number){
+    async getProductAttributeSetList(limit:number, offset:number, queryString: string){
         try{
-            const productAttributeSetList = await this.productAttributeSetModel.find({}).sort('-_id').limit(limit).skip(offset)
-            const count = await this.productAttributeSetModel.countDocuments({})
+            const query = { "attributeSetName": { "$regex": queryString, "$options": "i" }}
+            const productAttributeSetList = await this.productAttributeSetModel.find(query).sort('-_id').limit(limit).skip(offset)
+            const count = await this.productAttributeSetModel.countDocuments(query)
             return {
                 productAttributeSetList,
                 count
