@@ -21,8 +21,9 @@ export class SellersResolver {
   findAll(
     @Args('limit', {type: ()=>Number}) limit: number,
     @Args('offset', {type: ()=>Number}) offset: number,
+    @Args('status', {type: ()=>String, nullable:true}) status: string
   ) {
-    return this.sellersService.findAll(limit, offset);
+    return this.sellersService.findAll(limit, offset, status);
   }
 
   @Query(() => Seller, { name: 'seller' })

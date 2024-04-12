@@ -38,10 +38,14 @@ export class SellersService {
     }
   }
 
-  async findAll(limit:number, offset: number) {
+  async findAll(limit:number, offset: number, status: string) {
     try{
-      const total = await this.sellerModel.countDocuments({isAdmin:false})
-      const sellers = await this.sellerModel.find({isAdmin:false}).limit(limit).skip(offset)
+      const query = {isAdmin:false}
+      if(status){
+        query['status'] = status
+      }
+      const total = await this.sellerModel.countDocuments(query)
+      const sellers = await this.sellerModel.find(query).limit(limit).skip(offset)
       return {
         total,
         sellers

@@ -492,7 +492,7 @@ type Query {
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
-  sellers(limit: Float!, offset: Float!): SellerList!
+  sellers(limit: Float!, offset: Float!, status: String): SellerList!
   seller(id: Int!): Seller!
 }
 
