@@ -25,11 +25,11 @@ export class ProductsService {
 
     try {
 
-      if (createProductInput.pro_input_image) {
+      if (createProductInput?.pro_input_image) {
         createProductInput.pro_input_image = await uploadFile(createProductInput.pro_input_image as FileUpload) as string
       }
 
-      if (createProductInput.other_imagesInput && createProductInput.other_imagesInput.length > 0) {
+      if (createProductInput?.other_imagesInput && createProductInput?.other_imagesInput?.length > 0) {
 
         let imageArray = []
 
