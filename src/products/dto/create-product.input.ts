@@ -180,6 +180,16 @@ export class CreateProductInput {
   @IsEnum(VariantStockLavelEnum)
   variant_stock_level_type?: VariantStockLavelEnum
 
+  @Field(()=>Number)
+  @IsNumber()
+  @IsNotEmpty()
+  simple_price: number
+
+  @Field(()=>Number)
+  @IsNumber()
+  @IsNotEmpty()
+  simple_special_price: number
+
   @Field(()=>[CreateProductVariantInput],{description:"Product Variants Details"})
   createProductVariantInput?:CreateProductVariantInput[]
 

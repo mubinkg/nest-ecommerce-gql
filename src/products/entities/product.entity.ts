@@ -136,6 +136,14 @@ export class Product {
   @Prop({type:String})
   product_type?: string
 
+  @Field(()=>String, {nullable:true})
+  @Prop({type: Number})
+  simple_price?:number
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: Number})
+  simple_special_price?:number
+
   // @Field(()=>Number, {nullable:true})
   // @Prop({type:Number})
   // stock_type: number

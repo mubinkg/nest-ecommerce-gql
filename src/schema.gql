@@ -60,6 +60,8 @@ type Product {
   category_id: String
   tax: Float
   product_type: String
+  simple_price: String
+  simple_special_price: String
   globalOrderNo: Float
 }
 
@@ -157,6 +159,8 @@ type ProductResponse {
   category_id: String
   tax: Float
   product_type: String
+  simple_price: String
+  simple_special_price: String
   globalOrderNo: Float
 
   """Product Variants"""
@@ -757,6 +761,8 @@ input CreateProductInput {
   status: Float
   product_type: ProductType
   variant_stock_level_type: VariantStockLavelEnum
+  simple_price: Float!
+  simple_special_price: Float!
 
   """Product Variants Details"""
   createProductVariantInput: [CreateProductVariantInput!]!
@@ -875,6 +881,8 @@ input UpdateProductInput {
   status: Float
   product_type: ProductType
   variant_stock_level_type: VariantStockLavelEnum
+  simple_price: Float
+  simple_special_price: Float
 
   """Product Variants Details"""
   createProductVariantInput: [CreateProductVariantInput!]
