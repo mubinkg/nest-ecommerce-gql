@@ -6,6 +6,8 @@ import { Product, ProductSchema } from './entities/product.entity';
 import { ProductTax, ProductTaxSchema } from './entities/product-tax.entity';
 import { ProductTaxService } from './services/product-tax.service';
 import { ProductVariantsModule } from 'src/product-variants/product-variants.module';
+import { ProductAdminResolver } from './resolvers/product-admin.resolver';
+import { ProductAdminService } from './services/product-admin.service';
 
 @Module({
   imports: [MongooseModule.forFeature([
@@ -16,6 +18,6 @@ import { ProductVariantsModule } from 'src/product-variants/product-variants.mod
       name: ProductTax.name, schema: ProductTaxSchema
     },
   ]),ProductVariantsModule],
-  providers: [ProductsResolver, ProductsService, ProductTaxService],
+  providers: [ProductsResolver, ProductsService, ProductTaxService, ProductAdminResolver, ProductAdminService],
 })
 export class ProductsModule {}

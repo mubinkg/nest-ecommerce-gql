@@ -163,6 +163,11 @@ type ProductResponse {
   productvariants: [ProductVariant!]!
 }
 
+type AdminProductListResponseDto {
+  products: [Product!]
+  count: Float
+}
+
 type Area {
   _id: String!
   area_name: String
@@ -460,6 +465,7 @@ type Query {
   getTicketTypes(limit: Float!, offset: Float!): [TicketType!]!
   get_products(getProductInput: GetProductDto!): [ProductResponse!]!
   product(id: Int!): Product!
+  getAdminProductList(adminProductListDto: AdminProductListDto!): AdminProductListResponseDto!
   productVariants: [ProductVariant!]!
   productVariant(id: Int!): ProductVariant!
   areas: [Area!]!
@@ -538,6 +544,14 @@ enum ProductSort {
 enum ProductOrder {
   ASC
   DESC
+}
+
+input AdminProductListDto {
+  seller: String
+  category: String
+  status: String
+  limit: Float!
+  offset: Float!
 }
 
 input SignInDto {
