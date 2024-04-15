@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument, mongo } from 'mongoose';
+import { Customer } from 'src/customers/entities/customer.entity';
 
 export type OrderDocument = HydratedDocument<Order>
 
@@ -13,9 +14,9 @@ export class Order {
   @Field(()=>String)
   _id:string
   
-  @Field(()=>String, {nullable:true})
-  @Prop({type: String})
-  user_id?:string
+  @Field(()=>Customer, {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Customer'})
+  user?:Customer
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})

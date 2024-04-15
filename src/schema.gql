@@ -351,7 +351,7 @@ type CartList {
 
 type Order {
   _id: String!
-  user_id: String
+  user: Customer
   mobile: String
   product_variant_id: [String!]
   quantity: [Float!]
