@@ -4,6 +4,8 @@ import { OrdersResolver } from './orders.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Order, OrderSchema } from './entities/order.entity';
 import { ProductVariantsModule } from 'src/product-variants/product-variants.module';
+import { OrderAdminResolver } from './resolvers/admin-order.resolver';
+import { OrderAdminService } from './service/admin-order.service';
 
 @Module({
   imports: [
@@ -15,6 +17,6 @@ import { ProductVariantsModule } from 'src/product-variants/product-variants.mod
     ]),
     ProductVariantsModule
   ],
-  providers: [OrdersResolver, OrdersService],
+  providers: [OrdersResolver, OrdersService, OrderAdminResolver, OrderAdminService],
 })
 export class OrdersModule {}
