@@ -27,15 +27,31 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Brand {
+  _id: String!
+  name: String
+  image: String
+}
+
+type Category {
+  _id: String!
+  name: String
+  order: Float
+  image: String
+  banner: String
+  parent: String
+  status: String
+}
+
 type Product {
   _id: String
-  seller_id: String
+  seller: String
   pro_input_name: String
   short_description: String
   tags: String
   indicator: String
   made_in: String
-  brand: String
+  brand: Brand
   total_allowed_quantity: Float
   minimum_order_quantity: Float
   quantity_step_size: Float
@@ -57,7 +73,7 @@ type Product {
   extra_input_description: String
   attribute_values: String
   status: Float
-  category_id: String
+  category: Category
   tax: Float
   product_type: String
   globalOrderNo: Float
@@ -126,13 +142,13 @@ type ProductVariant {
 
 type ProductResponse {
   _id: String
-  seller_id: String
+  seller: String
   pro_input_name: String
   short_description: String
   tags: String
   indicator: String
   made_in: String
-  brand: String
+  brand: Brand
   total_allowed_quantity: Float
   minimum_order_quantity: Float
   quantity_step_size: Float
@@ -154,7 +170,7 @@ type ProductResponse {
   extra_input_description: String
   attribute_values: String
   status: Float
-  category_id: String
+  category: Category
   tax: Float
   product_type: String
   globalOrderNo: Float
@@ -211,16 +227,6 @@ type AuthResponseDto {
   customer: Customer
 }
 
-type Category {
-  _id: String!
-  name: String
-  order: Float
-  image: String
-  banner: String
-  parent: String
-  status: String
-}
-
 type CategoriesResponse {
   _id: String!
   name: String
@@ -270,12 +276,6 @@ type Slider {
   slider_type: SliderType
   image: String
   link: String
-}
-
-type Brand {
-  _id: String!
-  name: String
-  image: String
 }
 
 type BrandList {
@@ -736,7 +736,7 @@ input CereateTicketTypeInput {
 }
 
 input CreateProductInput {
-  seller_id: String!
+  seller: String!
   pro_input_name: String!
   short_description: String!
 
@@ -767,7 +767,7 @@ input CreateProductInput {
 
   """comma separated string"""
   attribute_values: String
-  category_id: String!
+  category: String!
   status: Float
   product_type: ProductType
   variant_stock_level_type: VariantStockLavelEnum
@@ -854,7 +854,7 @@ enum StockStatus {
 }
 
 input UpdateProductInput {
-  seller_id: String
+  seller: String
   pro_input_name: String
   short_description: String
 
@@ -885,7 +885,7 @@ input UpdateProductInput {
 
   """comma separated string"""
   attribute_values: String
-  category_id: String
+  category: String
   status: Float
   product_type: ProductType
   variant_stock_level_type: VariantStockLavelEnum

@@ -23,7 +23,12 @@ export class ProductAdminService{
             query['status'] = adminProductListDto.status
         }
         const count = await this.productModel.countDocuments(query)
-        const products = await this.productModel.find(query).limit(adminProductListDto.limit).skip(adminProductListDto.offset)
+        const products = await this.productModel.find(query).populate({
+            path: 'brand'
+        }).populate({
+            path:'category'
+        })
+        .limit(adminProductListDto.limit).skip(adminProductListDto.offset)
         return {
             products,
             count

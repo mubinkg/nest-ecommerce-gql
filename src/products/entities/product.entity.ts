@@ -3,6 +3,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, {HydratedDocument} from 'mongoose'
 import { HalalIndicator } from '../enum/halal-indicator.enum';
 import { DownloadLinkType } from '../enum/download-link-type.enum';
+import { Brand } from 'src/brands/entities/brand.entity';
+import { Category } from 'src/categories/entities/category.entity';
 
 export type ProductDocument = HydratedDocument<Product>
 
@@ -14,7 +16,7 @@ export class Product {
 
   @Field(()=>String, {nullable:true})
   @Prop({type: mongoose.Schema.Types.ObjectId})
-  seller_id?: string
+  seller?: string
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
@@ -36,9 +38,9 @@ export class Product {
   @Prop({type:String})
   made_in?: string
 
-  @Field(()=>String, {nullable:true})
-  @Prop({type:String})    //brand id object id??
-  brand?: string
+  @Field(()=>Brand, {nullable:true})
+  @Prop({type:mongoose.Schema.Types.ObjectId, ref: "Brand"})    //brand id object id??
+  brand?: Brand
 
   @Field(()=>Number, {nullable:true})
   @Prop({type:Number})
@@ -124,9 +126,9 @@ export class Product {
   @Prop({type:Number})
   status?: number
 
-  @Field(()=>String, {nullable:true})
-  @Prop({type: mongoose.Schema.Types.ObjectId})
-  category_id: string
+  @Field(()=>Category, {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Category'})
+  category?: Category
 
   @Field(()=>Number, {nullable:true})
   @Prop({type:Number})

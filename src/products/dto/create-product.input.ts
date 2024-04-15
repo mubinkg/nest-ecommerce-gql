@@ -36,7 +36,7 @@ export class CreateProductInput {
   @Field(()=>String)
   @IsString()
   @IsNotEmpty()
-  seller_id: string
+  seller: string
 
   @Field(()=>String)
   @IsNotEmpty()
@@ -165,7 +165,7 @@ export class CreateProductInput {
   @Field(()=>String)
   @IsString()
   @IsNotEmpty()
-  category_id: string
+  category: string
 
   @Field(()=>Number, {nullable:true})
   status: number
