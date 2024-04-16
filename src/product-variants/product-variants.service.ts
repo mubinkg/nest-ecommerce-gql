@@ -42,15 +42,15 @@ export class ProductVariantsService {
 
   async updateProductVarientAfterOrder(createOrderInput:CreateOrderInput){
     try{
-      const {product_variant_id, quantity} = createOrderInput
+      const {product_variants, quantity} = createOrderInput
       const variants = await this.productVariantModel.find({
         _id:{
-          $in:product_variant_id
+          $in:product_variants
         }
       })
       const update = []
 
-      product_variant_id.forEach((id, i)=>{
+      product_variants.forEach((id, i)=>{
         const variant = variants.find((v)=>v._id.toString() === id)
         const qty = quantity[i]
         

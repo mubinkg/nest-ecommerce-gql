@@ -353,7 +353,7 @@ type Order {
   _id: String!
   user: Customer
   mobile: String
-  product_variant_id: [String!]
+  product_variants: [ProductVariant!]
   quantity: [Float!]
   total: Float
   delivery_charge: Float
@@ -489,6 +489,7 @@ type Query {
   cart(id: Int!): Cart!
   get_orders(getOrderDto: GetOrderDto!): [Order!]!
   order(id: Int!): Order!
+  getAdminOrderList(adminOrderListInput: GetAdminOrderInput!): String
   getProductAttributeSetList(limit: Float!, offset: Float!, query: String): GetProductAttributeSet
   productAttributes(limit: Float!, offset: Float!, query: String): ProductAttributeResponseDto!
   productAttribute(id: Int!): ProductAttribute!
@@ -630,6 +631,14 @@ enum OrderSortBy {
 enum OrderSortOrder {
   DESC
   AESC
+}
+
+input GetAdminOrderInput {
+  start_date: DateTime
+  end_date: DateTime
+  status: OrderStatus
+  payment_method: String
+  product_type: String
 }
 
 input GetFaqInput {
@@ -1088,7 +1097,7 @@ input UpdateCartInput {
 
 input CreateOrderInput {
   mobile: String!
-  product_variant_id: [String!]!
+  product_variants: [String!]!
   quantity: [Float!]!
   total: Float!
   delivery_charge: Float!

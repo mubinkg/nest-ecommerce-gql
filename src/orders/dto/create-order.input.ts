@@ -11,7 +11,7 @@ export class CreateOrderInput {
 
   @Field(()=>[String])
   @IsArray()
-  product_variant_id:string[]
+  product_variants:string[]
 
   @Field(()=>[Number])
   @IsArray()

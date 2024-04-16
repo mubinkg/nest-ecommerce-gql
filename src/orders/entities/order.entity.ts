@@ -2,6 +2,7 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument, mongo } from 'mongoose';
 import { Customer } from 'src/customers/entities/customer.entity';
+import { ProductVariant } from 'src/product-variants/entities/product-variant.entity';
 
 export type OrderDocument = HydratedDocument<Order>
 
@@ -22,9 +23,9 @@ export class Order {
   @Prop({type:String})
   mobile?:string
 
-  @Field(()=>[String], {nullable:true})
-  @Prop([{type:String}])
-  product_variant_id?:string[]
+  @Field(()=>[ProductVariant], {nullable:true})
+  @Prop([{type:mongoose.Schema.Types.ObjectId, ref:"ProductVariant"}])
+  product_variants?:ProductVariant[]
 
   @Field(()=>[Number], {nullable:true})
   @Prop([{type:Number}])

@@ -15,7 +15,7 @@ export class Product {
   _id: string;
 
   @Field(()=>String, {nullable:true})
-  @Prop({type: mongoose.Schema.Types.ObjectId})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Seller'})
   seller?: string
 
   @Field(()=>String, {nullable:true})

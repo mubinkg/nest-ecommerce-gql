@@ -1,4 +1,4 @@
-import { Args, Resolver } from "@nestjs/graphql";
+import { Args, Resolver, Query } from "@nestjs/graphql";
 import { OrderAdminService } from "../service/admin-order.service";
 import { GetAdminOrderInput } from "../dto/admin-order.input";
 
@@ -8,6 +8,7 @@ export class OrderAdminResolver{
         private readonly orderAdminService:OrderAdminService
     ){}
 
+    @Query(()=>String, {nullable:true})
     getAdminOrderList(
         @Args('adminOrderListInput') getAdminOrderInput:GetAdminOrderInput
     ){

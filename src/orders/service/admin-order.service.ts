@@ -9,7 +9,17 @@ export class OrderAdminService{
     ){}
 
     async getAdminOrderList(getAdminOrderInput:GetAdminOrderInput){
-        
+        const query = {}
+        const orders = await this.orderModel.find(query).populate({path: 'user',}).populate({
+            path: 'product_variants',
+            populate: {
+                path: 'productId',
+                populate: {
+                    path: 'seller'
+                }
+            }
+        })
+        return ""
     }
 
 }
