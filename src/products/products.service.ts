@@ -69,7 +69,6 @@ export class ProductsService {
 
     const { id, category_id, search, tags, attribute_value_ids, sort, order, min_price, max_price, seller_id, offset, limit } = getProductInputDto;
     try {
-      //first stage
       const matchFirstStage = {}
 
       if (id) {

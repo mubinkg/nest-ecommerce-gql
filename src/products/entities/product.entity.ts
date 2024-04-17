@@ -5,6 +5,7 @@ import { HalalIndicator } from '../enum/halal-indicator.enum';
 import { DownloadLinkType } from '../enum/download-link-type.enum';
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Category } from 'src/categories/entities/category.entity';
+import { Seller } from 'src/sellers/entities/seller.entity';
 
 export type ProductDocument = HydratedDocument<Product>
 
@@ -14,9 +15,9 @@ export class Product {
   @Field(() => String, {nullable:true})
   _id: string;
 
-  @Field(()=>String, {nullable:true})
+  @Field(()=>Seller, {nullable:true})
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Seller'})
-  seller?: string
+  seller?: Seller
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})

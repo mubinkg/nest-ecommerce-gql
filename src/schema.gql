@@ -43,9 +43,27 @@ type Category {
   status: String
 }
 
+type Seller {
+  _id: String!
+  name: String
+  mobile: String
+  email: String
+  password: String
+  address: String
+  address_proof: String
+  national_identity_card: String
+  business_license: String
+  account_number: String
+  account_name: String
+  bank_code: String
+  bank_name: String
+  isAdmin: Boolean
+  status: String
+}
+
 type Product {
   _id: String
-  seller: String
+  seller: Seller
   pro_input_name: String
   short_description: String
   tags: String
@@ -142,7 +160,7 @@ type ProductVariant {
 
 type ProductResponse {
   _id: String
-  seller: String
+  seller: Seller
   pro_input_name: String
   short_description: String
   tags: String
@@ -368,7 +386,7 @@ type Order {
   documents: [String!]
   status: String
   email: String
-  created_at: String
+  created_at: DateTime
 }
 
 type AdminOrderResponse {
@@ -434,24 +452,6 @@ enum SectionStyle {
   STYLE_ONE
   STYLE_TWO
   STYLE_THREE
-}
-
-type Seller {
-  _id: String!
-  name: String
-  mobile: String
-  email: String
-  password: String
-  address: String
-  address_proof: String
-  national_identity_card: String
-  business_license: String
-  account_number: String
-  account_name: String
-  bank_code: String
-  bank_name: String
-  isAdmin: Boolean
-  status: String
 }
 
 type SellerAuthResponse {

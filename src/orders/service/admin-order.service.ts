@@ -13,7 +13,7 @@ export class OrderAdminService{
         const orders = await this.orderModel.find(query).populate({path: 'user',}).populate({
             path: 'product_variants',
             populate: {
-                path: 'productId',
+                path: 'product',
                 populate: {
                     path: 'seller'
                 }

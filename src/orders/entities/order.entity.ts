@@ -83,9 +83,8 @@ export class Order {
   @Prop({type:String})
   email?:string // only enter when ordered product is digital product and one of them is not downloadable(download_allowed = 0)
 
-  @Field(()=>String, {nullable:true})
-  @Prop({type:String})
-  created_at?:string
+  @Field(()=>Date, {nullable:true, name: 'created_at'})
+  createdAt?:Date
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order)
