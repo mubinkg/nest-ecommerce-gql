@@ -19,7 +19,11 @@ export class OrderAdminService{
                 }
             }
         })
-        return ""
+        const count = await this.orderModel.countDocuments(query)
+        return {
+            orders,
+            count
+        }
     }
 
 }

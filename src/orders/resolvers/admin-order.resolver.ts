@@ -1,6 +1,7 @@
 import { Args, Resolver, Query } from "@nestjs/graphql";
 import { OrderAdminService } from "../service/admin-order.service";
 import { GetAdminOrderInput } from "../dto/admin-order.input";
+import { AdminOrderResponse } from "../dto/admin-order.response.dto";
 
 @Resolver(()=>OrderAdminResolver)
 export class OrderAdminResolver{
@@ -8,7 +9,7 @@ export class OrderAdminResolver{
         private readonly orderAdminService:OrderAdminService
     ){}
 
-    @Query(()=>String, {nullable:true})
+    @Query(()=>AdminOrderResponse, {nullable:true})
     getAdminOrderList(
         @Args('adminOrderListInput') getAdminOrderInput:GetAdminOrderInput
     ){

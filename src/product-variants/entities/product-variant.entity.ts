@@ -3,6 +3,7 @@ import { StockStatus } from '../enum';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { ProductAttributeValue } from 'src/product-attributes/entities/product-attribute-value.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 
 @ObjectType()
@@ -55,11 +56,9 @@ export class ProductVariant {
   @Field(() => ProductAttributeValue, { description: "Attribute Values", nullable: true })
   attributes?:  ProductAttributeValue;
 
-  @Field(() => String, { description: "Product Reference Id", nullable: true })
+  @Field(() => Product, { description: "Product Reference Id", nullable: true })
   @Prop({ type: mongoose.Schema.Types.ObjectId , ref: 'Product'})
-  productId?: string
-
-
+  product?: Product
 
 }
 export type ProductVariantDocument = HydratedDocument<ProductVariant>

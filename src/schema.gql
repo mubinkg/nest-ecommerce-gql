@@ -137,7 +137,7 @@ type ProductVariant {
   attributes: ProductAttributeValue
 
   """Product Reference Id"""
-  productId: String
+  product: Product
 }
 
 type ProductResponse {
@@ -371,6 +371,11 @@ type Order {
   created_at: String
 }
 
+type AdminOrderResponse {
+  orders: [Order!]
+  count: Float
+}
+
 type ProductAttributeSet {
   _id: String
   attributeSetName: String
@@ -489,7 +494,7 @@ type Query {
   cart(id: Int!): Cart!
   get_orders(getOrderDto: GetOrderDto!): [Order!]!
   order(id: Int!): Order!
-  getAdminOrderList(adminOrderListInput: GetAdminOrderInput!): String
+  getAdminOrderList(adminOrderListInput: GetAdminOrderInput!): AdminOrderResponse
   getProductAttributeSetList(limit: Float!, offset: Float!, query: String): GetProductAttributeSet
   productAttributes(limit: Float!, offset: Float!, query: String): ProductAttributeResponseDto!
   productAttribute(id: Int!): ProductAttribute!

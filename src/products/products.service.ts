@@ -57,7 +57,7 @@ export class ProductsService {
 
       const product = await this.productModel.create(createProductInput)
       
-      const productVariant = await this.productVariantsService.create(createProductVariantInput.map((d) => ({ ...d, productId: product._id })))
+      const productVariant = await this.productVariantsService.create(createProductVariantInput.map((d) => ({ ...d, product: product._id })))
       return product
     } catch (err) {
       Logger.log(err)
