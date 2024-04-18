@@ -296,6 +296,11 @@ type Slider {
   link: String
 }
 
+type BrandList {
+  brands: [Brand!]
+  total: Float
+}
+
 type Rating {
   _id: String!
   product_id: String
@@ -480,6 +485,7 @@ type Query {
   sliders(limit: Float!, offset: Float!): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
   brands(limit: Float!, offset: Float!): [Brand!]!
+  adminBrandList(limit: Float!, offset: Float!): BrandList!
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
   rating(id: Int!): Rating!
   getPromoCodes(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!

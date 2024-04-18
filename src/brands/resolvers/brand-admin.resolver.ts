@@ -8,8 +8,8 @@ export class BrandAdminResolver{
         private readonly brandAdminService:BrandAdminService
     ){}
 
-    @Query(() => BrandList, { name: 'brands' })
-    findAll(
+    @Query(() => BrandList, { name: 'adminBrandList' })
+    adminBrandList(
         @Args('limit', {type: ()=>Number}) limit:number,
         @Args('offset', {type: ()=>Number}) offset:number
     ) {
