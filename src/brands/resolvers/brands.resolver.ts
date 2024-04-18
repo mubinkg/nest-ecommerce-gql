@@ -14,7 +14,7 @@ export class BrandsResolver {
     return this.brandsService.create(createBrandInput);
   }
 
-  @Query(() => BrandList, { name: 'brands' })
+  @Query(() => [Brand], { name: 'brands' })
   findAll(
     @Args('limit', {type: ()=>Number}) limit:number,
     @Args('offset', {type: ()=>Number}) offset:number
