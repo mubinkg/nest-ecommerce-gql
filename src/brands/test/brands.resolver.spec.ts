@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BrandsResolver } from './brands.resolver';
-import { BrandsService } from './brands.service';
+import { BrandsResolver } from './resolvers/brands.resolver';
+import { BrandsService } from './services/brands.service';
 
 describe('BrandsResolver', () => {
   let resolver: BrandsResolver;

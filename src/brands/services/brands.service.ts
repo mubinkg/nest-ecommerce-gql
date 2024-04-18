@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateBrandInput } from './dto/create-brand.input';
-import { UpdateBrandInput } from './dto/update-brand.input';
+import { CreateBrandInput } from '../dto/create-brand.input';
+import { UpdateBrandInput } from '../dto/update-brand.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Brand, BrandDocument } from './entities/brand.entity';
+import { Brand, BrandDocument } from '../entities/brand.entity';
 import { Model } from 'mongoose';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';

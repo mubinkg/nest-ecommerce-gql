@@ -1,9 +1,9 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { BrandsService } from './brands.service';
-import { Brand } from './entities/brand.entity';
-import { CreateBrandInput } from './dto/create-brand.input';
-import { UpdateBrandInput } from './dto/update-brand.input';
-import { BrandList } from './dto/brand-list.dto';
+import { BrandsService } from '../services/brands.service';
+import { Brand } from '../entities/brand.entity';
+import { CreateBrandInput } from '../dto/create-brand.input';
+import { UpdateBrandInput } from '../dto/update-brand.input';
+import { BrandList } from '../dto/brand-list.dto';
 
 @Resolver(() => Brand)
 export class BrandsResolver {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { BrandsService } from './brands.service';
-import { BrandsResolver } from './brands.resolver';
+import { BrandsService } from './services/brands.service';
+import { BrandsResolver } from './resolvers/brands.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Brand, BrandSchema } from './entities/brand.entity';
 
