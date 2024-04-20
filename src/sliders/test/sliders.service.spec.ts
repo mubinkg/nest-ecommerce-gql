@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SlidersService } from './sliders.service';
+import { SlidersService } from '../services/sliders.service';
 
 describe('SlidersService', () => {
   let service: SlidersService;

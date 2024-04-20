@@ -75,10 +75,10 @@ export class ProductsService {
         matchFirstStage['_id'] = new mongoose.Types.ObjectId(id)
       }
       if (seller_id) {
-        matchFirstStage['seller_id'] = new mongoose.Types.ObjectId(seller_id)
+        matchFirstStage['seller'] = new mongoose.Types.ObjectId(seller_id)
       }
       if (category_id) {
-        matchFirstStage['category_id'] = new mongoose.Types.ObjectId(category_id)
+        matchFirstStage['category'] = new mongoose.Types.ObjectId(category_id)
       }
 
       //tags not implemented

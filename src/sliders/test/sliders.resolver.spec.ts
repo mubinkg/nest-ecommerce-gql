@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SlidersResolver } from './sliders.resolver';
-import { SlidersService } from './sliders.service';
+import { SlidersResolver } from '../resolvers/sliders.resolver';
+import { SlidersService } from '../services/sliders.service';
 
 describe('SlidersResolver', () => {
   let resolver: SlidersResolver;

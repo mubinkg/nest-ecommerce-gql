@@ -1,9 +1,9 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { SlidersService } from './sliders.service';
-import { Slider } from './entities/slider.entity';
-import { CreateSliderInput } from './dto/create-slider.input';
-import { SliderType } from './entities/slider-type.entity';
-import { CreateSliderTypeInput } from './dto/create-slider-type.input';
+import { SlidersService } from '../services/sliders.service';
+import { Slider } from '../entities/slider.entity';
+import { CreateSliderInput } from '../dto/create-slider.input';
+import { SliderType } from '../entities/slider-type.entity';
+import { CreateSliderTypeInput } from '../dto/create-slider-type.input';
 
 @Resolver(() => Slider)
 export class SlidersResolver {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { SlidersService } from './sliders.service';
-import { SlidersResolver } from './sliders.resolver';
+import { SlidersService } from './services/sliders.service';
+import { SlidersResolver } from './resolvers/sliders.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Slider, SliderSchema } from './entities/slider.entity';
 import { SliderType, SliderTypeSchema } from './entities/slider-type.entity';
