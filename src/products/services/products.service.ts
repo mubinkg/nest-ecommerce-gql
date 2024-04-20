@@ -1,16 +1,16 @@
 import { Injectable, InternalServerErrorException, NotAcceptableException, NotImplementedException } from '@nestjs/common';
-import { CreateProductInput } from './dto/create-product.input';
-import { UpdateProductInput } from './dto/update-product.input';
+import { CreateProductInput } from '../dto/create-product.input';
+import { UpdateProductInput } from '../dto/update-product.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Product, ProductDocument } from './entities/product.entity';
+import { Product, ProductDocument } from '../entities/product.entity';
 import mongoose, { Model } from 'mongoose';
 import { Logger } from '@nestjs/common';
-import { ProductVariantsService } from './../product-variants/product-variants.service';
+import { ProductVariantsService } from '../../product-variants/product-variants.service';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
-import { VideoType } from './enum';
-import { GetProductDto } from './dto/get-products.dto';
-import { UpdateProductGlobalOrderNoInput } from './dto/updateGlobalOrderNo.input';
+import { VideoType } from '../enum';
+import { GetProductDto } from '../dto/get-products.dto';
+import { UpdateProductGlobalOrderNoInput } from '../dto/updateGlobalOrderNo.input';
 
 @Injectable()
 export class ProductsService {
