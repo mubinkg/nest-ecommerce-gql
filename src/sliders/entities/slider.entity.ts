@@ -23,6 +23,14 @@ export class Slider {
   @Field(() => String , {nullable:true})
   @Prop({type: String})
   link?: string;
+
+  @Field(() => String , {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId})
+  category?: string;
+
+  @Field(() => String , {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId})
+  product?: string;
 }
 
 export const SliderSchema = SchemaFactory.createForClass(Slider)

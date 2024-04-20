@@ -294,6 +294,8 @@ type Slider {
   slider_type: SliderType
   image: String
   link: String
+  category: String
+  product: String
 }
 
 type BrandList {
@@ -1031,6 +1033,8 @@ input CreateSliderInput {
   slider_type: String
   image: Upload
   link: String
+  category: String
+  product: String
 }
 
 input CreateSliderTypeInput {
