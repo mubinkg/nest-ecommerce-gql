@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CategoriesResolver } from './categories.resolver';
-import { CategoriesService } from './categories.service';
+import { CategoriesResolver } from '../resolvers/categories.resolver';
+import { CategoriesService } from '../services/categories.service';
 
 describe('CategoriesResolver', () => {
   let resolver: CategoriesResolver;

@@ -23,4 +23,11 @@ export class AdminSliderResolver{
     ){
         return this.productSliderService.getProduct(query)
     }
+
+    @Query(()=>[SliderProduct], {nullable:true})
+    sliderCategory(
+        @Args({type: ()=>String, name: 'query'}) query:string
+    ){
+        return this.productSliderService.getProduct(query)
+    }
 }

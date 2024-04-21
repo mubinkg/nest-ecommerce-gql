@@ -493,6 +493,7 @@ type Query {
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
   sliderType: [SliderType!]
   sliderProduct(query: String!): [SliderProduct!]
+  sliderCategory(query: String!): [SliderProduct!]
   brands(limit: Float!, offset: Float!): [Brand!]!
   adminBrandList(limit: Float!, offset: Float!): BrandList!
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!

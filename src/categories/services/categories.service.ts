@@ -1,12 +1,12 @@
 import { Injectable, InternalServerErrorException, NotImplementedException } from '@nestjs/common';
-import { CreateCategoryInput } from './dto/create-category.input';
-import { UpdateCategoryInput } from './dto/update-category.input';
+import { CreateCategoryInput } from '../dto/create-category.input';
+import { UpdateCategoryInput } from '../dto/update-category.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Category, CategoryDocuemnt } from './entities/category.entity';
+import { Category, CategoryDocuemnt } from '../entities/category.entity';
 import mongoose, { Model, Mongoose } from 'mongoose';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
-import { GetCategoryDto } from './entities/get-category.dto';
+import { GetCategoryDto } from '../entities/get-category.dto';
 
 @Injectable()
 export class CategoriesService {
