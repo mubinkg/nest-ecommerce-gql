@@ -8,4 +8,13 @@ export class AdminSliderService{
     constructor(
         @InjectModel(SliderType.name) private readonly sliderTypeModel:Model<SliderTypeDocument>
     ){}
+
+    async getSliderType(){
+        try{
+            return await this.sliderTypeModel.find({})
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

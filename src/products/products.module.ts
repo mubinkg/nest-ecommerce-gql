@@ -8,6 +8,7 @@ import { ProductTaxService } from './services/product-tax.service';
 import { ProductVariantsModule } from 'src/product-variants/product-variants.module';
 import { ProductAdminResolver } from './resolvers/product-admin.resolver';
 import { ProductAdminService } from './services/product-admin.service';
+import { ProductSliderService } from './services/product-slider.service';
 
 @Module({
   imports: [MongooseModule.forFeature([
@@ -18,6 +19,7 @@ import { ProductAdminService } from './services/product-admin.service';
       name: ProductTax.name, schema: ProductTaxSchema
     },
   ]),ProductVariantsModule],
-  providers: [ProductsResolver, ProductsService, ProductTaxService, ProductAdminResolver, ProductAdminService],
+  providers: [ProductsResolver, ProductsService, ProductTaxService, ProductAdminResolver, ProductAdminService, ProductSliderService],
+  exports: [ProductSliderService]
 })
 export class ProductsModule {}

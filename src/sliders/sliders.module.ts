@@ -6,6 +6,7 @@ import { Slider, SliderSchema } from './entities/slider.entity';
 import { SliderType, SliderTypeSchema } from './entities/slider-type.entity';
 import { AdminSliderResolver } from './resolvers/admin.slider.resolver';
 import { AdminSliderService } from './services/admin-slider.service';
+import { ProductsModule } from 'src/products/products.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { AdminSliderService } from './services/admin-slider.service';
         name: SliderType.name,
         schema: SliderTypeSchema
       }
-    ])
+    ]),
+    ProductsModule
   ],
   providers: [SlidersResolver, SlidersService, AdminSliderResolver, AdminSliderService],
 })

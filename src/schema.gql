@@ -298,6 +298,11 @@ type Slider {
   product: String
 }
 
+type SliderProduct {
+  _id: String
+  pro_input_name: String
+}
+
 type BrandList {
   brands: [Brand!]
   total: Float
@@ -486,6 +491,8 @@ type Query {
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
+  sliderType: [SliderType!]
+  sliderProduct(query: String!): [SliderProduct!]
   brands(limit: Float!, offset: Float!): [Brand!]!
   adminBrandList(limit: Float!, offset: Float!): BrandList!
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
