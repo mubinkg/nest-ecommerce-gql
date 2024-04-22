@@ -25,11 +25,11 @@ export class Slider {
   link?: string;
 
   @Field(() => String , {nullable:true})
-  @Prop({type: mongoose.Schema.Types.ObjectId})
+  @Prop({type: String})
   category?: string;
 
   @Field(() => String , {nullable:true})
-  @Prop({type: mongoose.Schema.Types.ObjectId})
+  @Prop({type: String})
   product?: string;
 }
 

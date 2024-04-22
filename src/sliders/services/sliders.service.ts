@@ -19,6 +19,7 @@ export class SlidersService {
 
   async create(createSliderInput: CreateSliderInput) {
     try{
+      if(!createSliderInput.image) throw new NotImplementedException('Slider Image Not Found')
       const data = await uploadFile(createSliderInput.image as FileUpload)
       createSliderInput.image = data as string
       return await this.sliderModel.create(createSliderInput)
