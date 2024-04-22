@@ -308,6 +308,11 @@ type SliderCategory {
   name: String
 }
 
+type SliderResponseDto {
+  sliders: [Slider!]
+  count: Float
+}
+
 type BrandList {
   brands: [Brand!]
   total: Float
@@ -499,6 +504,7 @@ type Query {
   sliderType: [SliderType!]
   sliderProduct(query: String!): [SliderProduct!]
   sliderCategory(query: String!): [SliderCategory!]
+  adminSliderList(limit: Float!, offset: Float!): SliderResponseDto!
   brands(limit: Float!, offset: Float!): [Brand!]!
   adminBrandList(limit: Float!, offset: Float!): BrandList!
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
