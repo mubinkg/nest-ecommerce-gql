@@ -3,6 +3,7 @@ import { CategoriesService } from './services/categories.service';
 import { CategoriesResolver } from './resolvers/categories.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Category, CategorySchema } from './entities/category.entity';
+import { CategoriesSliderService } from './services/categories-slider.service';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { Category, CategorySchema } from './entities/category.entity';
       }
     ])
   ],
-  providers: [CategoriesResolver, CategoriesService],
+  providers: [CategoriesResolver, CategoriesService, CategoriesSliderService],
+  exports: [CategoriesSliderService]
 })
 export class CategoriesModule {}
