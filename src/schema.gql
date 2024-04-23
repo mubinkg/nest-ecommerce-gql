@@ -455,6 +455,11 @@ type Faq {
   ans: String
 }
 
+type FaqAdminDto {
+  faqs: [Faq!]
+  count: Float
+}
+
 type Section {
   _id: String
   title: String
@@ -524,6 +529,7 @@ type Query {
   aramics: String!
   aramic(id: Int!): Aramic!
   faq(getFaqInput: GetFaqInput!): [Faq!]!
+  adminFaqList(limit: Float!, offset: Float!): FaqAdminDto!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
   sellers(limit: Float!, offset: Float!, status: String): SellerList!
