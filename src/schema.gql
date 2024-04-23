@@ -451,7 +451,7 @@ type Aramic {
 type Faq {
   product: Product
   question: String
-  user: String
+  user: Seller
   ans: String
 }
 
