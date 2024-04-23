@@ -4,6 +4,8 @@ import { FaqResolver } from './resolvers/faq.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Faq } from './entities/faq.entity';
 import { FaqSchema } from './dto/create-faq.input';
+import { FaqAdminService } from './services/faq-admin.service';
+import { FaqAdminResolver } from './resolvers/faq-admin.resolver';
 
 @Module({
   imports: [
@@ -14,6 +16,6 @@ import { FaqSchema } from './dto/create-faq.input';
       }
     ])
   ],
-  providers: [FaqResolver, FaqService],
+  providers: [FaqResolver, FaqService, FaqAdminService, FaqAdminResolver],
 })
 export class FaqModule {}
