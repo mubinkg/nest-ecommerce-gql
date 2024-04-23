@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FaqResolver } from './faq.resolver';
-import { FaqService } from './faq.service';
+import { FaqResolver } from '../resolvers/faq.resolver';
+import { FaqService } from '../services/faq.service';
 
 describe('FaqResolver', () => {
   let resolver: FaqResolver;

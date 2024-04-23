@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFaqInput, FaqDocument } from './dto/create-faq.input';
-import { UpdateFaqInput } from './dto/update-faq.input';
+import { CreateFaqInput, FaqDocument } from '../dto/create-faq.input';
+import { UpdateFaqInput } from '../dto/update-faq.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Faq } from './entities/faq.entity';
+import { Faq } from '../entities/faq.entity';
 import { Model } from 'mongoose';
-import { GetFaqInput } from './dto/get-faq-input';
+import { GetFaqInput } from '../dto/get-faq-input';
 
 @Injectable()
 export class FaqService {

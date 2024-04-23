@@ -1,12 +1,12 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { FaqService } from './faq.service';
-import { Faq } from './entities/faq.entity';
-import { CreateFaqInput } from './dto/create-faq.input';
-import { UpdateFaqInput } from './dto/update-faq.input';
+import { FaqService } from '../services/faq.service';
+import { Faq } from '../entities/faq.entity';
+import { CreateFaqInput } from '../dto/create-faq.input';
+import { UpdateFaqInput } from '../dto/update-faq.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
-import { GetFaqInput } from './dto/get-faq-input';
+import { GetFaqInput } from '../dto/get-faq-input';
 
 @Resolver(() => Faq)
 export class FaqResolver {

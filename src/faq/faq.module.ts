@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { FaqService } from './faq.service';
-import { FaqResolver } from './faq.resolver';
+import { FaqService } from './services/faq.service';
+import { FaqResolver } from './resolvers/faq.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Faq } from './entities/faq.entity';
 import { FaqSchema } from './dto/create-faq.input';
