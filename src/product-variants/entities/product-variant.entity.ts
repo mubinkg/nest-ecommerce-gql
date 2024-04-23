@@ -9,10 +9,10 @@ import { Product } from 'src/products/entities/product.entity';
 @ObjectType()
 @Schema({ timestamps: true })
 export class ProductVariant {
-  @Field(() => String, { description: 'Regular Price' })
+  @Field(() => String, { description: 'Regular Price', nullable:true })
   _id?:string;
   
-  @Field(() => Number, { description: 'Regular Price' })
+  @Field(() => Number, { description: 'Regular Price', nullable:true })
   @Prop({ type: Number })
   price?: number;
 

@@ -115,7 +115,7 @@ export class ProductsService {
           $lookup: {
             from: 'productvariants',
             localField: '_id',
-            foreignField: 'productId',
+            foreignField: 'product',
             as: 'productvariants'
           }
         }, 
@@ -154,8 +154,8 @@ export class ProductsService {
           pro_input_name: {
             $first: "$pro_input_name",
           },
-          seller_id: {
-            $first: "$seller_id",
+          seller: {
+            $first: "$seller",
           },
           short_description: {
             $first: "$short_description",
@@ -235,8 +235,8 @@ export class ProductsService {
           status: {
             $first: "$status",
           },
-          category_id: {
-            $first: "$category_id",
+          category: {
+            $first: "$category",
           },
           tax: {
             $first: "$tax",

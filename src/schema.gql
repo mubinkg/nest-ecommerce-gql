@@ -119,10 +119,10 @@ enum ProductAttributeValueType {
 
 type ProductVariant {
   """Regular Price"""
-  _id: String!
+  _id: String
 
   """Regular Price"""
-  price: Float!
+  price: Float
 
   """Price after discount"""
   specialPrice: Float
@@ -194,7 +194,7 @@ type ProductResponse {
   globalOrderNo: Float
 
   """Product Variants"""
-  productvariants: [ProductVariant!]!
+  productvariants: [ProductVariant!]
 }
 
 type AdminProductListResponseDto {
