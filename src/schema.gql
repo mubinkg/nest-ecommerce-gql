@@ -449,6 +449,7 @@ type Aramic {
 }
 
 type Faq {
+  _id: String!
   product: Product
   question: String
   user: Seller
@@ -750,6 +751,7 @@ type Mutation {
   updateAramic(updateAramicInput: UpdateAramicInput!): Aramic!
   removeAramic(id: Int!): Aramic!
   createFaq(createFaqInput: CreateFaqInput!): Faq!
+  createAdminFaq(faqAdminInput: FaqAdminInput!): Faq!
   sendOtp(mobile: String!): String!
   createSection(createSectionInput: CreateSectionInput!): Section!
   createSeller(createSellerInput: CreateSellerInput!): Seller!
@@ -1204,6 +1206,12 @@ input UpdateAramicInput {
 input CreateFaqInput {
   product: String!
   question: String!
+}
+
+input FaqAdminInput {
+  product: String!
+  question: String!
+  ans: String
 }
 
 input CreateSectionInput {

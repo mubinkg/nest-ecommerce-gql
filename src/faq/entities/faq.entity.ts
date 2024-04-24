@@ -9,6 +9,10 @@ import { Seller } from 'src/sellers/entities/seller.entity';
   timestamps: true
 })
 export class Faq {
+
+  @Field(()=>String)
+  _id?: string
+
   @Field(()=>Product, {nullable:true})
   @Prop({type:mongoose.Schema.Types.ObjectId, ref: 'Product'})
   product?: Product
