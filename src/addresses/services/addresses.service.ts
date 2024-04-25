@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
-import { CreateAddressInput } from './dto/create-address.input';
-import { UpdateAddressInput } from './dto/update-address.input';
+import { CreateAddressInput } from '../dto/create-address.input';
+import { UpdateAddressInput } from '../dto/update-address.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Address, AddressDocument } from './entities/address.entity';
+import { Address, AddressDocument } from '../entities/address.entity';
 import { Model } from 'mongoose';
 
 @Injectable()

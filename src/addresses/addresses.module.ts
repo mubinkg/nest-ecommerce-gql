@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AddressesService } from './addresses.service';
-import { AddressesResolver } from './addresses.resolver';
+import { AddressesService } from './services/addresses.service';
+import { AddressesResolver } from './resolvers/addresses.resolver';
 import { Address, AddressSchema } from './entities/address.entity';
 import { MongooseModule } from '@nestjs/mongoose';
 

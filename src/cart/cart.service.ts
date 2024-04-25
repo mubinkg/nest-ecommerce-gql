@@ -6,7 +6,7 @@ import { Cart, CartDocument } from './entities/cart.entity';
 import { Model } from 'mongoose';
 import { CartList, GetCartDto } from './dto/get-cart.dto';
 import { DeliveryCharge, DeliveryChargeDocument } from './entities/delvary-charge.entity';
-import { AddressesService } from 'src/addresses/addresses.service';
+import { AddressesService } from 'src/addresses/services/addresses.service';
 import { Address } from 'src/addresses/entities/address.entity';
 
 @Injectable()
