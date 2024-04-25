@@ -7,6 +7,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './passport.strategy';
 import { GqlAuthGuard } from './jwt-guards';
+import { CustomerAdminService } from './services/customer-admin.service';
+import { CustomerAdminResolver } from './resolvers/customer-admin.resolver';
 
 @Module({
   imports: [
@@ -25,6 +27,6 @@ import { GqlAuthGuard } from './jwt-guards';
     }),
     PassportModule
   ],
-  providers: [CustomersResolver, CustomersService,JwtStrategy, GqlAuthGuard],
+  providers: [CustomersResolver, CustomersService,JwtStrategy, GqlAuthGuard, CustomerAdminService,CustomerAdminResolver],
 })
 export class CustomersModule {}
