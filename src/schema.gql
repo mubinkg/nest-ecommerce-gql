@@ -225,7 +225,6 @@ type Customer {
   city: String
   email: String
   mobile_no: String
-  password: String
   country_code: String
   currency: String
   language: String
@@ -243,6 +242,11 @@ type Customer {
 type AuthResponseDto {
   access_token: String!
   customer: Customer
+}
+
+type CustomerAdminDto {
+  customers: [Customer!]
+  count: Float
 }
 
 type CategoriesResponse {
@@ -502,6 +506,7 @@ type Query {
   city(id: Int!): City!
   signIn(signinInput: SignInDto!): AuthResponseDto!
   verifyUser(verifyUserInput: VerifyUser!): Boolean!
+  customerAdminList(query: String!, limit: Float!, offset: Float!): CustomerAdminDto!
   categories(getCategoriesInput: GetCategoryDto!): [CategoriesResponse!]!
   getAdminCategories(getCategoriesInput: GetCategoryDto!): AdminCategoryList!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!

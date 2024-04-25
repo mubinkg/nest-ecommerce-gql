@@ -39,7 +39,6 @@ export class Customer {
   @Prop({type: String})
   mobile_no?: string
 
-  @Field(()=>String, {nullable:true})
   @Prop({type: String})
   password?: string
 
