@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { CustomersService } from './customers.service';
-import { CustomersResolver } from './customers.resolver';
+import { CustomersService } from './services/customers.service';
+import { CustomersResolver } from './resolvers/customers.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Customer, CustomerSchema } from './entities/customer.entity';
 import { JwtModule } from '@nestjs/jwt';

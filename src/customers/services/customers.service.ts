@@ -1,17 +1,17 @@
 import { Injectable, NotAcceptableException, NotFoundException, NotImplementedException, UnauthorizedException } from '@nestjs/common';
-import { CreateCustomerInput } from './dto/create-customer.input';
-import { UpdateCustomerInput } from './dto/update-customer.input';
+import { CreateCustomerInput } from '../dto/create-customer.input';
+import { UpdateCustomerInput } from '../dto/update-customer.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Customer, CustomerDocument } from './entities/customer.entity';
+import { Customer, CustomerDocument } from '../entities/customer.entity';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
-import { AuthResponseDto } from './dto/auth-response.dto';
+import { AuthResponseDto } from '../dto/auth-response.dto';
 import { JwtService } from '@nestjs/jwt';
-import { SignInDto } from './dto/signin.dto';
-import { VerifyUser } from './entities/verify-user.dto';
-import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { DeleteCustomerInput } from './dto/delete-customer.input';
-import { Status } from './enum/status.enum';
+import { SignInDto } from '../dto/signin.dto';
+import { VerifyUser } from '../entities/verify-user.dto';
+import { UpdateCustomerDto } from '../dto/update-customer.dto';
+import { DeleteCustomerInput } from '../dto/delete-customer.input';
+import { Status } from '../enum/status.enum';
 
 
 @Injectable()
