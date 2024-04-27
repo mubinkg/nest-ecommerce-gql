@@ -1,13 +1,13 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { ProductAttributesService } from './product-attributes.service';
-import { ProductAttribute } from './entities/product-attribute.entity';
-import { CreateProductAttributeInput } from './dto/create-product-attribute.input';
-import { UpdateProductAttributeInput } from './dto/update-product-attribute.input';
-import { ProductAttributeSetService } from './product-attribute-set.service';
-import { ProductAttributeSet } from './entities/product-attribute-set.entity';
-import { CreateProductAttributeSetInput } from './dto/create-product-attribute-set.input';
-import { GetProductAttributeSet } from './dto/get-attributeset.dto';
-import { ProductAttributeResponseDto } from './dto/product-attribute-response.dto';
+import { ProductAttributesService } from '../service/product-attributes.service';
+import { ProductAttribute } from '../entities/product-attribute.entity';
+import { CreateProductAttributeInput } from '../dto/create-product-attribute.input';
+import { UpdateProductAttributeInput } from '../dto/update-product-attribute.input';
+import { ProductAttributeSetService } from '../service/product-attribute-set.service';
+import { ProductAttributeSet } from '../entities/product-attribute-set.entity';
+import { CreateProductAttributeSetInput } from '../dto/create-product-attribute-set.input';
+import { GetProductAttributeSet } from '../dto/get-attributeset.dto';
+import { ProductAttributeResponseDto } from '../dto/product-attribute-response.dto';
 
 @Resolver(() => ProductAttribute)
 export class ProductAttributesResolver {

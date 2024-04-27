@@ -1,8 +1,8 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { CreateProductAttributeInput } from './dto/create-product-attribute.input';
-import { UpdateProductAttributeInput } from './dto/update-product-attribute.input';
+import { CreateProductAttributeInput } from '../dto/create-product-attribute.input';
+import { UpdateProductAttributeInput } from '../dto/update-product-attribute.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { ProductAttribute, ProductAttributeDocument } from './entities/product-attribute.entity';
+import { ProductAttribute, ProductAttributeDocument } from '../entities/product-attribute.entity';
 import { Model } from 'mongoose';
 import ShortUniqueId from 'short-unique-id';
 import { uploadFile } from 'src/util/upload';

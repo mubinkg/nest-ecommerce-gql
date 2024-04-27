@@ -1,7 +1,7 @@
 import { InjectModel } from "@nestjs/mongoose";
-import { ProductAttributeSet, ProductAttributeSetDocument } from "./entities/product-attribute-set.entity";
+import { ProductAttributeSet, ProductAttributeSetDocument } from "../entities/product-attribute-set.entity";
 import { Model } from "mongoose";
-import { CreateProductAttributeSetInput } from "./dto/create-product-attribute-set.input";
+import { CreateProductAttributeSetInput } from "../dto/create-product-attribute-set.input";
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
 
 
