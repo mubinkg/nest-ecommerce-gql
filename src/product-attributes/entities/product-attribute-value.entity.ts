@@ -1,11 +1,14 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import { Prop, Schema } from "@nestjs/mongoose";
 import { ProductAttributeValueType } from "../enum/attribute-value-type.enum";
-import mongoose from "mongoose";
+
 
 @ObjectType()
-@Schema({_id:false})
+@Schema({
+    timestamps: false
+})
 export class ProductAttributeValue{
+    
     @Field(()=>String,{nullable:true})
     @Prop({type:String})
     id?:string

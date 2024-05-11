@@ -139,51 +139,6 @@ export class Product {
   @Prop({type:String})
   product_type?: string
 
-  // @Field(()=>Number, {nullable:true})
-  // @Prop({type:Number})
-  // stock_type: number
-
-  // @Field(()=>Number, {nullable:true})
-  // @Prop({type:Number})
-  // cod_allowed: number
-
-  // @Field(()=>Boolean, {nullable:true})
-  // @Prop({type:Boolean})
-  // is_prices_inclusive_tax: boolean
-
-  // @Field(()=>String, {nullable:true})
-  // @Prop({type:String})
-  // image: string
-
-
-  // @Field(()=>String, {nullable:true})
-  // @Prop({type:String})
-  // sku: string
-
-  // @Field(()=>Number, {nullable:true})
-  // @Prop({type:Number})
-  // stock: number
-
-  // @Field(()=>Number, {nullable:true})
-  // @Prop({type:Number})
-  // availability: number
-
-  // @Field(()=>String, {nullable:true})
-  // @Prop({type:String})
-  // description: string
-
-  // @Field(()=>String, {nullable:true})
-  // @Prop({type:String})
-  // deliverable_type: string
-
-  // @Field(()=>String, {nullable:true})
-  // @Prop({type:String})
-  // deliverable_zipcodes: string
-
-  // @Field(()=>String, {nullable:true})
-  // @Prop({type:String})
-  // variant_id: string
-
   @Field(()=>Number, {nullable:true})
   @Prop({type:Number})
   globalOrderNo?: number

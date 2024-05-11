@@ -16,35 +16,24 @@ export class ProductAttributesService {
   ){}
 
  async createProductAttribute(createProductAttributeInput: CreateProductAttributeInput) {
-
-     let attribute
-
-     let createInputArray=[]
-
-     for (let index = 0; index <  createProductAttributeInput.values.length; index++) {
-              const shortId=new ShortUniqueId({ length: 8 ,dictionary:"alphanum_upper"})()
-              createProductAttributeInput.values[index].id="AV"+shortId
-
-              if(createProductAttributeInput.values[index].image){
-
-                const imageUrl = await uploadFile(createProductAttributeInput.values[index].image as FileUpload) as string;
-                
-                createProductAttributeInput.values[index].image=imageUrl
-              }
-     }
-
-      createProductAttributeInput.values.map((element)=>{
-          createInputArray.push({name:createProductAttributeInput.name,attributeSet:createProductAttributeInput.attributeSet,values:element})
-      })
-
-
+  console.log(createProductAttributeInput)
       try {
-        attribute= await this.productAttributeModel.insertMany(createInputArray)
+        for (let index = 0; index <  createProductAttributeInput.values.length; index++) {
+          const shortId=new ShortUniqueId({ length: 8 ,dictionary:"alphanum_upper"})()
+          createProductAttributeInput.values[index].id="AV"+shortId
+  
+          if(createProductAttributeInput.values[index].image){
+  
+            const imageUrl = await uploadFile(createProductAttributeInput.values[index].image as FileUpload) as string;
+            
+            createProductAttributeInput.values[index].image=imageUrl
+          }
+        }
+        const attribute =  await this.productAttributeModel.create(createProductAttributeInput)
+        return attribute
       } catch (error) {
         throw new InternalServerErrorException('Failed to create attribute'+error.message)
       }
-
-    return attribute;
   }
 
   async findAll(limit:number, offset:number, queryString:string) {

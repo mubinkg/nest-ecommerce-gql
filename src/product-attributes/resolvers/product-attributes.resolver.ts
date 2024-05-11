@@ -16,7 +16,7 @@ export class ProductAttributesResolver {
               private readonly productAttributeSetService:ProductAttributeSetService
     ) {}
 
-  @Mutation(() => [ProductAttribute])
+  @Mutation(() => ProductAttribute)
   async createProductAttribute(@Args('createProductAttributeInput') createProductAttributeInput: CreateProductAttributeInput) {
     return await this.productAttributesService.createProductAttribute(createProductAttributeInput);
   }

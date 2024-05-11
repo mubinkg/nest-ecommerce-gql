@@ -425,7 +425,7 @@ type ProductAttribute {
   _id: String
   name: String
   attributeSet: ProductAttributeSet
-  values: ProductAttributeValue
+  values: [ProductAttributeValue!]
   status: ActiveStatus
 }
 
@@ -745,7 +745,7 @@ type Mutation {
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrderStatus(updateOrderInput: UpdateOrderInput!): String!
   removeOrder(id: Int!): Order!
-  createProductAttribute(createProductAttributeInput: CreateProductAttributeInput!): [ProductAttribute!]!
+  createProductAttribute(createProductAttributeInput: CreateProductAttributeInput!): ProductAttribute!
   createProductAttributeSet(createProductAttributeInput: CreateProductAttributeSetInput!): ProductAttributeSet!
   updateProductAttribute(updateProductAttributeInput: UpdateProductAttributeInput!): ProductAttribute!
   removeProductAttribute(id: Int!): ProductAttribute!
