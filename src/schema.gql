@@ -149,7 +149,8 @@ type ProductVariant {
   stockStatus: String
 
   """If variants is missing it will be general variant"""
-  attributeReference: String
+  attributeReference: [String!]
+  attributeValues: [String!]
 
   """Attribute Values"""
   attributes: ProductAttributeValue
@@ -800,7 +801,7 @@ input CreateProductInput {
   warranty_period: String
   guarantee_period: String
   download_allowed: Float
-  download_link_type: DownloadLinkType
+  download_link_type: String
   pro_input_zip: Upload
   download_link: String
   is_returnable: Float
@@ -891,10 +892,10 @@ input CreateProductVariantInput {
   stockStatus: StockStatus
 
   """If variants is missing it will be general variant"""
-  attributeReference: String
+  attributeReference: [String!]
 
-  """Product Reference Id"""
-  productId: String
+  """If variants is missing it will be general variant"""
+  attributeValues: [String!]
 }
 
 enum StockStatus {
@@ -918,7 +919,7 @@ input UpdateProductInput {
   warranty_period: String
   guarantee_period: String
   download_allowed: Float
-  download_link_type: DownloadLinkType
+  download_link_type: String
   pro_input_zip: Upload
   download_link: String
   is_returnable: Float

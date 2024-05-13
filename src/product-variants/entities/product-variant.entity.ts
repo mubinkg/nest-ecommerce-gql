@@ -49,9 +49,13 @@ export class ProductVariant {
   stockStatus?: StockStatus;
 
  //variant reference id 
-  @Field(() => String, { description: "If variants is missing it will be general variant", nullable: true })
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ProductAttribute'})
-  attributeReference?: string;
+  @Field(() => [String], { description: "If variants is missing it will be general variant", nullable: true })
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'ProductAttribute'}])
+  attributeReference?: string[];
+
+  @Field(() => [String], { nullable: true })
+  @Prop([{ type: String}])
+  attributeValues?: string[];
 
   @Field(() => ProductAttributeValue, { description: "Attribute Values", nullable: true })
   attributes?:  ProductAttributeValue;

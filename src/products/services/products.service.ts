@@ -22,7 +22,7 @@ export class ProductsService {
 
   async create(createProductInput: CreateProductInput) {
     const { createProductVariantInput } = createProductInput
-
+    
     try {
 
       if (createProductInput?.pro_input_image) {

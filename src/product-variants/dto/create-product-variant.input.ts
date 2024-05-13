@@ -32,10 +32,9 @@ export class CreateProductVariantInput {
   @Field(() => StockStatus, { description: "", nullable: true })
   stockStatus?: StockStatus;
 
-  @Field(() => String, { description: "If variants is missing it will be general variant", nullable: true })
-  attributeReference?: string;
- 
+  @Field(() => [String], { description: "If variants is missing it will be general variant", nullable: true })
+  attributeReference?: string[];
 
-  @Field(() => String, { description: "Product Reference Id", nullable: true })
-  productId?: string
+  @Field(() => [String], { description: "If variants is missing it will be general variant", nullable: true })
+  attributeValues?: string[];
 }

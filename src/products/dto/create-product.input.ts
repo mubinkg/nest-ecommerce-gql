@@ -98,10 +98,9 @@ export class CreateProductInput {
   @IsNumber()
   download_allowed?: number
 
-  @Field(()=>DownloadLinkType, {nullable:true})
+  @Field(()=>String, {nullable:true})
   @IsOptional()
-  @IsEnum(DownloadLinkType)
-  download_link_type?: DownloadLinkType
+  download_link_type?: string
 
   @Field(()=>GraphQLUpload, {nullable:true})
   pro_input_zip?: FileUpload | string
