@@ -20,8 +20,8 @@ export class ProductVariantsService {
     }
   }
 
-  findAll() {
-    return `This action returns all productVariants`;
+  async findAll() {
+    return await this.productVariantModel.find({}).populate({path: 'product'})
   }
 
   findOne(id: number) {
