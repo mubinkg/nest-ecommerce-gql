@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
@@ -16,11 +16,15 @@ export class Media {
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
-  url?:String
+  file?:String
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
   extension?:String
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  type?:String
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})

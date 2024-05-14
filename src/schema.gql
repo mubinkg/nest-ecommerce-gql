@@ -495,8 +495,9 @@ type SellerList {
 type Media {
   _id: String!
   name: String
-  url: String
+  file: String
   extension: String
+  type: String
   subDirectory: String
   size: Float
 }
@@ -1280,12 +1281,18 @@ enum SellerStatusEnum {
 }
 
 input CreateMediaInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  file: Upload
+  name: String
+  extension: String
+  subDirectory: String
+  size: Float
 }
 
 input UpdateMediaInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  file: Upload
+  name: String
+  extension: String
+  subDirectory: String
+  size: Float
   id: Int!
 }
