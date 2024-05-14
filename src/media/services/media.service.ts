@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateMediaInput } from './dto/create-media.input';
-import { UpdateMediaInput } from './dto/update-media.input';
+import { CreateMediaInput } from '../dto/create-media.input';
+import { UpdateMediaInput } from '../dto/update-media.input';
 
 @Injectable()
 export class MediaService {

@@ -492,6 +492,15 @@ type SellerList {
   total: Float
 }
 
+type Media {
+  _id: String!
+  name: String
+  url: String
+  extension: String
+  subDirectory: String
+  size: Float
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -541,6 +550,7 @@ type Query {
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
   sellers(limit: Float!, offset: Float!, status: String): SellerList!
   seller(id: Int!): Seller!
+  media(id: Int!): Media!
 }
 
 input GetTicketsDto {
@@ -763,6 +773,9 @@ type Mutation {
   createSeller(createSellerInput: CreateSellerInput!): Seller!
   updateSeller(updateSellerInput: UpdateSellerInput!): Seller!
   signinSeller(password: String!, phone: String!): SellerAuthResponse!
+  createMedia(createMediaInput: CreateMediaInput!): Media!
+  updateMedia(updateMediaInput: UpdateMediaInput!): Media!
+  removeMedia(id: Int!): Media!
 }
 
 input CreateTicketInput {
@@ -1264,4 +1277,15 @@ input UpdateSellerInput {
 enum SellerStatusEnum {
   ACTIVE
   INACTIVE
+}
+
+input CreateMediaInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateMediaInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

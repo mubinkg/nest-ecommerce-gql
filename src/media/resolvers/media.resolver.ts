@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { MediaService } from './media.service';
-import { Media } from './entities/media.entity';
-import { CreateMediaInput } from './dto/create-media.input';
-import { UpdateMediaInput } from './dto/update-media.input';
+import { MediaService } from '../services/media.service';
+import { Media } from '../entities/media.entity';
+import { CreateMediaInput } from '../dto/create-media.input';
+import { UpdateMediaInput } from '../dto/update-media.input';
 
 @Resolver(() => Media)
 export class MediaResolver {

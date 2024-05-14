@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MediaResolver } from './media.resolver';
-import { MediaService } from './media.service';
+import { MediaResolver } from '../resolvers/media.resolver';
+import { MediaService } from '../services/media.service';
 
 describe('MediaResolver', () => {
   let resolver: MediaResolver;
