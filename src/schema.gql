@@ -103,9 +103,29 @@ enum DownloadLinkType {
   ADD_LINK
 }
 
+type ProductAttributeSet {
+  _id: String
+  attributeSetName: String
+  status: ActiveStatus
+}
+
+enum ActiveStatus {
+  ACTIVE
+  INACTIVE
+}
+
+type ProductAttribute {
+  _id: String
+  name: String
+  attributeSet: ProductAttributeSet
+  values: [ProductAttributeValue!]
+  status: ActiveStatus
+}
+
 type ProductAttributeValue {
   _id: String
   type: ProductAttributeValueType
+  productAttribute: ProductAttribute
   valueName: String
   image: String
   color: String
@@ -116,11 +136,6 @@ enum ProductAttributeValueType {
   DEFAULT
   COLOR
   IMAGE
-}
-
-enum ActiveStatus {
-  ACTIVE
-  INACTIVE
 }
 
 type ProductVariant {
@@ -420,20 +435,6 @@ type Order {
 type AdminOrderResponse {
   orders: [Order!]
   count: Float
-}
-
-type ProductAttributeSet {
-  _id: String
-  attributeSetName: String
-  status: ActiveStatus
-}
-
-type ProductAttribute {
-  _id: String
-  name: String
-  attributeSet: ProductAttributeSet
-  values: [ProductAttributeValue!]
-  status: ActiveStatus
 }
 
 type GetProductAttributeSet {
