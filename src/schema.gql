@@ -502,6 +502,11 @@ type Media {
   size: Float
 }
 
+type AdminMedia {
+  media: [Media!]
+  count: Float
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -551,6 +556,7 @@ type Query {
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
   sellers(limit: Float!, offset: Float!, status: String): SellerList!
   seller(id: Int!): Seller!
+  adminMedia: AdminMedia!
   media(id: Int!): Media!
 }
 
@@ -776,7 +782,7 @@ type Mutation {
   signinSeller(password: String!, phone: String!): SellerAuthResponse!
   createMedia(createMediaInput: CreateMediaInput!): Media!
   updateMedia(updateMediaInput: UpdateMediaInput!): Media!
-  removeMedia(id: Int!): Media!
+  removeMedia(id: String!): Media!
 }
 
 input CreateTicketInput {

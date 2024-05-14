@@ -3,17 +3,22 @@ import { MediaService } from '../services/media.service';
 import { Media } from '../entities/media.entity';
 import { CreateMediaInput } from '../dto/create-media.input';
 import { UpdateMediaInput } from '../dto/update-media.input';
+import { AdminMedia } from '../dto/admin-media.dto';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
 
 @Resolver(() => Media)
 export class MediaResolver {
   constructor(private readonly mediaService: MediaService) {}
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Media)
   createMedia(@Args('createMediaInput') createMediaInput: CreateMediaInput) {
     return this.mediaService.create(createMediaInput);
   }
 
-  @Query(() => [Media], { name: 'media' })
+  @UseGuards(GqlAuthGuard)
+  @Query(() => AdminMedia, { name: 'adminMedia' })
   findAll() {
     return this.mediaService.findAll();
   }
@@ -29,7 +34,7 @@ export class MediaResolver {
   }
 
   @Mutation(() => Media)
-  removeMedia(@Args('id', { type: () => Int }) id: number) {
+  removeMedia(@Args('id', { type: () => String }) id: string) {
     return this.mediaService.remove(id);
   }
 }

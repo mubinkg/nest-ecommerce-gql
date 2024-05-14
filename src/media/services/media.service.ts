@@ -23,8 +23,16 @@ export class MediaService {
     }
   }
 
-  findAll() {
-    return `This action returns all media`;
+  async findAll() {
+    try{  
+      const count = await this.mediaModel.countDocuments({})
+      const media = await this.mediaModel.find({}).sort('-_id')
+      return {
+        count, media
+      }
+    }catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {
@@ -35,7 +43,11 @@ export class MediaService {
     return `This action updates a #${id} media`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} media`;
+  async remove(id: string) {
+    try{ 
+      return await this.mediaModel.findByIdAndDelete(id)
+    }catch(err){
+      throw err;
+    }
   }
 }
