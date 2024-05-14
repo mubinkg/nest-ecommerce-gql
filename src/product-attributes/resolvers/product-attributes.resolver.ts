@@ -8,6 +8,7 @@ import { ProductAttributeSet } from '../entities/product-attribute-set.entity';
 import { CreateProductAttributeSetInput } from '../dto/create-product-attribute-set.input';
 import { GetProductAttributeSet } from '../dto/get-attributeset.dto';
 import { ProductAttributeResponseDto } from '../dto/product-attribute-response.dto';
+import { AdminProductAttributeValuesResponse } from '../entities/admin-product-atrribute-values';
 
 @Resolver(() => ProductAttribute)
 export class ProductAttributesResolver {
@@ -57,5 +58,14 @@ export class ProductAttributesResolver {
   @Mutation(() => ProductAttribute)
   removeProductAttribute(@Args('id', { type: () => Int }) id: number) {
     return this.productAttributesService.remove(id);
+  }
+
+  @Query(()=>AdminProductAttributeValuesResponse)
+  attributeValues(
+    @Args('limit', {type: ()=>Number}) limit: number,
+    @Args('offset', {type: ()=>Number}) offset: number,
+    @Args('query', {type: ()=>String,nullable:true}) query: string
+  ){
+    return this.productAttributesService.productAttributeValues(limit, offset)
   }
 }

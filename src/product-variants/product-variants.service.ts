@@ -21,7 +21,7 @@ export class ProductVariantsService {
   }
 
   async findAll() {
-    return await this.productVariantModel.find({}).populate({path: 'product'})
+    return await this.productVariantModel.find({}).populate({path: 'product'}).sort('-_id')
   }
 
   findOne(id: number) {

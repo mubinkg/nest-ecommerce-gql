@@ -1,9 +1,9 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import {raw, Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument } from "mongoose";
-import { ActiveStatus } from "src/promo-code/types/activeStatus.enum";
 import { ProductAttributeValue } from "./product-attribute-value.entity";
 import { ProductAttributeSet } from "./product-attribute-set.entity";
+import { ActiveStatus } from "src/promo-code/types/activeStatus.enum";
 
 export type ProductAttributeDocument = HydratedDocument<ProductAttribute>
 

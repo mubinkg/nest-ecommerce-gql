@@ -51,6 +51,50 @@ export class ProductAttributesService {
     }
   }
 
+  async productAttributeValues(limit:number, offset:number){
+    try{
+      const values = await this.productAttributeModel.aggregate([
+        {
+          $unwind: {
+            path: '$values',
+            preserveNullAndEmptyArrays: true
+          }
+        },
+        {
+          $skip: offset
+        },
+        {
+          $limit: limit
+        }
+      ],
+      )
+      
+      const totalDocs:any = await this.productAttributeModel.aggregate([
+        {
+          $unwind:
+            {
+              path: "$values",
+              preserveNullAndEmptyArrays: true,
+            },
+        },
+        {
+          $group:
+            {
+              _id: null,
+              count: {
+                $sum: 1,
+              },
+            },
+        },
+      ])
+      const count = totalDocs[0]?.count
+      return {count, values}
+    }
+    catch(err){
+      throw err
+    }
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} productAttribute`;
   }

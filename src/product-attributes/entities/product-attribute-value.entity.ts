@@ -1,6 +1,7 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import { Prop, Schema } from "@nestjs/mongoose";
 import { ProductAttributeValueType } from "../enum/attribute-value-type.enum";
+import { ActiveStatus } from "src/promo-code/types/activeStatus.enum";
 
 
 @ObjectType()
@@ -28,4 +29,8 @@ export class ProductAttributeValue{
     @Field(()=>String,{nullable:true})
     @Prop({type:String})
     color?:string
+
+    @Field(()=>ActiveStatus,{nullable:true})
+    @Prop({type:String,enum:ActiveStatus,default:ActiveStatus.ACTIVE})
+    status?:ActiveStatus
 }

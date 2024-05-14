@@ -109,12 +109,18 @@ type ProductAttributeValue {
   valueName: String
   image: String
   color: String
+  status: ActiveStatus
 }
 
 enum ProductAttributeValueType {
   DEFAULT
   COLOR
   IMAGE
+}
+
+enum ActiveStatus {
+  ACTIVE
+  INACTIVE
 }
 
 type ProductVariant {
@@ -365,11 +371,6 @@ enum RepeatUsage {
   NOT_ALLOWED
 }
 
-enum ActiveStatus {
-  ACTIVE
-  INACTIVE
-}
-
 type Favourite {
   _id: String
   product: ProductResponse
@@ -438,6 +439,17 @@ type GetProductAttributeSet {
 type ProductAttributeResponseDto {
   attributeList: [ProductAttribute!]
   count: Float
+}
+
+type AdminProductAttributeValues {
+  name: String
+  values: ProductAttributeValue
+  status: ActiveStatus
+}
+
+type AdminProductAttributeValuesResponse {
+  count: Float
+  values: [AdminProductAttributeValues!]
 }
 
 type ProductFaq {
@@ -547,6 +559,7 @@ type Query {
   getProductAttributeSetList(limit: Float!, offset: Float!, query: String): GetProductAttributeSet
   productAttributes(limit: Float!, offset: Float!, query: String): ProductAttributeResponseDto!
   productAttribute(id: Int!): ProductAttribute!
+  attributeValues(limit: Float!, offset: Float!, query: String): AdminProductAttributeValuesResponse!
   productFaq(id: Int!): ProductFaq!
   aramics: String!
   aramic(id: Int!): Aramic!
