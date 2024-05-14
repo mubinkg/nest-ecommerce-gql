@@ -27,6 +27,7 @@ import { FaqModule } from './faq/faq.module';
 import { SmsModule } from './sms/sms.module';
 import { SectionsModule } from './sections/sections.module';
 import { SellersModule } from './sellers/sellers.module';
+import { MediaModule } from './media/media.module';
 
 
 @Module({
@@ -62,7 +63,8 @@ import { SellersModule } from './sellers/sellers.module';
     FaqModule,
     SmsModule,
     SectionsModule,
-    SellersModule
+    SellersModule,
+    MediaModule
   ],
 })
 export class AppModule {}
