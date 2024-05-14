@@ -3,6 +3,7 @@ import { ProductVariantsService } from './product-variants.service';
 import { ProductVariant } from './entities/product-variant.entity';
 import { CreateProductVariantInput } from './dto/create-product-variant.input';
 import { UpdateProductVariantInput } from './dto/update-product-variant.input';
+import { AmdinProductVariantResponse } from './dto/admin-product-variant.dto';
 
 @Resolver(() => ProductVariant)
 export class ProductVariantsResolver {
@@ -13,9 +14,13 @@ export class ProductVariantsResolver {
   //   return this.productVariantsService.create(createProductVariantInput);
   // }
 
-  @Query(() => [ProductVariant], { name: 'productVariants' })
-  findAll() {
-    return this.productVariantsService.findAll();
+  @Query(() => AmdinProductVariantResponse, { name: 'productVariants' })
+  findAll(
+    @Args('limit', {type: ()=>Number}) limit: number,
+    @Args('offset', {type: ()=>Number}) offset: number,
+    @Args('query', {type: ()=>String,nullable:true}) query: string
+  ) {
+    return this.productVariantsService.findAll(limit,offset);
   }
 
   @Query(() => ProductVariant, { name: 'productVariant' })

@@ -204,6 +204,11 @@ type ProductResponse {
   productvariants: [ProductVariant!]
 }
 
+type AmdinProductVariantResponse {
+  count: Float
+  productVariants: [ProductVariant!]!
+}
+
 type AdminProductListResponseDto {
   products: [Product!]
   count: Float
@@ -526,7 +531,7 @@ type Query {
   get_products(getProductInput: GetProductDto!): [ProductResponse!]!
   product(id: Int!): Product!
   getAdminProductList(adminProductListDto: AdminProductListDto!): AdminProductListResponseDto!
-  productVariants: [ProductVariant!]!
+  productVariants(limit: Float!, offset: Float!, query: String): AmdinProductVariantResponse!
   productVariant(id: Int!): ProductVariant!
   areas: [Area!]!
   areaByCityId(city_id: String!): [Area!]!

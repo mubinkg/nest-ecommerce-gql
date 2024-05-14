@@ -20,8 +20,13 @@ export class ProductVariantsService {
     }
   }
 
-  async findAll() {
-    return await this.productVariantModel.find({}).populate({path: 'product'}).sort('-_id')
+  async findAll(limit:number, offset:number) {
+    const productVariants = await this.productVariantModel.find({}).populate({path: 'product'}).sort('-_id').limit(limit).skip(offset)
+    const count = await this.productVariantModel.countDocuments({})
+    return {
+      productVariants,
+      count
+    }
   }
 
   findOne(id: number) {
