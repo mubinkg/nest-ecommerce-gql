@@ -7,12 +7,14 @@ import { Model } from 'mongoose';
 import ShortUniqueId from 'short-unique-id';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
+import { ProductAttributeValue, ProductAttributeValueDocument } from '../entities/product-attribute-value.entity';
 
 @Injectable()
 export class ProductAttributesService {
 
   constructor(
-    @InjectModel(ProductAttribute.name) private productAttributeModel: Model<ProductAttributeDocument>
+    @InjectModel(ProductAttribute.name) private productAttributeModel: Model<ProductAttributeDocument>,
+    @InjectModel(ProductAttributeValue.name) private productAttributeValueModel:Model<ProductAttributeValueDocument>
   ){}
 
  async createProductAttribute(createProductAttributeInput: CreateProductAttributeInput) {
@@ -29,7 +31,8 @@ export class ProductAttributesService {
             createProductAttributeInput.values[index].image=imageUrl
           }
         }
-        const attribute =  await this.productAttributeModel.create(createProductAttributeInput)
+        const attribute =  await this.productAttributeModel.create({name: createProductAttributeInput.name, attributeSet:createProductAttributeInput.attributeSet})
+        await this.productAttributeValueModel.insertMany(createProductAttributeInput.values)
         return attribute
       } catch (error) {
         throw new InternalServerErrorException('Failed to create attribute'+error.message)

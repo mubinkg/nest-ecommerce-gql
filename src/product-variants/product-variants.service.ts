@@ -21,7 +21,35 @@ export class ProductVariantsService {
   }
 
   async findAll(limit:number, offset:number) {
-    const productVariants = await this.productVariantModel.find({}).populate({path: 'product'}).sort('-_id').limit(limit).skip(offset)
+    const productVariants = await this.productVariantModel.aggregate([
+      {
+        $lookup: {
+          from: "productattributes",
+          localField: "attributeReference",
+          foreignField: "_id",
+          as: "attributes",
+          pipeline: [
+            {
+              $project: {
+                _id: 1,
+                values: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        $sort:{
+          _id: -1
+        }
+      },
+      {
+        $limit: limit
+      },
+      {
+        $skip: offset
+      }
+    ])
     const count = await this.productVariantModel.countDocuments({})
     return {
       productVariants,

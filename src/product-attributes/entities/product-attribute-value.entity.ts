@@ -1,21 +1,21 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { Prop, Schema } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { ProductAttributeValueType } from "../enum/attribute-value-type.enum";
 import { ActiveStatus } from "src/promo-code/types/activeStatus.enum";
+import { HydratedDocument } from "mongoose";
 
 
 @ObjectType()
 @Schema({
-    timestamps: false
+    timestamps: true
 })
 export class ProductAttributeValue{
     
     @Field(()=>String,{nullable:true})
-    @Prop({type:String})
-    id?:string
+    _id?:string
 
     @Field(()=>ProductAttributeValueType,{nullable:true})
-    @Prop({type:ProductAttributeValueType})
+    @Prop({type:String, default: ProductAttributeValueType.DEFAULT})
     type?:ProductAttributeValueType
 
     @Field(()=>String,{nullable:true})
@@ -34,3 +34,6 @@ export class ProductAttributeValue{
     @Prop({type:String,enum:ActiveStatus,default:ActiveStatus.ACTIVE})
     status?:ActiveStatus
 }
+
+export type ProductAttributeValueDocument = HydratedDocument<ProductAttributeValue>
+export const ProductAttributeValueSchema = SchemaFactory.createForClass(ProductAttributeValue)

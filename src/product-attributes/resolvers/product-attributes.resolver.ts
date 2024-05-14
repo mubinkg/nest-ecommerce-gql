@@ -8,7 +8,7 @@ import { ProductAttributeSet } from '../entities/product-attribute-set.entity';
 import { CreateProductAttributeSetInput } from '../dto/create-product-attribute-set.input';
 import { GetProductAttributeSet } from '../dto/get-attributeset.dto';
 import { ProductAttributeResponseDto } from '../dto/product-attribute-response.dto';
-import { AdminProductAttributeValuesResponse } from '../entities/admin-product-atrribute-values';
+import { AdminProductAttributeValuesResponse } from '../dto/admin-product-atrribute-values';
 
 @Resolver(() => ProductAttribute)
 export class ProductAttributesResolver {

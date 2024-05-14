@@ -104,7 +104,7 @@ enum DownloadLinkType {
 }
 
 type ProductAttributeValue {
-  id: String
+  _id: String
   type: ProductAttributeValueType
   valueName: String
   image: String

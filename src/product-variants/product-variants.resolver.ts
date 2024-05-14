@@ -1,8 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ProductVariantsService } from './product-variants.service';
 import { ProductVariant } from './entities/product-variant.entity';
-import { CreateProductVariantInput } from './dto/create-product-variant.input';
-import { UpdateProductVariantInput } from './dto/update-product-variant.input';
 import { AmdinProductVariantResponse } from './dto/admin-product-variant.dto';
 
 @Resolver(() => ProductVariant)

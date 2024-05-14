@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql"
-import { ProductAttributeValue } from "./product-attribute-value.entity"
+import { ProductAttributeValue } from "../entities/product-attribute-value.entity"
 import { ActiveStatus } from "src/promo-code/types/activeStatus.enum"
 
 @ObjectType()

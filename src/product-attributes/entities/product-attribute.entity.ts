@@ -23,7 +23,6 @@ export class ProductAttribute{
         attributeSet?:ProductAttributeSet
 
         @Field(()=>[ProductAttributeValue],{nullable:true})
-        @Prop({type:[{...ProductAttributeValue}]})
         values?:ProductAttributeValue[]
 
         @Field(()=>ActiveStatus,{nullable:true})

@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ProductAttribute, ProductAttributeSchema } from './entities/product-attribute.entity';
 import { ProductAttributeSet, ProductAttributeSetSchema } from './entities/product-attribute-set.entity';
 import { ProductAttributeSetService } from './service/product-attribute-set.service';
+import { ProductAttributeValue, ProductAttributeValueSchema } from './entities/product-attribute-value.entity';
 
 @Module({
 
@@ -19,6 +20,12 @@ import { ProductAttributeSetService } from './service/product-attribute-set.serv
       {
         schema: ProductAttributeSetSchema,
         name: ProductAttributeSet.name
+      }
+    ]),
+    MongooseModule.forFeature([
+      {
+        schema: ProductAttributeValueSchema,
+        name: ProductAttributeValue.name
       }
     ])
   ],
