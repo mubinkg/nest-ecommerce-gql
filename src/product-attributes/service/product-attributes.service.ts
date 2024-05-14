@@ -8,6 +8,7 @@ import ShortUniqueId from 'short-unique-id';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
 import { ProductAttributeValue, ProductAttributeValueDocument } from '../entities/product-attribute-value.entity';
+import { getAllAttribute } from '../query';
 
 @Injectable()
 export class ProductAttributesService {
@@ -55,41 +56,8 @@ export class ProductAttributesService {
 
   async productAttributeValues(limit:number, offset:number){
     try{
-      const values = await this.productAttributeModel.aggregate([
-        {
-          $unwind: {
-            path: '$values',
-            preserveNullAndEmptyArrays: true
-          }
-        },
-        {
-          $skip: offset
-        },
-        {
-          $limit: limit
-        }
-      ],
-      )
-      
-      const totalDocs:any = await this.productAttributeModel.aggregate([
-        {
-          $unwind:
-            {
-              path: "$values",
-              preserveNullAndEmptyArrays: true,
-            },
-        },
-        {
-          $group:
-            {
-              _id: null,
-              count: {
-                $sum: 1,
-              },
-            },
-        },
-      ])
-      const count = totalDocs[0]?.count
+      const values = await this.productAttributeValueModel.find({}).populate({path: 'productAttribute'}).sort('-_id')
+      const count = await this.productAttributeValueModel.countDocuments({})
       return {count, values}
     }
     catch(err){
@@ -97,15 +65,13 @@ export class ProductAttributesService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} productAttribute`;
-  }
 
-  update(id: number, updateProductAttributeInput: UpdateProductAttributeInput) {
-    return `This action updates a #${id} productAttribute`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} productAttribute`;
+  async getAll(){
+    try{
+      const res =  await this.productAttributeModel.aggregate(getAllAttribute)
+      return res;
+    }catch(err){
+      throw err;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Field } from '@nestjs/graphql';
 import { ProductAttributesService } from '../service/product-attributes.service';
 import { ProductAttribute } from '../entities/product-attribute.entity';
 import { CreateProductAttributeInput } from '../dto/create-product-attribute.input';
@@ -45,20 +45,20 @@ export class ProductAttributesResolver {
     return this.productAttributesService.findAll(limit, offset, query);
   }
 
-  @Query(() => ProductAttribute, { name: 'productAttribute' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.productAttributesService.findOne(id);
-  }
+  // @Query(() => ProductAttribute, { name: 'productAttribute' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.productAttributesService.findOne(id);
+  // }
 
-  @Mutation(() => ProductAttribute)
-  updateProductAttribute(@Args('updateProductAttributeInput') updateProductAttributeInput: UpdateProductAttributeInput) {
-    return this.productAttributesService.update(updateProductAttributeInput.id, updateProductAttributeInput);
-  }
+  // @Mutation(() => ProductAttribute)
+  // updateProductAttribute(@Args('updateProductAttributeInput') updateProductAttributeInput: UpdateProductAttributeInput) {
+  //   return this.productAttributesService.update(updateProductAttributeInput.id, updateProductAttributeInput);
+  // }
 
-  @Mutation(() => ProductAttribute)
-  removeProductAttribute(@Args('id', { type: () => Int }) id: number) {
-    return this.productAttributesService.remove(id);
-  }
+  // @Mutation(() => ProductAttribute)
+  // removeProductAttribute(@Args('id', { type: () => Int }) id: number) {
+  //   return this.productAttributesService.remove(id);
+  // }
 
   @Query(()=>AdminProductAttributeValuesResponse)
   attributeValues(
@@ -67,5 +67,10 @@ export class ProductAttributesResolver {
     @Args('query', {type: ()=>String,nullable:true}) query: string
   ){
     return this.productAttributesService.productAttributeValues(limit, offset)
+  }
+
+  @Query(()=>[ProductAttribute],{nullable:true})
+  getAllProductAttribute(){
+    return this.productAttributesService.getAll()
   }
 }

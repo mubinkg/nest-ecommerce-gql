@@ -447,15 +447,9 @@ type ProductAttributeResponseDto {
   count: Float
 }
 
-type AdminProductAttributeValues {
-  name: String
-  values: ProductAttributeValue
-  status: ActiveStatus
-}
-
 type AdminProductAttributeValuesResponse {
   count: Float
-  values: [AdminProductAttributeValues!]
+  values: [ProductAttributeValue!]
 }
 
 type ProductFaq {
@@ -564,8 +558,8 @@ type Query {
   getAdminOrderList(adminOrderListInput: GetAdminOrderInput!): AdminOrderResponse
   getProductAttributeSetList(limit: Float!, offset: Float!, query: String): GetProductAttributeSet
   productAttributes(limit: Float!, offset: Float!, query: String): ProductAttributeResponseDto!
-  productAttribute(id: Int!): ProductAttribute!
   attributeValues(limit: Float!, offset: Float!, query: String): AdminProductAttributeValuesResponse!
+  getAllProductAttribute: [ProductAttribute!]
   productFaq(id: Int!): ProductFaq!
   aramics: String!
   aramic(id: Int!): Aramic!
@@ -784,8 +778,6 @@ type Mutation {
   removeOrder(id: Int!): Order!
   createProductAttribute(createProductAttributeInput: CreateProductAttributeInput!): ProductAttribute!
   createProductAttributeSet(createProductAttributeInput: CreateProductAttributeSetInput!): ProductAttributeSet!
-  updateProductAttribute(updateProductAttributeInput: UpdateProductAttributeInput!): ProductAttribute!
-  removeProductAttribute(id: Int!): ProductAttribute!
   createProductFaq(createProductFaqInput: CreateProductFaqInput!): ProductFaq!
   updateProductFaq(updateProductFaqInput: UpdateProductFaqInput!): ProductFaq!
   removeProductFaq(id: Int!): ProductFaq!
@@ -1215,13 +1207,6 @@ input ProductAttributeValueInput {
 
 input CreateProductAttributeSetInput {
   attributeSetName: String!
-}
-
-input UpdateProductAttributeInput {
-  name: String
-  attributeSet: String
-  values: [ProductAttributeValueInput!]
-  id: Int!
 }
 
 input CreateProductFaqInput {
