@@ -23,10 +23,21 @@ export class MediaService {
     }
   }
 
-  async findAll() {
+  async findAll(limit:number, offset:number, query:string) {
     try{  
-      const count = await this.mediaModel.countDocuments({})
-      const media = await this.mediaModel.find({}).sort('-_id')
+      
+      const count = await this.mediaModel.countDocuments({name:{
+        $regex: query,
+        $options: 'i'
+      }})
+
+      const media = await this.mediaModel.find({
+        name:{
+          $regex: query,
+          $options: 'i'
+        }
+      }).sort('-_id').limit(limit).skip(offset)
+      
       return {
         count, media
       }

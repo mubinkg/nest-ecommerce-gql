@@ -17,10 +17,14 @@ export class MediaResolver {
     return this.mediaService.create(createMediaInput);
   }
 
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   @Query(() => AdminMedia, { name: 'adminMedia' })
-  findAll() {
-    return this.mediaService.findAll();
+  findAll(
+    @Args('limit', {type: ()=>Number}) limit: number,
+    @Args('offset', {type: ()=>Number}) offset: number,
+    @Args('query', {type: ()=>String,nullable:true}) query: string
+  ) {
+    return this.mediaService.findAll(limit, offset, query);
   }
 
   @Query(() => Media, { name: 'media' })

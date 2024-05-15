@@ -569,7 +569,7 @@ type Query {
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
   sellers(limit: Float!, offset: Float!, status: String): SellerList!
   seller(id: Int!): Seller!
-  adminMedia: AdminMedia!
+  adminMedia(limit: Float!, offset: Float!, query: String): AdminMedia!
   media(id: Int!): Media!
 }
 
