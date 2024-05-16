@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CitiesResolver } from './cities.resolver';
-import { CitiesService } from './cities.service';
+import { CitiesResolver } from '../resolvers/cities.resolver';
+import { CitiesService } from '../services/cities.service';
 
 describe('CitiesResolver', () => {
   let resolver: CitiesResolver;

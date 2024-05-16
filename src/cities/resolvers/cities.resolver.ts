@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { CitiesService } from './cities.service';
-import { City } from './entities/city.entity';
-import { CreateCityInput } from './dto/create-city.input';
-import { UpdateCityInput } from './dto/update-city.input';
+import { CitiesService } from '../services/cities.service';
+import { City } from '../entities/city.entity';
+import { CreateCityInput } from '../dto/create-city.input';
+import { UpdateCityInput } from '../dto/update-city.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
 

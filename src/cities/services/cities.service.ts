@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
-import { CreateCityInput } from './dto/create-city.input';
-import { UpdateCityInput } from './dto/update-city.input';
+import { CreateCityInput } from '../dto/create-city.input';
+import { UpdateCityInput } from '../dto/update-city.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { City, CityDocument } from './entities/city.entity';
+import { City, CityDocument } from '../entities/city.entity';
 import { Model } from 'mongoose';
 
 @Injectable()

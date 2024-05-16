@@ -243,6 +243,11 @@ type City {
   city_name: String
 }
 
+type AdminCities {
+  cities: [City!]
+  count: Float
+}
+
 type Customer {
   _id: String!
   name: String
@@ -532,6 +537,7 @@ type Query {
   areaByCityId(city_id: String!): [Area!]!
   getCities(limit: Float!, offset: Float!, query: String!): [City!]!
   city(id: Int!): City!
+  adminCityList(limit: Float!, offset: Float!, query: String!): AdminCities!
   signIn(signinInput: SignInDto!): AuthResponseDto!
   verifyUser(verifyUserInput: VerifyUser!): Boolean!
   customerAdminList(query: String!, limit: Float!, offset: Float!): CustomerAdminDto!
