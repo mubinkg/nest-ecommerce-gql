@@ -233,7 +233,6 @@ type Area {
   _id: String!
   area_name: String
   city_id: String
-  zipcode_id: String
   minimum_free_delivery_order_amount: Float
   delivery_charges: Float
 }
@@ -992,17 +991,15 @@ input UpdateProductGlobalOrderNoInputObject {
 }
 
 input CreateAreaInput {
-  area_name: String
-  city_id: String
-  zipcode_id: String
-  minimum_free_delivery_order_amount: Float
-  delivery_charges: Float
+  area_name: String!
+  city_id: String!
+  minimum_free_delivery_order_amount: Float!
+  delivery_charges: Float!
 }
 
 input UpdateAreaInput {
   area_name: String
   city_id: String
-  zipcode_id: String
   minimum_free_delivery_order_amount: Float
   delivery_charges: Float
   id: Int!
