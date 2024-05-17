@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AreasService } from './areas.service';
-import { AreasResolver } from './areas.resolver';
+import { AreasService } from './services/areas.service';
+import { AreasResolver } from './resolvers/areas.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Area, AreaSchema } from './entities/area.entity';
 

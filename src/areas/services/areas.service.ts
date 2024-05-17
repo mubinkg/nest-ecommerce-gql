@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
-import { CreateAreaInput } from './dto/create-area.input';
-import { UpdateAreaInput } from './dto/update-area.input';
+import { CreateAreaInput } from '../dto/create-area.input';
+import { UpdateAreaInput } from '../dto/update-area.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Area, AreaDocument } from './entities/area.entity';
+import { Area, AreaDocument } from '../entities/area.entity';
 import { Model } from 'mongoose';
 
 @Injectable()
