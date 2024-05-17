@@ -11,7 +11,7 @@ export class AdminCitiesService{
 
     async adminCityList({limit, offset, query}:{limit:number, offset:number, query:string}){
         try{
-            const cities = await this.cityModel.find({city_name:{$regex:query, $options: 'i'}}).limit(limit).skip(offset)
+            const cities = await this.cityModel.find({city_name:{$regex:query, $options: 'i'}}).sort('-_id').limit(limit).skip(offset)
             const count = await this.cityModel.countDocuments({city_name:{$regex:query, $options: 'i'}})
             return {cities,count}
         }
