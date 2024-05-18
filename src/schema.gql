@@ -237,6 +237,11 @@ type Area {
   delivery_charges: Float
 }
 
+type AdminAreaDto {
+  areas: [Area!]
+  count: Float
+}
+
 type City {
   _id: String!
   city_name: String
@@ -534,6 +539,7 @@ type Query {
   productVariant(id: Int!): ProductVariant!
   areas: [Area!]!
   areaByCityId(city_id: String!): [Area!]!
+  getAdminArea(limit: Float!, offset: Float!, query: String!): AdminAreaDto!
   getCities(limit: Float!, offset: Float!, query: String!): [City!]!
   city(id: Int!): City!
   adminCityList(limit: Float!, offset: Float!, query: String!): AdminCities!
