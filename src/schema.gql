@@ -857,7 +857,7 @@ input CreateProductInput {
   extra_input_description: String
 
   """comma separated string"""
-  attribute_values: String
+  attributes: [ProductAttributeInput!]
   category: String!
   status: Float
   product_type: ProductType
@@ -887,6 +887,11 @@ enum VideoType {
   SELF_HOSTED
   VIMEO
   YOUTUBE
+}
+
+input ProductAttributeInput {
+  attribute: String!
+  values: [String!]!
 }
 
 enum ProductType {
@@ -970,7 +975,7 @@ input UpdateProductInput {
   extra_input_description: String
 
   """comma separated string"""
-  attribute_values: String
+  attributes: [ProductAttributeInput!]
   category: String
   status: Float
   product_type: ProductType

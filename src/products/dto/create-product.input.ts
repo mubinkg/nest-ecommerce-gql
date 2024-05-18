@@ -1,9 +1,9 @@
-import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
-import { IsArray, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsTaxId } from 'class-validator';
+import { InputType, Field, registerEnumType } from '@nestjs/graphql';
+import { IsArray, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { CreateProductVariantInput } from 'src/product-variants/dto/create-product-variant.input';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { VariantStockLavelEnum ,ProductType, VideoType, CancelableTill, HalalIndicator, DownloadLinkType} from '../enum';
-import { ImageInput } from 'src/ratings/dto/rating-images';
+import { ProductAttributeInput } from './product-attribute.input';
 
 
 registerEnumType(HalalIndicator,{
@@ -155,10 +155,10 @@ export class CreateProductInput {
   @IsOptional()
   extra_input_description?: string
 
-  @Field(()=>String, {nullable:true, description: 'comma separated string'})
-  @IsString()
+  @Field(()=>[ProductAttributeInput], {nullable:true, description: 'comma separated string'})
+  @IsArray()
   @IsOptional()
-  attribute_values?: string
+  attributes?: ProductAttributeInput[]
 
   @Field(()=>String)
   @IsString()
