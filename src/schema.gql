@@ -61,6 +61,46 @@ type Seller {
   status: String
 }
 
+type ProductAttributeSet {
+  _id: String
+  attributeSetName: String
+  status: ActiveStatus
+}
+
+enum ActiveStatus {
+  ACTIVE
+  INACTIVE
+}
+
+type ProductAttribute {
+  _id: String
+  name: String
+  attributeSet: ProductAttributeSet
+  values: [ProductAttributeValue!]
+  status: ActiveStatus
+}
+
+type ProductAttributeValue {
+  _id: String
+  type: ProductAttributeValueType
+  productAttribute: ProductAttribute
+  valueName: String
+  image: String
+  color: String
+  status: ActiveStatus
+}
+
+enum ProductAttributeValueType {
+  DEFAULT
+  COLOR
+  IMAGE
+}
+
+type ProductAttributeEntity {
+  attribute: ProductAttribute
+  values: [ProductAttributeValue!]
+}
+
 type Product {
   _id: String
   seller: Seller
@@ -95,47 +135,13 @@ type Product {
   tax: Float
   product_type: String
   globalOrderNo: Float
+  attributes: ProductAttributeEntity
 }
 
 enum DownloadLinkType {
   NONE
   SELF_HOSTED
   ADD_LINK
-}
-
-type ProductAttributeSet {
-  _id: String
-  attributeSetName: String
-  status: ActiveStatus
-}
-
-enum ActiveStatus {
-  ACTIVE
-  INACTIVE
-}
-
-type ProductAttribute {
-  _id: String
-  name: String
-  attributeSet: ProductAttributeSet
-  values: [ProductAttributeValue!]
-  status: ActiveStatus
-}
-
-type ProductAttributeValue {
-  _id: String
-  type: ProductAttributeValueType
-  productAttribute: ProductAttribute
-  valueName: String
-  image: String
-  color: String
-  status: ActiveStatus
-}
-
-enum ProductAttributeValueType {
-  DEFAULT
-  COLOR
-  IMAGE
 }
 
 type ProductVariant {
@@ -214,6 +220,7 @@ type ProductResponse {
   tax: Float
   product_type: String
   globalOrderNo: Float
+  attributes: ProductAttributeEntity
 
   """Product Variants"""
   productvariants: [ProductVariant!]

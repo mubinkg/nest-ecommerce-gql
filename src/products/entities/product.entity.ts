@@ -1,11 +1,12 @@
-import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { ObjectType, Field} from '@nestjs/graphql';
+import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
 import mongoose, {HydratedDocument} from 'mongoose'
 import { HalalIndicator } from '../enum/halal-indicator.enum';
 import { DownloadLinkType } from '../enum/download-link-type.enum';
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Category } from 'src/categories/entities/category.entity';
 import { Seller } from 'src/sellers/entities/seller.entity';
+import { ProductAttributeEntity } from './product-attribute.entity';
 
 export type ProductDocument = HydratedDocument<Product>
 
@@ -143,6 +144,9 @@ export class Product {
   @Prop({type:Number})
   globalOrderNo?: number
 
+  @Field(()=>ProductAttributeEntity, {nullable:true})
+  @Prop({type: raw({...ProductAttributeEntity})})
+  attributes?:ProductAttributeEntity
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product)
