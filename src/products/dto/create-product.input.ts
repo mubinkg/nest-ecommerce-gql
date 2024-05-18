@@ -1,5 +1,5 @@
 import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsTaxId } from 'class-validator';
+import { IsArray, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsTaxId } from 'class-validator';
 import { CreateProductVariantInput } from 'src/product-variants/dto/create-product-variant.input';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { VariantStockLavelEnum ,ProductType, VideoType, CancelableTill, HalalIndicator, DownloadLinkType} from '../enum';
@@ -125,13 +125,15 @@ export class CreateProductInput {
   @IsEnum(CancelableTill)
   cancelable_till?: CancelableTill
 
-  @Field(()=>GraphQLUpload,{nullable:true})
-  pro_input_image?: FileUpload | string
+  @Field(()=>String)
+  @IsString()
+  @IsNotEmpty()
+  pro_input_image?: String
 
+  @Field(()=>[String], {nullable:true})
+  @IsArray()
+  @IsString()
   other_images?: string[]
-
-  @Field(()=>[ImageInput], {nullable:true})
-  other_imagesInput?: ImageInput[] 
 
   @Field(()=>VideoType, {nullable:true})
   @IsOptional()
@@ -142,9 +144,6 @@ export class CreateProductInput {
   @IsString()
   @IsOptional()
   video?: string
-
-  @Field(()=>GraphQLUpload, {nullable:true})
-  pro_input_video?:FileUpload | string
 
   @Field(()=>String, {nullable:true})
   @IsString()

@@ -849,11 +849,10 @@ input CreateProductInput {
   is_returnable: Float
   is_cancelable: Float
   cancelable_till: CancelableTill
-  pro_input_image: Upload
-  other_imagesInput: [ImageInput!]
+  pro_input_image: String!
+  other_images: [String!]
   video_type: VideoType
   video: String
-  pro_input_video: Upload
   pro_input_description: String
   extra_input_description: String
 
@@ -881,10 +880,6 @@ enum CancelableTill {
   RECEIVED
   PROCESSED
   SHIPPED
-}
-
-input ImageInput {
-  image: Upload
 }
 
 enum VideoType {
@@ -967,11 +962,10 @@ input UpdateProductInput {
   is_returnable: Float
   is_cancelable: Float
   cancelable_till: CancelableTill
-  pro_input_image: Upload
-  other_imagesInput: [ImageInput!]
+  pro_input_image: String
+  other_images: [String!]
   video_type: VideoType
   video: String
-  pro_input_video: Upload
   pro_input_description: String
   extra_input_description: String
 
@@ -1127,6 +1121,10 @@ input CreateRatingInput {
   comment: String
   images: [ImageInput!]
   imageUrl: [String!]
+}
+
+input ImageInput {
+  image: Upload
 }
 
 input UpdateRatingInput {
