@@ -53,6 +53,11 @@ export class CreateProductInput {
   @IsOptional()
   tags?: string
 
+  @Field(()=>String, {nullable:true})
+  @IsString()
+  @IsNotEmpty()
+  variant?: string
+
   @Field(()=>HalalIndicator, {defaultValue: HalalIndicator.NONE,nullable:true})
   @IsEnum(HalalIndicator)
   @IsNotEmpty()

@@ -7,6 +7,7 @@ import { Brand } from 'src/brands/entities/brand.entity';
 import { Category } from 'src/categories/entities/category.entity';
 import { Seller } from 'src/sellers/entities/seller.entity';
 import { ProductAttributeEntity } from './product-attribute.entity';
+import { ProductVariant } from 'src/product-variants/entities/product-variant.entity';
 
 export type ProductDocument = HydratedDocument<Product>
 
@@ -23,6 +24,10 @@ export class Product {
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
   pro_input_name?: string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  variant?: string
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
@@ -144,9 +149,12 @@ export class Product {
   @Prop({type:Number})
   globalOrderNo?: number
 
-  @Field(()=>ProductAttributeEntity, {nullable:true})
-  @Prop({type: raw({...ProductAttributeEntity})})
-  attributes?:ProductAttributeEntity
+  @Field(()=>[ProductAttributeEntity], {nullable:true})
+  @Prop([{type: raw({...ProductAttributeEntity})}])
+  attributes?:ProductAttributeEntity[]
+
+  @Field(()=>[ProductVariant], {nullable:true})
+  productvariants?:ProductVariant[]
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product)

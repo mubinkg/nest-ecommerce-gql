@@ -4,6 +4,7 @@ import { Product, ProductDocument } from "../entities/product.entity";
 import { Model } from "mongoose";
 import { AdminProductListDto } from "../dto/admin-product-list.input";
 import { convertToObjectId } from "src/utils/convert-to-objectid";
+import { adminProductQuery } from "../mongo";
 
 @Injectable()
 export class ProductAdminService{
@@ -23,12 +24,8 @@ export class ProductAdminService{
             query['status'] = adminProductListDto.status
         }
         const count = await this.productModel.countDocuments(query)
-        const products = await this.productModel.find(query).populate({
-            path: 'brand'
-        }).populate({
-            path:'category'
-        })
-        .limit(adminProductListDto.limit).skip(adminProductListDto.offset)
+        const products:Product[] = await this.productModel.aggregate(adminProductQuery)
+                
         return {
             products,
             count
