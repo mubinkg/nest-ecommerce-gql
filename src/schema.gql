@@ -177,7 +177,7 @@ type ProductVariant {
 
   """If variants is missing it will be general variant"""
   attributeReference: [String!]
-  attributeValues: [String!]
+  attributeValues: [ProductAttributeValue!]
 
   """Attribute Values"""
   attributes: ProductAttributeValue
@@ -867,7 +867,7 @@ input CreateProductInput {
   attributes: [ProductAttributeInput!]
   category: String!
   status: Float
-  product_type: ProductType
+  product_type: String
   variant_stock_level_type: VariantStockLavelEnum
 
   """Product Variants Details"""
@@ -899,12 +899,6 @@ enum VideoType {
 input ProductAttributeInput {
   attribute: String!
   values: [String!]!
-}
-
-enum ProductType {
-  SIMPLE_PRODUCT
-  VARIABLE_PRODUCT
-  DIGITAL_PRODUCT
 }
 
 enum VariantStockLavelEnum {
@@ -985,7 +979,7 @@ input UpdateProductInput {
   attributes: [ProductAttributeInput!]
   category: String
   status: Float
-  product_type: ProductType
+  product_type: String
   variant_stock_level_type: VariantStockLavelEnum
 
   """Product Variants Details"""

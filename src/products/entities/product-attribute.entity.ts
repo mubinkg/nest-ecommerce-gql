@@ -1,6 +1,6 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { Prop, Schema } from "@nestjs/mongoose";
-import mongoose from "mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import mongoose, { SchemaTypes } from "mongoose";
 import { ProductAttributeValue } from "src/product-attributes/entities/product-attribute-value.entity";
 import { ProductAttribute } from "src/product-attributes/entities/product-attribute.entity";
 
@@ -10,10 +10,12 @@ import { ProductAttribute } from "src/product-attributes/entities/product-attrib
 })
 export class ProductAttributeEntity{
     @Field(()=>ProductAttribute, {nullable:true})
-    @Prop({type: mongoose.Schema.Types.ObjectId, ref:'ProductAttribute'})
+    @Prop({type: SchemaTypes.ObjectId, ref:'ProductAttribute'})
     attribute?:ProductAttribute
 
     @Field(()=>[ProductAttributeValue], {nullable:true})
-    @Prop([{type: mongoose.Schema.Types.ObjectId, ref: "ProductAttributeValue"}])
+    @Prop([{type: SchemaTypes.ObjectId, ref: "ProductAttributeValue"}])
     values?:ProductAttributeValue[]
 }
+
+export const ProductAttributeEntitySchema = SchemaFactory.createForClass(ProductAttributeEntity)

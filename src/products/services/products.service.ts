@@ -8,6 +8,8 @@ import { Logger } from '@nestjs/common';
 import { ProductVariantsService } from '../../product-variants/product-variants.service';
 import { GetProductDto } from '../dto/get-products.dto';
 import { UpdateProductGlobalOrderNoInput } from '../dto/updateGlobalOrderNo.input';
+import { ProductAttributeInput } from '../dto/product-attribute.input';
+import { convertToObjectId } from 'src/utils/convert-to-objectid';
 
 @Injectable()
 export class ProductsService {
@@ -21,7 +23,11 @@ export class ProductsService {
     const { createProductVariantInput } = createProductInput
     
     try {
-
+      createProductInput.attributes = createProductInput.attributes.map((d:ProductAttributeInput)=>({
+        ...d,
+        attribute: convertToObjectId(d.attribute),
+        values: d.values.map((d:any)=>convertToObjectId(d))
+      }))
       const productCount= await this.productModel.countDocuments()
 
       createProductInput.globalOrderNo=productCount+1

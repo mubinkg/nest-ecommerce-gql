@@ -1,14 +1,17 @@
 import { Field, InputType } from "@nestjs/graphql";
-import { IsArray, IsNotEmpty, IsString } from "class-validator";
+import { Transform } from "class-transformer";
+import { IsArray, IsMongoId, IsNotEmpty, IsString } from "class-validator";
+import mongoose from "mongoose";
 
 @InputType()
 export class ProductAttributeInput{
     @Field(()=>String)
     @IsString()
+    @IsMongoId()
     @IsNotEmpty()
-    attribute?:string
+    attribute?:any
 
     @Field(()=>[String])
     @IsArray()
-    values?: string[]
+    values?: any[]
 }

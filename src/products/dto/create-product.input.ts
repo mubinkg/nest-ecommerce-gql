@@ -132,7 +132,6 @@ export class CreateProductInput {
 
   @Field(()=>[String], {nullable:true})
   @IsArray()
-  @IsString()
   other_images?: string[]
 
   @Field(()=>VideoType, {nullable:true})
@@ -168,10 +167,9 @@ export class CreateProductInput {
   @Field(()=>Number, {nullable:true})
   status: number
 
-  @Field(()=>ProductType, {nullable:true})
+  @Field(()=>String, {nullable:true})
   @IsOptional()
-  @IsEnum(ProductType)
-  product_type?: ProductType
+  product_type?: String
 
   @Field(()=>VariantStockLavelEnum, {nullable:true})
   @IsOptional()
