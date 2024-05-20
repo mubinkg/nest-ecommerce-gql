@@ -1,5 +1,6 @@
 import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
 import { StockStatus } from '../enum';
+import { IsNotEmpty, IsString } from 'class-validator';
 registerEnumType(StockStatus,{
   name:"StockStatus"
 })
@@ -37,4 +38,14 @@ export class CreateProductVariantInput {
 
   @Field(() => [String], { description: "If variants is missing it will be general variant", nullable: true })
   attributeValues?: string[];
+
+  @Field(() => String)
+  @IsString()
+  @IsNotEmpty()
+  stockType: string;
+
+  @Field(() => String, { nullable: true })
+  @IsString()
+  @IsNotEmpty()
+  productType?: string;
 }

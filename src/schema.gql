@@ -141,6 +141,12 @@ type ProductVariant {
 
   """Product Reference Id"""
   product: Product
+
+  """Stock Keeping Unit"""
+  stockType: String
+
+  """Stock Keeping Unit"""
+  productType: String
 }
 
 type Product {
@@ -943,6 +949,8 @@ input CreateProductVariantInput {
 
   """If variants is missing it will be general variant"""
   attributeValues: [String!]
+  stockType: String!
+  productType: String
 }
 
 enum StockStatus {

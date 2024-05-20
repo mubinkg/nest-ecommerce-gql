@@ -64,6 +64,13 @@ export class ProductVariant {
   @Prop({ type: mongoose.Schema.Types.ObjectId , ref: 'Product'})
   product?: Product
 
+  @Field(() => String, { description: "Stock Keeping Unit", nullable: true })
+  @Prop({ type: String })
+  stockType: string;
+
+  @Field(() => String, { description: "Stock Keeping Unit", nullable: true })
+  @Prop({ type: String })
+  productType?: string;
 }
 export type ProductVariantDocument = HydratedDocument<ProductVariant>
 export const ProductVariantSchema = SchemaFactory.createForClass(ProductVariant)
