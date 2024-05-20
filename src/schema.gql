@@ -243,6 +243,8 @@ type AmdinProductVariantResponse {
 type Stock {
   values: [ProductVariant!]
   product: Product
+  stockType: String
+  productType: String
 }
 
 type AdminStockDto {

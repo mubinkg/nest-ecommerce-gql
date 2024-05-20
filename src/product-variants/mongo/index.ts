@@ -32,6 +32,12 @@ export const getStockQery = ({limit, offset, isCount=false}:{limit:number,offset
           product: {
             $first: "$product",
           },
+          stockType: {
+            $first: "$stockType",
+          },
+          productType: {
+            $first: "$productType",
+          },
         },
       },
       {
@@ -56,6 +62,8 @@ export const getStockQery = ({limit, offset, isCount=false}:{limit:number,offset
           product: {
             $arrayElemAt: ["$product", 0],
           },
+          productType: 1,
+          stockType: 1
         },
       },
       {

@@ -9,6 +9,12 @@ class Stock{
 
     @Field(()=>Product, {nullable:true})
     product?:Product
+
+    @Field(()=>String, {nullable:true})
+    stockType?:string
+
+    @Field(()=>String, {nullable:true})
+    productType?:string
 }
 
 @ObjectType()
