@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductDocument } from '../entities/product.entity';
 import mongoose, { Model } from 'mongoose';
 import { Logger } from '@nestjs/common';
-import { ProductVariantsService } from '../../product-variants/product-variants.service';
+import { ProductVariantsService } from '../../product-variants/services/product-variants.service';
 import { GetProductDto } from '../dto/get-products.dto';
 import { UpdateProductGlobalOrderNoInput } from '../dto/updateGlobalOrderNo.input';
 import { ProductAttributeInput } from '../dto/product-attribute.input';

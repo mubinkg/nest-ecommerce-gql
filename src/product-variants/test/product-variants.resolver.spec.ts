@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProductVariantsResolver } from './product-variants.resolver';
-import { ProductVariantsService } from './product-variants.service';
+import { ProductVariantsResolver } from '../resolvers/product-variants.resolver';
+import { ProductVariantsService } from '../services/product-variants.service';
 
 describe('ProductVariantsResolver', () => {
   let resolver: ProductVariantsResolver;

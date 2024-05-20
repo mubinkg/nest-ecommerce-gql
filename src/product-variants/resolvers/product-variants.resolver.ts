@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { ProductVariantsService } from './product-variants.service';
-import { ProductVariant } from './entities/product-variant.entity';
-import { AmdinProductVariantResponse } from './dto/admin-product-variant.dto';
+import { ProductVariantsService } from '../services/product-variants.service';
+import { ProductVariant } from '../entities/product-variant.entity';
+import { AmdinProductVariantResponse } from '../dto/admin-product-variant.dto';
 
 @Resolver(() => ProductVariant)
 export class ProductVariantsResolver {

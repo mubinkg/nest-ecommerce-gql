@@ -1,11 +1,11 @@
 import { Injectable, InternalServerErrorException, NotAcceptableException } from '@nestjs/common';
-import { CreateProductVariantInput } from './dto/create-product-variant.input';
-import { UpdateProductVariantInput } from './dto/update-product-variant.input';
+import { CreateProductVariantInput } from '../dto/create-product-variant.input';
+import { UpdateProductVariantInput } from '../dto/update-product-variant.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { ProductVariant } from './entities/product-variant.entity';
+import { ProductVariant } from '../entities/product-variant.entity';
 import { Model } from 'mongoose';
 import { CreateOrderInput } from 'src/orders/dto/create-order.input';
-import { StockStatus } from './enum';
+import { StockStatus } from '../enum';
 
 @Injectable()
 export class ProductVariantsService {
