@@ -1,12 +1,12 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { OrdersService } from './orders.service';
-import { Order } from './entities/order.entity';
-import { CreateOrderInput } from './dto/create-order.input';
-import { UpdateOrderInput } from './dto/update-order.input';
+import { OrdersService } from '../service/orders.service';
+import { Order } from '../entities/order.entity';
+import { CreateOrderInput } from '../dto/create-order.input';
+import { UpdateOrderInput } from '../dto/update-order.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
-import { GetOrderDto } from './dto/get-orders.dto';
+import { GetOrderDto } from '../dto/get-orders.dto';
 
 @Resolver(() => Order)
 export class OrdersResolver {

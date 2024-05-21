@@ -1,12 +1,12 @@
 import { Injectable, NotImplementedException } from '@nestjs/common';
-import { CreateOrderInput } from './dto/create-order.input';
-import { UpdateOrderInput } from './dto/update-order.input';
+import { CreateOrderInput } from '../dto/create-order.input';
+import { UpdateOrderInput } from '../dto/update-order.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Order, OrderDocument } from './entities/order.entity';
+import { Order, OrderDocument } from '../entities/order.entity';
 import { Model } from 'mongoose';
 import { ProductVariantsService } from 'src/product-variants/services/product-variants.service';
-import { GetOrderDto } from './dto/get-orders.dto';
-import { OrderSortOrder } from './enum';
+import { GetOrderDto } from '../dto/get-orders.dto';
+import { OrderSortOrder } from '../enum';
 
 @Injectable()
 export class OrdersService {
