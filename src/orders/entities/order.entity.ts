@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument, mongo } from 'mongoose';
+import { Address } from 'src/addresses/entities/address.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { ProductVariant } from 'src/product-variants/entities/product-variant.entity';
 
@@ -55,9 +56,9 @@ export class Order {
   @Prop({type:String})
   payment_method?:string
 
-  @Field(()=>String, {nullable:true})
-  @Prop({type:String})
-  address_id?:string
+  @Field(()=>Address, {nullable:true})
+  @Prop({type:mongoose.Schema.Types.ObjectId, ref: "Address"})
+  address?:Address
 
   @Field(()=>Number, {nullable:true, defaultValue: 0})
   @Prop({type:Number})

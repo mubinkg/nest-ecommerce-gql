@@ -459,7 +459,7 @@ type Order {
   promo_code: String
   promo_discount: Float
   payment_method: String
-  address_id: String
+  address: Address
   is_wallet_used: Float
   wallet_balance_used: Float
   order_note: String

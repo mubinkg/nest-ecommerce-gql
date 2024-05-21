@@ -19,7 +19,7 @@ export class OrdersService {
   async create(createOrderInput: CreateOrderInput, user:any) {
     try{
       await this.productVariantsService.updateProductVarientAfterOrder(createOrderInput)
-      return await this.orderModel.create({...createOrderInput, user: user.userId})
+      return await this.orderModel.create({...createOrderInput, user: user.userId, address: createOrderInput.address_id})
     }
     catch(err){
       throw err
