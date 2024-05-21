@@ -50,6 +50,7 @@ export const getStockQery = ({limit, offset, isCount=false}:{limit:number,offset
             {
               $project: {
                 pro_input_name: 1,
+                pro_input_image: 1,
                 category: 1,
               },
             },
