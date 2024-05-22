@@ -16,7 +16,7 @@ export class RatingsService {
   ) { }
   async create(createRatingInput: CreateRatingInput) {
     try {
-      if (createRatingInput.images.length > 0) {
+      if (createRatingInput?.images?.length > 0) {
         let images: string[] = []
         for (let index = 0; index < createRatingInput.images.length; index++) {
           const temp = await uploadFile(createRatingInput.images[index].image as FileUpload) as string;
