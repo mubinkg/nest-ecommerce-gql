@@ -51,6 +51,10 @@ export class Customer {
   currency?: string
 
   @Field(()=>String, {nullable:true})
+  @Prop({type: Number, default: 0})
+  wallet_amount?: number
+
+  @Field(()=>String, {nullable:true})
   @Prop({type: String})
   language?: string
 

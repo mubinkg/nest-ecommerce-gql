@@ -291,6 +291,7 @@ type Customer {
   mobile_no: String
   country_code: String
   currency: String
+  wallet_amount: String
   language: String
   dob: DateTime
   height: Float
