@@ -11,7 +11,7 @@ export class CustomerDashboardService{
     async getTotalWalletAmount(){
         try{
             const data = await this.customerModel.aggregate(allCustomerWalletAmountQuery)
-            return data[0].total
+            return data[0]?.total || 0
         }
         catch(err){
             throw err;
