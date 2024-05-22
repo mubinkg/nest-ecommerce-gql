@@ -1,5 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsEnum, IsNotEmpty, IsOptional, IsString, IsTaxId } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsTaxId } from 'class-validator';
 import { AddressType } from '../enum/address.enum';
 
 @InputType()
@@ -82,6 +82,6 @@ export class CreateAddressInput {
 
   @Field(()=>Int, {nullable:true})
   @IsOptional()
-  @IsString()
+  @IsNumber()
   is_default?:number
 }
