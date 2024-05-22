@@ -1,13 +1,13 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { CreateRatingInput } from './dto/create-rating.input';
-import { UpdateRatingInput } from './dto/update-rating.input';
+import { CreateRatingInput } from '../dto/create-rating.input';
+import { UpdateRatingInput } from '../dto/update-rating.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Rating, RatingDocument } from './entities/rating.entity';
+import { Rating, RatingDocument } from '../entities/rating.entity';
 import mongoose, { Model } from 'mongoose';
 import { uploadFile } from 'src/util/upload';
 import { FileUpload } from 'graphql-upload';
-import { DeleteRatingInput } from './dto/delete-rating.dto';
-import { RatingFilterDto } from './dto/ratings.filter.dto';
+import { DeleteRatingInput } from '../dto/delete-rating.dto';
+import { RatingFilterDto } from '../dto/ratings.filter.dto';
 
 @Injectable()
 export class RatingsService {

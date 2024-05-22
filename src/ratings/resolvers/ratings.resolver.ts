@@ -1,10 +1,10 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { RatingsService } from './ratings.service';
-import { Rating } from './entities/rating.entity';
-import { CreateRatingInput } from './dto/create-rating.input';
-import { UpdateRatingInput } from './dto/update-rating.input';
-import { DeleteRatingInput } from './dto/delete-rating.dto';
-import { RatingFilterDto } from './dto/ratings.filter.dto';
+import { RatingsService } from '../services/ratings.service';
+import { Rating } from '../entities/rating.entity';
+import { CreateRatingInput } from '../dto/create-rating.input';
+import { UpdateRatingInput } from '../dto/update-rating.input';
+import { DeleteRatingInput } from '../dto/delete-rating.dto';
+import { RatingFilterDto } from '../dto/ratings.filter.dto';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
 import { UseGuards } from '@nestjs/common';
