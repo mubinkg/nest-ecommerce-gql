@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { DashboardService } from './dashboard.service';
-import { Dashboard } from './entities/dashboard.entity';
-import { CreateDashboardInput } from './dto/create-dashboard.input';
-import { UpdateDashboardInput } from './dto/update-dashboard.input';
+import { DashboardService } from '../services/dashboard.service';
+import { Dashboard } from '../entities/dashboard.entity';
+import { CreateDashboardInput } from '../dto/create-dashboard.input';
+import { UpdateDashboardInput } from '../dto/update-dashboard.input';
 
 @Resolver(() => Dashboard)
 export class DashboardResolver {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { DashboardService } from './dashboard.service';
-import { DashboardResolver } from './dashboard.resolver';
+import { DashboardService } from './services/dashboard.service';
+import { DashboardResolver } from './resolvers/dashboard.resolver';
 
 @Module({
   providers: [DashboardResolver, DashboardService],

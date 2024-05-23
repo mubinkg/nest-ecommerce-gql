@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateDashboardInput } from './dto/create-dashboard.input';
-import { UpdateDashboardInput } from './dto/update-dashboard.input';
+import { CreateDashboardInput } from '../dto/create-dashboard.input';
+import { UpdateDashboardInput } from '../dto/update-dashboard.input';
 
 @Injectable()
 export class DashboardService {

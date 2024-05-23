@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DashboardResolver } from './dashboard.resolver';
-import { DashboardService } from './dashboard.service';
+import { DashboardResolver } from '../resolvers/dashboard.resolver';
+import { DashboardService } from '../services/dashboard.service';
 
 describe('DashboardResolver', () => {
   let resolver: DashboardResolver;
