@@ -7,6 +7,8 @@ import { ProductVariantsModule } from 'src/product-variants/product-variants.mod
 import { OrderAdminResolver } from './resolvers/admin-order.resolver';
 import { OrderAdminService } from './service/admin-order.service';
 import { OrderDashboardServie } from './service/order-dashboard.service';
+import { OrderReportResolver } from './resolvers/order-reports.resolver';
+import { OrderReportService } from './service/order-report.service';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { OrderDashboardServie } from './service/order-dashboard.service';
     ]),
     ProductVariantsModule
   ],
-  providers: [OrdersResolver, OrdersService, OrderAdminResolver, OrderAdminService, OrderDashboardServie],
+  providers: [OrdersResolver, OrdersService, OrderAdminResolver, OrderAdminService, OrderDashboardServie, OrderReportResolver, OrderReportService],
   exports: [OrderDashboardServie]
 })
 export class OrdersModule {}

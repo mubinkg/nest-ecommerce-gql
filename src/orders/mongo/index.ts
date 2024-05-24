@@ -24,14 +24,6 @@ export const sellerOrderCount =(sellerId:string)=> [
     },
     {
       $lookup:
-        /**
-         * from: The target collection.
-         * localField: The local join field.
-         * foreignField: The target join field.
-         * as: The name for the results.
-         * pipeline: Optional pipeline to run on the foreign collection.
-         * let: Optional variables to use in the pipeline field stages.
-         */
         {
           from: "products",
           localField: "product_variants.product",
@@ -41,10 +33,6 @@ export const sellerOrderCount =(sellerId:string)=> [
     },
     {
       $set:
-        /**
-         * field: The field name
-         * expression: The expression.
-         */
         {
           product: {
             $arrayElemAt: ["$product", 0],
@@ -53,10 +41,6 @@ export const sellerOrderCount =(sellerId:string)=> [
     },
     {
       $project:
-        /**
-         * specifications: The fields to
-         *   include or exclude.
-         */
         {
           seller: "$product.seller",
         },
@@ -86,3 +70,53 @@ export const sellerOrderCount =(sellerId:string)=> [
         },
     },
   ]
+
+export const salesReportQuery = (seller:string)=>[
+  {
+    $lookup: {
+      from: "productvariants",
+      localField: "product_variants",
+      foreignField: "_id",
+      as: "product_variants",
+      pipeline: [
+        {
+          $lookup: {
+            from: "products",
+            localField: "product",
+            foreignField: "_id",
+            as: "product",
+            pipeline: [
+              {
+                $match: {
+                  seller: convertToObjectId(seller)
+                },
+              },
+              {
+                $lookup: {
+                  from: "sellers",
+                  localField: "seller",
+                  foreignField: "_id",
+                  as: "seller",
+                },
+              },
+              {
+                $set: {
+                  seller: {
+                    $arrayElemAt: ["$seller", 0]
+                  }
+                }
+              }
+            ],
+          },
+        },
+        {
+          $set: {
+            product: {
+              $arrayElemAt: ["$product", 0],
+            },
+          },
+        },
+      ],
+    },
+  },
+]

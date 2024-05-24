@@ -610,6 +610,7 @@ type Query {
   get_orders(getOrderDto: GetOrderDto!): [Order!]!
   order(id: Int!): Order!
   getAdminOrderList(adminOrderListInput: GetAdminOrderInput!): AdminOrderResponse
+  salesReport: String
   getProductAttributeSetList(limit: Float!, offset: Float!, query: String): GetProductAttributeSet
   productAttributes(limit: Float!, offset: Float!, query: String): ProductAttributeResponseDto!
   attributeValues(limit: Float!, offset: Float!, query: String): AdminProductAttributeValuesResponse!
