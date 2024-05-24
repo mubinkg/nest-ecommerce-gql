@@ -565,6 +565,11 @@ type DashboardTopContent {
   totalBalance: Float
 }
 
+type CategoryWiseProduct {
+  count: Float
+  category: Category
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -621,6 +626,7 @@ type Query {
   adminMedia(limit: Float!, offset: Float!, query: String): AdminMedia!
   media(id: Int!): Media!
   dashboardTopContent: DashboardTopContent
+  sellerCategoryWiseProduct: [CategoryWiseProduct!]
 }
 
 input GetTicketsDto {

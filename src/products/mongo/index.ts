@@ -1,3 +1,5 @@
+import { convertToObjectId } from "src/utils/convert-to-objectid"
+
 export const adminProductQuery:any = [
     {
       $sort:
@@ -95,3 +97,59 @@ export const adminProductQuery:any = [
         },
     },
   ]
+
+export const categoryWiseSellerProduct = (sellerId:string) => [
+  {
+    $match:
+      /**
+       * query: The query in MQL.
+       */
+      {
+        seller: convertToObjectId(
+          sellerId
+        ),
+      },
+  },
+  {
+    $group:
+      /**
+       * _id: The id of the group.
+       * fieldN: The first field name.
+       */
+      {
+        _id: "$category",
+        count: {
+          $sum: 1,
+        },
+      },
+  },
+  {
+    $lookup:
+      /**
+       * from: The target collection.
+       * localField: The local join field.
+       * foreignField: The target join field.
+       * as: The name for the results.
+       * pipeline: Optional pipeline to run on the foreign collection.
+       * let: Optional variables to use in the pipeline field stages.
+       */
+      {
+        from: "categories",
+        localField: "_id",
+        foreignField: "_id",
+        as: "category",
+      },
+  },
+  {
+    $set:
+      /**
+       * field: The field name
+       * expression: The expression.
+       */
+      {
+        category: {
+          $arrayElemAt: ["$category", 0],
+        },
+      },
+  },
+]

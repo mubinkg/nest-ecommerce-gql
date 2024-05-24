@@ -11,6 +11,7 @@ import { CurrentUser } from 'src/decorator/current-user.decorator';
 import { DashboardRatingService } from 'src/ratings/services/dashboard-rating.service';
 import { CustomerDashboardService } from 'src/customers/services/customer-dashboard.service';
 import { OrderDashboardServie } from 'src/orders/service/order-dashboard.service';
+import { CategoryWiseProduct } from '../dto/category-wise-product.dto';
 
 @Resolver(() => Dashboard)
 export class DashboardResolver {
@@ -39,6 +40,19 @@ export class DashboardResolver {
         totalBalance,
         totalOrder
       }
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
+  @Query(()=>[CategoryWiseProduct], {nullable:true})
+  @UseGuards(GqlAuthGuard)
+  async sellerCategoryWiseProduct(
+    @CurrentUser('user') user:any
+  ){
+    try{
+      return await this.productDashboardService.getSellerCategoryWiseProducts(user?.userId)
     }
     catch(err){
       throw err;
