@@ -10,6 +10,7 @@ import { ProductAdminResolver } from './resolvers/product-admin.resolver';
 import { ProductAdminService } from './services/product-admin.service';
 import { ProductSliderService } from './services/product-slider.service';
 import { ProductAttributeEntity, ProductAttributeEntitySchema } from './entities/product-attribute.entity';
+import { ProductDashboardServic } from './services/product-dahsboard.service';
 
 @Module({
   imports: [MongooseModule.forFeature([
@@ -23,7 +24,7 @@ import { ProductAttributeEntity, ProductAttributeEntitySchema } from './entities
       name: ProductAttributeEntity.name, schema: ProductAttributeEntitySchema
     }
   ]),ProductVariantsModule],
-  providers: [ProductsResolver, ProductsService, ProductTaxService, ProductAdminResolver, ProductAdminService, ProductSliderService],
-  exports: [ProductSliderService]
+  providers: [ProductsResolver, ProductsService, ProductTaxService, ProductAdminResolver, ProductAdminService, ProductSliderService, ProductDashboardServic],
+  exports: [ProductSliderService, ProductDashboardServic]
 })
 export class ProductsModule {}

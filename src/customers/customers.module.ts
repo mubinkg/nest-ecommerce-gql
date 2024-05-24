@@ -9,6 +9,7 @@ import { JwtStrategy } from './passport.strategy';
 import { GqlAuthGuard } from './jwt-guards';
 import { CustomerAdminService } from './services/customer-admin.service';
 import { CustomerAdminResolver } from './resolvers/customer-admin.resolver';
+import { CustomerDashboardService } from './services/customer-dashboard.service';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CustomerAdminResolver } from './resolvers/customer-admin.resolver';
     }),
     PassportModule
   ],
-  providers: [CustomersResolver, CustomersService,JwtStrategy, GqlAuthGuard, CustomerAdminService,CustomerAdminResolver],
+  providers: [CustomersResolver, CustomersService,JwtStrategy, GqlAuthGuard, CustomerAdminService,CustomerAdminResolver,CustomerDashboardService],
+  exports:[CustomerDashboardService]
 })
 export class CustomersModule {}

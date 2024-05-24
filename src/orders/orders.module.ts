@@ -6,6 +6,7 @@ import { Order, OrderSchema } from './entities/order.entity';
 import { ProductVariantsModule } from 'src/product-variants/product-variants.module';
 import { OrderAdminResolver } from './resolvers/admin-order.resolver';
 import { OrderAdminService } from './service/admin-order.service';
+import { OrderDashboardServie } from './service/order-dashboard.service';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { OrderAdminService } from './service/admin-order.service';
     ]),
     ProductVariantsModule
   ],
-  providers: [OrdersResolver, OrdersService, OrderAdminResolver, OrderAdminService],
+  providers: [OrdersResolver, OrdersService, OrderAdminResolver, OrderAdminService, OrderDashboardServie],
+  exports: [OrderDashboardServie]
 })
 export class OrdersModule {}

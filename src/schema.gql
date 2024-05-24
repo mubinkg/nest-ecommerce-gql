@@ -557,9 +557,12 @@ type AdminMedia {
   count: Float
 }
 
-type Dashboard {
-  """Example field (placeholder)"""
-  exampleField: Int!
+type DashboardTopContent {
+  totalOrder: Float
+  totalProduct: Float
+  totalRating: Float
+  rating: Float
+  totalBalance: Float
 }
 
 type Query {
@@ -617,7 +620,7 @@ type Query {
   seller(id: Int!): Seller!
   adminMedia(limit: Float!, offset: Float!, query: String): AdminMedia!
   media(id: Int!): Media!
-  dashboard(id: Int!): Dashboard!
+  dashboardTopContent: DashboardTopContent
 }
 
 input GetTicketsDto {
@@ -841,9 +844,6 @@ type Mutation {
   createMedia(createMediaInput: CreateMediaInput!): Media!
   updateMedia(updateMediaInput: UpdateMediaInput!): Media!
   removeMedia(id: String!): Media!
-  createDashboard(createDashboardInput: CreateDashboardInput!): Dashboard!
-  updateDashboard(updateDashboardInput: UpdateDashboardInput!): Dashboard!
-  removeDashboard(id: Int!): Dashboard!
 }
 
 input CreateTicketInput {
@@ -1353,16 +1353,5 @@ input UpdateMediaInput {
   extension: String
   subDirectory: String
   size: Float
-  id: Int!
-}
-
-input CreateDashboardInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateDashboardInput {
-  """Example field (placeholder)"""
-  exampleField: Int
   id: Int!
 }
