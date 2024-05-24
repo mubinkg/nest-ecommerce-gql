@@ -10,10 +10,15 @@ export class OrderReportService{
         @InjectModel(Order.name) private readonly orderModel:Model<OrderDocument>
     ){}
 
-    async getSelsReport(seller:string){
+    async getSelsReport(seller:string, limit:number, offset:number){
         try{
-            const data = await this.orderModel.aggregate(salesReportQuery(seller))
-            console.log(data)
+            const orders = await this.orderModel.aggregate(salesReportQuery(seller, limit, offset, false))
+            const countData = await this.orderModel.aggregate(salesReportQuery(seller, limit, offset, true))
+            const count = countData[0]?.count || 0
+            return {
+                orders,
+                count
+            }
         }
         catch(err){
             throw err;
