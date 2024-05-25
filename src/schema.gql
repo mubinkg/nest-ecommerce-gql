@@ -1165,7 +1165,7 @@ input CreateSliderTypeInput {
 
 input CreateBrandInput {
   name: String!
-  image: Upload
+  image: String
 }
 
 input CreateRatingInput {

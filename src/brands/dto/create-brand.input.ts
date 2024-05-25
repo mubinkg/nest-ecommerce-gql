@@ -1,6 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
-import { FileUpload, GraphQLUpload } from 'graphql-upload';
 
 @InputType()
 export class CreateBrandInput {
@@ -9,7 +8,8 @@ export class CreateBrandInput {
   @IsNotEmpty()
   name: string;
 
-  @Field(()=>GraphQLUpload, {nullable:true})
+  @Field(()=>String, {nullable:true})
   @IsNotEmpty()
-  image: FileUpload | string
+  @IsString()
+  image: string
 }

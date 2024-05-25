@@ -16,7 +16,6 @@ export class BrandsService {
 
   async create(createBrandInput: CreateBrandInput) {
     try{
-      createBrandInput.image = await uploadFile(createBrandInput.image as FileUpload) as string
       return await this.brandModel.create(createBrandInput)
     }
     catch(err){
@@ -26,7 +25,7 @@ export class BrandsService {
 
   async findAll(limit:number, offset:number) {
     try{
-      const brands = await this.brandModel.find({}).limit(limit).skip(offset)
+      const brands = await this.brandModel.find({}).sort('-_id').limit(limit).skip(offset)
       return brands
     }
     catch(err){
