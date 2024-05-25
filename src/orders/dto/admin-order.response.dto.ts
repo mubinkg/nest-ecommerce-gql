@@ -9,3 +9,12 @@ export class AdminOrderResponse{
     @Field(()=>Number, {nullable:true})
     count?: number
 }
+
+@ObjectType()
+export class AdminSalesInventory{
+    @Field(()=>Order, {nullable:true})
+    orders?: Order
+
+    @Field(()=>Number, {nullable:true})
+    count?: number
+}

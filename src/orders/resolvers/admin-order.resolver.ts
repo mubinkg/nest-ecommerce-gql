@@ -1,7 +1,7 @@
 import { Args, Resolver, Query } from "@nestjs/graphql";
 import { OrderAdminService } from "../service/admin-order.service";
 import { GetAdminOrderInput } from "../dto/admin-order.input";
-import { AdminOrderResponse } from "../dto/admin-order.response.dto";
+import { AdminOrderResponse, AdminSalesInventory } from "../dto/admin-order.response.dto";
 
 @Resolver(()=>OrderAdminResolver)
 export class OrderAdminResolver{
@@ -14,5 +14,13 @@ export class OrderAdminResolver{
         @Args('adminOrderListInput') getAdminOrderInput:GetAdminOrderInput
     ){
         return this.orderAdminService.getAdminOrderList(getAdminOrderInput)
+    }
+
+    @Query(()=>AdminSalesInventory, {nullable:true})
+    adminSalesInventory(
+        @Args('limit') limit:number,
+        @Args('offset') offset:number
+    ){
+
     }
 }

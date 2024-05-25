@@ -13,7 +13,7 @@ export class OrderDashboardServie{
     async getSellerOrderCount(sellerId:string){
         try{
             const data = await this.orderModel.aggregate(sellerOrderCount(sellerId))
-            const count = data[0].total
+            const count = data[0]?.total || 0
             return count    
         } 
         catch(err){
