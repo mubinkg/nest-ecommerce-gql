@@ -26,4 +26,8 @@ export class OrderAdminService{
         }
     }
 
+    async getSalesInventoryReport(limit:number, offset:number){
+        
+    }
+
 }

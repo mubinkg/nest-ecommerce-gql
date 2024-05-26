@@ -21,6 +21,6 @@ export class OrderAdminResolver{
         @Args('limit') limit:number,
         @Args('offset') offset:number
     ){
-
+        return this.orderAdminService.getSalesInventoryReport(limit, offset)
     }
 }
