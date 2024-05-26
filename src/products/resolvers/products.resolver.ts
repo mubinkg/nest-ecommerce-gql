@@ -16,7 +16,7 @@ export class ProductsResolver {
     return await this.productsService.create(createProductInput);
   }
 
-  @Query(() => [ProductResponse], { name: 'get_products' })
+  @Query(() => [Product], { name: 'get_products' })
   findAll(
     @Args('getProductInput') getProductInputDto:GetProductDto
   ) {

@@ -12,10 +12,6 @@ registerEnumType(ProductOrder, {
 
 @InputType()
 export class GetProductDto{
-    @Field(()=>String, {nullable:true})
-    @IsString()
-    @IsOptional()
-    id?:string
 
     @Field(()=>String, {nullable:true})
     @IsString()
