@@ -3,6 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Category } from 'src/categories/entities/category.entity';
 import { SectionStyle } from '../enum/section-style.enum';
+import { Product } from 'src/products/entities/product.entity';
 
 registerEnumType(SectionStyle, {
   name: 'SectionStyle'
@@ -35,6 +36,10 @@ export class Section {
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
   productType?:string
+
+  @Field(()=>[Product], {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref:'Product'})
+  products?: Product[]
 }
 
 export const SectionSchema = SchemaFactory.createForClass(Section)
