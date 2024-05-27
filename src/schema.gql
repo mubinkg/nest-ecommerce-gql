@@ -550,6 +550,11 @@ enum ProductTypes {
   CUSTOM_PRODUCT
 }
 
+type AdminSectionDto {
+  sections: [Section!]
+  count: Float
+}
+
 type SellerAuthResponse {
   seller: Seller
   access_token: String
@@ -643,6 +648,7 @@ type Query {
   adminFaqList(limit: Float!, offset: Float!): FaqAdminDto!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
+  getAdminSetions(limit: Float!, offset: Float!, query: String!): AdminSectionDto
   sellers(limit: Float!, offset: Float!, status: String): SellerList!
   seller(id: Int!): Seller!
   adminMedia(limit: Float!, offset: Float!, query: String): AdminMedia!
