@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSectionInput } from './dto/create-section.input';
-import { UpdateSectionInput } from './dto/update-section.input';
+import { CreateSectionInput } from '../dto/create-section.input';
+import { UpdateSectionInput } from '../dto/update-section.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Section, SectionDocuement } from './entities/section.entity';
+import { Section, SectionDocuement } from '../entities/section.entity';
 import { Model } from 'mongoose';
-import { GetSectionsInput } from './dto/get-sections.input';
+import { GetSectionsInput } from '../dto/get-sections.input';
 
 @Injectable()
 export class SectionsService {

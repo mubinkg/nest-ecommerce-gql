@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { SectionsService } from './sections.service';
-import { SectionsResolver } from './sections.resolver';
+import { SectionsService } from './services/sections.service';
+import { SectionsResolver } from './resolvers/sections.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Section, SectionSchema } from './entities/section.entity';
 
