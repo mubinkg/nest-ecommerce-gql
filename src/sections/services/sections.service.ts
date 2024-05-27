@@ -15,7 +15,8 @@ export class SectionsService {
 
   async create(createSectionInput: CreateSectionInput) {
     try{
-      return await this.sectionModel.create(createSectionInput)
+      const total = await this.sectionModel.countDocuments() + 1;
+      return await this.sectionModel.create({...createSectionInput, order: total})
     }
     catch(err){
       throw err;
