@@ -1,4 +1,4 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
 import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 @InputType()
@@ -56,6 +56,7 @@ export class CreateOrderInput {
   @IsNumber()
   @IsNotEmpty()
   is_wallet_used?:number
+
 
   @Field(()=>Number, {defaultValue: 0})
   @IsNumber()

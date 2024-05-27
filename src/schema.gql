@@ -465,9 +465,18 @@ type Order {
   wallet_balance_used: Float
   order_note: String
   documents: [String!]
-  status: String
+  status: OrderStatus
   email: String
   created_at: DateTime
+}
+
+enum OrderStatus {
+  RECEIVED
+  DELIVERED
+  CANCELLED
+  PROCESSED
+  SHIPPED
+  RETURNED
 }
 
 type AdminOrderResponse {
@@ -774,13 +783,6 @@ input GetOrderDto {
   sort: OrderSortBy = ID
   order: OrderSortOrder = DESC
   download_invoice: Float
-}
-
-enum OrderStatus {
-  RECEIVED
-  DELIVERED
-  CANCELLED
-  PROCESSED
 }
 
 enum OrderSortBy {

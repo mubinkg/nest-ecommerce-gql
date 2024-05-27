@@ -1,11 +1,16 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, registerEnumType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument, mongo } from 'mongoose';
 import { Address } from 'src/addresses/entities/address.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { ProductVariant } from 'src/product-variants/entities/product-variant.entity';
+import { OrderStatus } from '../enum';
 
 export type OrderDocument = HydratedDocument<Order>
+
+registerEnumType(OrderStatus, {
+  name: "OrderStatus"
+})
 
 @ObjectType()
 @Schema({
@@ -76,9 +81,9 @@ export class Order {
   @Prop([{type:String}])
   documents?:string[]
 
-  @Field(()=>String, {nullable:true})
-  @Prop({type:String})
-  status?: string
+  @Field(()=>OrderStatus, {nullable:true})
+  @Prop({type:String, default:OrderStatus.RECEIVED})
+  status?: OrderStatus
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
