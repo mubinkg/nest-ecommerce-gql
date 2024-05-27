@@ -20,4 +20,23 @@ export class OrderDashboardServie{
             throw err;
         }
     }
+
+    async getStatusWiseCount(){
+        try{
+            return await this.orderModel.aggregate([
+                {
+                  $group:
+                    {
+                      _id: "$status",
+                      statusCount: {
+                        $sum: 1,
+                      },
+                    },
+                },
+              ])
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

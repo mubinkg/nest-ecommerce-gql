@@ -12,6 +12,7 @@ import { DashboardRatingService } from 'src/ratings/services/dashboard-rating.se
 import { CustomerDashboardService } from 'src/customers/services/customer-dashboard.service';
 import { OrderDashboardServie } from 'src/orders/service/order-dashboard.service';
 import { CategoryWiseProduct } from '../dto/category-wise-product.dto';
+import { StatusWiseOrderCountDto } from '../dto/status-wise-order-count.dto';
 
 @Resolver(() => Dashboard)
 export class DashboardResolver {
@@ -57,5 +58,11 @@ export class DashboardResolver {
     catch(err){
       throw err;
     }
+  }
+
+  @Query(()=>[StatusWiseOrderCountDto])
+  @UseGuards(GqlAuthGuard)
+  async statusWiseOrderCount(){
+    return this.orderDashboardService.getStatusWiseCount()
   }
 }

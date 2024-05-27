@@ -602,6 +602,11 @@ type CategoryWiseProduct {
   category: Category
 }
 
+type StatusWiseOrderCountDto {
+  _id: String
+  statusCount: Float
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -664,6 +669,7 @@ type Query {
   media(id: Int!): Media!
   dashboardTopContent: DashboardTopContent
   sellerCategoryWiseProduct: [CategoryWiseProduct!]
+  statusWiseOrderCount: [StatusWiseOrderCountDto!]!
 }
 
 input GetTicketsDto {
