@@ -49,6 +49,9 @@ export class Section {
   @Field(()=>[Product], {nullable:true})
   @Prop([{type: mongoose.Schema.Types.ObjectId, ref:'Product'}])
   products?: Product[]
+
+  @Field(()=>Date, {nullable:true})
+  createdAt:Date
 }
 
 export const SectionSchema = SchemaFactory.createForClass(Section)

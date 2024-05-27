@@ -535,6 +535,7 @@ type Section {
   style: SectionStyle!
   productType: ProductTypes
   products: [Product!]
+  createdAt: DateTime
 }
 
 enum SectionStyle {
@@ -594,6 +595,7 @@ type Query {
   get_products(getProductInput: GetProductDto!): [Product!]!
   product(id: Int!): Product!
   getAdminProductList(adminProductListDto: AdminProductListDto!): AdminProductListResponseDto!
+  getProductsForFeaturedSections(adminFeaturedSectionProductFilterInput: AdminFeaturedSectionProductFilterInput!): [Product!]!
   productVariants(limit: Float!, offset: Float!, query: String): AmdinProductVariantResponse!
   productVariant(id: Int!): ProductVariant!
   getAdminStockList(limit: Float!, offset: Float!): AdminStockDto!
@@ -698,6 +700,13 @@ input AdminProductListDto {
   status: String
   limit: Float!
   offset: Float!
+}
+
+input AdminFeaturedSectionProductFilterInput {
+  limit: Float!
+  offset: Float!
+  categories: [String!]
+  productType: String
 }
 
 input SignInDto {
