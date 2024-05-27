@@ -530,9 +530,10 @@ type Section {
   _id: String
   title: String
   description: String
+  order: Float
   categories: [String!]
   style: SectionStyle!
-  productType: String
+  productType: ProductTypes
   products: [Product!]
 }
 
@@ -541,6 +542,11 @@ enum SectionStyle {
   STYLE_ONE
   STYLE_TWO
   STYLE_THREE
+}
+
+enum ProductTypes {
+  DIGITAL_PRODUCT
+  CUSTOM_PRODUCT
 }
 
 type SellerAuthResponse {
@@ -602,6 +608,7 @@ type Query {
   customerAdminList(query: String!, limit: Float!, offset: Float!): CustomerAdminDto!
   categories(getCategoriesInput: GetCategoryDto!): [CategoriesResponse!]!
   getAdminCategories(getCategoriesInput: GetCategoryDto!): AdminCategoryList!
+  getAllCategory: [Category!]!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
   sliders(limit: Float!, offset: Float!): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
@@ -1316,7 +1323,7 @@ input CreateSectionInput {
   description: String!
   categories: [String!]
   style: SectionStyle! = DEFAULT
-  productType: String!
+  productType: ProductTypes! = CUSTOM_PRODUCT
   products: [String!]
 }
 

@@ -1,0 +1,4 @@
+export enum ProductTypes{
+    DIGITAL_PRODUCT = 'DIGITAL_PRODUCT',
+    CUSTOM_PRODUCT = 'CUSTOM_PRODUCT'
+}

@@ -4,9 +4,14 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { Category } from 'src/categories/entities/category.entity';
 import { SectionStyle } from '../enum/section-style.enum';
 import { Product } from 'src/products/entities/product.entity';
+import { ProductTypes } from '../enum/product-type.enum';
 
 registerEnumType(SectionStyle, {
   name: 'SectionStyle'
+})
+
+registerEnumType(ProductTypes,{
+  name: "ProductTypes"
 })
 
 @ObjectType()
@@ -25,6 +30,10 @@ export class Section {
   @Prop({type:String})
   description?:string
 
+  @Field(()=>Number, {nullable:true})
+  @Prop({type:Number})
+  order:number
+
   @Field(()=>[String], {nullable:true})
   @Prop([{type:mongoose.Schema.Types.ObjectId, ref: 'Category'}])
   categories?:Category[]
@@ -33,12 +42,12 @@ export class Section {
   @Prop({type:String})
   style?:SectionStyle
 
-  @Field(()=>String, {nullable:true})
+  @Field(()=>ProductTypes, {nullable:true})
   @Prop({type:String})
-  productType?:string
+  productType?:ProductTypes
 
   @Field(()=>[Product], {nullable:true})
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref:'Product'})
+  @Prop([{type: mongoose.Schema.Types.ObjectId, ref:'Product'}])
   products?: Product[]
 }
 
