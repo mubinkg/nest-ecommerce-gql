@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Section, SectionDocuement } from '../entities/section.entity';
 import { Model } from 'mongoose';
 import { GetSectionsInput } from '../dto/get-sections.input';
+import { getSectionQuery } from '../mongo';
 
 @Injectable()
 export class SectionsService {
@@ -23,8 +24,13 @@ export class SectionsService {
     }
   }
 
-  findAll(getSectionInput:GetSectionsInput) {
-    return `This action returns all sections`;
+  async findAll(getSectionInput:GetSectionsInput) {
+    try{
+      return await this.sectionModel.aggregate(getSectionQuery(getSectionInput))
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {
