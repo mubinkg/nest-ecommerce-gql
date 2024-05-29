@@ -56,18 +56,18 @@ export class GetSectionsInput{
     @IsOptional()
     p_order?: string
 
-    @Field(()=>Number, {defaultValue: 0})
+    @Field(()=>Number, {defaultValue: 0, nullable:true})
     @IsInt()
-    @IsNotEmpty()
+    @IsOptional()
     discount?: number
 
-    @Field(()=>Number, {defaultValue: 0})
+    @Field(()=>Number, {defaultValue: 0, nullable:true})
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional()
     min_price?: number
 
-    @Field(()=>Number, {defaultValue: 0})
+    @Field(()=>Number, {defaultValue: 0, nullable:true})
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional()
     max_price?: number
 }

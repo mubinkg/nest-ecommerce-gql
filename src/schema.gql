@@ -827,9 +827,9 @@ input GetSectionsInput {
   p_offset: Float! = 0
   p_sort: String
   p_order: String
-  discount: Float! = 0
-  min_price: Float! = 0
-  max_price: Float! = 0
+  discount: Float = 0
+  min_price: Float = 0
+  max_price: Float = 0
 }
 
 type Mutation {
