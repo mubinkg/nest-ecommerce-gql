@@ -7,19 +7,31 @@ import { Model } from 'mongoose';
 import { ProductVariantsService } from 'src/product-variants/services/product-variants.service';
 import { GetOrderDto } from '../dto/get-orders.dto';
 import { OrderSortOrder } from '../enum';
+import { OrderItem, OrderItemDocument } from '../entities/order-item.entity';
 
 @Injectable()
 export class OrdersService {
 
   constructor(
     @InjectModel(Order.name) private readonly orderModel:Model<OrderDocument>,
+    @InjectModel(OrderItem.name) private readonly orderItemModel:Model<OrderItemDocument>,
     private readonly productVariantsService:ProductVariantsService
   ){}
 
   async create(createOrderInput: CreateOrderInput, user:any) {
     try{
       await this.productVariantsService.updateProductVarientAfterOrder(createOrderInput)
-      return await this.orderModel.create({...createOrderInput, user: user.userId, address: createOrderInput.address_id})
+      const order = await this.orderModel.create({...createOrderInput, user: user.userId, address: createOrderInput.address_id})
+      const ordetItemList = []
+      createOrderInput.product_variants.forEach((item, i)=>{
+        ordetItemList.push({
+          quantity: createOrderInput.quantity[i],
+          product_variant: item,
+          order: order._id.toString()
+        })
+      })
+      await this.orderItemModel.insertMany(ordetItemList)
+      return order;
     }
     catch(err){
       throw err

@@ -9,6 +9,7 @@ import { OrderAdminService } from './service/admin-order.service';
 import { OrderDashboardServie } from './service/order-dashboard.service';
 import { OrderReportResolver } from './resolvers/order-reports.resolver';
 import { OrderReportService } from './service/order-report.service';
+import { OrderItem, OrderItemSchema } from './entities/order-item.entity';
 
 @Module({
   imports: [
@@ -16,6 +17,10 @@ import { OrderReportService } from './service/order-report.service';
       {
         name: Order.name,
         schema: OrderSchema
+      },
+      {
+        name: OrderItem.name,
+        schema: OrderItemSchema
       }
     ]),
     ProductVariantsModule
