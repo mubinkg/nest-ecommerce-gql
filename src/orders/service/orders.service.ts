@@ -8,6 +8,7 @@ import { ProductVariantsService } from 'src/product-variants/services/product-va
 import { GetOrderDto } from '../dto/get-orders.dto';
 import { OrderSortOrder } from '../enum';
 import { OrderItem, OrderItemDocument } from '../entities/order-item.entity';
+import { OrderProductVariantServie } from 'src/product-variants/services/order-product-variant.service';
 
 @Injectable()
 export class OrdersService {
@@ -15,22 +16,16 @@ export class OrdersService {
   constructor(
     @InjectModel(Order.name) private readonly orderModel:Model<OrderDocument>,
     @InjectModel(OrderItem.name) private readonly orderItemModel:Model<OrderItemDocument>,
-    private readonly productVariantsService:ProductVariantsService
+    private readonly productVariantsService:ProductVariantsService,
+    private readonly orderProductVariantService:OrderProductVariantServie
   ){}
 
   async create(createOrderInput: CreateOrderInput, user:any) {
     try{
       await this.productVariantsService.updateProductVarientAfterOrder(createOrderInput)
       const order = await this.orderModel.create({...createOrderInput, user: user.userId, address: createOrderInput.address_id})
-      const ordetItemList = []
-      createOrderInput.product_variants.forEach((item, i)=>{
-        ordetItemList.push({
-          quantity: createOrderInput.quantity[i],
-          product_variant: item,
-          order: order._id.toString()
-        })
-      })
-      await this.orderItemModel.insertMany(ordetItemList)
+      const variantData = await this.orderProductVariantService.getVariantListWithQuantity(createOrderInput.product_variants, createOrderInput.quantity);
+      await this.orderItemModel.insertMany(variantData)
       return order;
     }
     catch(err){

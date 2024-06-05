@@ -1,8 +1,9 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory, raw } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument } from "mongoose";
 import { OrderStatus } from "../enum";
 import { Order } from "./order.entity";
+import { ProductVariant } from "src/product-variants/entities/product-variant.entity";
 
 @Schema({
     timestamps: true
@@ -14,11 +15,11 @@ export class OrderItem{
 
     @Field(()=>Number, {nullable:true})
     @Prop({type: Number})
-    quantity: string
+    quantity: number
 
-    @Field(()=>String, {nullable:true})
-    @Prop({type: String})
-    product_variant?: string
+    @Field(()=>ProductVariant, {nullable:true})
+    @Prop({type: raw({...ProductVariant})})
+    product_variant?: ProductVariant
 
     @Field(()=>Order, {nullable:true})
     @Prop({type: mongoose.Schema.Types.ObjectId, ref:"Order"})
