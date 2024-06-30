@@ -24,7 +24,7 @@ export class ProductsResolver {
   }
 
   @Query(() => Product, { name: 'product' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('productId', { type: () => String }) id: string) {
     return this.productsService.findOne(id);
   }
 

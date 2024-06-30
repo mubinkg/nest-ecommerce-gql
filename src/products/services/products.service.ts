@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotAcceptableException, NotImplementedException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotAcceptableException, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { CreateProductInput } from '../dto/create-product.input';
 import { UpdateProductInput } from '../dto/update-product.input';
 import { InjectModel } from '@nestjs/mongoose';
@@ -10,7 +10,7 @@ import { GetProductDto } from '../dto/get-products.dto';
 import { UpdateProductGlobalOrderNoInput } from '../dto/updateGlobalOrderNo.input';
 import { ProductAttributeInput } from '../dto/product-attribute.input';
 import { convertToObjectId } from 'src/utils/convert-to-objectid';
-import { getProductsQuery } from '../mongo';
+import { getProductsQuery, productDetailsQuery } from '../mongo';
 
 @Injectable()
 export class ProductsService {
@@ -88,8 +88,17 @@ export class ProductsService {
 
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: string) {
+    try{
+      const data = await this.productModel.aggregate(productDetailsQuery(id))
+      if(data?.length <= 0){
+        throw new NotFoundException('Product not found')
+      }
+      return data[0]
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   update(id: number, updateProductInput: UpdateProductInput) {
