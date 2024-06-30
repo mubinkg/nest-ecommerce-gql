@@ -42,7 +42,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
       csrfPrevention: false,
       context: ({ req, res }) => ({ req, res }),
     }),
-    MongooseModule.forRoot(process.env.MONGO_URI),
+    MongooseModule.forRoot(process.env.MONGO_URI || 'mongodb://localhost:27017/ecommerc'),
     TicketsModule,
     ProductsModule,
     AreasModule,
