@@ -11,13 +11,15 @@ import { UpdateProductGlobalOrderNoInput } from '../dto/updateGlobalOrderNo.inpu
 import { ProductAttributeInput } from '../dto/product-attribute.input';
 import { convertToObjectId } from 'src/utils/convert-to-objectid';
 import { getProductsQuery, productDetailsQuery } from '../mongo';
+import { Attribute } from '../entities/product-attribute.entity';
 
 @Injectable()
 export class ProductsService {
 
   constructor(
     private productVariantsService: ProductVariantsService,
-    @InjectModel(Product.name) private readonly productModel: Model<ProductDocument>
+    @InjectModel(Product.name) private readonly productModel: Model<ProductDocument>,
+    @InjectModel(Attribute.name) private readonly attributeModel: Model<Attribute>
   ) { }
 
   async create(createProductInput: CreateProductInput) {
@@ -35,7 +37,11 @@ export class ProductsService {
 
       const product = await this.productModel.create(createProductInput)
       
-      const productVariant = await this.productVariantsService.create(createProductVariantInput.map((d) => ({ ...d, product: product._id })))
+      await this.productVariantsService.create(createProductVariantInput.map((d) => ({ ...d, product: product._id })))
+
+      if(createProductInput?.attributes && createProductInput.attributes.length){
+        await this.attributeModel.insertMany(createProductInput.attributes.map(d=>({...d, product:product._id.toString()})))
+      }
       
       return product
     

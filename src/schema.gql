@@ -96,7 +96,9 @@ enum ProductAttributeValueType {
   IMAGE
 }
 
-type ProductAttributeEntity {
+type Attribute {
+  _id: String!
+  product: Product
   attribute: ProductAttribute
   values: [ProductAttributeValue!]
 }
@@ -184,7 +186,7 @@ type Product {
   tax: Float
   product_type: String
   globalOrderNo: Float
-  attributes: [ProductAttributeEntity!]
+  attributes: [Attribute!]
   productvariants: [ProductVariant!]
 }
 
@@ -423,7 +425,7 @@ type ProductResponse {
   tax: Float
   product_type: String
   globalOrderNo: Float
-  attributes: [ProductAttributeEntity!]
+  attributes: [Attribute!]
 
   """Product Variants"""
   productvariants: [ProductVariant!]

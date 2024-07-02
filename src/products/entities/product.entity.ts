@@ -6,7 +6,7 @@ import { DownloadLinkType } from '../enum/download-link-type.enum';
 import { Brand } from 'src/brands/entities/brand.entity';
 import { Category } from 'src/categories/entities/category.entity';
 import { Seller } from 'src/sellers/entities/seller.entity';
-import { ProductAttributeEntity } from './product-attribute.entity';
+import { Attribute } from './product-attribute.entity';
 import { ProductVariant } from 'src/product-variants/entities/product-variant.entity';
 
 export type ProductDocument = HydratedDocument<Product>
@@ -149,9 +149,8 @@ export class Product {
   @Prop({type:Number})
   globalOrderNo?: number
 
-  @Field(()=>[ProductAttributeEntity], {nullable:true})
-  @Prop([{type: raw({...ProductAttributeEntity})}])
-  attributes?:ProductAttributeEntity[]
+  @Field(()=>[Attribute], {nullable:true})
+  attributes?:Attribute[]
 
   @Field(()=>[ProductVariant], {nullable:true})
   productvariants?:ProductVariant[]

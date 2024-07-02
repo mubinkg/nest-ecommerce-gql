@@ -5,6 +5,9 @@ import mongoose from "mongoose";
 
 @InputType()
 export class ProductAttributeInput{
+
+    product?: string
+
     @Field(()=>String)
     @IsString()
     @IsMongoId()
