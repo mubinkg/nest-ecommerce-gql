@@ -9,20 +9,21 @@ export const adminProductQuery:any = [
         },
     },
     {
-      $lookup:
-        {
-          from: "productattributes",
-          localField: "attributes.attribute",
-          foreignField: "_id",
-          as: "attributelist",
-        },
-    },
-    {
       $lookup: {
-        from: "productattributevalues",
-        localField: "attributes.values",
-        foreignField: "_id",
-        as: "valueList",
+        from: "attributes",
+        localField: "_id",
+        foreignField: "product",
+        as: "attributes",
+        pipeline: [
+          {
+            $lookup: {
+              from: "productattributevalues",
+              localField: "values",
+              foreignField: "_id",
+              as: "values",
+            },
+          },
+        ],
       },
     },
     {
@@ -45,20 +46,13 @@ export const adminProductQuery:any = [
     {
       $set:
         {
-          "attributes.attribute": {
-            $arrayElemAt: ["$attributelist", 0],
-          },
           brand: {
             $arrayElemAt: ["$brand", 0],
           },
           category: {
             $arrayElemAt: ["$category", 0],
           },
-          "attributes.values": "$valueList",
         },
-    },
-    {
-      $unset: ["valueList", "attributelist"],
     },
     {
       $lookup:
@@ -160,20 +154,21 @@ export const getProductsQuery = (getProductInputDto:GetProductDto)=>{
 
   const otherQuery:any = [
     {
-      $lookup:
-        {
-          from: "productattributes",
-          localField: "attributes.attribute",
-          foreignField: "_id",
-          as: "attributelist",
-        },
-    },
-    {
       $lookup: {
-        from: "productattributevalues",
-        localField: "attributes.values",
-        foreignField: "_id",
-        as: "valueList",
+        from: "attributes",
+        localField: "_id",
+        foreignField: "product",
+        as: "attributes",
+        pipeline: [
+          {
+            $lookup: {
+              from: "productattributevalues",
+              localField: "values",
+              foreignField: "_id",
+              as: "values",
+            },
+          },
+        ],
       },
     },
     {
@@ -196,20 +191,13 @@ export const getProductsQuery = (getProductInputDto:GetProductDto)=>{
     {
       $set:
         {
-          "attributes.attribute": {
-            $arrayElemAt: ["$attributelist", 0],
-          },
           brand: {
             $arrayElemAt: ["$brand", 0],
           },
           category: {
             $arrayElemAt: ["$category", 0],
           },
-          "attributes.values": "$valueList",
         },
-    },
-    {
-      $unset: ["valueList", "attributelist"],
     },
     {
       $lookup:
@@ -270,18 +258,20 @@ export const productDetailsQuery = (id:string)=> [
   },
   {
     $lookup: {
-      from: "productattributes",
-      localField: "attributes.attribute",
-      foreignField: "_id",
-      as: "attributelist",
-    },
-  },
-  {
-    $lookup: {
-      from: "productattributevalues",
-      localField: "attributes.values",
-      foreignField: "_id",
-      as: "valueList",
+      from: "attributes",
+      localField: "_id",
+      foreignField: "product",
+      as: "attributes",
+      pipeline: [
+        {
+          $lookup: {
+            from: "productattributevalues",
+            localField: "values",
+            foreignField: "_id",
+            as: "values",
+          },
+        },
+      ],
     },
   },
   {
@@ -302,20 +292,13 @@ export const productDetailsQuery = (id:string)=> [
   },
   {
     $set: {
-      "attributes.attribute": {
-        $arrayElemAt: ["$attributelist", 0],
-      },
       brand: {
         $arrayElemAt: ["$brand", 0],
       },
       category: {
         $arrayElemAt: ["$category", 0],
       },
-      "attributes.values": "$valueList",
     },
-  },
-  {
-    $unset: ["valueList", "attributelist"],
   },
   {
     $lookup: {

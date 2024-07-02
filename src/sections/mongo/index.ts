@@ -27,20 +27,22 @@ export const getSectionQuery = (getSectionInput: GetSectionsInput) => {
         },
         {
             $lookup: {
-                from: "productattributes",
-                localField: "attributes.attribute",
-                foreignField: "_id",
-                as: "attributelist",
+              from: "attributes",
+              localField: "_id",
+              foreignField: "product",
+              as: "attributes",
+              pipeline: [
+                {
+                  $lookup: {
+                    from: "productattributevalues",
+                    localField: "values",
+                    foreignField: "_id",
+                    as: "values",
+                  },
+                },
+              ],
             },
-        },
-        {
-            $lookup: {
-                from: "productattributevalues",
-                localField: "attributes.values",
-                foreignField: "_id",
-                as: "valueList",
-            },
-        },
+          },
         {
             $lookup: {
                 from: "brands",
@@ -59,20 +61,13 @@ export const getSectionQuery = (getSectionInput: GetSectionsInput) => {
         },
         {
             $set: {
-                "attributes.attribute": {
-                    $arrayElemAt: ["$attributelist", 0],
-                },
                 brand: {
                     $arrayElemAt: ["$brand", 0],
                 },
                 category: {
                     $arrayElemAt: ["$category", 0],
                 },
-                "attributes.values": "$valueList",
             },
-        },
-        {
-            $unset: ["valueList", "attributelist"],
         },
         {
             $lookup: {
