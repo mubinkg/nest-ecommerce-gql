@@ -22,8 +22,7 @@ export const adminProductQuery:any = [
               foreignField: "_id",
               as: "values",
             },
-          },
-........  {
+          },{
             $lookup: {
               from: "productattributes",
               localField: "attribute",
