@@ -23,6 +23,14 @@ export const adminProductQuery:any = [
               as: "values",
             },
           },
+........  {
+            $lookup: {
+              from: "productattributes",
+              localField: "attribute",
+              foreignField: "_id",
+              as: "attribute",
+            },
+          },
         ],
       },
     },
