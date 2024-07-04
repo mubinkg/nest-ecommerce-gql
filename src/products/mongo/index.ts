@@ -29,7 +29,14 @@ export const adminProductQuery:any = [
               foreignField: "_id",
               as: "attribute",
             },
+          },{
+      $set:
+        {
+          attribute: {
+            $arrayElemAt: ["$attribute", 0],
           },
+        },
+    },
         ],
       },
     },
