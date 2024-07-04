@@ -285,6 +285,22 @@ export const productDetailsQuery = (id:string)=> [
             as: "values",
           },
         },
+         {
+            $lookup: {
+              from: "productattributes",
+              localField: "attribute",
+              foreignField: "_id",
+              as: "attribute",
+            },
+          },
+{
+      $set:
+        {
+          attribute: {
+            $arrayElemAt: ["$attribute", 0],
+          },
+        },
+    },
       ],
     },
   },
