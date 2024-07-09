@@ -11,19 +11,26 @@ import { ProductAdminService } from './services/product-admin.service';
 import { ProductSliderService } from './services/product-slider.service';
 import { Attribute, AttributeSchema } from './entities/product-attribute.entity';
 import { ProductDashboardServic } from './services/product-dahsboard.service';
+import { FavouritesModule } from 'src/favourites/favourites.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([
-    {
-      name: Product.name, schema: ProductSchema
-    },
-    {
-      name: ProductTax.name, schema: ProductTaxSchema
-    },
-    {
-      name: Attribute.name, schema: AttributeSchema
-    }
-  ]),ProductVariantsModule],
+  imports: [
+    MongooseModule.forFeature(
+      [
+        {
+          name: Product.name, schema: ProductSchema
+        },
+        {
+          name: ProductTax.name, schema: ProductTaxSchema
+        },
+        {
+          name: Attribute.name, schema: AttributeSchema
+        }
+      ]
+    ),
+    ProductVariantsModule,
+    FavouritesModule
+  ],
   providers: [ProductsResolver, ProductsService, ProductTaxService, ProductAdminResolver, ProductAdminService, ProductSliderService, ProductDashboardServic],
   exports: [ProductSliderService, ProductDashboardServic]
 })

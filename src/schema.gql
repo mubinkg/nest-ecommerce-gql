@@ -197,6 +197,54 @@ enum DownloadLinkType {
   ADD_LINK
 }
 
+type ProductResponse {
+  _id: String
+  is_favorite: Boolean
+  seller: Seller
+  pro_input_name: String
+  variant: String
+  short_description: String
+  tags: String
+  indicator: String
+  made_in: String
+  brand: Brand
+  total_allowed_quantity: Float
+  minimum_order_quantity: Float
+  quantity_step_size: Float
+  warranty_period: String
+  guarantee_period: String
+  download_allowed: Float
+  download_link_type: DownloadLinkType
+  pro_input_zip: String
+  download_link: String
+  is_returnable: Float
+  is_cancelable: Float
+  cancelable_till: String
+  pro_input_image: String
+  other_images: [String!]
+  video_type: String
+  video: String
+  pro_input_video: String
+  pro_input_description: String
+  extra_input_description: String
+  attribute_values: String
+  status: Float
+  category: Category
+  tax: Float
+  product_type: String
+  globalOrderNo: Float
+  attributes: [Attribute!]
+
+  """Product Variants"""
+  productvariants: [ProductVariant!]
+}
+
+type Favourite {
+  _id: String
+  product: ProductResponse
+  user: String
+}
+
 type AmdinProductVariantResponse {
   count: Float
   productVariants: [ProductVariant!]!
@@ -391,54 +439,6 @@ enum RepeatUsage {
   NOT_ALLOWED
 }
 
-type ProductResponse {
-  _id: String
-  is_favorite: Boolean
-  seller: Seller
-  pro_input_name: String
-  variant: String
-  short_description: String
-  tags: String
-  indicator: String
-  made_in: String
-  brand: Brand
-  total_allowed_quantity: Float
-  minimum_order_quantity: Float
-  quantity_step_size: Float
-  warranty_period: String
-  guarantee_period: String
-  download_allowed: Float
-  download_link_type: DownloadLinkType
-  pro_input_zip: String
-  download_link: String
-  is_returnable: Float
-  is_cancelable: Float
-  cancelable_till: String
-  pro_input_image: String
-  other_images: [String!]
-  video_type: String
-  video: String
-  pro_input_video: String
-  pro_input_description: String
-  extra_input_description: String
-  attribute_values: String
-  status: Float
-  category: Category
-  tax: Float
-  product_type: String
-  globalOrderNo: Float
-  attributes: [Attribute!]
-
-  """Product Variants"""
-  productvariants: [ProductVariant!]
-}
-
-type Favourite {
-  _id: String
-  product: ProductResponse
-  user: String
-}
-
 type Cart {
   _id: String!
   user_id: String
@@ -622,6 +622,8 @@ type Query {
   productVariants(limit: Float!, offset: Float!, query: String): AmdinProductVariantResponse!
   productVariant(id: Int!): ProductVariant!
   getAdminStockList(limit: Float!, offset: Float!): AdminStockDto!
+  favourites(limit: Float!, offset: Float!): [Favourite!]!
+  favourite(id: Int!): Favourite!
   areas: [Area!]!
   areaByCityId(city_id: String!): [Area!]!
   getAdminArea(limit: Float!, offset: Float!, query: String!): AdminAreaDto!
@@ -646,8 +648,6 @@ type Query {
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
   rating(id: Int!): Rating!
   getPromoCodes(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!
-  favourites(limit: Float!, offset: Float!): [Favourite!]!
-  favourite(id: Int!): Favourite!
   getUserCart(getCartDto: GetCartDto!): [CartList!]!
   cart(id: Int!): Cart!
   get_orders(getOrderDto: GetOrderDto!): [Order!]!
@@ -846,6 +846,9 @@ type Mutation {
   updateProductOrderNo(updateProductOrderNoInput: UpdateProductGlobalOrderNoInput!): String!
   deleteProduct(productId: String!): String!
   removeProductVariant(id: Int!): ProductVariant!
+  createFavourite(createFavouriteInput: CreateFavouriteInput!): Favourite!
+  updateFavourite(updateFavouriteInput: UpdateFavouriteInput!): Favourite!
+  removeFavourite(id: String!): String!
   createArea(createAreaInput: CreateAreaInput!): Area!
   updateArea(updateAreaInput: UpdateAreaInput!): Area!
   removeArea(id: Int!): Area!
@@ -869,9 +872,6 @@ type Mutation {
   removeRating(id: Int!): Rating!
   createPromoCode(createPromoCodeInput: CreatePromoCodeInput!): PromoCode!
   validatePromoCode(code: String!, orderFinalAmount: Float!): PromoCode!
-  createFavourite(createFavouriteInput: CreateFavouriteInput!): Favourite!
-  updateFavourite(updateFavouriteInput: UpdateFavouriteInput!): Favourite!
-  removeFavourite(id: String!): String!
   createCart(createCartInput: CreateCartInput!): Cart!
   updateCart(updateCartInput: UpdateCartInput!): Cart!
   removeCart(id: String!): Cart!
@@ -1084,6 +1084,17 @@ input UpdateProductGlobalOrderNoInputObject {
   globalOrderNo: Float!
 }
 
+input CreateFavouriteInput {
+  product_id: String
+  user_Id: String
+}
+
+input UpdateFavouriteInput {
+  product_id: String
+  user_Id: String
+  id: String!
+}
+
 input CreateAreaInput {
   area_name: String!
   city_id: String!
@@ -1246,17 +1257,6 @@ input CreatePromoCodeInput {
   numberOfRepeatUsage: Float! = 0
   isCashBack: Boolean! = false
   status: ActiveStatus!
-}
-
-input CreateFavouriteInput {
-  product_id: String
-  user_Id: String
-}
-
-input UpdateFavouriteInput {
-  product_id: String
-  user_Id: String
-  id: String!
 }
 
 input CreateCartInput {

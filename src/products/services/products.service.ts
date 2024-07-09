@@ -3,7 +3,7 @@ import { CreateProductInput } from '../dto/create-product.input';
 import { UpdateProductInput } from '../dto/update-product.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductDocument } from '../entities/product.entity';
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { Logger } from '@nestjs/common';
 import { ProductVariantsService } from '../../product-variants/services/product-variants.service';
 import { GetProductDto } from '../dto/get-products.dto';
@@ -12,12 +12,14 @@ import { ProductAttributeInput } from '../dto/product-attribute.input';
 import { convertToObjectId } from 'src/utils/convert-to-objectid';
 import { getProductsQuery, productDetailsQuery } from '../mongo';
 import { Attribute } from '../entities/product-attribute.entity';
+import { FavoriteProductService } from 'src/favourites/services/favorite.product.service';
 
 @Injectable()
 export class ProductsService {
 
   constructor(
     private productVariantsService: ProductVariantsService,
+    private readonly favoriteProductService:FavoriteProductService,
     @InjectModel(Product.name) private readonly productModel: Model<ProductDocument>,
     @InjectModel(Attribute.name) private readonly attributeModel: Model<Attribute>
   ) { }
@@ -56,6 +58,11 @@ export class ProductsService {
       const userId = user.userId
       const productQuery = getProductsQuery(getProductInputDto)
       let products = await this.productModel.aggregate(productQuery)
+      const favoriteProductList = await this.favoriteProductService.getFavoriteProductList(userId)
+      products = products.map((product:Product)=>{
+        product.is_favorite = favoriteProductList.find((favorite:any)=>favorite == product._id.toString()) ? true : false;
+        return product
+      })
       return products
     }
     catch(err){
