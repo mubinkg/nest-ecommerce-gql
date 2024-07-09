@@ -17,6 +17,9 @@ export class Product {
   @Field(() => String, {nullable:true})
   _id: string;
 
+  @Field(() => Boolean, {nullable:true})
+  is_favorite?: boolean;
+
   @Field(()=>Seller, {nullable:true})
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Seller'})
   seller?: Seller

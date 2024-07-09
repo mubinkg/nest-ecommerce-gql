@@ -6,21 +6,27 @@ import { UpdateProductInput } from '../dto/update-product.input';
 import { GetProductDto } from '../dto/get-products.dto';
 import { ProductResponse } from '../dto/product-responose.dto';
 import { UpdateProductGlobalOrderNoInput } from '../dto/updateGlobalOrderNo.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
 
 @Resolver(() => Product)
 export class ProductsResolver {
   constructor(private readonly productsService: ProductsService) {}
 
   @Mutation(() => Product)
+  @UseGuards(GqlAuthGuard)
   async createProduct(@Args('createProductInput') createProductInput: CreateProductInput) {
     return await this.productsService.create(createProductInput);
   }
 
   @Query(() => [Product], { name: 'get_products' })
+  @UseGuards(GqlAuthGuard)
   findAll(
-    @Args('getProductInput') getProductInputDto:GetProductDto
+    @Args('getProductInput') getProductInputDto:GetProductDto,
+    @CurrentUser('user') user:any
   ) {
-    return this.productsService.findAll(getProductInputDto);
+    return this.productsService.findAll(getProductInputDto, user);
   }
 
   @Query(() => Product, { name: 'product' })

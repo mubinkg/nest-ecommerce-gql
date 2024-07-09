@@ -51,10 +51,12 @@ export class ProductsService {
     }
   }
 
-  async findAll(getProductInputDto: GetProductDto) {
+  async findAll(getProductInputDto: GetProductDto, user:any) {
     try{
+      const userId = user.userId
       const productQuery = getProductsQuery(getProductInputDto)
-      return await this.productModel.aggregate(productQuery)
+      let products = await this.productModel.aggregate(productQuery)
+      return products
     }
     catch(err){
       throw err;

@@ -211,6 +211,7 @@ export const getProductsQuery = (getProductInputDto: GetProductDto) => {
         category: {
           $arrayElemAt: ["$category", 0],
         },
+        is_favorite: false
       },
     },
     {

@@ -153,6 +153,7 @@ type ProductVariant {
 
 type Product {
   _id: String
+  is_favorite: Boolean
   seller: Seller
   pro_input_name: String
   variant: String
@@ -392,6 +393,7 @@ enum RepeatUsage {
 
 type ProductResponse {
   _id: String
+  is_favorite: Boolean
   seller: Seller
   pro_input_name: String
   variant: String
