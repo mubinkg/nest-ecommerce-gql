@@ -30,8 +30,12 @@ export class ProductsResolver {
   }
 
   @Query(() => Product, { name: 'product' })
-  findOne(@Args('productId', { type: () => String }) id: string) {
-    return this.productsService.findOne(id);
+  @UseGuards(GqlAuthGuard)
+  findOne(
+    @Args('productId', { type: () => String }) id: string,
+    @CurrentUser('user') user:{userId:string}
+  ) {
+    return this.productsService.findOne(id, user);
   }
 
   @Mutation(() => Product)

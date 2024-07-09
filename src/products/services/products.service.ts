@@ -103,13 +103,16 @@ export class ProductsService {
 
   }
 
-  async findOne(id: string) {
+  async findOne(id: string, user: {userId:string}) {
     try{
-      const data = await this.productModel.aggregate(productDetailsQuery(id))
+      const data:Product[] = await this.productModel.aggregate(productDetailsQuery(id))
       if(data?.length <= 0){
         throw new NotFoundException('Product not found')
       }
-      return data[0]
+      const product = data[0]
+      const isFavorite = await this.favoriteProductService.getFavoriteProduct(user.userId, product._id)
+      product.is_favorite = isFavorite
+      return product
     }
     catch(err){
       throw err;

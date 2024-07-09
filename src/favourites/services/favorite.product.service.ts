@@ -17,4 +17,14 @@ export class FavoriteProductService{
             throw err;
         }
     }
+
+    async getFavoriteProduct(userId:string, productId:string):Promise<boolean>{
+        try{
+            const isExist = await this.favoriteModel.exists({user: convertToObjectId(userId), product: convertToObjectId(productId)})
+            return isExist?._id ? true : false
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }
