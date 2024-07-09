@@ -1,11 +1,11 @@
 import { Injectable, InternalServerErrorException, NotFoundException, NotImplementedException } from '@nestjs/common';
-import { CreateFavouriteInput } from './dto/create-favourite.input';
-import { UpdateFavouriteInput } from './dto/update-favourite.input';
+import { CreateFavouriteInput } from '../dto/create-favourite.input';
+import { UpdateFavouriteInput } from '../dto/update-favourite.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Favourite, FavouriteDocument } from './entities/favourite.entity';
+import { Favourite, FavouriteDocument } from '../entities/favourite.entity';
 import { Model } from 'mongoose';
 import { convertToObjectId } from 'src/utils/convert-to-objectid';
-import { getFavoriteProduct } from './mongo';
+import { getFavoriteProduct } from '../mongo';
 
 @Injectable()
 export class FavouritesService {

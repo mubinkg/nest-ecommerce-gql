@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FavouritesResolver } from './favourites.resolver';
-import { FavouritesService } from './favourites.service';
+import { FavouritesResolver } from '../resolvers/favourites.resolver';
+import { FavouritesService } from '../services/favourites.service';
 
 describe('FavouritesResolver', () => {
   let resolver: FavouritesResolver;

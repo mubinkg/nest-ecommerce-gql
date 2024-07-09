@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { FavouritesService } from './favourites.service';
-import { Favourite } from './entities/favourite.entity';
-import { CreateFavouriteInput } from './dto/create-favourite.input';
-import { UpdateFavouriteInput } from './dto/update-favourite.input';
+import { FavouritesService } from '../services/favourites.service';
+import { Favourite } from '../entities/favourite.entity';
+import { CreateFavouriteInput } from '../dto/create-favourite.input';
+import { UpdateFavouriteInput } from '../dto/update-favourite.input';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
