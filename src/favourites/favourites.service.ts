@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Favourite, FavouriteDocument } from './entities/favourite.entity';
 import { Model } from 'mongoose';
 import { convertToObjectId } from 'src/utils/convert-to-objectid';
+import { getFavoriteProduct } from './mongo';
 
 @Injectable()
 export class FavouritesService {
@@ -27,7 +28,7 @@ export class FavouritesService {
 
   async findAll(userId:string, limit:number, offset:number) {
     try {
-      return await this.favouriteModel.find({user: convertToObjectId(userId)}).populate({path: 'product'}).limit(limit).skip(offset)
+      return await this.favouriteModel.aggregate(getFavoriteProduct(userId, limit, offset))
     } catch (error) {
       throw new InternalServerErrorException("Error on finding",error.message)
       
