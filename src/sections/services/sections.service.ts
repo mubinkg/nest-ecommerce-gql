@@ -6,11 +6,13 @@ import { Section, SectionDocuement } from '../entities/section.entity';
 import { Model } from 'mongoose';
 import { GetSectionsInput } from '../dto/get-sections.input';
 import { getSectionQuery } from '../mongo';
+import { FavoriteProductService } from 'src/favourites/services/favorite.product.service';
 
 @Injectable()
 export class SectionsService {
 
   constructor(
+private readonly favoriteProductService:FavoriteProductService,
     @InjectModel(Section.name) private readonly sectionModel:Model<SectionDocuement>
   ){}
 
