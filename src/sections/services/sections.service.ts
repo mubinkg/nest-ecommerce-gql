@@ -7,12 +7,13 @@ import { Model } from 'mongoose';
 import { GetSectionsInput } from '../dto/get-sections.input';
 import { getSectionQuery } from '../mongo';
 import { FavoriteProductService } from 'src/favourites/services/favorite.product.service';
+import { Product } from 'src/products/entities/product.entity';
 
 @Injectable()
 export class SectionsService {
 
   constructor(
-private readonly favoriteProductService:FavoriteProductService,
+    private readonly favoriteProductService:FavoriteProductService,
     @InjectModel(Section.name) private readonly sectionModel:Model<SectionDocuement>
   ){}
 
@@ -26,9 +27,18 @@ private readonly favoriteProductService:FavoriteProductService,
     }
   }
 
-  async findAll(getSectionInput:GetSectionsInput) {
+  async findAll(getSectionInput:GetSectionsInput, user:any) {
     try{
-      return await this.sectionModel.aggregate(getSectionQuery(getSectionInput))
+      let sections = await this.sectionModel.aggregate(getSectionQuery(getSectionInput))
+      const favoriteProductList = await this.favoriteProductService.getFavoriteProductList(user.userId)
+      sections = sections.map((sectionItem:Section)=>{
+        sectionItem.products = sectionItem.products.map((product:Product)=>{
+          product.is_favorite = favoriteProductList.find((favorite:any)=>favorite == product._id.toString()) ? true : false;
+          return product
+        })
+        return sectionItem
+      })
+      return sections;
     }
     catch(err){
       throw err;

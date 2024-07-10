@@ -3,6 +3,9 @@ import { SectionsService } from '../services/sections.service';
 import { Section } from '../entities/section.entity';
 import { CreateSectionInput } from '../dto/create-section.input';
 import { GetSectionsInput } from '../dto/get-sections.input';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
 
 @Resolver(() => Section)
 export class SectionsResolver {
@@ -14,10 +17,12 @@ export class SectionsResolver {
   }
 
   @Query(() => [Section], { name: 'getSections' })
+  @UseGuards(GqlAuthGuard)
   findAll(
-    @Args('getSectionInput') getSectionInput:GetSectionsInput
+    @Args('getSectionInput') getSectionInput:GetSectionsInput,
+    @CurrentUser('user') user:any
   ) {
-    return this.sectionsService.findAll(getSectionInput);
+    return this.sectionsService.findAll(getSectionInput, user);
   }
 
   // @Query(() => Section, { name: 'section' })

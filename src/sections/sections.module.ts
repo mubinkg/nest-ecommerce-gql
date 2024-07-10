@@ -15,7 +15,7 @@ import { FavouritesModule } from 'src/favourites/favourites.module';
         schema: SectionSchema
       }
     ]),
-FavouritesModule
+    FavouritesModule
   ],
   providers: [SectionsResolver, SectionsService, AdminSectionResolver, AdminSectionService],
 })
