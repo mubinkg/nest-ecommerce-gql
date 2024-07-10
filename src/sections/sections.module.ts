@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Section, SectionSchema } from './entities/section.entity';
 import { AdminSectionResolver } from './resolvers/admin-section.resolver';
 import { AdminSectionService } from './services/admin-section.service';
+import { FavouritesModule } from 'src/favourites/favourites.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AdminSectionService } from './services/admin-section.service';
       }
     ])
   ],
+FavouritesModule
   providers: [SectionsResolver, SectionsService, AdminSectionResolver, AdminSectionService],
 })
 export class SectionsModule {}
