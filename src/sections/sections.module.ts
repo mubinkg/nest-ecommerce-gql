@@ -14,9 +14,9 @@ import { FavouritesModule } from 'src/favourites/favourites.module';
         name: Section.name,
         schema: SectionSchema
       }
-    ])
-  ],
+    ]),
 FavouritesModule
+  ],
   providers: [SectionsResolver, SectionsService, AdminSectionResolver, AdminSectionService],
 })
 export class SectionsModule {}
