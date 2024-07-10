@@ -28,7 +28,12 @@ export class FavouritesService {
 
   async findAll(userId:string, limit:number, offset:number) {
     try {
-      return await this.favouriteModel.aggregate(getFavoriteProduct(userId, limit, offset))
+      let favoriteProducts = await this.favouriteModel.aggregate(getFavoriteProduct(userId, limit, offset))
+      favoriteProducts = favoriteProducts.map((item:Favourite)=>{
+        item.product.is_favorite = true;
+        return item;
+      })
+      return favoriteProducts
     } catch (error) {
       throw new InternalServerErrorException("Error on finding",error.message)
       
