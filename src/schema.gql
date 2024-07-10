@@ -630,6 +630,7 @@ type Query {
   getCities(limit: Float!, offset: Float!, query: String!): [City!]!
   city(id: Int!): City!
   adminCityList(limit: Float!, offset: Float!, query: String!): AdminCities!
+  customer: Customer!
   signIn(signinInput: SignInDto!): AuthResponseDto!
   verifyUser(verifyUserInput: VerifyUser!): Boolean!
   customerAdminList(query: String!, limit: Float!, offset: Float!): CustomerAdminDto!

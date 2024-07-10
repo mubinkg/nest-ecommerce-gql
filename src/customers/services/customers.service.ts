@@ -56,8 +56,12 @@ export class CustomersService {
     }
   }
 
-  findAll() {
-    return `This action returns all customers`;
+  async findOne(userId:string) {
+    try{
+      return await this.customerModel.findById(userId)
+    }catch(err){
+      throw err;
+    }
   }
 
   async verifyUser(verifyUserInput:VerifyUser){

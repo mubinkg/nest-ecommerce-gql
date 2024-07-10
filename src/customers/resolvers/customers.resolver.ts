@@ -20,6 +20,14 @@ export class CustomersResolver {
     return this.customersService.create(createCustomerInput);
   }
 
+  @Query(()=>Customer)
+  @UseGuards(GqlAuthGuard)
+  customer(
+    @CurrentUser('user') user:any
+  ){
+    return this.customersService.findOne(user.userId)
+  }
+
   @Query(() => AuthResponseDto, { name: 'signIn' })
   signIn(
     @Args('signinInput') signinInput:SignInDto
