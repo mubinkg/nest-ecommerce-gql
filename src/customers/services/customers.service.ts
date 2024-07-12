@@ -58,7 +58,7 @@ export class CustomersService {
 
   async findOne(userId:string) {
     try{
-      return await this.customerModel.findById(userId)
+      return await this.customerModel.findById(userId).select('-password')
     }catch(err){
       throw err;
     }
