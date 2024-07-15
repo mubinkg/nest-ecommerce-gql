@@ -1303,7 +1303,7 @@ input CreateProductAttributeInput {
 input ProductAttributeValueInput {
   type: ProductAttributeValueType!
   valueName: String!
-  image: Upload
+  image: String
   color: String
 }
 

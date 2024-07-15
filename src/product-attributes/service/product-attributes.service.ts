@@ -23,13 +23,6 @@ export class ProductAttributesService {
         for (let index = 0; index <  createProductAttributeInput.values.length; index++) {
           const shortId=new ShortUniqueId({ length: 8 ,dictionary:"alphanum_upper"})()
           createProductAttributeInput.values[index].id="AV"+shortId
-  
-          if(createProductAttributeInput.values[index].image){
-  
-            const imageUrl = await uploadFile(createProductAttributeInput.values[index].image as FileUpload) as string;
-            
-            createProductAttributeInput.values[index].image=imageUrl
-          }
         }
         const attribute =  await this.productAttributeModel.create({name: createProductAttributeInput.name, attributeSet:createProductAttributeInput.attributeSet})
         await this.productAttributeValueModel.insertMany(createProductAttributeInput.values.map(d=>({...d, productAttribute: attribute._id})))
