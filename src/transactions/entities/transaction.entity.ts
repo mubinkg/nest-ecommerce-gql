@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Prop, Schema } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import { Customer } from 'src/customers/entities/customer.entity';
 
 @ObjectType()
@@ -37,5 +37,7 @@ export class Transaction {
 
   @Field(()=>Date, {nullable:true})
   updatedAt?: Date
-  
 }
+
+export const TransactionSchema = SchemaFactory.createForClass(Transaction)
+export type TransactionDocument = HydratedDocument<Transaction>

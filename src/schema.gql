@@ -1426,12 +1426,18 @@ input UpdateMediaInput {
 }
 
 input CreateTransactionInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  user: String!
+  type: String!
+  amount: Float!
+  status: String!
+  message: String!
 }
 
 input UpdateTransactionInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  user: String
+  type: String
+  amount: Float
+  status: String
+  message: String
   id: Int!
 }
