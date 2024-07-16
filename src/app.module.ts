@@ -29,6 +29,7 @@ import { SectionsModule } from './sections/sections.module';
 import { SellersModule } from './sellers/sellers.module';
 import { MediaModule } from './media/media.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 
 @Module({
@@ -67,6 +68,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     SellersModule,
     MediaModule,
     DashboardModule,
+    TransactionsModule,
   ],
 })
 export class AppModule {}

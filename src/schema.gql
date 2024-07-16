@@ -611,6 +611,11 @@ type StatusWiseOrderCountDto {
   statusCount: Float
 }
 
+type Transaction {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -675,6 +680,8 @@ type Query {
   dashboardTopContent: DashboardTopContent
   sellerCategoryWiseProduct: [CategoryWiseProduct!]
   statusWiseOrderCount: [StatusWiseOrderCountDto!]!
+  transactions: [Transaction!]!
+  transaction(id: Int!): Transaction!
 }
 
 input GetTicketsDto {
@@ -897,6 +904,9 @@ type Mutation {
   createMedia(createMediaInput: CreateMediaInput!): Media!
   updateMedia(updateMediaInput: UpdateMediaInput!): Media!
   removeMedia(id: String!): Media!
+  createTransaction(createTransactionInput: CreateTransactionInput!): Transaction!
+  updateTransaction(updateTransactionInput: UpdateTransactionInput!): Transaction!
+  removeTransaction(id: Int!): Transaction!
 }
 
 input CreateTicketInput {
@@ -1406,5 +1416,16 @@ input UpdateMediaInput {
   extension: String
   subDirectory: String
   size: Float
+  id: Int!
+}
+
+input CreateTransactionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateTransactionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
   id: Int!
 }
