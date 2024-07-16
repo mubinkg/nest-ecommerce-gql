@@ -1,5 +1,15 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { TransactionType } from '../enum/transaction-type.enum';
+import { TransactionStatusEnum } from '../enum/transaction-status.enum';
+
+registerEnumType(TransactionType, {
+  name:"TransactionType"
+})
+
+registerEnumType(TransactionStatusEnum, {
+  name:"TransactionStatusEnum"
+})
 
 @InputType()
 export class CreateTransactionInput {
@@ -7,19 +17,19 @@ export class CreateTransactionInput {
   user:string
 
   @IsNotEmpty()
-  @IsString()
-  @Field(()=>String)
-  type?:string
+  @IsEnum(TransactionType)
+  @Field(()=>TransactionType)
+  type?:TransactionType
 
   @IsNumber()
   @IsNotEmpty()
   @Field(()=>Number)
   amount?:number
 
-  @IsString()
+  @IsEnum(TransactionStatusEnum)
   @IsNotEmpty()
-  @Field(()=>String)
-  status?: string
+  @Field(()=>TransactionStatusEnum)
+  status?: TransactionStatusEnum
 
   @Field(()=>String)
   @IsString()

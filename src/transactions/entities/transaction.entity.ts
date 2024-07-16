@@ -1,7 +1,17 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, registerEnumType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Customer } from 'src/customers/entities/customer.entity';
+import { TransactionType } from '../enum/transaction-type.enum';
+import { TransactionStatusEnum } from '../enum/transaction-status.enum';
+
+
+registerEnumType(TransactionType, {
+  name :"TransactionType"
+})
+registerEnumType(TransactionStatusEnum, {
+  name:"TransactionStatusEnum"
+})
 
 @ObjectType()
 @Schema({
@@ -16,17 +26,17 @@ export class Transaction {
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: "Customer"})
   user?:Customer
 
-  @Field(()=>String, {nullable:true})
+  @Field(()=>TransactionType, {nullable:true})
   @Prop({type:String})
-  type?:string
+  type?:TransactionType
 
   @Field(()=>Number,{nullable:true})
   @Prop({type:Number})
   amount?:number
 
-  @Field(()=>String, {nullable:true})
+  @Field(()=>TransactionStatusEnum, {nullable:true})
   @Prop({type: String})
-  status?: string
+  status?: TransactionStatusEnum
 
   @Field(()=>String, {nullable:true})
   @Prop({type: String})

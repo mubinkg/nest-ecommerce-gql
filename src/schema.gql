@@ -614,12 +614,22 @@ type StatusWiseOrderCountDto {
 type Transaction {
   _id: String!
   user: Customer
-  type: String
+  type: TransactionType
   amount: Float
-  status: String
+  status: TransactionStatusEnum
   message: String
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+enum TransactionType {
+  DEBIT
+  CREDIT
+}
+
+enum TransactionStatusEnum {
+  PENDING
+  SUCCESS
 }
 
 type Query {
@@ -1426,16 +1436,16 @@ input UpdateMediaInput {
 }
 
 input CreateTransactionInput {
-  type: String!
+  type: TransactionType!
   amount: Float!
-  status: String!
+  status: TransactionStatusEnum!
   message: String!
 }
 
 input UpdateTransactionInput {
-  type: String
+  type: TransactionType
   amount: Float
-  status: String
+  status: TransactionStatusEnum
   message: String
   id: Int!
 }
