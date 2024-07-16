@@ -3,9 +3,7 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 @InputType()
 export class CreateTransactionInput {
-  @IsNotEmpty()
-  @IsString()
-  @Field(()=>String)
+  
   user:string
 
   @IsNotEmpty()

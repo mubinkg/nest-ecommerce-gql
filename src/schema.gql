@@ -1426,7 +1426,6 @@ input UpdateMediaInput {
 }
 
 input CreateTransactionInput {
-  user: String!
   type: String!
   amount: Float!
   status: String!
@@ -1434,7 +1433,6 @@ input CreateTransactionInput {
 }
 
 input UpdateTransactionInput {
-  user: String
   type: String
   amount: Float
   status: String

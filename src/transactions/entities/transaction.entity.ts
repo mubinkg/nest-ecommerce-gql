@@ -13,7 +13,7 @@ export class Transaction {
   _id: string
 
   @Field(()=>Customer, {nullable:true})
-  @Prop({type: mongoose.Types.ObjectId, ref: "Customer"})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: "Customer"})
   user?:Customer
 
   @Field(()=>String, {nullable:true})

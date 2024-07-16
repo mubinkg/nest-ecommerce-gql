@@ -1,16 +1,23 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { TransactionsService } from './transactions.service';
-import { Transaction } from './entities/transaction.entity';
-import { CreateTransactionInput } from './dto/create-transaction.input';
-import { UpdateTransactionInput } from './dto/update-transaction.input';
+import { TransactionsService } from '../services/transactions.service';
+import { Transaction } from '../entities/transaction.entity';
+import { CreateTransactionInput } from '../dto/create-transaction.input';
+import { UpdateTransactionInput } from '../dto/update-transaction.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
 
 @Resolver(() => Transaction)
 export class TransactionsResolver {
   constructor(private readonly transactionsService: TransactionsService) {}
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Transaction)
-  createTransaction(@Args('createTransactionInput') createTransactionInput: CreateTransactionInput) {
-    return this.transactionsService.create(createTransactionInput);
+  createTransaction(
+      @Args('createTransactionInput') createTransactionInput: CreateTransactionInput,
+      @CurrentUser('user') user:any
+    ) {
+    return this.transactionsService.create(createTransactionInput, user);
   }
 
   @Query(() => [Transaction], { name: 'transactions' })
