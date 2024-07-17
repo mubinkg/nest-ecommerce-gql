@@ -21,9 +21,22 @@ export class TransactionsService {
   async findAll(limit:number, offset:number, user:any) {
     try{
       if(user?.isAdmin){
-        return await this.transactionModel.find({user: convertToObjectId(user.userId)}).limit(limit).skip(offset)
+        const transactionList = await this.transactionModel.find({user: convertToObjectId(user.userId)}).populate({
+          path: 'user'
+        }).limit(limit).skip(offset)
+        const count = await this.transactionModel.countDocuments({user: convertToObjectId(user.userId)})
+        return {
+          transactionList,
+          count
+        }
       }
-      return await this.transactionModel.find({}).limit(limit).skip(offset)
+      const transactionList = await this.transactionModel.find({}).populate({
+        path: 'user'
+      }).limit(limit).skip(offset)
+      const count = await this.transactionModel.countDocuments({})
+      return {
+        transactionList, count
+      }
     }
     catch(err){
       throw err;

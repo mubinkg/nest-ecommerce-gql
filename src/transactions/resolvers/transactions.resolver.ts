@@ -6,6 +6,7 @@ import { UpdateTransactionInput } from '../dto/update-transaction.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
+import { GetTransactionListDto } from '../dto/get-transaction.dto';
 
 @Resolver(() => Transaction)
 export class TransactionsResolver {
@@ -21,7 +22,7 @@ export class TransactionsResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Query(() => [Transaction], { name: 'transactions' })
+  @Query(() => GetTransactionListDto, { name: 'transactions' })
   findAll(
     @Args('limit',{type:()=> Number}) limit: number,
     @Args('offset',{type:()=> Number}) offset: number,

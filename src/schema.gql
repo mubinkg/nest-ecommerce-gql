@@ -632,6 +632,11 @@ enum TransactionStatusEnum {
   SUCCESS
 }
 
+type GetTransactionListDto {
+  transactionList: [Transaction!]
+  count: Float
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -696,7 +701,7 @@ type Query {
   dashboardTopContent: DashboardTopContent
   sellerCategoryWiseProduct: [CategoryWiseProduct!]
   statusWiseOrderCount: [StatusWiseOrderCountDto!]!
-  transactions(limit: Float!, offset: Float!): [Transaction!]!
+  transactions(limit: Float!, offset: Float!): GetTransactionListDto!
   transaction(id: Int!): Transaction!
 }
 
