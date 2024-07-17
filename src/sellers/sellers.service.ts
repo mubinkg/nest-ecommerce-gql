@@ -86,9 +86,10 @@ export class SellersService {
         const payload = {
           id:seller._id.toString(),
           mobile_no: seller.mobile,
-          name: seller.name
+          name: seller.name,
+          isAdmin: seller.isAdmin
         }
-        const access_token = await this.jwtService.sign(payload)
+        const access_token = await this.jwtService.signAsync(payload)
         return {
           access_token,
           seller
@@ -98,9 +99,10 @@ export class SellersService {
       const payload = {
         id:seller._id.toString(),
         mobile_no: seller.mobile,
-        name: seller.name
+        name: seller.name,
+        isAdmin: seller.isAdmin
       }
-      const access_token = await this.jwtService.sign(payload)
+      const access_token = await this.jwtService.signAsync(payload)
       return {
         access_token,
         seller

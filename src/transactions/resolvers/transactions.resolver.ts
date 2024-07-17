@@ -20,9 +20,14 @@ export class TransactionsResolver {
     return this.transactionsService.create(createTransactionInput, user);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => [Transaction], { name: 'transactions' })
-  findAll() {
-    return this.transactionsService.findAll();
+  findAll(
+    @Args('limit',{type:()=> Number}) limit: number,
+    @Args('offset',{type:()=> Number}) offset: number,
+    @CurrentUser('user') user:any
+  ) {
+    return this.transactionsService.findAll(limit, offset, user);
   }
 
   @Query(() => Transaction, { name: 'transaction' })

@@ -696,7 +696,7 @@ type Query {
   dashboardTopContent: DashboardTopContent
   sellerCategoryWiseProduct: [CategoryWiseProduct!]
   statusWiseOrderCount: [StatusWiseOrderCountDto!]!
-  transactions: [Transaction!]!
+  transactions(limit: Float!, offset: Float!): [Transaction!]!
   transaction(id: Int!): Transaction!
 }
 
