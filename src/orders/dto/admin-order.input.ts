@@ -1,5 +1,5 @@
 import { Field, InputType, registerEnumType } from "@nestjs/graphql";
-import { IsDate, IsEnum, IsOptional, IsString } from "class-validator";
+import { IsDate, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
 import { OrderStatus } from "../enum";
 
 registerEnumType(OrderStatus,{
@@ -8,6 +8,15 @@ registerEnumType(OrderStatus,{
 
 @InputType()
 export class GetAdminOrderInput{
+    
+    @Field(()=>Number, {nullable:true})
+    @IsNumber()
+    limit:number
+
+    @Field(()=>Number, {nullable:true})
+    @IsNumber()
+    offset:number
+
     @Field(()=>Date, {nullable:true})
     @IsOptional()
     @IsDate()

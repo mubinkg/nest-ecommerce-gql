@@ -835,6 +835,8 @@ enum OrderSortOrder {
 }
 
 input GetAdminOrderInput {
+  limit: Float
+  offset: Float
   start_date: DateTime
   end_date: DateTime
   status: OrderStatus

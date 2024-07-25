@@ -18,7 +18,7 @@ export class OrderAdminService{
                     path: 'seller'
                 }
             }
-        })
+        }).limit(getAdminOrderInput.limit).skip(getAdminOrderInput.offset)
         const count = await this.orderModel.countDocuments(query)
         return {
             orders,
