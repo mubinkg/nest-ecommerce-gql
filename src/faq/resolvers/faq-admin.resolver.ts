@@ -14,6 +14,7 @@ export class FaqAdminResolver{
     ){}
 
     @Query(()=>FaqAdminDto)
+    @UseGuards(GqlAuthGuard)
     adminFaqList(
         @Args('limit', {type:()=>Number}) limit: number,
         @Args('offset', {type:()=>Number}) offset: number,
@@ -28,5 +29,15 @@ export class FaqAdminResolver{
         @CurrentUser('user') user:any
     ){
         return this.faqAdminService.createFaqAdmin(faqAdminInput, user)
+    }
+
+    @Query(()=>FaqAdminDto)
+    @UseGuards(GqlAuthGuard)
+    getProductFaqList(
+        @Args('limit', {type:()=>Number}) limit: number,
+        @Args('offset', {type:()=>Number}) offset: number,
+        @Args('productId', {type:()=>String}) productId: string,
+    ){
+        return this.faqAdminService.adminProductFaqList(limit,offset, productId)
     }
 }

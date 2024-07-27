@@ -691,6 +691,7 @@ type Query {
   aramic(id: Int!): Aramic!
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   adminFaqList(limit: Float!, offset: Float!): FaqAdminDto!
+  getProductFaqList(limit: Float!, offset: Float!, productId: String!): FaqAdminDto!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
   getAdminSetions(limit: Float!, offset: Float!, query: String!): AdminSectionDto
