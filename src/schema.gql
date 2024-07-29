@@ -678,7 +678,7 @@ type Query {
   getUserCart(getCartDto: GetCartDto!): [CartList!]!
   cart(id: Int!): Cart!
   get_orders(getOrderDto: GetOrderDto!): [Order!]!
-  order(id: Int!): Order!
+  order(orderId: String!): Order!
   getAdminOrderList(adminOrderListInput: GetAdminOrderInput!): AdminOrderResponse
   adminSalesInventory(limit: Float!, offset: Float!): AdminSalesInventory
   salesReport(limit: Float!, offset: Float!): SalesReportDto

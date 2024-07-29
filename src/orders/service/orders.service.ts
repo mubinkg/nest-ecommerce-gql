@@ -54,8 +54,13 @@ export class OrdersService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  async findOne(id: string) {
+    try{
+      return await this.orderModel.findById(id).populate({path: "address"}).populate({path: 'user'})
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   async update(updateOrderInput: UpdateOrderInput) {

@@ -29,8 +29,8 @@ export class OrdersResolver {
   }
 
   @Query(() => Order, { name: 'order' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.ordersService.findOne(id);
+  findOne(@Args('orderId', { type: () => String }) orderId: string) {
+    return this.ordersService.findOne(orderId);
   }
 
   @Mutation(() => String)
