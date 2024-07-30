@@ -1,5 +1,6 @@
 import { Field, InputType } from "@nestjs/graphql"
 import { IsNotEmpty, IsOptional, IsString } from "class-validator"
+import { FileUpload, GraphQLUpload } from "graphql-upload"
 
 @InputType()
 export class UpdateCustomerDto{
@@ -53,4 +54,7 @@ export class UpdateCustomerDto{
     @IsString()
     @IsOptional()
     new?:string
+
+    @Field(()=>GraphQLUpload, {nullable:true})
+    image?:FileUpload
 }

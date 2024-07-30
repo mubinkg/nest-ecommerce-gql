@@ -1183,6 +1183,7 @@ input UpdateCustomerDto {
   referral_code: String
   old: String
   new: String
+  image: Upload
 }
 
 input DeleteCustomerInput {
