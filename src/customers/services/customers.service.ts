@@ -12,6 +12,8 @@ import { VerifyUser } from '../entities/verify-user.dto';
 import { UpdateCustomerDto } from '../dto/update-customer.dto';
 import { DeleteCustomerInput } from '../dto/delete-customer.input';
 import { Status } from '../enum/status.enum';
+import { uploadFile } from 'src/util/upload';
+import { FileUpload } from 'graphql-upload';
 
 
 @Injectable()
@@ -112,6 +114,10 @@ export class CustomersService {
   async update(id: string, updateCustomerInput: UpdateCustomerDto) {
     try{
       const updateData = {}
+      if(updateCustomerInput?.image){
+        const image_url = await uploadFile(updateCustomerInput.image as FileUpload) as string
+        updateData['image'] = image_url
+      }
       const customer = await this.customerModel.findById(id)
       if(!customer){
         throw new NotFoundException('Customer not found')
@@ -140,6 +146,7 @@ export class CustomersService {
       
     }
     catch(err){
+      console.log(err)
       throw new NotImplementedException('Can not udpate customer.')
     } 
   }
