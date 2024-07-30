@@ -4,7 +4,7 @@ import * as path from 'path'
 import {v4 as uuidV4} from 'uuid'
 
 const storage = new Storage({
-    keyFilename: path.join(__dirname, '../../bucket.json'),
+    keyFilename: path.join(__dirname, '../../../bucket.json'),
     projectId: "kocart-3ccbb"
 })
 
@@ -12,6 +12,7 @@ export const kocartBucket = storage.bucket('kocart')
 
 export async function uploadFile(file:FileUpload){
     try{
+        console.log(__dirname)
         const {createReadStream, filename} = await file
         const modifiedFilename = uuidV4() + filename
         return new Promise((resolve, reject)=>{
