@@ -311,6 +311,7 @@ type Customer {
   flavor: String
   referral_code: String
   friends_code: String
+  image: String
   status: String
 }
 

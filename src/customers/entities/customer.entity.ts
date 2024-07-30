@@ -91,6 +91,10 @@ export class Customer {
   friends_code?: string
 
   @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  image?: string
+
+  @Field(()=>String, {nullable:true})
   @Prop({type: String, default: Status.ACTIVE})
   status?: Status
 }
