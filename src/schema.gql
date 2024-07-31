@@ -647,7 +647,7 @@ type Query {
   getAdminProductList(adminProductListDto: AdminProductListDto!): AdminProductListResponseDto!
   getProductsForFeaturedSections(adminFeaturedSectionProductFilterInput: AdminFeaturedSectionProductFilterInput!): [Product!]!
   productVariants(limit: Float!, offset: Float!, query: String): AmdinProductVariantResponse!
-  productVariant(id: Int!): ProductVariant!
+  productVariant(values: [String!]!): ProductVariant!
   getAdminStockList(limit: Float!, offset: Float!): AdminStockDto!
   favourites(limit: Float!, offset: Float!): [Favourite!]!
   favourite(id: Int!): Favourite!

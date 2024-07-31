@@ -22,11 +22,9 @@ export class ProductVariantsResolver {
   }
 
   @Query(() => ProductVariant, { name: 'productVariant' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.productVariantsService.findOne(id);
+  findOne(@Args('values', { type: () => [String] }) values: string[]) {
+    return this.productVariantsService.findOne(values);
   }
-
-  
 
   @Mutation(() => ProductVariant)
   removeProductVariant(@Args('id', { type: () => Int }) id: number) {

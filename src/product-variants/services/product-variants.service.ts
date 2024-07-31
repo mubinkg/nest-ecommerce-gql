@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotAcceptableException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotAcceptableException, NotFoundException } from '@nestjs/common';
 import { CreateProductVariantInput } from '../dto/create-product-variant.input';
 import { UpdateProductVariantInput } from '../dto/update-product-variant.input';
 import { InjectModel } from '@nestjs/mongoose';
@@ -57,8 +57,25 @@ export class ProductVariantsService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} productVariant`;
+  async findOne(values: string[]) {
+    try{
+      let variant = await this.productVariantModel.findOne({
+        attributeValues: values
+      })
+      if(!variant && values.length === 2){
+        values = [values[1],values[0]]
+        variant = await this.productVariantModel.findOne({
+          attributeValues: values
+        })
+      }
+      if(!variant || values.length<=1){
+        throw new NotFoundException('Product variants not found')
+      }
+      return variant
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   async update(id: string, productId: string) {
