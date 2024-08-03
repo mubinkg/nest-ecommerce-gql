@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { WithdrawalService } from './withdrawal.service';
-import { WithdrawalResolver } from './withdrawal.resolver';
+import { WithdrawalService } from './services/withdrawal.service';
+import { WithdrawalResolver } from './resolvers/withdrawal.resolver';
 
 @Module({
   providers: [WithdrawalResolver, WithdrawalService],

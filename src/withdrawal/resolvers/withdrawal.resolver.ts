@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { WithdrawalService } from './withdrawal.service';
-import { Withdrawal } from './entities/withdrawal.entity';
-import { CreateWithdrawalInput } from './dto/create-withdrawal.input';
-import { UpdateWithdrawalInput } from './dto/update-withdrawal.input';
+import { WithdrawalService } from '../services/withdrawal.service';
+import { Withdrawal } from '../entities/withdrawal.entity';
+import { CreateWithdrawalInput } from '../dto/create-withdrawal.input';
+import { UpdateWithdrawalInput } from '../dto/update-withdrawal.input';
 
 @Resolver(() => Withdrawal)
 export class WithdrawalResolver {

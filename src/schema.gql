@@ -640,6 +640,7 @@ type GetTransactionListDto {
 
 type Withdrawal {
   _ids: String!
+  userType: String
   seller: Seller
   customer: Customer
   paymentDetails: String
@@ -1476,12 +1477,12 @@ input UpdateTransactionInput {
 }
 
 input CreateWithdrawalInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  paymentDetails: String!
+  amountRequested: Float!
 }
 
 input UpdateWithdrawalInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  paymentDetails: String
+  amountRequested: Float
   id: Int!
 }

@@ -12,6 +12,10 @@ export class Withdrawal {
   @Field(() => String)
   _ids: string;
 
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  userType?:string
+
   @Field(()=>Seller, {nullable:true})
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: "Seller"})
   seller?: Seller

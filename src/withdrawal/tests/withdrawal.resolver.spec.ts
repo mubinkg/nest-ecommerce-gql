@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { WithdrawalResolver } from './withdrawal.resolver';
-import { WithdrawalService } from './withdrawal.service';
+import { WithdrawalResolver } from '../resolvers/withdrawal.resolver';
+import { WithdrawalService } from '../services/withdrawal.service';
 
 describe('WithdrawalResolver', () => {
   let resolver: WithdrawalResolver;

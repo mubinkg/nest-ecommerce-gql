@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateWithdrawalInput } from './dto/create-withdrawal.input';
-import { UpdateWithdrawalInput } from './dto/update-withdrawal.input';
+import { CreateWithdrawalInput } from '../dto/create-withdrawal.input';
+import { UpdateWithdrawalInput } from '../dto/update-withdrawal.input';
 
 @Injectable()
 export class WithdrawalService {
