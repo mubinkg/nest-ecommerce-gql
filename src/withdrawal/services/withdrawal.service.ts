@@ -4,7 +4,7 @@ import { UpdateWithdrawalInput } from '../dto/update-withdrawal.input';
 
 @Injectable()
 export class WithdrawalService {
-  create(createWithdrawalInput: CreateWithdrawalInput) {
+  async create(createWithdrawalInput: CreateWithdrawalInput, user:any) {
     return 'This action adds a new withdrawal';
   }
 

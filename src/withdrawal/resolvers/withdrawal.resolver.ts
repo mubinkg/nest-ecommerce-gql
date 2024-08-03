@@ -3,14 +3,21 @@ import { WithdrawalService } from '../services/withdrawal.service';
 import { Withdrawal } from '../entities/withdrawal.entity';
 import { CreateWithdrawalInput } from '../dto/create-withdrawal.input';
 import { UpdateWithdrawalInput } from '../dto/update-withdrawal.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
 
 @Resolver(() => Withdrawal)
 export class WithdrawalResolver {
   constructor(private readonly withdrawalService: WithdrawalService) {}
 
   @Mutation(() => Withdrawal)
-  createWithdrawal(@Args('createWithdrawalInput') createWithdrawalInput: CreateWithdrawalInput) {
-    return this.withdrawalService.create(createWithdrawalInput);
+  @UseGuards(GqlAuthGuard)
+  createWithdrawal(
+    @Args('createWithdrawalInput') createWithdrawalInput: CreateWithdrawalInput,
+    @CurrentUser('user') user:any
+  ) {
+    return this.withdrawalService.create(createWithdrawalInput, user);
   }
 
   @Query(() => [Withdrawal], { name: 'withdrawal' })
