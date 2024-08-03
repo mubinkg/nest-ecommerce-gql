@@ -638,6 +638,11 @@ type GetTransactionListDto {
   count: Float
 }
 
+type Withdrawal {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -705,6 +710,7 @@ type Query {
   statusWiseOrderCount: [StatusWiseOrderCountDto!]!
   transactions(limit: Float!, offset: Float!): GetTransactionListDto!
   transaction(id: Int!): Transaction!
+  withdrawal(id: Int!): Withdrawal!
 }
 
 input GetTicketsDto {
@@ -932,6 +938,9 @@ type Mutation {
   createTransaction(createTransactionInput: CreateTransactionInput!): Transaction!
   updateTransaction(updateTransactionInput: UpdateTransactionInput!): Transaction!
   removeTransaction(id: Int!): Transaction!
+  createWithdrawal(createWithdrawalInput: CreateWithdrawalInput!): Withdrawal!
+  updateWithdrawal(updateWithdrawalInput: UpdateWithdrawalInput!): Withdrawal!
+  removeWithdrawal(id: Int!): Withdrawal!
 }
 
 input CreateTicketInput {
@@ -1457,5 +1466,16 @@ input UpdateTransactionInput {
   amount: Float
   status: TransactionStatusEnum
   message: String
+  id: Int!
+}
+
+input CreateWithdrawalInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateWithdrawalInput {
+  """Example field (placeholder)"""
+  exampleField: Int
   id: Int!
 }

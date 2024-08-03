@@ -30,6 +30,7 @@ import { SellersModule } from './sellers/sellers.module';
 import { MediaModule } from './media/media.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TransactionsModule } from './transactions/transactions.module';
+import { WithdrawalModule } from './withdrawal/withdrawal.module';
 
 
 @Module({
@@ -69,6 +70,7 @@ import { TransactionsModule } from './transactions/transactions.module';
     MediaModule,
     DashboardModule,
     TransactionsModule,
+    WithdrawalModule,
   ],
 })
 export class AppModule {}
