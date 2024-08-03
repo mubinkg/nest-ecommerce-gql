@@ -1,11 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { CreateWithdrawalInput } from '../dto/create-withdrawal.input';
 import { UpdateWithdrawalInput } from '../dto/update-withdrawal.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { Withdrawal, WithdrawalDocument } from '../entities/withdrawal.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class WithdrawalService {
+
+  constructor(
+    @InjectModel(Withdrawal.name) private readonly withdrawalModel:Model<WithdrawalDocument>
+  ){}
+
   async create(createWithdrawalInput: CreateWithdrawalInput, user:any) {
-    return 'This action adds a new withdrawal';
+    try{
+
+    }
+    catch(errr){
+      throw errr;
+    }
   }
 
   findAll() {
