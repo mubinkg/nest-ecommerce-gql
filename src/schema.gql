@@ -639,8 +639,14 @@ type GetTransactionListDto {
 }
 
 type Withdrawal {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  _ids: String!
+  seller: Seller
+  customer: Customer
+  paymentDetails: String
+  amountRequested: Float
+  remarks: String
+  status: String
+  createdAt: DateTime
 }
 
 type Query {
