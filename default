@@ -1,9 +1,27 @@
 server {
     listen 80;
-    server_name yourdomain.com; # Set your domain or IP address
+    server_name kocart.com; # Set your domain or IP address
+
+    location /api/graphql {
+        proxy_pass http://localhost:3001/graphql; # Forward requests to your Nest.js application
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location /admin {
+        proxy_pass http://localhost:3000/; # Forward requests to your Next.js Admin application
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
 
     location / {
-        proxy_pass http://localhost:3001; # Forward requests to your Nest.js application
+        proxy_pass http://localhost:3000/; # Forward requests to your Next.js main application
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -13,4 +31,3 @@ server {
 
     # Additional Nginx configurations if needed
 }
-
