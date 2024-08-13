@@ -448,9 +448,14 @@ type Cart {
   qty: Float!
 }
 
-type CartList {
-  delivery_charge: Float
-  carts: [Cart!]
+type CartResults {
+  _id: String!
+  user: Customer
+  product_variant: ProductVariant
+  is_saved_for_later: Float!
+  qty: Float!
+  product: Product
+  attribute_values: [ProductAttributeValue!]
 }
 
 type Order {
@@ -688,7 +693,7 @@ type Query {
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
   rating(id: Int!): Rating!
   getPromoCodes(getPromocodesInput: GetPromoCodesInput!): [PromoCode!]!
-  getUserCart(getCartDto: GetCartDto!): [CartList!]!
+  getUserCart: [CartResults!]!
   cart(id: Int!): Cart!
   get_orders(getOrderDto: GetOrderDto!): [Order!]!
   order(orderId: String!): Order!
@@ -821,12 +826,6 @@ input GetPromoCodesInput {
   sort: String! = "id"
   search: String! = "id"
   order: String! = "DESC"
-}
-
-input GetCartDto {
-  only_delivery_charge: Float
-  address_id: String
-  is_saved_for_later: Float = 0
 }
 
 input GetOrderDto {

@@ -1,6 +1,8 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { IsNumber, IsOptional, IsString } from "class-validator";
 import { Cart } from "../entities/cart.entity";
+import { Product } from "src/products/entities/product.entity";
+import { ProductAttributeValue } from "src/product-attributes/entities/product-attribute-value.entity";
 
 @InputType()
 export class GetCartDto{
@@ -19,10 +21,10 @@ export class GetCartDto{
 }
 
 @ObjectType()
-export class CartList{
-    @Field(()=>Number, {nullable:true})
-    delivery_charge?:number
+export class CartResults extends Cart{
+    @Field(()=>Product, {nullable:true})
+    product?: Product
 
-    @Field(()=>[Cart], {nullable:true})
-    carts?: Cart[]
+    @Field(()=>[ProductAttributeValue], {nullable:true})
+    attribute_values?: ProductAttributeValue[]
 }

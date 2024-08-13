@@ -6,7 +6,7 @@ import { UpdateCartInput } from '../dto/update-cart.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
-import { CartList, GetCartDto } from '../dto/get-cart.dto';
+import { CartResults, GetCartDto } from '../dto/get-cart.dto';
 
 @Resolver(() => Cart)
 export class CartResolver {
@@ -21,13 +21,12 @@ export class CartResolver {
     return this.cartService.create(createCartInput, user);
   }
 
-  @Query(() => [CartList], { name: 'getUserCart' })
+  @Query(() => [CartResults], { name: 'getUserCart' })
   @UseGuards(GqlAuthGuard)
   findAll(
-    @Args('getCartDto') getCartDto:GetCartDto,
     @CurrentUser() user:any
   ) {
-    return this.cartService.findAll(user, getCartDto);
+    return this.cartService.findAll(user);
   }
 
   @Query(() => Cart, { name: 'cart' })

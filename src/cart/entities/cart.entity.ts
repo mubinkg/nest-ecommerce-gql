@@ -7,7 +7,9 @@ import { ProductVariant } from 'src/product-variants/entities/product-variant.en
 export type CartDocument = HydratedDocument<Cart>
 
 @ObjectType()
-@Schema()
+@Schema({
+  timestamps: true
+})
 export class Cart {
 
   @Field(()=>String)

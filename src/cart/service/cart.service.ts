@@ -4,10 +4,11 @@ import { UpdateCartInput } from '../dto/update-cart.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { Cart, CartDocument } from '../entities/cart.entity';
 import { Model } from 'mongoose';
-import { CartList, GetCartDto } from '../dto/get-cart.dto';
+import { GetCartDto } from '../dto/get-cart.dto';
 import { DeliveryCharge, DeliveryChargeDocument } from '../entities/delvary-charge.entity';
 import { AddressesService } from 'src/addresses/services/addresses.service';
 import { Address } from 'src/addresses/entities/address.entity';
+import { getCart } from '../mongo';
 
 @Injectable()
 export class CartService {
@@ -21,31 +22,28 @@ export class CartService {
   async create(createCartInput: CreateCartInput, user:any) {
     try{
       const cartInput = {...createCartInput, user_id: user.userId}
-      return await this.cartModel.create(cartInput)
+      return await this.cartModel.create({...cartInput, user: cartInput.user_id, product_variant:createCartInput.product_variant_id})
     }
     catch(err){
       throw new NotImplementedException('Error on creating cart')
     }
   }
 
-  async findAll(user:any, getCartDto:GetCartDto):Promise<CartList> {
+  async findAll(user:any) {
     try{
       const userId = user.userId
-      let deliverCharge = null
-      if(getCartDto.only_delivery_charge){
-        const address:Address = await this.addressService.findOne(getCartDto.address_id)
-        const chargeDetails = await this.delevaryChargeModel.findOne({countryName:address.country})
-        deliverCharge = chargeDetails.price
-        return {
-          delivery_charge: deliverCharge,
-          carts: null
-        }
-      }
-      const carts = await this.cartModel.find({user_id: userId, is_saved_for_later: getCartDto.is_saved_for_later})
-      return {
-        delivery_charge: deliverCharge,
-        carts: carts
-      }
+      // let deliverCharge = null
+      // if(getCartDto.only_delivery_charge){
+      //   const address:Address = await this.addressService.findOne(getCartDto.address_id)
+      //   const chargeDetails = await this.delevaryChargeModel.findOne({countryName:address.country})
+      //   deliverCharge = chargeDetails.price
+      //   return {
+      //     delivery_charge: deliverCharge,
+      //     carts: null
+      //   }
+      // }
+      const carts = await this.cartModel.aggregate(getCart(userId))
+      return carts
     }
     catch(err){
       throw new NotImplementedException('Can not get user card details.')
