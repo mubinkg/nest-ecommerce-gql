@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { CartService } from './cart.service';
-import { CartResolver } from './cart.resolver';
+import { CartService } from './service/cart.service';
+import { CartResolver } from './resolvers/cart.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Cart, CartSchema } from './entities/cart.entity';
 import { DeliveryCharge, DeliveryChargeSchema } from './entities/delvary-charge.entity';

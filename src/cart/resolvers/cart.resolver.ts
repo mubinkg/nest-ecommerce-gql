@@ -1,12 +1,12 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { CartService } from './cart.service';
-import { Cart } from './entities/cart.entity';
-import { CreateCartInput } from './dto/create-cart.input';
-import { UpdateCartInput } from './dto/update-cart.input';
+import { CartService } from '../service/cart.service';
+import { Cart } from '../entities/cart.entity';
+import { CreateCartInput } from '../dto/create-cart.input';
+import { UpdateCartInput } from '../dto/update-cart.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
-import { CartList, GetCartDto } from './dto/get-cart.dto';
+import { CartList, GetCartDto } from '../dto/get-cart.dto';
 
 @Resolver(() => Cart)
 export class CartResolver {
