@@ -1,6 +1,8 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { Customer } from 'src/customers/entities/customer.entity';
+import { ProductVariant } from 'src/product-variants/entities/product-variant.entity';
 
 export type CartDocument = HydratedDocument<Cart>
 
@@ -11,13 +13,13 @@ export class Cart {
   @Field(()=>String)
   _id: string
 
-  @Field(()=>String, {nullable:true})
-  @Prop({type: mongoose.Schema.Types.ObjectId})
-  user_id:string
+  @Field(()=>Customer, {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref:"Customer"})
+  user?:Customer
 
-  @Field(()=>String, {nullable:true})
-  @Prop({type: String})
-  product_variant_id:string
+  @Field(()=>ProductVariant, {nullable:true})
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: "ProductVariant"})
+  product_variant:ProductVariant
 
   @Field(()=>Number)
   @Prop({type: Number, default: 0})
