@@ -131,4 +131,17 @@ export class ProductVariantsService {
       throw err
     }
   }
+
+  async updateProductVariant(updateProductVariantInput:UpdateProductVariantInput){
+    try{
+      const quantity = updateProductVariantInput.type === 'add' ? updateProductVariantInput.quantity : -updateProductVariantInput.quantity
+      const productVariant = await this.productVariantModel.findById(updateProductVariantInput.id)
+      productVariant.totalStock = productVariant.totalStock + quantity
+      const updatedData = await productVariant.save()
+      return updatedData
+    }
+    catch(err){
+      throw err;
+    }
+  }
 }

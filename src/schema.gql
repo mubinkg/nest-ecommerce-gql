@@ -891,6 +891,7 @@ type Mutation {
   updateProductOrderNo(updateProductOrderNoInput: UpdateProductGlobalOrderNoInput!): String!
   deleteProduct(productId: String!): String!
   removeProductVariant(id: Int!): ProductVariant!
+  updateProductVariant(updateProductVariantInput: UpdateProductVariantInput!): ProductVariant!
   createFavourite(createFavouriteInput: CreateFavouriteInput!): Favourite!
   updateFavourite(updateFavouriteInput: UpdateFavouriteInput!): Favourite!
   removeFavourite(id: String!): String!
@@ -1133,6 +1134,12 @@ input UpdateProductGlobalOrderNoInput {
 input UpdateProductGlobalOrderNoInputObject {
   _id: String!
   globalOrderNo: Float!
+}
+
+input UpdateProductVariantInput {
+  id: String!
+  quantity: Float!
+  type: String!
 }
 
 input CreateFavouriteInput {

@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ProductVariantsService } from '../services/product-variants.service';
 import { ProductVariant } from '../entities/product-variant.entity';
 import { AmdinProductVariantResponse } from '../dto/admin-product-variant.dto';
+import { UpdateProductVariantInput } from '../dto/update-product-variant.input';
 
 @Resolver(() => ProductVariant)
 export class ProductVariantsResolver {
@@ -29,5 +30,10 @@ export class ProductVariantsResolver {
   @Mutation(() => ProductVariant)
   removeProductVariant(@Args('id', { type: () => Int }) id: number) {
     return this.productVariantsService.remove(id);
+  }
+
+  @Mutation(()=>ProductVariant)
+  updateProductVariant(@Args('updateProductVariantInput') updateProductVariantInput: UpdateProductVariantInput){
+    return this.productVariantsService.updateProductVariant(updateProductVariantInput)
   }
 }
