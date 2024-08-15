@@ -31,7 +31,6 @@ import { MediaModule } from './media/media.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { WithdrawalModule } from './withdrawal/withdrawal.module';
-import { OfferModule } from './offer/offer.module';
 
 
 @Module({
@@ -72,7 +71,6 @@ import { OfferModule } from './offer/offer.module';
     DashboardModule,
     TransactionsModule,
     WithdrawalModule,
-    OfferModule,
   ],
 })
 export class AppModule {}
