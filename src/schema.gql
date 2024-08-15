@@ -655,6 +655,11 @@ type Withdrawal {
   createdAt: DateTime
 }
 
+type Offer {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
@@ -723,6 +728,7 @@ type Query {
   transactions(limit: Float!, offset: Float!): GetTransactionListDto!
   transaction(id: Int!): Transaction!
   withdrawal(id: Int!): Withdrawal!
+  offer(id: Int!): Offer!
 }
 
 input GetTicketsDto {
@@ -948,6 +954,9 @@ type Mutation {
   createWithdrawal(createWithdrawalInput: CreateWithdrawalInput!): Withdrawal!
   updateWithdrawal(updateWithdrawalInput: UpdateWithdrawalInput!): Withdrawal!
   removeWithdrawal(id: Int!): Withdrawal!
+  createOffer(createOfferInput: CreateOfferInput!): Offer!
+  updateOffer(updateOfferInput: UpdateOfferInput!): Offer!
+  removeOffer(id: Int!): Offer!
 }
 
 input CreateTicketInput {
@@ -1490,5 +1499,16 @@ input CreateWithdrawalInput {
 input UpdateWithdrawalInput {
   paymentDetails: String
   amountRequested: Float
+  id: Int!
+}
+
+input CreateOfferInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateOfferInput {
+  """Example field (placeholder)"""
+  exampleField: Int
   id: Int!
 }
