@@ -37,4 +37,12 @@ export class TicketTypeResolver{
     ){
         return this.ticketTypeService.getAdminTicketTypes(limit, offset)
     }
+
+    @Mutation(()=>TicketType)
+    @UseGuards(GqlAuthGuard)
+    deleteTicketType(
+        @Args('id', {type: ()=> String}) id:string,
+    ){
+        return this.ticketTypeService.deleteTicketType(id)
+    }
 }

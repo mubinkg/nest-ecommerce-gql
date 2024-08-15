@@ -40,4 +40,13 @@ export class TicketTypeService{
             throw new NotFoundException('Not found ticket type list')
         }
     }
+
+    async deleteTicketType(id:string){
+        try{
+            return await this.ticketTypeModel.findByIdAndDelete(id)
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

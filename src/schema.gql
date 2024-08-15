@@ -904,6 +904,7 @@ type Mutation {
   updateTicket(updateTicketInput: UpdateTicketInput!): Ticket!
   removeTicket(id: Int!): Ticket!
   createTicketType(createTicketTypeInput: CereateTicketTypeInput!): TicketType!
+  deleteTicketType(id: String!): TicketType!
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   updateProductOrderNo(updateProductOrderNoInput: UpdateProductGlobalOrderNoInput!): String!
