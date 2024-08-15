@@ -27,6 +27,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type AdminTicketTypeResponse {
+  ticketTypes: [TicketType!]
+  count: Float
+}
+
 type Brand {
   _id: String!
   name: String
@@ -670,6 +675,7 @@ type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   ticket(id: Int!): Ticket!
   getTicketTypes(limit: Float!, offset: Float!): [TicketType!]!
+  getAdminTicketTypes(limit: Float!, offset: Float!): AdminTicketTypeResponse!
   get_products(getProductInput: GetProductDto!): [Product!]!
   product(productId: String!): Product!
   getAdminProductList(adminProductListDto: AdminProductListDto!): AdminProductListResponseDto!

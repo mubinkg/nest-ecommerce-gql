@@ -28,9 +28,7 @@ export class AdminSliderService{
             }else{
                 query['type'] = {$ne:"offer"}
             }
-
-            console.log(query)
-
+            
             const sliders = await this.sliderModel.find(query).sort('-_id').populate({
                 path: "slider_type"
             }).limit(limit).skip(offset)

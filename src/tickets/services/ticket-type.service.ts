@@ -27,4 +27,17 @@ export class TicketTypeService{
             throw new NotFoundException('Not found ticket type list')
         }
     }
+    async getAdminTicketTypes(limit:number, offset:number){
+        try{
+            const ticketTypes = await this.ticketTypeModel.find({}).limit(limit).skip(offset)
+            const count = await this.ticketTypeModel.countDocuments({})
+            return {
+                ticketTypes,
+                count
+            }
+        }
+        catch(err){
+            throw new NotFoundException('Not found ticket type list')
+        }
+    }
 }
