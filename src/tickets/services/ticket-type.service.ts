@@ -1,8 +1,8 @@
 import { InjectModel } from "@nestjs/mongoose";
-import { TicketType, TicketTypeDocument } from "./entities/ticker-type.entity";
+import { TicketType, TicketTypeDocument } from "../entities/ticker-type.entity";
 import { Model } from "mongoose";
 import { NotFoundException, NotImplementedException } from "@nestjs/common";
-import { CereateTicketTypeInput } from "./dto/create-ticket-type.input";
+import { CereateTicketTypeInput } from "../dto/create-ticket-type.input";
 
 export class TicketTypeService{
     constructor(

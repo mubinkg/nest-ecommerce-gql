@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTicketInput } from './dto/create-ticket.input';
-import { UpdateTicketInput } from './dto/update-ticket.input';
+import { CreateTicketInput } from '../dto/create-ticket.input';
+import { UpdateTicketInput } from '../dto/update-ticket.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { Ticket, TicketDocument } from './entities/ticket.entity';
+import { Ticket, TicketDocument } from '../entities/ticket.entity';
 import { Model } from 'mongoose';
-import { GetTicketsDto } from './dto/get-ticket.dto';
+import { GetTicketsDto } from '../dto/get-ticket.dto';
 import { convertToObjectId } from 'src/utils/convert-to-objectid';
 
 @Injectable()
