@@ -38,8 +38,9 @@ export class AdminSliderResolver{
     @Query(()=>SliderResponseDto)
     adminSliderList(
         @Args('limit',{type: ()=>Number}) limit: number,
-        @Args('offset',{type: ()=>Number}) offset: number
+        @Args('offset',{type: ()=>Number}) offset: number,
+        @Args('type', {type: ()=>String, nullable:true}) type:string
     ){
-        return this.adminSliderService.adminSliderList(limit, offset)
+        return this.adminSliderService.adminSliderList(limit, offset, type)
     }
 }

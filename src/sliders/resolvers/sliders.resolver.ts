@@ -24,9 +24,10 @@ export class SlidersResolver {
   @Query(() => [Slider], { name: 'sliders' })
   findAll(
     @Args('limit', {type: ()=> Number}) limit: number,
-    @Args('offset', {type: ()=> Number}) offset: number
+    @Args('offset', {type: ()=> Number}) offset: number,
+    @Args('type', {type: ()=>String, nullable:true}) type:string
   ) {
-    return this.slidersService.findAll(limit, offset);
+    return this.slidersService.findAll(limit, offset, type);
   }
 
   @Query(()=>[SliderType], {name: 'sliderTypeList'})

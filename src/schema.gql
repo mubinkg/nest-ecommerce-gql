@@ -688,12 +688,12 @@ type Query {
   getAdminCategories(getCategoriesInput: GetCategoryDto!): AdminCategoryList!
   getAllCategory: [Category!]!
   getAddresses(user_id: String!, limit: Float!, offset: Float!): [Address!]!
-  sliders(limit: Float!, offset: Float!): [Slider!]!
+  sliders(limit: Float!, offset: Float!, type: String): [Slider!]!
   sliderTypeList(limit: Float!, offset: Float!): [SliderType!]!
   sliderType: [SliderType!]
   sliderProduct(query: String!): [SliderProduct!]
   sliderCategory(query: String!): [SliderCategory!]
-  adminSliderList(limit: Float!, offset: Float!): SliderResponseDto!
+  adminSliderList(limit: Float!, offset: Float!, type: String): SliderResponseDto!
   brands(limit: Float!, offset: Float!): [Brand!]!
   adminBrandList(limit: Float!, offset: Float!): BrandList!
   ratings(ratingFilterDto: RatingFilterDto!): [Rating!]!
@@ -1269,6 +1269,7 @@ input UpdateAddressInput {
 input CreateSliderInput {
   slider_type: String
   image: Upload
+  type: String
   link: String
   category: String
   product: String

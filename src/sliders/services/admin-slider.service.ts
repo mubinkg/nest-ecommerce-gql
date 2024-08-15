@@ -20,12 +20,21 @@ export class AdminSliderService{
         }
     }
 
-    async adminSliderList(limit: number, offset: number){
+    async adminSliderList(limit: number, offset: number, type:string){
         try{
-            const sliders = await this.sliderModel.find({}).sort('-_id').populate({
+            const query = {}
+            if(type && type === 'offer'){
+                query['type'] = 'offer'
+            }else{
+                query['type'] = {$ne:"offer"}
+            }
+
+            console.log(query)
+
+            const sliders = await this.sliderModel.find(query).sort('-_id').populate({
                 path: "slider_type"
             }).limit(limit).skip(offset)
-            const count = await this.sliderModel.countDocuments({})
+            const count = await this.sliderModel.countDocuments(query)
             return {
                 sliders,
                 count

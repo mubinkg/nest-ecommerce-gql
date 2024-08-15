@@ -39,9 +39,15 @@ export class SlidersService {
     }
   }
 
-  async findAll(limit:number, offset: number) {
+  async findAll(limit:number, offset: number, type:string) {
     try{
-      return await this.sliderModel.find().populate('slider_type').limit(limit).skip(offset)
+      const query = {}
+      if(type && type === 'offer'){
+        query['type'] = 'offer'
+      }else{
+        query['type'] = {$ne:"offer"}
+      }
+      return await this.sliderModel.find(query).populate('slider_type').limit(limit).skip(offset)
     }
     catch(err){
       throw new NotFoundException('Slider not found')

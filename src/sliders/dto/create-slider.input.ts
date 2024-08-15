@@ -11,6 +11,11 @@ export class CreateSliderInput {
   @Field(() => GraphQLUpload, {nullable:true})
   image?: FileUpload | string
 
+  @Field(()=>String, {nullable:true})
+  @IsString()
+  @IsOptional()
+  type?:string
+
   @Field(() => String , {nullable:true})
   @IsOptional()
   @IsString()

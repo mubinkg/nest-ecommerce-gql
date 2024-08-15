@@ -22,7 +22,7 @@ export class Slider {
   slider_type: SliderType;
 
   @Field(()=>SliderContentTypeEnum, {nullable:true})
-  @Prop({type:String})
+  @Prop({type:String, default: SliderContentTypeEnum.SLIDER})
   type?: SliderContentTypeEnum
 
   @Field(() => String, {nullable:true})
