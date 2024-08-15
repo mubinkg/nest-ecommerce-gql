@@ -6,6 +6,7 @@ import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "src/customers/jwt-guards";
 import { CurrentUser } from "src/decorator/current-user.decorator";
 import { AdminTicketTypeResponse } from "../dto/admin-ticket-type-response.dto";
+import { UpdateTicketType } from "../dto/update-ticket-type.input";
 
 @Resolver('TicketType')
 export class TicketTypeResolver{
@@ -20,6 +21,14 @@ export class TicketTypeResolver{
         @Args('createTicketTypeInput') createTikcetTypeInput:CereateTicketTypeInput,
     ){
         return this.ticketTypeService.createTicketType(createTikcetTypeInput)
+    }
+
+    @Mutation(()=>TicketType)
+    @UseGuards(GqlAuthGuard)
+    updateTicketType(
+        @Args('updateTicketTypeInput') updateTikcetTypeInput:UpdateTicketType,
+    ){
+        return this.ticketTypeService.updateTicketType(updateTikcetTypeInput)
     }
 
     @Query(()=>[TicketType])

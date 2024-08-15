@@ -3,6 +3,7 @@ import { TicketType, TicketTypeDocument } from "../entities/ticker-type.entity";
 import { Model } from "mongoose";
 import { NotFoundException, NotImplementedException } from "@nestjs/common";
 import { CereateTicketTypeInput } from "../dto/create-ticket-type.input";
+import { UpdateTicketType } from "../dto/update-ticket-type.input";
 
 export class TicketTypeService{
     constructor(
@@ -11,11 +12,21 @@ export class TicketTypeService{
 
     async createTicketType(ticketTypeInput:CereateTicketTypeInput): Promise<TicketType>{
         try{
-            const ticketType = this.ticketTypeModel.create(ticketTypeInput)
+            const ticketType = await this.ticketTypeModel.create(ticketTypeInput)
             return ticketType
         }
         catch(err){
             throw new NotImplementedException('Can not create ticket type.')
+        }
+    }
+
+    async updateTicketType(updateTicketTypeInput:UpdateTicketType): Promise<TicketType>{
+        try{
+            await this.ticketTypeModel.findByIdAndUpdate(updateTicketTypeInput.id, {title:updateTicketTypeInput.title})
+            return this.ticketTypeModel.findById(updateTicketTypeInput.id)
+        }
+        catch(err){
+            throw new NotImplementedException('Can not update ticket type.')
         }
     }
 
