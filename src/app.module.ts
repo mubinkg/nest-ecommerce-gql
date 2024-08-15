@@ -31,6 +31,7 @@ import { MediaModule } from './media/media.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { WithdrawalModule } from './withdrawal/withdrawal.module';
+import { NotificationModule } from './notification/notification.module';
 
 
 @Module({
@@ -71,6 +72,7 @@ import { WithdrawalModule } from './withdrawal/withdrawal.module';
     DashboardModule,
     TransactionsModule,
     WithdrawalModule,
+    NotificationModule,
   ],
 })
 export class AppModule {}
