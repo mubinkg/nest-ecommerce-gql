@@ -7,6 +7,7 @@ import { CurrentUser } from 'src/decorator/current-user.decorator';
 import { GetTicketsDto } from '../dto/get-ticket.dto';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
+import { AdminTicketsDto } from '../dto/admin-tickets.dto';
 
 @Resolver(() => Ticket)
 export class TicketsResolver {
@@ -27,6 +28,14 @@ export class TicketsResolver {
   ) {
     return this.ticketsService.findAll(getTicketDto);
   }
+
+  @Query(()=>AdminTicketsDto)
+  getAdminTickets(
+    @Args('limit', {type:()=>Number}) limit:number,
+    @Args('offset', {type:()=>Number}) offset:number
+  ){
+    return this.ticketsService.getAdminTicketList(limit,offset)
+  } 
 
   @Query(() => Ticket, { name: 'ticket' })
   findOne(@Args('id', { type: () => Int }) id: number) {

@@ -55,6 +55,20 @@ export class TicketsService {
     }
   }
 
+  async getAdminTicketList(limit:number, offset:number){
+    try{
+      const tickets = await this.ticketModel.find({}).populate('ticket_type').populate('user').sort({_id: -1}).limit(limit).skip(offset)
+      const count = await this.ticketModel.countDocuments({})
+      return {
+        tickets,
+        count
+      }
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} ticket`;
   }
