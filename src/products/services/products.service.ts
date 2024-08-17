@@ -130,6 +130,20 @@ export class ProductsService {
     }
   }
 
+  async productForWeb(id: string) {
+    try{
+      const data:Product[] = await this.productModel.aggregate(productDetailsQuery(id))
+      if(data?.length <= 0){
+        throw new NotFoundException('Product not found')
+      }
+      const product = data[0]
+      return product
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
   update(id: number, updateProductInput: UpdateProductInput) {
     return `This action updates a #${id} product`;
   }

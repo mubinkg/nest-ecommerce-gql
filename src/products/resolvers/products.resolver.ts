@@ -45,6 +45,13 @@ export class ProductsResolver {
     return this.productsService.findOne(id, user);
   }
 
+  @Query(() => Product)
+  productForWeb(
+    @Args('productId', { type: () => String }) id: string,
+  ) {
+    return this.productsService.productForWeb(id);
+  }
+
   @Mutation(() => Product)
   updateProduct(@Args('updateProductInput') updateProductInput: UpdateProductInput) {
     return this.productsService.update(updateProductInput.id, updateProductInput);

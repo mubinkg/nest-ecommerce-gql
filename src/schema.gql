@@ -685,6 +685,7 @@ type Query {
   get_products(getProductInput: GetProductDto!): [Product!]!
   getProductForWeb(getProductInput: GetProductDto!): [Product!]!
   product(productId: String!): Product!
+  productForWeb(productId: String!): Product!
   getAdminProductList(adminProductListDto: AdminProductListDto!): AdminProductListResponseDto!
   getProductsForFeaturedSections(adminFeaturedSectionProductFilterInput: AdminFeaturedSectionProductFilterInput!): [Product!]!
   productVariants(limit: Float!, offset: Float!, query: String): AmdinProductVariantResponse!
