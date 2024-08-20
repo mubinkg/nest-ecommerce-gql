@@ -32,6 +32,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { WithdrawalModule } from './withdrawal/withdrawal.module';
 import { NotificationModule } from './notification/notification.module';
+import { FlashSellModule } from './flash-sell/flash-sell.module';
 
 
 @Module({
@@ -73,6 +74,7 @@ import { NotificationModule } from './notification/notification.module';
     TransactionsModule,
     WithdrawalModule,
     NotificationModule,
+    FlashSellModule,
   ],
 })
 export class AppModule {}

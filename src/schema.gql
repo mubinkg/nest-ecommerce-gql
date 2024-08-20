@@ -676,6 +676,11 @@ type Notification {
   exampleField: Int!
 }
 
+type FlashSell {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   getAdminTickets(limit: Float!, offset: Float!): AdminTicketsDto!
@@ -749,6 +754,7 @@ type Query {
   transaction(id: Int!): Transaction!
   withdrawal(id: Int!): Withdrawal!
   notification(id: Int!): Notification!
+  flashSell(id: Int!): FlashSell!
 }
 
 input GetTicketsDto {
@@ -979,6 +985,9 @@ type Mutation {
   createNotification(createNotificationInput: CreateNotificationInput!): Notification!
   updateNotification(updateNotificationInput: UpdateNotificationInput!): Notification!
   removeNotification(id: Int!): Notification!
+  createFlashSell(createFlashSellInput: CreateFlashSellInput!): FlashSell!
+  updateFlashSell(updateFlashSellInput: UpdateFlashSellInput!): FlashSell!
+  removeFlashSell(id: Int!): FlashSell!
 }
 
 input CreateTicketInput {
@@ -1536,6 +1545,17 @@ input CreateNotificationInput {
 }
 
 input UpdateNotificationInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateFlashSellInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateFlashSellInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!
