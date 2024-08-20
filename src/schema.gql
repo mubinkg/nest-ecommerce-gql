@@ -677,8 +677,10 @@ type Notification {
 }
 
 type FlashSell {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  _id: String!
+  product: Product
+  endTime: DateTime
+  status: String
 }
 
 type Query {
