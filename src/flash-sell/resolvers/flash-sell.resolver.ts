@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { FlashSellService } from './flash-sell.service';
-import { FlashSell } from './entities/flash-sell.entity';
-import { CreateFlashSellInput } from './dto/create-flash-sell.input';
-import { UpdateFlashSellInput } from './dto/update-flash-sell.input';
+import { FlashSellService } from '../services/flash-sell.service';
+import { FlashSell } from '../entities/flash-sell.entity';
+import { CreateFlashSellInput } from '../dto/create-flash-sell.input';
+import { UpdateFlashSellInput } from '../dto/update-flash-sell.input';
 
 @Resolver(() => FlashSell)
 export class FlashSellResolver {

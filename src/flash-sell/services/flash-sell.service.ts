@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFlashSellInput } from './dto/create-flash-sell.input';
-import { UpdateFlashSellInput } from './dto/update-flash-sell.input';
+import { CreateFlashSellInput } from '../dto/create-flash-sell.input';
+import { UpdateFlashSellInput } from '../dto/update-flash-sell.input';
 
 @Injectable()
 export class FlashSellService {

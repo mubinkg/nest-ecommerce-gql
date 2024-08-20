@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FlashSellResolver } from './flash-sell.resolver';
-import { FlashSellService } from './flash-sell.service';
+import { FlashSellResolver } from '../resolvers/flash-sell.resolver';
+import { FlashSellService } from '../services/flash-sell.service';
 
 describe('FlashSellResolver', () => {
   let resolver: FlashSellResolver;

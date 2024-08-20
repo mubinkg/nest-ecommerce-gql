@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FlashSellService } from './flash-sell.service';
+import { FlashSellService } from '../services/flash-sell.service';
 
 describe('FlashSellService', () => {
   let service: FlashSellService;
