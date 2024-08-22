@@ -2,6 +2,7 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Product } from 'src/products/entities/product.entity';
+import { HotDealsEnum } from '../enum/hot-deal.enum';
 
 @ObjectType()
 @Schema({
@@ -22,6 +23,10 @@ export class HotDeal {
   @Field(()=>Number, {nullable:true})
   @Prop({type: Number})
   discountPercent?:number
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String, default:HotDealsEnum.ACTIVE})
+  status?: HotDealsEnum
 
   @Field(()=>Date, {nullable:true})
   createdAt?:Date

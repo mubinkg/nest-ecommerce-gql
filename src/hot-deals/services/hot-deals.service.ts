@@ -27,7 +27,7 @@ export class HotDealsService {
     }
   }
 
-  findAll() {
+  findAll(limit: number, offset: number) {
     return `This action returns all hotDeals`;
   }
 

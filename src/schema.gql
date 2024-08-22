@@ -688,6 +688,7 @@ type HotDeal {
   product: Product
   validTime: DateTime
   discountPercent: Float
+  status: String
   createdAt: DateTime
 }
 
@@ -765,7 +766,7 @@ type Query {
   withdrawal(id: Int!): Withdrawal!
   notification(id: Int!): Notification!
   flashSell(id: Int!): FlashSell!
-  hotDeals: [HotDeal!]!
+  hotDeals(limit: Float!, offset: Float!): [HotDeal!]!
   hotDeal(id: Int!): HotDeal!
 }
 

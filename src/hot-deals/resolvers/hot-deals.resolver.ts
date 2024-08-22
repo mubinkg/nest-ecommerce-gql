@@ -14,8 +14,11 @@ export class HotDealsResolver {
   }
 
   @Query(() => [HotDeal], { name: 'hotDeals' })
-  findAll() {
-    return this.hotDealsService.findAll();
+  findAll(
+    @Args('limit', {type: ()=>Number}) limit: number,
+    @Args('offset', {type: ()=>Number}) offset: number
+  ) {
+    return this.hotDealsService.findAll(limit, offset);
   }
 
   @Query(() => HotDeal, { name: 'hotDeal' })
