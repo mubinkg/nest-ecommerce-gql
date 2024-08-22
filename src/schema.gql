@@ -1576,12 +1576,12 @@ input UpdateFlashSellInput {
 }
 
 input CreateHotDealInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  products: [String!]!
+  validTime: DateTime!
 }
 
 input UpdateHotDealInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  products: [String!]
+  validTime: DateTime
   id: Int!
 }
