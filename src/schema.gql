@@ -687,6 +687,7 @@ type HotDeal {
   _id: String!
   product: Product
   validTime: DateTime
+  discountPercent: Float
   createdAt: DateTime
 }
 
@@ -999,7 +1000,7 @@ type Mutation {
   createFlashSell(createFlashSellInput: CreateFlashSellInput!): FlashSell!
   updateFlashSell(updateFlashSellInput: UpdateFlashSellInput!): FlashSell!
   removeFlashSell(id: Int!): FlashSell!
-  createHotDeal(createHotDealInput: CreateHotDealInput!): HotDeal!
+  createHotDeal(createHotDealInput: CreateHotDealInput!): String!
   updateHotDeal(updateHotDealInput: UpdateHotDealInput!): HotDeal!
   removeHotDeal(id: Int!): HotDeal!
 }
@@ -1578,10 +1579,12 @@ input UpdateFlashSellInput {
 input CreateHotDealInput {
   products: [String!]!
   validTime: DateTime!
+  discountPercent: Float!
 }
 
 input UpdateHotDealInput {
   products: [String!]
   validTime: DateTime
+  discountPercent: Float
   id: Int!
 }

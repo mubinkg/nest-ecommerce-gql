@@ -1,5 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsArray, IsDate, IsNotEmpty, IsString } from 'class-validator';
+import { IsArray, IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 @InputType()
 export class CreateHotDealInput {
@@ -12,4 +12,9 @@ export class CreateHotDealInput {
   @IsDate()
   @IsNotEmpty()
   validTime:Date
+
+  @IsNotEmpty()
+  @IsNumber()
+  @Field(()=>Number)
+  discountPercent:number
 }

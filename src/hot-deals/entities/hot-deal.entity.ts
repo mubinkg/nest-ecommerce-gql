@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Prop, Schema } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import { Product } from 'src/products/entities/product.entity';
 
 @ObjectType()
@@ -19,6 +19,13 @@ export class HotDeal {
   @Prop({type: Date})
   validTime?:Date
 
+  @Field(()=>Number, {nullable:true})
+  @Prop({type: Number})
+  discountPercent?:number
+
   @Field(()=>Date, {nullable:true})
   createdAt?:Date
 }
+
+export type HotDealDocuement = HydratedDocument<HotDeal>
+export const HotDealSchema = SchemaFactory.createForClass(HotDeal)

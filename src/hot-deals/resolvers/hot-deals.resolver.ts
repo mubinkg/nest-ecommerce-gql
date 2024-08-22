@@ -8,7 +8,7 @@ import { UpdateHotDealInput } from '../dto/update-hot-deal.input';
 export class HotDealsResolver {
   constructor(private readonly hotDealsService: HotDealsService) {}
 
-  @Mutation(() => HotDeal)
+  @Mutation(() => String)
   createHotDeal(@Args('createHotDealInput') createHotDealInput: CreateHotDealInput) {
     return this.hotDealsService.create(createHotDealInput);
   }
