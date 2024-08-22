@@ -684,8 +684,10 @@ type FlashSell {
 }
 
 type HotDeal {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  _id: String!
+  product: Product
+  validTime: DateTime
+  createdAt: DateTime
 }
 
 type Query {
