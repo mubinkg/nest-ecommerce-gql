@@ -1,5 +1,5 @@
 export enum HotDealsEnum{
-    ACTIVE='acitve',
+    ACTIVE='active',
     PENDING='pending',
     DEACTIVE='deactive'
 }

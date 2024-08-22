@@ -4,6 +4,8 @@ import { UpdateHotDealInput } from '../dto/update-hot-deal.input';
 import { InjectModel } from '@nestjs/mongoose';
 import { HotDeal, HotDealDocuement } from '../entities/hot-deal.entity';
 import { Model } from 'mongoose';
+import { HotDealsEnum } from '../enum/hot-deal.enum';
+import { getHotDeals } from '../query';
 
 @Injectable()
 export class HotDealsService {
@@ -27,8 +29,17 @@ export class HotDealsService {
     }
   }
 
-  findAll(limit: number, offset: number) {
-    return `This action returns all hotDeals`;
+  async findAll(limit: number, offset: number) {
+    try{
+      this.logger.log('Ininitiate request for fetching hot deals details')
+      const hotDeals = await this.hotDealModel.aggregate(getHotDeals(limit, offset))
+      this.logger.log('Hot deals list fetching success')
+      return hotDeals
+    }
+    catch(err){
+      this.logger.log('Error on fetching hot deals list ', err)
+      throw err;
+    }
   }
 
   findOne(id: number) {
