@@ -33,6 +33,7 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { WithdrawalModule } from './withdrawal/withdrawal.module';
 import { NotificationModule } from './notification/notification.module';
 import { FlashSellModule } from './flash-sell/flash-sell.module';
+import { HotDealsModule } from './hot-deals/hot-deals.module';
 
 
 @Module({
@@ -75,6 +76,7 @@ import { FlashSellModule } from './flash-sell/flash-sell.module';
     WithdrawalModule,
     NotificationModule,
     FlashSellModule,
+    HotDealsModule,
   ],
 })
 export class AppModule {}

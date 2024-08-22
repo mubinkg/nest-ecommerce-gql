@@ -683,6 +683,11 @@ type FlashSell {
   status: String
 }
 
+type HotDeal {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   getAdminTickets(limit: Float!, offset: Float!): AdminTicketsDto!
@@ -757,6 +762,8 @@ type Query {
   withdrawal(id: Int!): Withdrawal!
   notification(id: Int!): Notification!
   flashSell(id: Int!): FlashSell!
+  hotDeals: [HotDeal!]!
+  hotDeal(id: Int!): HotDeal!
 }
 
 input GetTicketsDto {
@@ -990,6 +997,9 @@ type Mutation {
   createFlashSell(createFlashSellInput: CreateFlashSellInput!): FlashSell!
   updateFlashSell(updateFlashSellInput: UpdateFlashSellInput!): FlashSell!
   removeFlashSell(id: Int!): FlashSell!
+  createHotDeal(createHotDealInput: CreateHotDealInput!): HotDeal!
+  updateHotDeal(updateHotDealInput: UpdateHotDealInput!): HotDeal!
+  removeHotDeal(id: Int!): HotDeal!
 }
 
 input CreateTicketInput {
@@ -1558,6 +1568,17 @@ input CreateFlashSellInput {
 }
 
 input UpdateFlashSellInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateHotDealInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateHotDealInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!
