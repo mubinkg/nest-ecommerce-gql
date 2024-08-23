@@ -753,6 +753,7 @@ type Query {
   getProductFaqList(limit: Float!, offset: Float!, productId: String!): FaqAdminDto!
   verifyOtp(phoneNumber: String!, otp: String!): Boolean
   getSections(getSectionInput: GetSectionsInput!): [Section!]!
+  sectionForWeb(getSectionInput: GetSectionsInput!): [Section!]!
   getAdminSetions(limit: Float!, offset: Float!, query: String!): AdminSectionDto
   sellers(limit: Float!, offset: Float!, status: String): SellerList!
   seller(id: Int!): Seller!

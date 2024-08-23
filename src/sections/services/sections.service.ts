@@ -45,6 +45,17 @@ export class SectionsService {
     }
   }
 
+  async sectionForWeb(getSectionInput:GetSectionsInput) {
+    try{
+      let sections = await this.sectionModel.aggregate(getSectionQuery(getSectionInput))
+      return sections;
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
+
   findOne(id: number) {
     return `This action returns a #${id} section`;
   }

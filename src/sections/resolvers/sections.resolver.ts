@@ -25,6 +25,13 @@ export class SectionsResolver {
     return this.sectionsService.findAll(getSectionInput, user);
   }
 
+  @Query(() => [Section], { name: 'sectionForWeb' })
+  sectionForWeb(
+    @Args('getSectionInput') getSectionInput:GetSectionsInput,
+  ) {
+    return this.sectionsService.sectionForWeb(getSectionInput);
+  }
+
   // @Query(() => Section, { name: 'section' })
   // findOne(@Args('id', { type: () => Int }) id: number) {
   //   return this.sectionsService.findOne(id);
