@@ -9,6 +9,7 @@ import { CreateProductAttributeSetInput } from '../dto/create-product-attribute-
 import { GetProductAttributeSet } from '../dto/get-attributeset.dto';
 import { ProductAttributeResponseDto } from '../dto/product-attribute-response.dto';
 import { AdminProductAttributeValuesResponse } from '../dto/admin-product-atrribute-values';
+import { AttributeSetValuesDto } from '../dto/attribute-set-values.dto';
 
 @Resolver(() => ProductAttribute)
 export class ProductAttributesResolver {
@@ -75,8 +76,8 @@ export class ProductAttributesResolver {
   }
   
 
-  @Query(()=>String)
+  @Query(()=>AttributeSetValuesDto)
   getAttributeValuesByAttributeSet(){
-    
+
   }
 }
