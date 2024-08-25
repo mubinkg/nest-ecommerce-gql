@@ -76,8 +76,8 @@ export class ProductAttributesResolver {
   }
   
 
-  @Query(()=>AttributeSetValuesDto)
+  @Query(()=>[AttributeSetValuesDto])
   getAttributeValuesByAttributeSet(){
-
+    return this.productAttributeSetService.getAttributeValuesByAttributeSet()
   }
 }

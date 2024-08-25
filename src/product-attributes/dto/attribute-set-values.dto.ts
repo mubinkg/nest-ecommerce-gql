@@ -2,15 +2,21 @@ import { Field, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
 export class AttributeSetValuesDto{
-    @Field(()=>[AttirbuteSetValue], {nullable:true})
-    attributeSetValues: AttirbuteSetValue[]
-}
-
-@ObjectType()
-class AttirbuteSetValue{
     @Field(()=>String)
     _id: string
 
     @Field(()=>String)
-    name: string
+    attributeSetName:string
+    
+    @Field(()=>[AttirbuteSetValue], {nullable:true})
+    attributeSetValues?: AttirbuteSetValue[]
+}
+
+@ObjectType()
+class AttirbuteSetValue{
+    @Field(()=>String, {nullable:true})
+    _id?: string
+
+    @Field(()=>String, {nullable:true})
+    valueName?: string
 }

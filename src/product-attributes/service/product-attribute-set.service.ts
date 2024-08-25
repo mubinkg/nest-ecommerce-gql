@@ -3,6 +3,7 @@ import { ProductAttributeSet, ProductAttributeSetDocument } from "../entities/pr
 import { Model } from "mongoose";
 import { CreateProductAttributeSetInput } from "../dto/create-product-attribute-set.input";
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { getAttributeSetValues } from "../mongo";
 
 
 @Injectable()
@@ -33,6 +34,31 @@ export class ProductAttributeSetService{
                 productAttributeSetList,
                 count
             }
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
+    async getAttributeValuesByAttributeSet(){
+        try{
+            const data = await this.productAttributeSetModel.aggregate(getAttributeSetValues)
+            const results = []
+            data?.forEach(d=>{
+                const attributeSet = {
+                    _id: d._id,
+                    attributeSetName: d.attributeSetName
+                }
+                const attributeValues = []
+                d?.attributes?.forEach(attribute=>{
+                    attribute?.productAttributes?.forEach(value=>{
+                        attributeValues.push(value)
+                    })
+                })
+                attributeSet['attributeSetValues'] = attributeValues
+                results.push(attributeSet)
+            })
+            return results
         }
         catch(err){
             throw err;

@@ -536,12 +536,14 @@ type AdminProductAttributeValuesResponse {
 }
 
 type AttributeSetValuesDto {
+  _id: String!
+  attributeSetName: String!
   attributeSetValues: [AttirbuteSetValue!]
 }
 
 type AttirbuteSetValue {
-  _id: String!
-  name: String!
+  _id: String
+  valueName: String
 }
 
 type ProductFaq {
@@ -754,7 +756,7 @@ type Query {
   productAttributes(limit: Float!, offset: Float!, query: String): ProductAttributeResponseDto!
   attributeValues(limit: Float!, offset: Float!, query: String): AdminProductAttributeValuesResponse!
   getAllProductAttribute: [ProductAttribute!]
-  getAttributeValuesByAttributeSet: AttributeSetValuesDto!
+  getAttributeValuesByAttributeSet: [AttributeSetValuesDto!]!
   productFaq(id: Int!): ProductFaq!
   aramics: String!
   aramic(id: Int!): Aramic!
