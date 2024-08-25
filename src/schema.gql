@@ -745,6 +745,7 @@ type Query {
   productAttributes(limit: Float!, offset: Float!, query: String): ProductAttributeResponseDto!
   attributeValues(limit: Float!, offset: Float!, query: String): AdminProductAttributeValuesResponse!
   getAllProductAttribute: [ProductAttribute!]
+  getAttributeValuesByAttributeSet: String!
   productFaq(id: Int!): ProductFaq!
   aramics: String!
   aramic(id: Int!): Aramic!

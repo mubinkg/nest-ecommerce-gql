@@ -73,4 +73,10 @@ export class ProductAttributesResolver {
   getAllProductAttribute(){
     return this.productAttributesService.getAll()
   }
+  
+
+  @Query(()=>String)
+  getAttributeValuesByAttributeSet(){
+    
+  }
 }
