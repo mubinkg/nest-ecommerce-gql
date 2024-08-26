@@ -144,7 +144,9 @@ export const getProductsQuery = (getProductInputDto: GetProductDto) => {
 
   if (category_id) {
     matchQuery['$match'] = {
-      category: convertToObjectId(category_id)
+      category: {
+        $in: category_id.map(d=>convertToObjectId(d))
+      }
     }
   }
 

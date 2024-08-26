@@ -803,7 +803,7 @@ enum TicketTypeEnum {
 }
 
 input GetProductDto {
-  category_id: String
+  category_id: [String!]
   search: String
   tags: String
   attribute_value_ids: String

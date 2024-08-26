@@ -1,5 +1,5 @@
 import { Field, InputType, registerEnumType } from "@nestjs/graphql";
-import { IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
 import { ProductOrder, ProductSort } from "../enum";
 
 registerEnumType(ProductSort, {
@@ -13,10 +13,10 @@ registerEnumType(ProductOrder, {
 @InputType()
 export class GetProductDto{
 
-    @Field(()=>String, {nullable:true})
-    @IsString()
+    @Field(()=>[String], {nullable:true})
+    @IsArray()
     @IsOptional()
-    category_id?:string
+    category_id?:string[]
 
     @Field(()=>String, {nullable:true})
     @IsString()
