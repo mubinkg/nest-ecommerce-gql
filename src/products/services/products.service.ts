@@ -70,6 +70,17 @@ export class ProductsService {
     }
   }
 
+  async findAllFroWeb(getProductInputDto: GetProductDto) {
+    try{
+      const productQuery = getProductsQuery(getProductInputDto)
+      let products = await this.productModel.aggregate(productQuery)
+      return products
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
   async getProductForWeb(getProductInputDto: GetProductDto) {
     try{
       const productQuery = getProductsQuery(getProductInputDto)

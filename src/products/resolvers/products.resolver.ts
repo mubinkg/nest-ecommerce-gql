@@ -29,6 +29,13 @@ export class ProductsResolver {
     return this.productsService.findAll(getProductInputDto, user);
   }
 
+  @Query(() => [Product], { name: 'getProductsForWeb' })
+  findAllFroWeb(
+    @Args('getProductInput') getProductInputDto:GetProductDto,
+  ) {
+    return this.productsService.getProductForWeb(getProductInputDto);
+  }
+
   @Query(() => [Product])
   getProductForWeb(
     @Args('getProductInput') getProductInputDto:GetProductDto,

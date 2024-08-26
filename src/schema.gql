@@ -710,6 +710,7 @@ type Query {
   getTicketTypes(limit: Float!, offset: Float!): [TicketType!]!
   getAdminTicketTypes(limit: Float!, offset: Float!): AdminTicketTypeResponse!
   get_products(getProductInput: GetProductDto!): [Product!]!
+  getProductsForWeb(getProductInput: GetProductDto!): [Product!]!
   getProductForWeb(getProductInput: GetProductDto!): [Product!]!
   product(productId: String!): Product!
   productForWeb(productId: String!): Product!
