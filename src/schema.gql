@@ -476,6 +476,7 @@ type CartResults {
 
 type Order {
   _id: String!
+  orderId: String
   user: Customer
   mobile: String
   product_variants: [ProductVariant!]
