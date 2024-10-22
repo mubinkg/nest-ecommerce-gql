@@ -9,6 +9,7 @@ import { GetOrderDto } from '../dto/get-orders.dto';
 import { OrderSortOrder } from '../enum';
 import { OrderItem, OrderItemDocument } from '../entities/order-item.entity';
 import { OrderProductVariantServie } from 'src/product-variants/services/order-product-variant.service';
+import { convertToObjectId } from 'src/utils/convert-to-objectid';
 
 @Injectable()
 export class OrdersService {
@@ -38,7 +39,7 @@ export class OrdersService {
       const query = {}
       const sort = {}
       if(getOrderDto?.user_id){
-        query['user_id'] = getOrderDto.user_id
+        query['user_id'] = convertToObjectId(getOrderDto.user_id)
       }
       if(getOrderDto?.active_status){
         query['status'] = getOrderDto.active_status
