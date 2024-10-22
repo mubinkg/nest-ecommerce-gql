@@ -34,7 +34,7 @@ export class OrdersService {
     try {
       await this.productVariantsService.updateProductVarientAfterOrder(createOrderInput)
       const orderId = await this.generateOrderId();
-      const order = await this.orderModel.create({ ...createOrderInput, user: user.userId, address: createOrderInput.address_id, orderId})
+      const order = await this.orderModel.create({ ...createOrderInput, user: user.userId, address: createOrderInput.address_id, orderId:orderId})
       const variantData = await this.orderProductVariantService.getVariantListWithQuantity(createOrderInput.product_variants, createOrderInput.quantity);
       await this.orderItemModel.insertMany(variantData)
       return order;
