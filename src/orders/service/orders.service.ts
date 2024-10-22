@@ -39,7 +39,7 @@ export class OrdersService {
       const query = {}
       const sort = {}
       if(getOrderDto?.user_id){
-        query['user_id'] = convertToObjectId(getOrderDto.user_id)
+        query['user'] = convertToObjectId(getOrderDto.user_id)
       }
       if(getOrderDto?.active_status){
         query['status'] = getOrderDto.active_status
