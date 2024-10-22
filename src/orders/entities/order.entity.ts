@@ -22,6 +22,7 @@ export class Order {
   _id:string
 
   @Field(()=>String, {nullable:true})
+  @Prop({type:String})
   orderId?:string
   
   @Field(()=>Customer, {nullable:true})
