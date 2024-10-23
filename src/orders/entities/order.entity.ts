@@ -20,6 +20,10 @@ export class Order {
 
   @Field(()=>String)
   _id:string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  orderId?:string
   
   @Field(()=>Customer, {nullable:true})
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Customer'})
