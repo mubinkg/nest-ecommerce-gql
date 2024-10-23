@@ -1,18 +1,18 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { AramicsService } from './aramics.service';
-import { Aramic } from './entities/aramic.entity';
-import { CreateAramicInput } from './dto/create-aramic.input';
-import { UpdateAramicInput } from './dto/update-aramic.input';
-import { CryptoServie } from './crypto.service';
+import { AramicsService } from '../services/aramics.service';
+import { Deliverycharge } from '../entities/aramic.entity';
+import { CreateAramicInput } from '../dto/create-aramic.input';
+import { UpdateAramicInput } from '../dto/update-aramic.input';
+import { CryptoServie } from '../services/crypto.service';
 
-@Resolver(() => Aramic)
+@Resolver(() => Deliverycharge)
 export class AramicsResolver {
   constructor(
     private readonly aramicsService: AramicsService,
     private readonly cryptoService:CryptoServie
   ) {}
 
-  @Mutation(() => Aramic)
+  @Mutation(() => Deliverycharge)
   createAramic(@Args('createAramicInput') createAramicInput: CreateAramicInput) {
     return this.aramicsService.create(createAramicInput);
   }
@@ -22,17 +22,17 @@ export class AramicsResolver {
     return this.cryptoService.encrypt('Mubin Mohammad Ikhtiar Khan')
   }
 
-  @Query(() => Aramic, { name: 'aramic' })
+  @Query(() => Deliverycharge, { name: 'aramic' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.aramicsService.findOne(id);
   }
 
-  @Mutation(() => Aramic)
+  @Mutation(() => Deliverycharge)
   updateAramic(@Args('updateAramicInput') updateAramicInput: UpdateAramicInput) {
     return this.aramicsService.update(updateAramicInput.id, updateAramicInput);
   }
 
-  @Mutation(() => Aramic)
+  @Mutation(() => Deliverycharge)
   removeAramic(@Args('id', { type: () => Int }) id: number) {
     return this.aramicsService.remove(id);
   }

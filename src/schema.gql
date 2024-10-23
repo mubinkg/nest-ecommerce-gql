@@ -554,9 +554,13 @@ type ProductFaq {
   createdAt: DateTime
 }
 
-type Aramic {
-  """Example field (placeholder)"""
-  exampleField: Int!
+type Deliverycharge {
+  _id: String!
+  countryCode: String
+  countryName: String
+  eramicsCountryName: String
+  weight: Float
+  price: Float
 }
 
 type Faq {
@@ -760,7 +764,7 @@ type Query {
   getAttributeValuesByAttributeSet: [AttributeSetValuesDto!]!
   productFaq(id: Int!): ProductFaq!
   aramics: String!
-  aramic(id: Int!): Aramic!
+  aramic(id: Int!): Deliverycharge!
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   adminFaqList(limit: Float!, offset: Float!): FaqAdminDto!
   getProductFaqList(limit: Float!, offset: Float!, productId: String!): FaqAdminDto!
@@ -990,9 +994,9 @@ type Mutation {
   createProductFaq(createProductFaqInput: CreateProductFaqInput!): ProductFaq!
   updateProductFaq(updateProductFaqInput: UpdateProductFaqInput!): ProductFaq!
   removeProductFaq(id: Int!): ProductFaq!
-  createAramic(createAramicInput: CreateAramicInput!): Aramic!
-  updateAramic(updateAramicInput: UpdateAramicInput!): Aramic!
-  removeAramic(id: Int!): Aramic!
+  createAramic(createAramicInput: CreateAramicInput!): Deliverycharge!
+  updateAramic(updateAramicInput: UpdateAramicInput!): Deliverycharge!
+  removeAramic(id: Int!): Deliverycharge!
   createFaq(createFaqInput: CreateFaqInput!): Faq!
   createAdminFaq(faqAdminInput: FaqAdminInput!): Faq!
   sendOtp(mobile: String!): String!

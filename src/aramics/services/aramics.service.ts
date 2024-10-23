@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAramicInput } from './dto/create-aramic.input';
-import { UpdateAramicInput } from './dto/update-aramic.input';
+import { CreateAramicInput } from '../dto/create-aramic.input';
+import { UpdateAramicInput } from '../dto/update-aramic.input';
 import axios from 'axios';
 
 @Injectable()
