@@ -2,9 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { CreateAramicInput } from '../dto/create-aramic.input';
 import { UpdateAramicInput } from '../dto/update-aramic.input';
 import axios from 'axios';
+import { InjectModel } from '@nestjs/mongoose';
+import { DeliveryCharge } from 'src/cart/entities/delvary-charge.entity';
+import { Model } from 'mongoose';
+import { DeliveryChargeDocument } from '../entities/aramic.entity';
 
 @Injectable()
 export class AramicsService {
+  constructor(
+    @InjectModel(DeliveryCharge.name) private readonly deliveryChargeModel:Model<DeliveryChargeDocument>
+  ){}
   async create(createAramicInput: CreateAramicInput) {
     try{
       await axios.post('wms.acieshop.com/api/orderNomalRegist',[{

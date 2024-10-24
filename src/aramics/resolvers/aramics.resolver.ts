@@ -22,7 +22,7 @@ export class AramicsResolver {
     return this.cryptoService.encrypt('Mubin Mohammad Ikhtiar Khan')
   }
 
-  @Query(() => Deliverycharge, { name: 'aramic' })
+  @Query(() => Deliverycharge, { name: 'deliveryCharge' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.aramicsService.findOne(id);
   }
