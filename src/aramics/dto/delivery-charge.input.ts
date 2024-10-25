@@ -1,7 +1,7 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, InputType } from "@nestjs/graphql";
 import { IsArray, IsNotEmpty, IsString } from "class-validator";
 
-@ObjectType()
+@InputType()
 export class DeliveryCharge {
     @Field(() => [String])
     @IsArray()

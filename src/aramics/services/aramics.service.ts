@@ -3,18 +3,18 @@ import { CreateAramicInput } from '../dto/create-aramic.input';
 import { UpdateAramicInput } from '../dto/update-aramic.input';
 import axios from 'axios';
 import { InjectModel } from '@nestjs/mongoose';
-import { DeliveryCharge } from 'src/cart/entities/delvary-charge.entity';
+import { DeliveryCharge } from '../dto/delivery-charge.input';
 import { Model } from 'mongoose';
 import { DeliveryChargeDocument } from '../entities/aramic.entity';
 
 @Injectable()
 export class AramicsService {
   constructor(
-    @InjectModel(DeliveryCharge.name) private readonly deliveryChargeModel:Model<DeliveryChargeDocument>
-  ){}
+    @InjectModel(DeliveryCharge.name) private readonly deliveryChargeModel: Model<DeliveryChargeDocument>
+  ) { }
   async create(createAramicInput: CreateAramicInput) {
-    try{
-      await axios.post('wms.acieshop.com/api/orderNomalRegist',[{
+    try {
+      await axios.post('wms.acieshop.com/api/orderNomalRegist', [{
         "Departure_Station": "SEL",
         "Arrival_Nation": "US",
         "Transfer_Company_Code": "",
@@ -58,43 +58,43 @@ export class AramicsService {
         "Delivery_Msg": "Call M",
         "Exp_Licence_YN": "N",
         "Exp_Business_Num": "",
-          "Item_Material":[
-              {
-                  "Customer_Item_Code": "ITEM2",
-                  "Hs_Code": "",
-                  "Brand": "Handcraft Vietnam1",
-                  "Item_Detail": "(Handcraft Vietnam) Straw Tote Bag",
-                  "Native_Item_Detail": "75301-6-1 VOGACORTE 70",
-                  "Item_Cnt": "1",
-                  "Unit_Value": "20.5",
-                  "Make_Country": "GB",
-                  "Make_Company": "",
-                  "Item_Div": "",
-                  "Qty_Unit": "EA",
-                  "Item_Url": "TESTURL.COM",
-                  "Item_Img_Url": "",
-                  "Trking_Company": "EPOST",
-                  "Trking_Number": "6063412344789",
-                  "Trking_Date": "20220921",
-                  "Chg_Currency": "USD",
-                  "Item_Material": ""
-              }
-          ]
+        "Item_Material": [
+          {
+            "Customer_Item_Code": "ITEM2",
+            "Hs_Code": "",
+            "Brand": "Handcraft Vietnam1",
+            "Item_Detail": "(Handcraft Vietnam) Straw Tote Bag",
+            "Native_Item_Detail": "75301-6-1 VOGACORTE 70",
+            "Item_Cnt": "1",
+            "Unit_Value": "20.5",
+            "Make_Country": "GB",
+            "Make_Company": "",
+            "Item_Div": "",
+            "Qty_Unit": "EA",
+            "Item_Url": "TESTURL.COM",
+            "Item_Img_Url": "",
+            "Trking_Company": "EPOST",
+            "Trking_Number": "6063412344789",
+            "Trking_Date": "20220921",
+            "Chg_Currency": "USD",
+            "Item_Material": ""
+          }
+        ]
       }]
-      ,
-      {
-        headers: {
-          'Content-Type':'application/json',
-          "UserID": "eresitrade",
-          "APIkey":"M6sCqNy4tq4F4bGq/J51xkuYv+6qJ68Rdd8bW0lUsIQ="
+        ,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            "UserID": "eresitrade",
+            "APIkey": "M6sCqNy4tq4F4bGq/J51xkuYv+6qJ68Rdd8bW0lUsIQ="
+          }
         }
-      }
       )
       return {
         "exampleField": 1
       }
     }
-    catch(err){
+    catch (err) {
       throw err;
     }
   }
@@ -103,8 +103,11 @@ export class AramicsService {
     return `This action returns all aramics`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} aramic`;
+  async findOne(deliveryCharge: DeliveryCharge) {
+    try { }
+    catch (err) {
+      throw err;
+    }
   }
 
   update(id: number, updateAramicInput: UpdateAramicInput) {

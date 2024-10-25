@@ -4,6 +4,7 @@ import { Deliverycharge } from '../entities/aramic.entity';
 import { CreateAramicInput } from '../dto/create-aramic.input';
 import { UpdateAramicInput } from '../dto/update-aramic.input';
 import { CryptoServie } from '../services/crypto.service';
+import { DeliveryCharge } from '../dto/delivery-charge.input';
 
 @Resolver(() => Deliverycharge)
 export class AramicsResolver {
@@ -23,8 +24,8 @@ export class AramicsResolver {
   }
 
   @Query(() => Deliverycharge, { name: 'deliveryCharge' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.aramicsService.findOne(id);
+  findOne(@Args('deliveryCharge') deliveryCharge: DeliveryCharge) {
+    return this.aramicsService.findOne(deliveryCharge);
   }
 
   @Mutation(() => Deliverycharge)
