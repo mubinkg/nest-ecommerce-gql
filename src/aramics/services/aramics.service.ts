@@ -6,11 +6,17 @@ import { InjectModel } from '@nestjs/mongoose';
 import { DeliveryCharge } from '../dto/delivery-charge.input';
 import { Model } from 'mongoose';
 import { DeliveryChargeDocument } from '../entities/aramic.entity';
+import { ProductVariant, ProductVariantDocument } from 'src/product-variants/entities/product-variant.entity';
+import { convertToObjectId } from 'src/utils/convert-to-objectid';
+import { Address, AddressDocument } from 'src/addresses/entities/address.entity';
+import { getCharge } from '../mongo';
 
 @Injectable()
 export class AramicsService {
   constructor(
-    @InjectModel(DeliveryCharge.name) private readonly deliveryChargeModel: Model<DeliveryChargeDocument>
+    @InjectModel(DeliveryCharge.name) private readonly deliveryChargeModel: Model<DeliveryChargeDocument>,
+    @InjectModel(ProductVariant.name) private readonly productVariant:Model<ProductVariantDocument>,
+    @InjectModel(Address.name) private readonly addressModel:Model<AddressDocument>
   ) { }
   async create(createAramicInput: CreateAramicInput) {
     try {
@@ -104,7 +110,19 @@ export class AramicsService {
   }
 
   async findOne(deliveryCharge: DeliveryCharge) {
-    try { }
+    try {
+      const variants = await this.productVariant.find({_id:{
+        $in: deliveryCharge.product_variants.map(d=>convertToObjectId(d))
+      }})
+      let weight = 0;
+      variants.forEach((d:ProductVariant,id:number)=>{
+        weight = weight + d.weight*deliveryCharge.quantity[id]
+      })
+      const addressDetials = await this.addressModel.findById(deliveryCharge.address_id)
+      const query:any = getCharge(weight.toString(), addressDetials.country)
+      const totalDeliveryCharge = await this.deliveryChargeModel.aggregate(query)
+      return totalDeliveryCharge[0].price
+    }
     catch (err) {
       throw err;
     }

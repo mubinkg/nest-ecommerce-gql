@@ -1,39 +1,27 @@
-const getCharge = ()=>[
+export const getCharge = (currentWeight:string, country:string)=>{
+  return [
     {
       $match:
-        /**
-         * query: The query in MQL.
-         */
         {
-          eramicsCountryName: "UAE"
+          eramicsCountryName: country
         }
     },
     {
       $sort:
-        /**
-         * Provide any number of field/order pairs.
-         */
         {
           weight: 1
         }
     },
     {
       $match:
-        /**
-         * query: The query in MQL.
-         */
         {
           weight: {
-            $gte: "9"
+            $gte: currentWeight
           }
         }
     },
     {
       $group:
-        /**
-         * _id: The id of the group.
-         * fieldN: The first field name.
-         */
         {
           _id: null,
           fieldN: {
@@ -42,3 +30,4 @@ const getCharge = ()=>[
         }
     }
   ]
+}

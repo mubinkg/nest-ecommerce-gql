@@ -765,7 +765,7 @@ type Query {
   getAttributeValuesByAttributeSet: [AttributeSetValuesDto!]!
   productFaq(id: Int!): ProductFaq!
   aramics: String!
-  deliveryCharge(deliveryCharge: DeliveryCharge!): Deliverycharge!
+  deliveryCharge(deliveryCharge: DeliveryCharge!): Float!
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   adminFaqList(limit: Float!, offset: Float!): FaqAdminDto!
   getProductFaqList(limit: Float!, offset: Float!, productId: String!): FaqAdminDto!
