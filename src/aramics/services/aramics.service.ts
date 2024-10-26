@@ -105,6 +105,15 @@ export class AramicsService {
     }
   }
 
+  async getCountries(){
+    try{
+      return await this.deliveryChargeModel.distinct("eramicsCountryName")
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
   findAll() {
     return `This action returns all aramics`;
   }

@@ -766,6 +766,7 @@ type Query {
   productFaq(id: Int!): ProductFaq!
   aramics: String!
   deliveryCharge(deliveryCharge: DeliveryCharge!): Float!
+  getDeliverableCountries: [String!]!
   faq(getFaqInput: GetFaqInput!): [Faq!]!
   adminFaqList(limit: Float!, offset: Float!): FaqAdminDto!
   getProductFaqList(limit: Float!, offset: Float!, productId: String!): FaqAdminDto!

@@ -28,6 +28,11 @@ export class AramicsResolver {
     return this.aramicsService.findOne(deliveryCharge);
   }
 
+  @Query(() => [String], { name: 'getDeliverableCountries' })
+  getCountries() {
+    return this.aramicsService.getCountries();
+  }
+
   @Mutation(() => Deliverycharge)
   updateAramic(@Args('updateAramicInput') updateAramicInput: UpdateAramicInput) {
     return this.aramicsService.update(updateAramicInput.id, updateAramicInput);
