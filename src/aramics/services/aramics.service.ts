@@ -121,7 +121,7 @@ export class AramicsService {
       const addressDetials = await this.addressModel.findById(deliveryCharge.address_id)
       const query:any = getCharge(weight.toString(), addressDetials.country)
       const totalDeliveryCharge = await this.deliveryChargeModel.aggregate(query)
-      return totalDeliveryCharge[0].price
+      return totalDeliveryCharge[0].value
     }
     catch (err) {
       throw err;

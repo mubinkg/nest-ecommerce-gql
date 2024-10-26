@@ -24,7 +24,7 @@ export const getCharge = (currentWeight:string, country:string)=>{
       $group:
         {
           _id: null,
-          fieldN: {
+          value: {
             $first: "$weight"
           }
         }
