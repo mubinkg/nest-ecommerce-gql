@@ -27,10 +27,10 @@ export class SellersService {
         throw new NotAcceptableException('Duplicate email or phone')
       }
 
-      createSellerInput.national_identity_card = await uploadFile(createSellerInput.national_identity_card as FileUpload) as string
-      createSellerInput.address_proof = await uploadFile(createSellerInput.address_proof as FileUpload) as string
-      createSellerInput.business_license = await uploadFile(createSellerInput.business_license as FileUpload) as string
-      createSellerInput.password = await bcrypt.hash(createSellerInput.password, 10)
+      createSellerInput.national_identity_card = createSellerInput?.national_identity_card ? await uploadFile(createSellerInput.national_identity_card as FileUpload) as string : ""
+      createSellerInput.address_proof =createSellerInput?.address_proof ? await uploadFile(createSellerInput.address_proof as FileUpload) as string : ""
+      createSellerInput.business_license = createSellerInput?.business_license ? await uploadFile(createSellerInput.business_license as FileUpload) as string : "";
+      createSellerInput.password =  await bcrypt.hash(createSellerInput.password, 10)
       return await this.sellerModel.create(createSellerInput)
     }
     catch(err){
