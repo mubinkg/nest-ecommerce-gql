@@ -20,6 +20,11 @@ export class ProductsResolver {
     return await this.productsService.create(createProductInput);
   }
 
+  @Mutation(() => String)
+  async createBulkProduct() {
+    return await this.productsService.createBulkProduct();
+  }
+
   @Query(() => [Product], { name: 'get_products' })
   @UseGuards(GqlAuthGuard)
   findAll(

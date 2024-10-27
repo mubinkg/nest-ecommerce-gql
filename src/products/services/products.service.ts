@@ -13,6 +13,8 @@ import { convertToObjectId } from 'src/utils/convert-to-objectid';
 import { getProductsQuery, productDetailsQuery } from '../mongo';
 import { Attribute } from '../entities/product-attribute.entity';
 import { FavoriteProductService } from 'src/favourites/services/favorite.product.service';
+import * as fs from 'fs'
+import * as csv from 'csv-parser'
 
 @Injectable()
 export class ProductsService {
@@ -50,6 +52,22 @@ export class ProductsService {
     } catch (err) {
       Logger.log(err)
       return new NotImplementedException('Can not create product' + err.message)
+    }
+  }
+
+  async createBulkProduct(){
+    try{
+      fs.createReadStream('./data/file.csv')
+      .pipe(csv())
+      .on('data', (data)=>{
+        const keys = Object.keys(data)
+        console.log(keys);
+        
+      })
+      return 'Success'
+    }
+    catch(err){
+      throw err;
     }
   }
 

@@ -960,6 +960,7 @@ type Mutation {
   updateTicketType(updateTicketTypeInput: UpdateTicketType!): TicketType!
   deleteTicketType(id: String!): TicketType!
   createProduct(createProductInput: CreateProductInput!): Product!
+  createBulkProduct: String!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   updateProductOrderNo(updateProductOrderNoInput: UpdateProductGlobalOrderNoInput!): String!
   deleteProduct(productId: String!): String!
