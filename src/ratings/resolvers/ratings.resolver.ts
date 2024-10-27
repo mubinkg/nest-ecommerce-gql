@@ -28,9 +28,6 @@ export class RatingsResolver {
     return this.ratingsService.delete(id);
   }
 
-
-  
-  
   @Query(() => [Rating], { name: 'ratings' })
   getRatings(@Args("ratingFilterDto") ratingFilterDto : RatingFilterDto) {
     return this.ratingsService.getRatings(ratingFilterDto);
