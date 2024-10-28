@@ -15,6 +15,8 @@ import { Attribute } from '../entities/product-attribute.entity';
 import { FavoriteProductService } from 'src/favourites/services/favorite.product.service';
 import * as fs from 'fs'
 import * as csv from 'csv-parser'
+import { CancelableTill, VideoType } from '../enum';
+import { CreateProductVariantInput } from 'src/product-variants/dto/create-product-variant.input';
 
 @Injectable()
 export class ProductsService {
@@ -61,26 +63,56 @@ export class ProductsService {
       fs.createReadStream('./data/file.csv', "utf8")
         .on('data', (data) => {
           results.push(data)
-        }).on('end', async ()=>{
-          const dataList = results.toString().split('\n').filter(d=>d)
-          const finalResult = dataList.map(d=>d.split(',')).slice(1,)
-          console.log(dataList[0].split(','))
-          console.log(finalResult)
-          for(let i =0;i<finalResult.length;i++){
-            const currentProduct = finalResult[i]
-            const productInput:CreateProductInput = {
-              category:currentProduct[0],
-              // tax: currentProduct[1],
-              product_type: currentProduct[2],
-              variant: currentProduct[3],
-              pro_input_name: currentProduct[4],
-              short_description: currentProduct[5],
-              indicator: currentProduct[6],
+        }).on('end', async () => {
+          try {
+            const dataList = results.toString().split('\n').filter(d => d)
+            const finalResult = dataList.map(d => d.split(',')).slice(1,)
+            console.log(dataList[0].split(','))
+            for (let i = 0; i < finalResult.length; i++) {
+              const currentProduct = finalResult[i]
+              const productInput: CreateProductInput = {
+                category: currentProduct[0],
+                // tax: currentProduct[1],
+                product_type: currentProduct[2],
+                variant: currentProduct[3],
+                pro_input_name: currentProduct[4],
+                short_description: currentProduct[5],
+                indicator: parseInt(currentProduct[6]),
+                // cod_allowed: parseInt(currentProduct[7]),
+                minimum_order_quantity: parseInt(currentProduct[8]),
+                quantity_step_size: parseInt(currentProduct[9]),
+                total_allowed_quantity: parseInt(currentProduct[10]),
+                // is_price_inclusive_tax: currentProduct[11],
+                is_returnable: parseInt(currentProduct[12]),
+                is_cancelable: parseInt(currentProduct[13]),
+                cancelable_till: currentProduct[14] as CancelableTill,
+                pro_input_image: currentProduct[15],
+                other_images: currentProduct[16].split(','),
+                video_type: currentProduct[17] as VideoType,
+                video: currentProduct[18],
+                tags: currentProduct[19],
+                warranty_period: currentProduct[20],
+                guarantee_period: currentProduct[21],
+                made_in: currentProduct[23],
+                pro_input_description: currentProduct[27],
+                seller: currentProduct[32],
+                brand: currentProduct[33],
+                extra_input_description: currentProduct[35],
+                status: 0
+              }
+              // await this.productModel.create(productInput)
+              const variantsList = currentProduct.slice(36,)
+              const productVariants:CreateProductVariantInput[] = []
+              for(let i = 0;i<variantsList.length;i=i+11){
+                console.log(typeof variantsList[i])
+              }
+              console.log('Variant list : ', variantsList)
             }
-            console.log(productInput)
+            return 'Success'
+          } catch (err) {
+            return 'Failed';
           }
         })
-      return 'Success'
     }
     catch (err) {
       throw err;
