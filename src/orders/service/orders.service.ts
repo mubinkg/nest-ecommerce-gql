@@ -58,7 +58,15 @@ export class OrdersService {
         sort[getOrderDto.sort] = getOrderDto.order === OrderSortOrder.DESC ? -1 : 1
       }
 
-      return await this.orderModel.find(query).sort(sort).limit(getOrderDto.limit).skip(getOrderDto.offset)
+      return await this.orderModel.find(query).sort(sort).populate({path: 'user',}).populate({
+        path: 'product_variants',
+        populate: {
+            path: 'product',
+            populate: {
+                path: 'seller'
+            }
+        }
+    }).limit(getOrderDto.limit).skip(getOrderDto.offset)
     }
     catch (err) {
       throw err;
