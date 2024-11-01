@@ -34,7 +34,7 @@ export class OrdersService {
     try {
       await this.productVariantsService.updateProductVarientAfterOrder(createOrderInput)
       const orderId = await this.generateOrderId();
-      const order = await this.orderModel.create({ ...createOrderInput, user: user.userId, address: createOrderInput.address_id, orderId:orderId})
+      const order = await this.orderModel.create({ ...createOrderInput, user: user.userId, address: createOrderInput.address_id, orderId: orderId })
       const variantData = await this.orderProductVariantService.getVariantListWithQuantity(createOrderInput.product_variants, createOrderInput.quantity);
       await this.orderItemModel.insertMany(variantData)
       return order;
@@ -58,15 +58,19 @@ export class OrdersService {
         sort[getOrderDto.sort] = getOrderDto.order === OrderSortOrder.DESC ? -1 : 1
       }
 
-      return await this.orderModel.find(query).sort(sort).populate({path: 'user',}).populate({
+      const orders =  await this.orderModel.find(query).sort(sort).populate({ path: 'user', }).populate({
         path: 'product_variants',
         populate: {
-            path: 'product',
-            populate: {
-                path: 'seller'
-            }
+          path: 'product',
+          populate: {
+            path: 'seller'
+          }
         }
-    }).limit(getOrderDto.limit).skip(getOrderDto.offset)
+      }).limit(getOrderDto.limit).skip(getOrderDto.offset)
+
+      console.log('Total order list : ', orders)
+
+      return orders;
     }
     catch (err) {
       throw err;
