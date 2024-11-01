@@ -12,7 +12,6 @@ export const kocartBucket = storage.bucket('kocart')
 
 export async function uploadFile(file:FileUpload){
     try{
-        console.log(__dirname)
         const {createReadStream, filename} = await file
         const modifiedFilename = uuidV4() + filename
         return new Promise((resolve, reject)=>{

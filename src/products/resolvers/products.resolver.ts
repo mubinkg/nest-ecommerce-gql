@@ -9,6 +9,7 @@ import { UpdateProductGlobalOrderNoInput } from '../dto/updateGlobalOrderNo.inpu
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/customers/jwt-guards';
 import { CurrentUser } from 'src/decorator/current-user.decorator';
+import { BulkProductInput } from '../dto/bulk-product.unput';
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -21,8 +22,10 @@ export class ProductsResolver {
   }
 
   @Mutation(() => String)
-  async createBulkProduct() {
-    return await this.productsService.createBulkProduct();
+  async createBulkProduct(
+    @Args('bulkProductInput') bulkProductInput: BulkProductInput
+  ) {
+    return await this.productsService.createBulkFromXlsx(bulkProductInput);
   }
 
   @Query(() => [Product], { name: 'get_products' })

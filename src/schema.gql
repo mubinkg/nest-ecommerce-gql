@@ -960,7 +960,7 @@ type Mutation {
   updateTicketType(updateTicketTypeInput: UpdateTicketType!): TicketType!
   deleteTicketType(id: String!): TicketType!
   createProduct(createProductInput: CreateProductInput!): Product!
-  createBulkProduct: String!
+  createBulkProduct(bulkProductInput: BulkProductInput!): String!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   updateProductOrderNo(updateProductOrderNoInput: UpdateProductGlobalOrderNoInput!): String!
   deleteProduct(productId: String!): String!
@@ -1171,6 +1171,10 @@ input CreateProductVariantInput {
 enum StockStatus {
   IN_STOCK
   OUT_OF_STOCK
+}
+
+input BulkProductInput {
+  productFile: Upload
 }
 
 input UpdateProductInput {
