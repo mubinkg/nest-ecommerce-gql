@@ -59,86 +59,90 @@ export class ProductsService {
   }
 
   async createBulkFromXlsx(bulkProductInput: BulkProductInput) {
-    const fileinfo = await bulkProductInput.productFile
-    const streamData = []
-    const getFileData = () => new Promise((resolve, reject) => fileinfo.createReadStream().on('data', (data) => {
-      streamData.push(data)
-    }).on('end', () => {
-      return resolve(streamData)
-    }).on('error', () => {
-      return reject('Error on getting file data')
-    })
-    )
-    const fileContent:any = await getFileData()
-    const buffer = Buffer.concat(fileContent)
-    const workbook = xlsx.read(buffer, {type: "buffer"})
-    const firstSheetName = workbook.SheetNames[0];
-    const firstSheet = workbook.Sheets[firstSheetName];
-    const data = xlsx.utils.sheet_to_json(firstSheet);
-    for(let i =0;i<data.length;i++){
-      const currentProduct = data[i]
-      const productInput: CreateProductInput = {
-        category: currentProduct['category_id'],
-        // tax: currentProduct['tax'],
-        product_type: currentProduct['type'],
-        variant: currentProduct['stock type'],
-        pro_input_name: currentProduct['name'],
-        short_description: currentProduct['short_description'],
-        indicator: parseInt(currentProduct['indicator'] || 0),
-        // cod_allowed: parseInt(currentProduct['cod_allowed']),
-        minimum_order_quantity: parseInt(currentProduct['minimum order quantity']),
-        quantity_step_size: parseInt(currentProduct['quantity step size']),
-        total_allowed_quantity: parseInt(currentProduct['total allowed quantity']),
-        // is_price_inclusive_tax: currentProduct['is prices inclusive tax'],
-        is_returnable: parseInt(currentProduct['is returnable'] || 0),
-        is_cancelable: parseInt(currentProduct['is cancelable'] || 0),
-        cancelable_till: currentProduct['cancelable till'] as CancelableTill,
-        pro_input_image: currentProduct['image'],
-        other_images: currentProduct['other_images']?.split(','),
-        video_type: currentProduct['video_type'] as VideoType,
-        video: currentProduct['video'],
-        tags: currentProduct['tags'],
-        warranty_period: currentProduct['warranty period'],
-        guarantee_period: currentProduct['guarantee period'],
-        made_in: currentProduct['made in'],
-        pro_input_description: currentProduct['description'],
-        seller: currentProduct['seller_id'],
-        brand: currentProduct['brand'],
-        extra_input_description: currentProduct['extra_description'],
-        status: 0
-      }
-      const product = await this.productModel.create(productInput)
-      let next_product = true
-      let key = 0
-      const productVariantInputs:CreateProductVariantInput[] = []
-      while(next_product){
-        const baseKey = `${!key ? "" : `_${key}`}`
-        const base = `attributes${baseKey}`
-        if(!currentProduct[base]){
-          next_product = false
-        }else{
-          const productVariantInput = {
-            attributeReference: currentProduct[`attributes${baseKey}`]?.split(','),
-            attributeValues: currentProduct[`attribute value ids${baseKey}`].split(','),
-            price: currentProduct[`price${baseKey}`],
-            specialPrice: currentProduct[`special price${baseKey}`],
-            sku: currentProduct[`sku${baseKey}`],
-            totalStock: currentProduct[`stock${baseKey}`],
-            productType: currentProduct['type'],
-            stockType: currentProduct['stock type'],
-            weight: currentProduct[`weight${baseKey}`],
-            height: currentProduct[`height${baseKey}`],
-            breadth: currentProduct[`breadth${baseKey}`],
-            length: currentProduct[`length${baseKey}`],
-            product: product._id
-          }
-          productVariantInputs.push(productVariantInput)
+    try {
+      const fileinfo = await bulkProductInput.productFile
+      const streamData = []
+      const getFileData = () => new Promise((resolve, reject) => fileinfo.createReadStream().on('data', (data) => {
+        streamData.push(data)
+      }).on('end', () => {
+        return resolve(streamData)
+      }).on('error', () => {
+        return reject('Error on getting file data')
+      })
+      )
+      const fileContent: any = await getFileData()
+      const buffer = Buffer.concat(fileContent)
+      const workbook = xlsx.read(buffer, { type: "buffer" })
+      const firstSheetName = workbook.SheetNames[0];
+      const firstSheet = workbook.Sheets[firstSheetName];
+      const data = xlsx.utils.sheet_to_json(firstSheet);
+      for (let i = 0; i < data.length; i++) {
+        const currentProduct = data[i]
+        const productInput: CreateProductInput = {
+          category: currentProduct['category_id'],
+          // tax: currentProduct['tax'],
+          product_type: currentProduct['type'],
+          variant: currentProduct['stock type'],
+          pro_input_name: currentProduct['name'],
+          short_description: currentProduct['short_description'],
+          indicator: parseInt(currentProduct['indicator'] || 0),
+          // cod_allowed: parseInt(currentProduct['cod_allowed']),
+          minimum_order_quantity: parseInt(currentProduct['minimum order quantity']),
+          quantity_step_size: parseInt(currentProduct['quantity step size']),
+          total_allowed_quantity: parseInt(currentProduct['total allowed quantity']),
+          // is_price_inclusive_tax: currentProduct['is prices inclusive tax'],
+          is_returnable: parseInt(currentProduct['is returnable'] || 0),
+          is_cancelable: parseInt(currentProduct['is cancelable'] || 0),
+          cancelable_till: currentProduct['cancelable till'] as CancelableTill,
+          pro_input_image: currentProduct['image'],
+          other_images: currentProduct['other_images']?.split(','),
+          video_type: currentProduct['video_type'] as VideoType,
+          video: currentProduct['video'],
+          tags: currentProduct['tags'],
+          warranty_period: currentProduct['warranty period'],
+          guarantee_period: currentProduct['guarantee period'],
+          made_in: currentProduct['made in'],
+          pro_input_description: currentProduct['description'],
+          seller: currentProduct['seller_id'],
+          brand: currentProduct['brand'],
+          extra_input_description: currentProduct['extra_description'],
+          status: 0
         }
-        key = key+1
+        const product = await this.productModel.create(productInput)
+        let next_product = true
+        let key = 0
+        const productVariantInputs: CreateProductVariantInput[] = []
+        while (next_product) {
+          const baseKey = `${!key ? "" : `_${key}`}`
+          const base = `attributes${baseKey}`
+          if (!currentProduct[base]) {
+            next_product = false
+          } else {
+            const productVariantInput = {
+              attributeReference: currentProduct[`attributes${baseKey}`]?.split(','),
+              attributeValues: currentProduct[`attribute value ids${baseKey}`].split(','),
+              price: currentProduct[`price${baseKey}`],
+              specialPrice: currentProduct[`special price${baseKey}`],
+              sku: currentProduct[`sku${baseKey}`],
+              totalStock: currentProduct[`stock${baseKey}`],
+              productType: currentProduct['type'],
+              stockType: currentProduct['stock type'],
+              weight: currentProduct[`weight${baseKey}`],
+              height: currentProduct[`height${baseKey}`],
+              breadth: currentProduct[`breadth${baseKey}`],
+              length: currentProduct[`length${baseKey}`],
+              product: product._id
+            }
+            productVariantInputs.push(productVariantInput)
+          }
+          key = key + 1
+        }
+        await this.attributeModel.insertMany(productVariantInputs)
       }
-      await this.attributeModel.insertMany(productVariantInputs)
+      return 'Done'
+    } catch (err) {
+      throw err;
     }
-    return 'Done'
   }
 
   async findAll(getProductInputDto: GetProductDto, user: any) {
