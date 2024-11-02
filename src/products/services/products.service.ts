@@ -108,7 +108,33 @@ export class ProductsService {
           extra_input_description: currentProduct['extra_description'],
           status: 0
         }
+
+        const productCount = await this.productModel.countDocuments()
+        productInput.globalOrderNo = productCount + 1
+
         const product = await this.productModel.create(productInput)
+
+        let next_product_attribute = true
+        let product_attribute_key = 0
+        const product_attribute_list:ProductAttributeInput[] = []
+
+        while(next_product_attribute){
+          const baseKey = `${!product_attribute_key ? "" : `_${product_attribute_key}`}`
+          if(!currentProduct[`product attribute${baseKey}`]){
+            next_product_attribute = false
+          }else{
+            const attribute:ProductAttributeInput ={
+              product: product._id,
+              attribute:currentProduct[`product attribute${baseKey}`],
+              values: currentProduct[`product attribute values${baseKey}`]?.split(',')
+            }
+            product_attribute_list.push(attribute)
+          }
+          product_attribute_key = product_attribute_key + 1;
+        }
+
+        await this.attributeModel.insertMany(product_attribute_list)
+
         let next_product = true
         let key = 0
         const productVariantInputs: CreateProductVariantInput[] = []
