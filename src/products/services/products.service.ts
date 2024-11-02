@@ -137,7 +137,7 @@ export class ProductsService {
           }
           key = key + 1
         }
-        await this.attributeModel.insertMany(productVariantInputs)
+        await this.productVariantsService.create(productVariantInputs)
       }
       return 'Done'
     } catch (err) {
