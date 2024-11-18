@@ -1639,14 +1639,16 @@ input UpdateHotDealInput {
 input CreateOfferInput {
   type: String!
   image: String!
-  category: String!
-  products: [String!]!
+  category: String
+  link: String
+  products: [String!]
 }
 
 input UpdateOfferInput {
   type: String
   image: String
   category: String
+  link: String
   products: [String!]
   id: Int!
 }
