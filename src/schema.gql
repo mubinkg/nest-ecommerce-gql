@@ -710,9 +710,12 @@ type HotDeal {
 
 type Offer {
   _id: String!
-  type: String!
-  image: String!
-  link: String!
+  type: String
+  image: String
+  link: String
+  category: String
+  products: [String!]
+  createdAt: DateTime
 }
 
 type Query {
@@ -1634,12 +1637,16 @@ input UpdateHotDealInput {
 }
 
 input CreateOfferInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  type: String!
+  image: String!
+  category: String!
+  products: [String!]!
 }
 
 input UpdateOfferInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  type: String
+  image: String
+  category: String
+  products: [String!]
   id: Int!
 }
