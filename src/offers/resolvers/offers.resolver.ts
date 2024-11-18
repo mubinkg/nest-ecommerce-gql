@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { OffersService } from './offers.service';
-import { Offer } from './entities/offer.entity';
-import { CreateOfferInput } from './dto/create-offer.input';
-import { UpdateOfferInput } from './dto/update-offer.input';
+import { OffersService } from "../services/offers.service";
+import { Offer } from '../entities/offer.entity';
+import { CreateOfferInput } from '../dto/create-offer.input';
+import { UpdateOfferInput } from '../dto/update-offer.input';
 
 @Resolver(() => Offer)
 export class OffersResolver {
