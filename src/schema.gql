@@ -708,6 +708,11 @@ type HotDeal {
   createdAt: DateTime
 }
 
+type Offer {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   getTickets(getTicketDto: GetTicketsDto!): [Ticket!]!
   getAdminTickets(limit: Float!, offset: Float!): AdminTicketsDto!
@@ -788,6 +793,8 @@ type Query {
   flashSell(id: Int!): FlashSell!
   hotDeals(limit: Float!, offset: Float!): [HotDeal!]!
   hotDeal(id: Int!): HotDeal!
+  offers: [Offer!]!
+  offer(id: Int!): Offer!
 }
 
 input GetTicketsDto {
@@ -1031,6 +1038,9 @@ type Mutation {
   createHotDeal(createHotDealInput: CreateHotDealInput!): String!
   updateHotDeal(updateHotDealInput: UpdateHotDealInput!): HotDeal!
   removeHotDeal(id: Int!): HotDeal!
+  createOffer(createOfferInput: CreateOfferInput!): Offer!
+  updateOffer(updateOfferInput: UpdateOfferInput!): Offer!
+  removeOffer(id: Int!): Offer!
 }
 
 input CreateTicketInput {
@@ -1618,5 +1628,16 @@ input UpdateHotDealInput {
   products: [String!]
   validTime: DateTime
   discountPercent: Float
+  id: Int!
+}
+
+input CreateOfferInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateOfferInput {
+  """Example field (placeholder)"""
+  exampleField: Int
   id: Int!
 }
