@@ -798,7 +798,7 @@ type Query {
   flashSell(id: Int!): FlashSell!
   hotDeals(limit: Float!, offset: Float!): [HotDeal!]!
   hotDeal(id: Int!): HotDeal!
-  offers: [Offer!]!
+  offers(limit: Int!, offset: Int!): [Offer!]!
   offer(id: Int!): Offer!
 }
 

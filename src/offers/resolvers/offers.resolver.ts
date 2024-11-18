@@ -14,8 +14,11 @@ export class OffersResolver {
   }
 
   @Query(() => [Offer], { name: 'offers' })
-  findAll() {
-    return this.offersService.findAll();
+  findAll(
+    @Args('limit', { type: () => Int }) limit: number,
+    @Args('offset', { type: () => Int }) offset: number
+  ) {
+    return this.offersService.findAll(limit, offset);
   }
 
   @Query(() => Offer, { name: 'offer' })

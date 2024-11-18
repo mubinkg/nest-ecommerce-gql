@@ -20,8 +20,14 @@ export class OffersService {
     }
   }
 
-  findAll() {
-    return `This action returns all offers`;
+  async findAll(limit:number, offset:number) {
+    try{
+      const offers = await this.offerModel.find({}).limit(limit).skip(offset)
+      return offers
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {
