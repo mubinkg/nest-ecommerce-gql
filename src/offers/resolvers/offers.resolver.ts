@@ -22,7 +22,7 @@ export class OffersResolver {
   }
 
   @Query(() => Offer, { name: 'offer' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.offersService.findOne(id);
   }
 

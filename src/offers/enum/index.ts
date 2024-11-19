@@ -1,6 +1,6 @@
 export enum OfferType{
     DEFAULT = 'default',
-    CATEORY = 'category',
+    CATEGORY = 'category',
     CUSTOM = 'custom',
     LINK = 'link'
 }

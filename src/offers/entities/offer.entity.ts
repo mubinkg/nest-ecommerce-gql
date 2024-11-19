@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { Product } from 'src/products/entities/product.entity';
 
 @ObjectType()
 @Schema({
@@ -26,9 +27,9 @@ export class Offer {
   @Prop({type:mongoose.Schema.Types.ObjectId, ref:"Category"})
   category: string
 
-  @Field(()=>[String], {nullable:true})
+  @Field(()=>[Product], {nullable:true})
   @Prop([{type:mongoose.Schema.Types.ObjectId, ref:"Product"}])
-  products?: String[]
+  products?: Product[]
 
   @Field(()=>Date, {nullable:true})
   createdAt?:Date
@@ -36,4 +37,4 @@ export class Offer {
 
 
 export const OfferSchema = SchemaFactory.createForClass(Offer)
-export type OfferType = HydratedDocument<Offer>
+export type OfferDocument = HydratedDocument<Offer>
