@@ -47,8 +47,14 @@ export class OffersService {
     }
   }
 
-  update(id: number, updateOfferInput: UpdateOfferInput) {
-    return `This action updates a #${id} offer`;
+  async update(id: string, updateOfferInput: UpdateOfferInput) {
+    try{
+      await this.offerModel.findByIdAndUpdate(id, updateOfferInput)
+      return await this.offerModel.findById(id)
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   remove(id: number) {
