@@ -33,10 +33,10 @@ export class OffersService {
     }
   }
 
-  async findOne(id: string) {
+  async findOne(id: string, type:string) {
     try{
       const offer = await this.offerModel.findById(id)
-      if(offer.type === OfferType.CUSTOM){
+      if(type === OfferType.CUSTOM){
         const productIds = offer.products
         const products = await this.productModel.find({_id: {$in:productIds}})
         offer.products = products

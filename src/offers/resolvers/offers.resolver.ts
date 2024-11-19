@@ -22,8 +22,11 @@ export class OffersResolver {
   }
 
   @Query(() => Offer, { name: 'offer' })
-  findOne(@Args('id', { type: () => String }) id: string) {
-    return this.offersService.findOne(id);
+  findOne(
+    @Args('id', { type: () => String }) id: string,
+    @Args('type', { type: () => String }) type: string
+  ) {
+    return this.offersService.findOne(id, type);
   }
 
   @Mutation(() => Offer)

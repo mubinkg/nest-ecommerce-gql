@@ -801,7 +801,7 @@ type Query {
   hotDeals(limit: Float!, offset: Float!): [HotDeal!]!
   hotDeal(id: Int!): HotDeal!
   offers(limit: Int!, offset: Int!): [Offer!]!
-  offer(id: String!): Offer!
+  offer(id: String!, type: String!): Offer!
 }
 
 input GetTicketsDto {
@@ -1640,6 +1640,8 @@ input UpdateHotDealInput {
 
 input CreateOfferInput {
   type: String!
+  title: String
+  description: String
   image: String!
   category: String
   link: String
@@ -1648,6 +1650,8 @@ input CreateOfferInput {
 
 input UpdateOfferInput {
   type: String
+  title: String
+  description: String
   image: String
   category: String
   link: String
