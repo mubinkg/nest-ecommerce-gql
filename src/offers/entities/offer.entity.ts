@@ -17,6 +17,14 @@ export class Offer {
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})
+  title:string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  description:string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
   image:string
 
   @Field(()=>String, {nullable:true})
