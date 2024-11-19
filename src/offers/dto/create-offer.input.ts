@@ -9,6 +9,16 @@ export class CreateOfferInput {
   @IsNotEmpty()
   type:OfferType
 
+  @Field(()=>String, {nullable:true})
+  @IsString()
+  @IsNotEmpty()
+  title:string
+
+  @Field(()=>String, {nullable:true})
+  @IsString()
+  @IsNotEmpty()
+  description:string
+
   @Field(()=>String)
   @IsString()
   @IsNotEmpty()
