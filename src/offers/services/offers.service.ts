@@ -41,6 +41,12 @@ export class OffersService {
         const products = await this.productModel.find({_id: {$in:productIds}})
         offer.products = products
       }
+      if(type === OfferType.CATEGORY){
+        const category = offer.category
+        const products = await this.productModel.find({category:category})
+        offer.products = products
+      }
+      return offer;
     }
     catch(err){
       throw err;
