@@ -25,7 +25,8 @@ export class FaqService {
   async findAll(getFaqInput:GetFaqInput) {
     try{
       const order = getFaqInput?.order === 'ASC'? 1 : -1
-      return await this.faqModel.find({}).sort({_di: order}).limit(getFaqInput.limit).skip(getFaqInput.offset)
+      const faqs = await this.faqModel.find({}).sort({_di: order})
+      return faqs
     }
     catch(err){
       throw err;

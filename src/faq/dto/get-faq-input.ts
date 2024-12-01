@@ -1,18 +1,8 @@
 import { Field, InputType, Int } from "@nestjs/graphql";
-import { IsInt, IsNotEmpty, IsOptional, IsSemVer, IsString } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
 
 @InputType()
 export class GetFaqInput{
-    @Field(()=>Int)
-    @IsInt()
-    @IsNotEmpty()
-    limit: number
-    
-    @Field(()=>Int)
-    @IsInt()
-    @IsNotEmpty()
-    offset: number
-
     @Field(()=>String, {nullable:true, defaultValue: 'id'})
     @IsString()
     @IsOptional()

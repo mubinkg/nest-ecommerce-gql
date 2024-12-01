@@ -950,8 +950,6 @@ input DeliveryCharge {
 }
 
 input GetFaqInput {
-  limit: Int!
-  offset: Int!
   sort: String = "id"
   order: String = "DESC"
 }
