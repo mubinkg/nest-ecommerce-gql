@@ -566,10 +566,16 @@ type Deliverycharge {
 
 type Faq {
   _id: String!
-  product: Product
+  faqType: FaqType!
   question: String
-  user: Seller
   ans: String
+}
+
+enum FaqType {
+  GENERAL
+  ACCOUNT
+  SERVICE
+  PAYMENT
 }
 
 type FaqAdminDto {
@@ -1504,14 +1510,15 @@ input UpdateAramicInput {
 }
 
 input CreateFaqInput {
-  product: String!
   question: String!
+  ans: String!
+  faqType: FaqType!
 }
 
 input FaqAdminInput {
-  product: String!
   question: String!
   ans: String
+  faqType: FaqType!
 }
 
 input CreateSectionInput {
