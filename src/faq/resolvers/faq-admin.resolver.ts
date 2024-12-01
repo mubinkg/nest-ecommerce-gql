@@ -14,7 +14,6 @@ export class FaqAdminResolver{
     ){}
 
     @Query(()=>FaqAdminDto)
-    @UseGuards(GqlAuthGuard)
     adminFaqList(
         @Args('limit', {type:()=>Number}) limit: number,
         @Args('offset', {type:()=>Number}) offset: number,

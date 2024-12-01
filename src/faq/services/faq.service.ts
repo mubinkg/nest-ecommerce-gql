@@ -13,10 +13,9 @@ export class FaqService {
     @InjectModel(Faq.name) private readonly faqModel:Model<FaqDocument>
   ){}
 
-  async create(createFaqInput: CreateFaqInput, user:any) {
-    console.log(user)
+  async create(createFaqInput: CreateFaqInput) {
     try{
-      return await this.faqModel.create({...createFaqInput, user: user.userId})
+      return await this.faqModel.create(createFaqInput)
     }
     catch(err){
       throw err;

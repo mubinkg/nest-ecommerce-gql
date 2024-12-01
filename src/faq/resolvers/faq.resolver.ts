@@ -13,12 +13,10 @@ export class FaqResolver {
   constructor(private readonly faqService: FaqService) {}
 
   @Mutation(() => Faq)
-  @UseGuards(GqlAuthGuard)
   createFaq(
     @Args('createFaqInput') createFaqInput: CreateFaqInput,
-    @CurrentUser('user') user:any
   ) {
-    return this.faqService.create(createFaqInput, user);
+    return this.faqService.create(createFaqInput);
   }
 
   @Query(() => [Faq], { name: 'faq' })
