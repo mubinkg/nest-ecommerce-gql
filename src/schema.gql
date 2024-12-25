@@ -696,6 +696,10 @@ type Withdrawal {
 
 type Notification {
   _id: String!
+  title: String
+  body: String
+  isRead: Boolean
+  createdAt: DateTime
 }
 
 type FlashSell {

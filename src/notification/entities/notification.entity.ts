@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 @ObjectType()
@@ -9,6 +9,22 @@ import { HydratedDocument } from 'mongoose';
 export class Notification {
   @Field(() => String)
   _id: string;
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  title?:string
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type:String})
+  body?:string
+
+  @Field(()=>Boolean, {nullable:true})
+  @Prop({type:Boolean, default: false})
+  isRead?:boolean
+  
+  @Field(()=>Date, {nullable:true})
+  createdAt?:Date
+  
 }
 
 export const NotificationSchema = SchemaFactory.createForClass(Notification)
