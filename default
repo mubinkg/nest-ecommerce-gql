@@ -28,16 +28,4 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
-stream {
-    upstream mongodb {
-        # Define the MongoDB server (localhost:27017 or the correct address)
-        server 127.0.0.1:27017;  # Assuming MongoDB is running on localhost
-    }
 
-    server {
-        listen 27017;  # MongoDB default port
-        proxy_pass mongodb;
-        proxy_timeout 10m;
-        proxy_connect_timeout 1s;
-    }
-}
