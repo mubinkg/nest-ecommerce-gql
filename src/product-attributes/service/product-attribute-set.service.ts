@@ -56,7 +56,7 @@ export class ProductAttributeSetService{
                     })
                 })
                 attributeSet['attributeSetValues'] = attributeValues
-                results.push(attributeSet)
+                if(attributeValues.length) results.push(attributeSet)
             })
             return results
         }
