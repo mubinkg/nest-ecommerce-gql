@@ -544,6 +544,7 @@ type AttributeSetValuesDto {
 
 type AttirbuteSetValue {
   _id: String
+  type: ProductAttributeValueType
   valueName: String
 }
 

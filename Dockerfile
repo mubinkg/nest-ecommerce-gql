@@ -1,7 +1,7 @@
-FROM node:18-alpine
-WORKDIR /app
+FROM node:18 AS development
+WORKDIR /usr/src/app
 COPY package*.json ./
+RUN npm install glob rimraf
 RUN npm install
 COPY . .
-EXPOSE 3000
-CMD ["npm", "run", "start:dev"]
+RUN npm run build
