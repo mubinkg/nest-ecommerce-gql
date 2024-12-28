@@ -185,19 +185,18 @@ export const getProductsQuery = (getProductInputDto: GetProductDto) => {
     },
   }
 
+  query.push(attributeQuery)
+
   if (attribute_value_ids && attribute_value_ids?.length) {
     const attributeValueObjectId = attribute_value_ids.split(',').map((d: string) => convertToObjectId(d))
-    console.log('Attribute value ids ', attributeValueObjectId)
-    attributeQuery['$lookup']['pipeline'].push({
+    query.push({
       $match:{
-        _id:{
+        'attributes._id':{
           $in: attributeValueObjectId
         }
       }
     })
   }
-
-  query.push(attributeQuery)
 
   const otherQuery: any = [
     {
