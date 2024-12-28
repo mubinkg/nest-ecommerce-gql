@@ -164,35 +164,43 @@ export const getProductsQuery = (getProductInputDto: GetProductDto) => {
     }
   }
 
+  let query: any = [matchQuery];
+
+  const attributeQuery:any = {
+    $lookup: {
+      from: "attributes",
+      localField: "_id",
+      foreignField: "product",
+      as: "attributes",
+      pipeline: [
+        {
+          $lookup: {
+            from: "productattributevalues",
+            localField: "values",
+            foreignField: "_id",
+            as: "values",
+          },
+        },
+      ],
+    },
+  }
+
   if (attribute_value_ids && attribute_value_ids?.length) {
     const attributeValueObjectId = attribute_value_ids.split(',').map((d: string) => convertToObjectId(d))
     console.log('Attribute value ids ', attributeValueObjectId)
-    matchQuery['$match'] = {
-      attributes: {
-        $in: attributeValueObjectId
+    attributeQuery['$lookup']['pipeline'].push({
+      $match:{
+        $expr:{
+          $in:[attributeValueObjectId,"$_id"]
+        }
       }
-    }
+    })
   }
 
+  query.push(attributeQuery)
+
   const otherQuery: any = [
-    {
-      $lookup: {
-        from: "attributes",
-        localField: "_id",
-        foreignField: "product",
-        as: "attributes",
-        pipeline: [
-          {
-            $lookup: {
-              from: "productattributevalues",
-              localField: "values",
-              foreignField: "_id",
-              as: "values",
-            },
-          },
-        ],
-      },
-    },
+    
     {
       $lookup: {
         from: "brands",
@@ -233,7 +241,6 @@ export const getProductsQuery = (getProductInputDto: GetProductDto) => {
     },
   ]
 
-  let query: any = [matchQuery];
   query = [...query, ...otherQuery]
 
   if (max_price && min_price !== undefined) {
