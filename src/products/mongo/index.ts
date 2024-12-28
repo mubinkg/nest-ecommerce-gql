@@ -166,6 +166,7 @@ export const getProductsQuery = (getProductInputDto: GetProductDto) => {
 
   if (attribute_value_ids && attribute_value_ids?.length) {
     const attributeValueObjectId = attribute_value_ids.split(',').map((d: string) => convertToObjectId(d))
+    console.log('Attribute value ids ', attributeValueObjectId)
     matchQuery['$match'] = {
       attributes: {
         $in: attributeValueObjectId
