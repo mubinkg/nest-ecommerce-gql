@@ -190,8 +190,8 @@ export const getProductsQuery = (getProductInputDto: GetProductDto) => {
     console.log('Attribute value ids ', attributeValueObjectId)
     attributeQuery['$lookup']['pipeline'].push({
       $match:{
-        $in:{
-          _id: attributeValueObjectId
+        _id:{
+          $in: attributeValueObjectId
         }
       }
     })
