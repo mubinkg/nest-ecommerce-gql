@@ -35,6 +35,7 @@ import { NotificationModule } from './notification/notification.module';
 import { FlashSellModule } from './flash-sell/flash-sell.module';
 import { HotDealsModule } from './hot-deals/hot-deals.module';
 import { OffersModule } from './offers/offers.module';
+import { ApplicationModule } from './application/application.module';
 
 
 @Module({
@@ -79,6 +80,7 @@ import { OffersModule } from './offers/offers.module';
     FlashSellModule,
     HotDealsModule,
     OffersModule,
+    ApplicationModule,
   ],
 })
 export class AppModule {}
