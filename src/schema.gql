@@ -730,9 +730,9 @@ type Offer {
   createdAt: DateTime
 }
 
-type Application {
-  """Example field (placeholder)"""
-  exampleField: Int!
+type PrivacyPolicy {
+  title: String!
+  body: String!
 }
 
 type Query {
@@ -817,7 +817,7 @@ type Query {
   hotDeal(id: Int!): HotDeal!
   offers(limit: Int!, offset: Int!): [Offer!]!
   offer(id: String!, type: String!): Offer!
-  application(id: Int!): Application!
+  privacyPolicy: [PrivacyPolicy!]!
 }
 
 input GetTicketsDto {
@@ -1062,9 +1062,6 @@ type Mutation {
   createOffer(createOfferInput: CreateOfferInput!): Offer!
   updateOffer(updateOfferInput: UpdateOfferInput!): Offer!
   removeOffer(id: Int!): Offer!
-  createApplication(createApplicationInput: CreateApplicationInput!): Application!
-  updateApplication(updateApplicationInput: UpdateApplicationInput!): Application!
-  removeApplication(id: Int!): Application!
 }
 
 input CreateTicketInput {
@@ -1675,15 +1672,4 @@ input UpdateOfferInput {
   link: String
   products: [String!]
   id: String!
-}
-
-input CreateApplicationInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateApplicationInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
 }
