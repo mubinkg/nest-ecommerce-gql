@@ -696,6 +696,7 @@ type Withdrawal {
 
 type Notification {
   _id: String!
+  customer: Customer
   title: String
   body: String
   isRead: Boolean
@@ -1614,13 +1615,13 @@ input UpdateWithdrawalInput {
 }
 
 input CreateNotificationInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  title: String
+  body: String
 }
 
 input UpdateNotificationInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  title: String
+  body: String
   id: Int!
 }
 

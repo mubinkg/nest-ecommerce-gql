@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
+import { Customer } from 'src/customers/entities/customer.entity';
 
 @ObjectType()
 @Schema({
@@ -9,6 +10,10 @@ import { HydratedDocument } from 'mongoose';
 export class Notification {
   @Field(() => String)
   _id: string;
+
+  @Field(()=>Customer, {nullable:true})
+  @Prop({type:mongoose.Schema.Types.ObjectId, ref:"Customer"})
+  customer?:Customer
 
   @Field(()=>String, {nullable:true})
   @Prop({type:String})

@@ -3,14 +3,22 @@ import { NotificationService } from '../services/notification.service';
 import { Notification } from '../entities/notification.entity';
 import { CreateNotificationInput } from '../dto/create-notification.input';
 import { UpdateNotificationInput } from '../dto/update-notification.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/customers/jwt-guards';
+import { CurrentUser } from 'src/decorator/current-user.decorator';
 
 @Resolver(() => Notification)
 export class NotificationResolver {
-  constructor(private readonly notificationService: NotificationService) {}
+  constructor(private readonly notificationService: NotificationService) { }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Notification)
-  createNotification(@Args('createNotificationInput') createNotificationInput: CreateNotificationInput) {
-    return this.notificationService.create(createNotificationInput);
+  createNotification(
+    @Args('createNotificationInput') createNotificationInput: CreateNotificationInput,
+    @CurrentUser() user: any
+  ) {
+    console.log(user)
+    return this.notificationService.create(createNotificationInput, user);
   }
 
   @Query(() => [Notification], { name: 'notification' })
