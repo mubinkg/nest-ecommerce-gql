@@ -1621,9 +1621,7 @@ input CreateNotificationInput {
 }
 
 input UpdateNotificationInput {
-  title: String
-  body: String
-  id: Int!
+  id: String!
 }
 
 input CreateFlashSellInput {

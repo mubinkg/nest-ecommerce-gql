@@ -32,9 +32,10 @@ export class NotificationResolver {
     return this.notificationService.findOne(id);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Notification)
   updateNotification(@Args('updateNotificationInput') updateNotificationInput: UpdateNotificationInput) {
-    return this.notificationService.update(updateNotificationInput.id, updateNotificationInput);
+    return this.notificationService.update(updateNotificationInput.id);
   }
 
   @Mutation(() => Notification)

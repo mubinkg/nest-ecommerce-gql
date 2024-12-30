@@ -36,8 +36,14 @@ export class NotificationService {
     return `This action returns a #${id} notification`;
   }
 
-  update(id: number, updateNotificationInput: UpdateNotificationInput) {
-    return `This action updates a #${id} notification`;
+  async update(id:string) {
+    try{
+      await this.notificationModel.findByIdAndUpdate(id, {isRead:true})
+      return await this.notificationModel.findById(id)
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   remove(id: number) {
