@@ -21,9 +21,10 @@ export class NotificationResolver {
     return this.notificationService.create(createNotificationInput, user);
   }
 
-  @Query(() => [Notification], { name: 'notification' })
-  findAll() {
-    return this.notificationService.findAll();
+  @UseGuards(GqlAuthGuard)
+  @Query(() => [Notification], { name: 'notifications' })
+  findAll(@CurrentUser() user: any) {
+    return this.notificationService.findAll(user);
   }
 
   @Query(() => Notification, { name: 'notification' })

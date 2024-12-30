@@ -4,6 +4,7 @@ import { UpdateNotificationInput } from '../dto/update-notification.input';
 import { Model } from 'mongoose';
 import { Notification, NotificationDocument } from '../entities/notification.entity';
 import { InjectModel } from '@nestjs/mongoose';
+import { convertToObjectId } from 'src/utils/convert-to-objectid';
 
 @Injectable()
 export class NotificationService {
@@ -21,8 +22,14 @@ export class NotificationService {
     }
   }
 
-  findAll() {
-    return `This action returns all notification`;
+  async findAll(user:any) {
+    try{
+      const notifications = await this.notificationModel.find({customer:convertToObjectId(user.userId)}).populate('customer')
+      return notifications
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   findOne(id: number) {

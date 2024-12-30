@@ -812,6 +812,7 @@ type Query {
   transactions(limit: Float!, offset: Float!): GetTransactionListDto!
   transaction(id: Int!): Transaction!
   withdrawal(id: Int!): Withdrawal!
+  notifications: [Notification!]!
   notification(id: Int!): Notification!
   flashSell(id: Int!): FlashSell!
   hotDeals(limit: Float!, offset: Float!): [HotDeal!]!
