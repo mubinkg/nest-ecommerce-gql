@@ -1031,7 +1031,7 @@ type Mutation {
   createProductFaq(createProductFaqInput: CreateProductFaqInput!): ProductFaq!
   updateProductFaq(updateProductFaqInput: UpdateProductFaqInput!): ProductFaq!
   removeProductFaq(id: Int!): ProductFaq!
-  createAramic(createAramicInput: CreateAramicInput!): Deliverycharge!
+  createAramic: String!
   updateAramic(updateAramicInput: UpdateAramicInput!): Deliverycharge!
   removeAramic(id: Int!): Deliverycharge!
   createFaq(createFaqInput: CreateFaqInput!): Faq!
@@ -1504,11 +1504,6 @@ input UpdateProductFaqInput {
   question: String
   ans: String
   id: Int!
-}
-
-input CreateAramicInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
 }
 
 input UpdateAramicInput {

@@ -13,9 +13,9 @@ export class AramicsResolver {
     private readonly cryptoService:CryptoServie
   ) {}
 
-  @Mutation(() => Deliverycharge)
-  createAramic(@Args('createAramicInput') createAramicInput: CreateAramicInput) {
-    return this.aramicsService.create(createAramicInput);
+  @Mutation(() => String)
+  createAramic() {
+    return this.aramicsService.create();
   }
 
   @Query(() => String, { name: 'aramics' })
