@@ -2,8 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { graphqlUploadExpress } from 'graphql-upload';
+import * as path from 'path'
+const admin = require('firebase-admin');
+
+const serviceAccount =  path.join(__dirname, '../../serviceAccountKey.json')
 
 async function bootstrap() {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'debug','log'],
   });

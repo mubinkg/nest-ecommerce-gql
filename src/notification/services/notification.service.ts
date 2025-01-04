@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNotificationInput } from '../dto/create-notification.input';
-import { UpdateNotificationInput } from '../dto/update-notification.input';
+const admin = require('firebase-admin');
 import { Model } from 'mongoose';
 import { Notification, NotificationDocument } from '../entities/notification.entity';
 import { InjectModel } from '@nestjs/mongoose';
@@ -16,6 +16,14 @@ export class NotificationService {
 
   async create(createNotificationInput: CreateNotificationInput, user:any) {
     try {
+      const message = {
+        notification: {
+          title: createNotificationInput.title,
+          body: createNotificationInput.body,
+        },
+        token: 'FCM_DEVICE_REGISTRATION_TOKEN',
+      };
+      await admin.messaging().send(message);
       return await this.notificationModel.create({...createNotificationInput, customer: user.userId})
     } catch (err) {
       throw err;
