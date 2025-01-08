@@ -14,28 +14,28 @@ export class NotificationService {
     private readonly notificationModel: Model<NotificationDocument>
   ) { }
 
-  async create(createNotificationInput: CreateNotificationInput, user:any) {
+  async create(createNotificationInput: CreateNotificationInput, user: any) {
     try {
       const message = {
         notification: {
           title: createNotificationInput.title,
           body: createNotificationInput.body,
         },
-        token: 'FCM_DEVICE_REGISTRATION_TOKEN',
+        token: 'fUcTwz-Ee0XYpR8klnUU25:APA91bHpnr8hgOpzJDOdzjH-A6wc9l68JlVHyPzbrmOZ-1WkX7UAKbA-wiz5SqR99FXdiYKuetBViYk2mfauM24EENiuinCwuZFySurz9313lNGJNLnBz54',
       };
       await admin.messaging().send(message);
-      return await this.notificationModel.create({...createNotificationInput, customer: user.userId})
+      return await this.notificationModel.create({ ...createNotificationInput, customer: user.userId })
     } catch (err) {
       throw err;
     }
   }
 
-  async findAll(user:any) {
-    try{
-      const notifications = await this.notificationModel.find({customer:convertToObjectId(user.userId)}).populate('customer')
+  async findAll(user: any) {
+    try {
+      const notifications = await this.notificationModel.find({ customer: convertToObjectId(user.userId) }).populate('customer')
       return notifications
     }
-    catch(err){
+    catch (err) {
       throw err;
     }
   }
@@ -44,12 +44,12 @@ export class NotificationService {
     return `This action returns a #${id} notification`;
   }
 
-  async update(id:string) {
-    try{
-      await this.notificationModel.findByIdAndUpdate(id, {isRead:true})
+  async update(id: string) {
+    try {
+      await this.notificationModel.findByIdAndUpdate(id, { isRead: true })
       return await this.notificationModel.findById(id)
     }
-    catch(err){
+    catch (err) {
       throw err;
     }
   }
