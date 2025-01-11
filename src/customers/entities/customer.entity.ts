@@ -97,6 +97,10 @@ export class Customer {
   @Field(()=>String, {nullable:true})
   @Prop({type: String, default: Status.ACTIVE})
   status?: Status
+
+  @Field(()=>String, {nullable:true})
+  @Prop({type: String})
+  fcmToken?: string
 }
 
 

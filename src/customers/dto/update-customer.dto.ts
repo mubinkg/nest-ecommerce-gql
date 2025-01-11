@@ -55,6 +55,9 @@ export class UpdateCustomerDto{
     @IsOptional()
     new?:string
 
+    @Field(()=>String, {nullable:true})
+    fcm_token?: string
+
     @Field(()=>GraphQLUpload, {nullable:true})
     image?:FileUpload
 }
