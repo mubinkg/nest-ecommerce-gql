@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name kocart.com; # Set your domain or IP address
+    server_name 34.170.86.152; # Set your domain or IP address
 
     location /api/graphql {
         proxy_pass http://localhost:3001/graphql; # Forward requests to your Nest.js application
