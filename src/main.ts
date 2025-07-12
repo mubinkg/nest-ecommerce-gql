@@ -5,14 +5,14 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import * as path from 'path'
 const admin = require('firebase-admin');
 
-const serviceAccount =  path.join(__dirname, '../../serviceAccountKey.json')
+const serviceAccount = path.join(__dirname, '../../bucket.json')
 
 async function bootstrap() {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
   });
   const app = await NestFactory.create(AppModule, {
-    logger: ['error', 'warn', 'debug','log'],
+    logger: ['error', 'warn', 'debug', 'log'],
   });
   app.useGlobalPipes(new ValidationPipe())
   app.enableCors({
@@ -22,7 +22,7 @@ async function bootstrap() {
     preflightContinue: false,
     optionsSuccessStatus: 200,
   });
-  app.use(graphqlUploadExpress({maxFileSize:1000*1000*1000, maxFiles: 5}))
+  app.use(graphqlUploadExpress({ maxFileSize: 1000 * 1000 * 1000, maxFiles: 5 }))
   await app.listen(3001);
   console.log('App started on http://localhost:3001/graphql')
 }
